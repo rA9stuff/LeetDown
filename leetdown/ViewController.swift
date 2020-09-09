@@ -363,6 +363,8 @@ runCommand("killall tsschecker")
                          self.ph.stringValue = "iPSW couldn't be created, make sure you have enough space"
                          self.downgradebutton.isEnabled = false
                          self.ipswselectiontext.isEnabled = true
+                                self.spinner.stopAnimation(.none)
+                                self.spinner.isHidden = true
                                 return } } else {
                                 
                                 
