@@ -81,7 +81,7 @@
                                 <rect key="frame" x="122" y="201" width="236" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="make sure your device is connected in" id="1YS-IF-vax">
-                                    <font key="font" metaFont="message"/>
+                                    <font key="font" metaFont="system"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -91,7 +91,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Downgrade" bezelStyle="rounded" imagePosition="overlaps" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="5YY-rE-NOj">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="message"/>
+                                    <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="downgrade:" target="XfG-lQ-9wD" id="M3m-Tq-UFp"/>
@@ -102,7 +102,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="13E-iw-6pq">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="message"/>
+                                    <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
                                     <segue destination="080-7f-Q05" kind="popover" popoverAnchorView="S6x-98-YY6" popoverBehavior="t" preferredEdge="maxY" id="eTj-8Q-E1d"/>
@@ -112,7 +112,7 @@
                                 <rect key="frame" x="134" y="215" width="287" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="an OTA downgrade utility made for      devices" id="bxp-Hd-eGx">
-                                    <font key="font" metaFont="message"/>
+                                    <font key="font" metaFont="system"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -122,7 +122,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Select 10.3.3 iPSW" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="HDt-rh-ozP">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="message"/>
+                                    <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="ipsw:" target="XfG-lQ-9wD" id="4xa-FL-UlZ"/>
@@ -132,7 +132,7 @@
                                 <rect key="frame" x="347" y="214" width="20" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="A7" id="DAn-NE-4Dq">
-                                    <font key="font" metaFont="message"/>
+                                    <font key="font" metaFont="system"/>
                                     <color key="textColor" name="selectedMenuItemTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -141,7 +141,7 @@
                                 <rect key="frame" x="216" y="3" width="127" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="made by @ra9_baris" id="b4E-GR-krd">
-                                    <font key="font" metaFont="message"/>
+                                    <font key="font" metaFont="system"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="0.45676392916321457" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -159,7 +159,7 @@
                                 <rect key="frame" x="358" y="202" width="68" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" allowsUndo="NO" title="DFU Mode" id="W6c-he-tvF">
-                                    <font key="font" metaFont="message"/>
+                                    <font key="font" metaFont="system"/>
                                     <color key="textColor" name="selectedMenuItemTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -193,17 +193,17 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="unnamed" imagePosition="overlaps" alignment="center" transparent="YES" imageScaling="proportionallyDown" inset="2" id="5Dc-Ot-1Jq">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="message"/>
+                                    <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="killbinaries:" target="XfG-lQ-9wD" id="CWI-n4-8l5"/>
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u5X-uC-bLC">
-                                <rect key="frame" x="238" y="17" width="82" height="16"/>
+                                <rect key="frame" x="238" y="17" width="84" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="version: 1.0.1" id="x3c-il-zAT">
-                                    <font key="font" metaFont="message"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="version: 1.0.2" id="x3c-il-zAT">
+                                    <font key="font" metaFont="system"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="0.67270803127589063" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -256,7 +256,7 @@
                                 <rect key="frame" x="18" y="174" width="259" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="@tihmstar for futurerestore and igetnonce" id="Ydu-Hs-t7O">
-                                    <font key="font" metaFont="message"/>
+                                    <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -265,7 +265,7 @@
                                 <rect key="frame" x="18" y="150" width="345" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="@dora2ios for &quot;pwnedDFU&quot; which works ~100% on A7 :)" id="2Qd-rX-vgF">
-                                    <font key="font" metaFont="message"/>
+                                    <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -274,7 +274,7 @@
                                 <rect key="frame" x="18" y="101" width="433" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" id="JJI-NX-csa">
-                                    <font key="font" metaFont="message"/>
+                                    <font key="font" metaFont="system"/>
                                     <string key="title">@mosk_i for ibxx patch files and ipwndfu fork that works with 
 S5L8965</string>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -285,7 +285,7 @@ S5L8965</string>
                                 <rect key="frame" x="18" y="200" width="272" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="@axi0mX for the legendary checkm8 exploit" id="mG6-cR-RJ4">
-                                    <font key="font" metaFont="message"/>
+                                    <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -294,7 +294,7 @@ S5L8965</string>
                                 <rect key="frame" x="18" y="87" width="194" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="@pimskeks for libimobiledevice" id="zpY-Se-xgn">
-                                    <font key="font" metaFont="message"/>
+                                    <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -303,7 +303,7 @@ S5L8965</string>
                                 <rect key="frame" x="18" y="10" width="343" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="@yebecekic for designing the LeetDown's beautiful icon" id="Sc2-xO-JUB">
-                                    <font key="font" metaFont="message"/>
+                                    <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -312,7 +312,7 @@ S5L8965</string>
                                 <rect key="frame" x="18" y="258" width="326" height="46"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" id="h7n-Sk-29x">
-                                    <font key="font" metaFont="message"/>
+                                    <font key="font" metaFont="system"/>
                                     <string key="title">A GUI wrapper based on the libimobiledevice project 
 and checkm8 exploit.</string>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -323,7 +323,7 @@ and checkm8 exploit.</string>
                                 <rect key="frame" x="18" y="53" width="246" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="@s0uthwes (RIP) for updated igetnonce" id="DAu-zH-YFw">
-                                    <font key="font" metaFont="message"/>
+                                    <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -332,7 +332,7 @@ and checkm8 exploit.</string>
                                 <rect key="frame" x="18" y="32" width="309" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="@ConlogeLogLuke for general help with scripts" id="3C6-fg-YGq">
-                                    <font key="font" metaFont="message"/>
+                                    <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>

@@ -352,7 +352,20 @@ runCommand("killall tsschecker")
                             self.spinner.isHidden = true
                             return
                             } } } } } else {
-                       
+    DispatchQueue.main.async {
+        self.ph.stringValue = "Verifying iPSW"
+        self.downgradebutton.isEnabled = false
+        self.ipswselectiontext.isEnabled = false }
+                        
+                        if FileManager.default.fileExists(atPath: "/Applications/leetdown.app/Contents/rsr/ipsw_create_err") {
+                            Process.launchedProcess(launchPath: "/bin/bash", arguments: ["/Applications/leetdown.app/Contents/rsr/cleanup.sh"]).waitUntilExit()
+                            DispatchQueue.main.async {
+                         self.ph.stringValue = "iPSW couldn't be created, make sure you have enough space"
+                         self.downgradebutton.isEnabled = false
+                         self.ipswselectiontext.isEnabled = true
+                                return } } else {
+                                
+                                
               DispatchQueue.main.async {
                 self.downgradebutton.isEnabled = false
                 self.ipswselectiontext.isEnabled = false
@@ -392,7 +405,7 @@ runCommand("killall tsschecker")
                         self.downgradebutton.isEnabled = false }
                     
     
-                        } } } } else {
+                            } } } } } else {
                         DispatchQueue.global(qos: .background).async {
                             
                             
