@@ -1,8 +1,6 @@
 # LeetDown
 an OTA Downgrade Tool for A7 devices.
 
-* made by [@ra9_baris](https://twitter.com/ra9_baris).
-
 Latest compiled version can be found [here](https://github.com/rA9stuff/LeetDown/releases).
 
 # How to Use?
