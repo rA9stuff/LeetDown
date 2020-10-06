@@ -25,5 +25,3 @@ and "pwnedDFU" is a thing :D
 * [@ConsoleLogLuke](https://twitter.com/ConsoleLogLuke) for helping with the dependencies and scripts :)
 
 * [@s0uthwes](https://twitter.com/s0uthwes) (RIP) for updated igetnonce.
-
-* [@yebecekic](https://twitter.com/yebecekic) for designing the LeetDown's beautiful icon.
