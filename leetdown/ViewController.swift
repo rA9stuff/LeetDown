@@ -8,7 +8,7 @@
 // TODO:
 // Fix dependencies / done
 // Fix futurerestore (kill) / done
-// breakpoint at custom ipsw creation / not needed
+// breakpoint at custom ipsw creation / done
 
 
 
@@ -31,6 +31,7 @@ class ViewController: NSViewController {
             NSAppleScript(source: "do shell script \"\(command)\" \(withAdmin ? "with administrator privileges" : "")")?
                     .executeAndReturnError(nil)
         }
+    
     
     @IBAction func killbinaries(_ sender: Any) {
         runCommand("killall futurerestore")
@@ -74,8 +75,7 @@ runCommand("killall tsschecker")
         self.ph.stringValue = "Checking connected device"
         
             Process.launchedProcess(launchPath: "/bin/bash", arguments: ["/Applications/leetdown.app/Contents/rsr/query_device.sh"]).waitUntilExit()
-        let f = FileManager.default
-        if f.fileExists(atPath: "/Applications/leetdown.app/Contents/rsr/no_device") {
+        if FileManager.default.fileExists(atPath: "/Applications/leetdown.app/Contents/rsr/no_device") {
             self.spinner.stopAnimation(.none)
             self.spinner.isHidden = true
             self.ph.stringValue = "No device connected"
@@ -170,22 +170,23 @@ runCommand("killall tsschecker")
                NSAppleScript(source: "do shell script \"\(command)\" \(withAdmin ? "with administrator privileges" : "")")?
                    .executeAndReturnError(nil)
        }
-       
+        
         self.ph.stringValue = "Cleaning up"
         Process.launchedProcess(launchPath: "/bin/bash", arguments: ["/Applications/leetdown.app/Contents/rsr/cleanupafterparty.sh"]).waitUntilExit()
 
         Process.launchedProcess(launchPath: "/bin/bash", arguments: ["/Applications/leetdown.app/Contents/rsr/identify.sh"]).waitUntilExit()
+  
       
         if FileManager.default.fileExists(atPath: "/Applications/leetdown.app/Contents/rsr/supported") {
              
                 self.ph.stringValue = "Checking connected device status"
-    
+   
        Process.launchedProcess(launchPath: "/bin/bash", arguments: ["/Applications/leetdown.app/Contents/rsr/query_device.sh"]).waitUntilExit()
+            
                             
                             
        let filea = FileManager.default
        if filea.fileExists(atPath: "/Applications/leetdown.app/Contents/rsr/no_device") {
-        
             self.spinner.stopAnimation(.none)
             self.spinner.isHidden = true
             self.ph.stringValue = "No device connected"
@@ -196,13 +197,12 @@ runCommand("killall tsschecker")
                           if fileManager.fileExists(atPath: "/Applications/leetdown.app/Contents/rsr/no_dfu") {
                             DispatchQueue.main.async {
                             self.ph.stringValue = "Please connect your device in DFU mode"
+                                
                                 self.spinner.stopAnimation(.none)
                                 self.spinner.isHidden = true
                             }
                             return }
                             else {
-         
-                            
                                 self.ph.stringValue = "Checking dependencies"
                             Process.launchedProcess(launchPath: "/bin/bash", arguments: ["/Applications/leetdown.app/Contents/rsr/dependency_check.sh"]).waitUntilExit()
                             
@@ -214,7 +214,7 @@ runCommand("killall tsschecker")
                     
                                         self.spinner.stopAnimation(.none)
                                         self.spinner.isHidden = true
-                                        
+                            
                                        let a = NSAlert()
                                                                    
                                                a.messageText = "Libusb missing"
@@ -398,8 +398,8 @@ runCommand("killall tsschecker")
                             self.ipswselectiontext.isEnabled = false
                             self.downgradebutton.isEnabled = false
                             } } else {
-                            
-                    DispatchQueue.main.async {
+                        
+                        DispatchQueue.main.async {
                         self.spinner.stopAnimation(.none)
                         self.spinner.isHidden = true
                         self.ph.stringValue = "Complete! Please report any issues to @rA9_baris"

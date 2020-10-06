@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.3"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -75,7 +75,7 @@
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QCm-bi-Z5v">
                                 <rect key="frame" x="0.0" y="0.0" width="555" height="307"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="IMG_0464" id="lLW-cE-Hxv"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="IMG_1052" id="lLW-cE-Hxv"/>
                             </imageView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dKb-kK-95N">
                                 <rect key="frame" x="122" y="201" width="236" height="22"/>
@@ -87,7 +87,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6gu-AN-fJy">
-                                <rect key="frame" x="224" y="37" width="110" height="32"/>
+                                <rect key="frame" x="224" y="41" width="110" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Downgrade" bezelStyle="rounded" imagePosition="overlaps" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="5YY-rE-NOj">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -134,15 +134,6 @@
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="A7" id="DAn-NE-4Dq">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="selectedMenuItemTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="U7h-ak-Ciq">
-                                <rect key="frame" x="216" y="3" width="127" height="16"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="made by @ra9_baris" id="b4E-GR-krd">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" red="1" green="1" blue="1" alpha="0.45676392916321457" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -200,11 +191,20 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u5X-uC-bLC">
-                                <rect key="frame" x="238" y="17" width="84" height="16"/>
+                                <rect key="frame" x="238" y="19" width="84" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="version: 1.0.2" id="x3c-il-zAT">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="0.67270803127589063" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="U7h-ak-Ciq">
+                                <rect key="frame" x="143" y="2" width="278" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="by @ra9_baris with the help of many others :)" id="b4E-GR-krd">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="0.45676392916321457" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -231,11 +231,11 @@
             <objects>
                 <viewController id="080-7f-Q05" sceneMemberID="viewController">
                     <view key="view" id="47Z-wu-lVK">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="378"/>
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="349"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oWM-kD-CIj">
-                                <rect key="frame" x="12" y="315" width="196" height="52"/>
+                                <rect key="frame" x="12" y="286" width="196" height="52"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="LeetDown" id="wGF-CP-OLf">
                                     <font key="font" metaFont="system" size="44"/>
@@ -244,7 +244,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HNO-Gr-IaS">
-                                <rect key="frame" x="12" y="221" width="177" height="35"/>
+                                <rect key="frame" x="12" y="192" width="177" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Huge Thanks To:" id="JbZ-4g-vPz">
                                     <font key="font" size="23" name="HelveticaNeue"/>
@@ -253,7 +253,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n8u-f3-L1X">
-                                <rect key="frame" x="18" y="174" width="259" height="23"/>
+                                <rect key="frame" x="18" y="145" width="259" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="@tihmstar for futurerestore and igetnonce" id="Ydu-Hs-t7O">
                                     <font key="font" metaFont="system"/>
@@ -262,7 +262,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GPu-8V-Afi">
-                                <rect key="frame" x="18" y="150" width="345" height="23"/>
+                                <rect key="frame" x="18" y="121" width="345" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="@dora2ios for &quot;pwnedDFU&quot; which works ~100% on A7 :)" id="2Qd-rX-vgF">
                                     <font key="font" metaFont="system"/>
@@ -271,7 +271,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qzx-YF-bCx">
-                                <rect key="frame" x="18" y="101" width="433" height="48"/>
+                                <rect key="frame" x="18" y="72" width="433" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" id="JJI-NX-csa">
                                     <font key="font" metaFont="system"/>
@@ -282,7 +282,7 @@ S5L8965</string>
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GcY-SC-MEK">
-                                <rect key="frame" x="18" y="200" width="272" height="21"/>
+                                <rect key="frame" x="18" y="171" width="272" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="@axi0mX for the legendary checkm8 exploit" id="mG6-cR-RJ4">
                                     <font key="font" metaFont="system"/>
@@ -291,7 +291,7 @@ S5L8965</string>
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IYW-PL-jIh">
-                                <rect key="frame" x="18" y="87" width="194" height="22"/>
+                                <rect key="frame" x="18" y="58" width="194" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="@pimskeks for libimobiledevice" id="zpY-Se-xgn">
                                     <font key="font" metaFont="system"/>
@@ -299,17 +299,8 @@ S5L8965</string>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fKE-Dq-dCn">
-                                <rect key="frame" x="18" y="10" width="343" height="23"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="@yebecekic for designing the LeetDown's beautiful icon" id="Sc2-xO-JUB">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ojw-Kr-VaX">
-                                <rect key="frame" x="18" y="258" width="326" height="46"/>
+                                <rect key="frame" x="18" y="229" width="326" height="46"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" id="h7n-Sk-29x">
                                     <font key="font" metaFont="system"/>
@@ -320,7 +311,7 @@ and checkm8 exploit.</string>
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="r51-YT-mKp">
-                                <rect key="frame" x="18" y="53" width="246" height="32"/>
+                                <rect key="frame" x="18" y="24" width="246" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="@s0uthwes (RIP) for updated igetnonce" id="DAu-zH-YFw">
                                     <font key="font" metaFont="system"/>
@@ -329,7 +320,7 @@ and checkm8 exploit.</string>
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YJ1-Ot-Jbs">
-                                <rect key="frame" x="18" y="32" width="309" height="27"/>
+                                <rect key="frame" x="18" y="3" width="309" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="@ConlogeLogLuke for general help with scripts" id="3C6-fg-YGq">
                                     <font key="font" metaFont="system"/>
@@ -346,7 +337,7 @@ and checkm8 exploit.</string>
         </scene>
     </scenes>
     <resources>
-        <image name="IMG_0464" width="555" height="307"/>
+        <image name="IMG_1052" width="555" height="307"/>
         <image name="unnamed" width="512" height="512"/>
     </resources>
 </document>
