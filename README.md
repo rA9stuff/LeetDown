@@ -11,7 +11,7 @@ Follow the instructions shown in the app.
 
 # F.A.Q.
 
-* How to fix `this app is damaged and can't be opened` error?
+* How to fix *this app is damaged and can't be opened* error?
 
 - Drag and drop `leetdown.app` to your `/Applications` folder then type the command below to terminal:
 
