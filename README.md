@@ -9,6 +9,14 @@ Mount the `LeetDown.dmg` and drag the `leetdown.app` to your `/Applications` fol
 
 Follow the instructions shown in the app.
 
+# F.A.Q.
+
+* How to fix `this app is damaged and can't be opened` error?
+
+- Drag and drop `leetdown.app` to your `/Applications` folder then type the command below to terminal:
+
+`xattr -cr /Applications/leetdown.app`
+
 # Huge Thanks To:
 
 * [@axi0mX](https://twitter.com/axi0mX) for the legendary checkm8 exploit.
