@@ -322,7 +322,7 @@ and checkm8 exploit.</string>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YJ1-Ot-Jbs">
                                 <rect key="frame" x="18" y="3" width="309" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="@ConlogeLogLuke for general help with scripts" id="3C6-fg-YGq">
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="@ConsoleLogLuke for general help with scripts" id="3C6-fg-YGq">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
