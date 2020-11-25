@@ -19,6 +19,8 @@ Follow the instructions shown in the app.
 
 `xattr -cr /Applications/leetdown.app`
 
+![alt text](https://i.imgur.com/iLALEGc.png)
+
 # Huge Thanks To:
 
 * [@axi0mX](https://twitter.com/axi0mX) for the legendary checkm8 exploit.
