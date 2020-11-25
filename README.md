@@ -3,6 +3,8 @@ an OTA Downgrade Tool for A7 devices.
 
 Latest compiled version can be found [here](https://github.com/rA9stuff/LeetDown/releases).
 
+![alt text](https://i.imgur.com/vbbsAoh.png)
+
 # How to Use?
 
 Mount the `LeetDown.dmg` and drag the `leetdown.app` to your `/Applications` folder.
