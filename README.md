@@ -21,6 +21,10 @@ Follow the instructions shown in the app.
 
 ![alt text](https://i.imgur.com/iLALEGc.png)
 
+# HEY! I HAVE PROBLEMS WITH LEETDOWN!
+
+Problems are expected as leetdown isn't perfect. But before opening an issue, please run leetdown with ``/Applications/leetdown.app/Contents/MacOS/leetdown`` command to include the terminal log with your issue.
+
 # Huge Thanks To:
 
 * [@axi0mX](https://twitter.com/axi0mX) for the legendary checkm8 exploit.
