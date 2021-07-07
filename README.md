@@ -1,7 +1,7 @@
 # LeetDown
 an OTA Downgrade Tool for A7 devices.
 
-Supported Devices are iPhone 5s, iPad Air and iPad Mini 2. iPad Mini 3 will never be supported as apple doesn't sign 10.3.3 OTA for it.
+Supported devices are iPhone 5s, iPad Air and iPad Mini 2. iPad Mini 3 will never be supported as apple doesn't sign 10.3.3 OTA for it.
 
 Latest compiled version can be found [here](https://github.com/rA9stuff/LeetDown/releases).
 
