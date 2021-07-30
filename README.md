@@ -35,6 +35,6 @@ Sure, just open an issue that includes which device you're trying to restore, yo
 
 * [@mosk_i](https://twitter.com/mosk_i) for boot component patches and notarizing the app (honestly can't thank him enough for this).
 
-* [@pimskeks](https://twitter.com/pimskeks) for libirecovery.
+* [@libimobiledev](https://twitter.com/pimskeks) for libirecovery.
 
 * [@ConsoleLogLuke](https://twitter.com/ConsoleLogLuke) for helping with the dependencies and scripts :) (both are purposeless with the version 2.0 but I'll keep it here anyways for his help on the initial release).
