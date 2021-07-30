@@ -29,15 +29,12 @@ Sure, just open an issue that includes which device you're trying to restore, yo
 
 * [@axi0mX](https://twitter.com/axi0mX) for the legendary checkm8 exploit.
 
-* [@tihmstar](https://twitter.com/tihmstar) for futurerestore and igetnonce.
+* [@tihmstar](https://twitter.com/tihmstar) for futurerestore.
 
-* [@dora2ios](https://twitter.com/dora2ios) for "pwnedDFU" which works ~100% on A7 :)
+* [@dora2ios](https://twitter.com/dora2ios) for "iPwnder32" which works amazingly well on A7 SoC.
 
-* [@mosk_i](https://twitter.com/mosk_i) for ibxx patch files and letting me know that DispatchQueue
-and "pwnedDFU" is a thing :D
+* [@mosk_i](https://twitter.com/mosk_i) for boot component patches and notarizing the app (honestly can't thank him enough for this).
 
-* [@pimskeks](https://twitter.com/pimskeks) for libimobiledevice.
+* [@pimskeks](https://twitter.com/pimskeks) for libirecovery.
 
-* [@ConsoleLogLuke](https://twitter.com/ConsoleLogLuke) for helping with the dependencies and scripts :)
-
-* [@s0uthwes](https://twitter.com/s0uthwes) (RIP) for updated igetnonce.
+* [@ConsoleLogLuke](https://twitter.com/ConsoleLogLuke) for helping with the dependencies and scripts :) (both are purposeless with the version 2.0 but I'll keep it here anyways for his help on the initial release).
