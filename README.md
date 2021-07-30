@@ -9,7 +9,7 @@ Supported devices are iPhone 5s, iPad Air and iPad Mini 2. iPad Mini 3 will neve
 
 Latest compiled version can be found [here](https://github.com/rA9stuff/LeetDown/releases).
 
-![alt text](https://i.imgur.com/MkTCrWt.png)
+![alt text](https://i.imgur.com/6oNI4kV.png)
 
 # How to Use?
 
@@ -19,15 +19,11 @@ Follow the instructions shown in the app.
 
 # F.A.Q.
 
-* How to fix ***this app is damaged and can't be opened*** error?
+Experimental Apple Silicon support: [As checkra1n team stated](https://checkra.in/news/2021/04/M1-announcement), Apple Silicon macs might have issues exploiting device or sending boot components. If you have problems with sending boot components, unplug your device after LeetDown sends iBSS, then plug it back in (LeetDown will wait for 5 seconds after sending each boot component to allow you to do this). If you have any other issues on Apple Silicon, feel free to open an issue.
 
-- Drag and drop `LeetDown.app` to your `/Applications` folder then type the command below to terminal:
+# Having issues?
 
-`xattr -cr /Applications/LeetDown.app`
-
-# HEY! I HAVE PROBLEMS WITH LEETDOWN!
-
-Problems are expected as LeetDown isn't perfect. But before opening an issue, please run leetdown with ``/Applications/LeetDown.app/Contents/MacOS/leetdown`` command to include the terminal log with your issue.
+Sure, just open an issue that includes which device you're trying to restore, your host environment and version.
 
 # Huge Thanks To:
 
