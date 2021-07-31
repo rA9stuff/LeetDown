@@ -38,3 +38,5 @@ Sure, just open an issue that includes which device you're trying to restore, yo
 * [@libimobiledev](https://twitter.com/libimobiledev) for libirecovery.
 
 * [@ConsoleLogLuke](https://twitter.com/ConsoleLogLuke) for helping with the dependencies and scripts :) (both are purposeless with the version 2.0 but I'll keep it here anyways for his help on the initial release).
+
+* [ZipArchive](https://github.com/ZipArchive/ZipArchive) for SSZipArchive. 
