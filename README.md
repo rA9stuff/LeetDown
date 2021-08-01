@@ -42,7 +42,7 @@ Experimental Apple Silicon support: [As checkra1n team stated](https://checkra.i
 
 Sure, just open an issue that includes which device you're trying to restore, your host environment and version.
 
-# Huge Thanks To:
+# Credits:
 
 * [@axi0mX](https://twitter.com/axi0mX) for the legendary checkm8 exploit.
 
