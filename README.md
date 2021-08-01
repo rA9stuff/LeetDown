@@ -2,13 +2,14 @@
 
 [Official LeetDown Twitter account](https://twitter.com/LeetDownApp) for updates & support. 
 
+![alt text](https://i.imgur.com/8uaLelG.png)
 
 an OTA Downgrade Tool for A7 devices.
 
 
 Latest compiled version can be found [here](https://github.com/rA9stuff/LeetDown/releases).
 
-![alt text](https://i.imgur.com/6oNI4kV.png)
+
 
 
 # Compatibility
