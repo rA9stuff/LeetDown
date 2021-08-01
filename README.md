@@ -1,6 +1,7 @@
 # LeetDown
 
-[Official LeetDown Twitter account](https://twitter.com/LeetDownApp) for updates & support. 
+* [Official LeetDown Twitter account](https://twitter.com/LeetDownApp) for updates & support. 
+* [Official LeetDown webpage](https://LeetDown.app)
 
 ![alt text](https://i.imgur.com/8uaLelG.png)
 
@@ -14,7 +15,7 @@ Latest compiled version can be found [here](https://github.com/rA9stuff/LeetDown
 
 # Compatibility
 
-LeetDown is compatible with these devices:
+LeetDown is compatible with the following A7 SoC devices:
 
 
 * iPhone 5s
