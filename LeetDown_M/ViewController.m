@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include "SSZipArchive/SSZipArchive.h"
 #define USB_TIMEOUT 10000
-
+#import "DFUHelperViewController.h"
 
 
 uint64_t ecid = 0;
@@ -66,7 +66,6 @@ int saveOTABlob(irecv_client_t client, irecv_device_t device) {
         const struct irecv_device_info *devinfo = irecv_get_device_info(client);
     
 
-
     irecv_devices_get_device_by_client(client, &device);
             
     NSString *devecid = [NSString stringWithFormat:@"%llu", devinfo ->ecid];
@@ -101,13 +100,17 @@ void cleanUp(void) {
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSString *blobLocation = [[NSString stringWithFormat:@"%@", [[NSBundle mainBundle] resourcePath]] stringByAppendingString:@"/LDResources/blob.shsh"];
-    NSString *iPSWLocation = [[NSString stringWithFormat:@"%@", [[NSBundle mainBundle] resourcePath]] stringByAppendingString:@"/LDResources/iPSW"];
+    NSString *tempipswdir = [[NSString stringWithFormat:@"%@", NSTemporaryDirectory()] stringByAppendingString:@"iPSW"];
     if ([fileManager fileExistsAtPath: blobLocation]) {
         [fileManager removeItemAtPath:blobLocation error:NULL];
     }
-    [fileManager removeItemAtPath:iPSWLocation error:NULL];
-    [fileManager createDirectoryAtPath:iPSWLocation withIntermediateDirectories:NO attributes:NULL error:NULL];
-    
+    /*
+        well, macOS should technincally clean the tmp path automatically but
+        I don't want to risk leaving junk behind so
+     */
+    if ([fileManager fileExistsAtPath:tempipswdir]) {
+        [fileManager removeItemAtPath:tempipswdir error:NULL];
+    }
 }
 
 
@@ -139,6 +142,7 @@ int restore(irecv_client_t client, irecv_device_t device) {
     NSString *devmodel = [NSString stringWithFormat:@"%s", device ->product_type];
     NSString *board = [NSString stringWithFormat:@"%s", device ->hardware_model];
     const char *boardcmp = [board cStringUsingEncoding:NSASCIIStringEncoding];
+    NSString *tempipswdir = [[NSString stringWithFormat:@"%@", NSTemporaryDirectory()] stringByAppendingString:@"iPSW"];
     
     NSTask *restore = [[NSTask alloc]init];
     restore.launchPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/LDResources/Binaries/futurerestore"];
@@ -148,12 +152,11 @@ int restore(irecv_client_t client, irecv_device_t device) {
     const char *iPhoneLDBoot = [iPhoneBootLogo cStringUsingEncoding:NSASCIIStringEncoding];
     const char *iPadLDBoot = [iPadBootLogo cStringUsingEncoding:NSASCIIStringEncoding];
     NSString *bm =[[[[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/LDResources/BuildManifests/"] stringByAppendingString:[NSString stringWithFormat:@"%@", devmodel]] stringByAppendingString:@".plist"];
-    NSString *bb = [[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/LDResources/iPSW/Firmware/Mav7Mav8-7.60.00.Release.bbfw"];
-    NSString *sep = [[[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/LDResources/iPSW/Firmware/all_flash/sep-firmware."] stringByAppendingString: [NSString stringWithFormat:@"%s", device -> hardware_model]];
+    NSString *bb = [tempipswdir stringByAppendingString:@"/Firmware/Mav7Mav8-7.60.00.Release.bbfw"];
+    NSString *sep = [[tempipswdir stringByAppendingString:@"/Firmware/all_flash/sep-firmware."] stringByAppendingString: [NSString stringWithFormat:@"%s", device -> hardware_model]];
     sep = [sep substringToIndex:[sep length] -2];
     sep = [sep stringByAppendingString:@".RELEASE.im4p"];
     NSString *ticket = [[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/LDResources/blob.shsh"];
-    NSString *iPSW = [[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/LDResources/iPSW"];
     
     
     if (strcmp(boardcmp, "n51ap") == 0 || strcmp(boardcmp, "n53ap") == 0) {
@@ -162,7 +165,7 @@ int restore(irecv_client_t client, irecv_device_t device) {
         irecv_send_command(client, "setpicture 0");
         irecv_send_command(client, "bgcolor 255 255 255");
         
-        restore.arguments = @[@"-t", ticket, @"-b", bb, @"-p", bm, @"-m", bm, @"-s", sep, iPSW];
+        restore.arguments = @[@"-t", ticket, @"-b", bb, @"-p", bm, @"-m", bm, @"-s", sep, tempipswdir];
     }
 
     else if (strcmp(boardcmp, "j71ap") == 0 || strcmp(boardcmp, "j85ap") == 0) {
@@ -171,7 +174,7 @@ int restore(irecv_client_t client, irecv_device_t device) {
         irecv_send_command(client, "setpicture 0");
         irecv_send_command(client, "bgcolor 255 255 255");
         
-        restore.arguments = @[@"-t", ticket, @"-p", bm, @"-m", bm, @"-s", sep, iPSW, @"--no-baseband"];
+        restore.arguments = @[@"-t", ticket, @"-p", bm, @"-m", bm, @"-s", sep, tempipswdir, @"--no-baseband"];
         
     }
     else if (strcmp(boardcmp, "j72ap") == 0 || strcmp(boardcmp, "j73ap") == 0 || strcmp(boardcmp, "j86ap") == 0 || strcmp(boardcmp, "j87ap") == 0) {
@@ -180,7 +183,7 @@ int restore(irecv_client_t client, irecv_device_t device) {
         irecv_send_command(client, "setpicture 0");
         irecv_send_command(client, "bgcolor 255 255 255");
         
-        restore.arguments = @[@"-t", ticket, @"-b", bb, @"-p", bm, @"-m", bm, @"-s", sep, iPSW];
+        restore.arguments = @[@"-t", ticket, @"-b", bb, @"-p", bm, @"-m", bm, @"-s", sep, tempipswdir];
         
     }
     irecv_close(client);
@@ -201,7 +204,7 @@ bool ispwned(irecv_client_t client, irecv_device_t device) {
     for (int i = 0; i < 5; i++) {
         irecv_error_t error = irecv_open_with_ecid(&client, ecid);
         printf("Attempting to connect... \n");
-        if (i == 5) {
+        if (i == 4) {
             return false;
         }
         if (error == IRECV_E_UNSUPPORTED) {
@@ -210,7 +213,7 @@ bool ispwned(irecv_client_t client, irecv_device_t device) {
         else if (error != IRECV_E_SUCCESS) {
             usleep(500000);
         }
-        else {
+        else if (error == IRECV_E_SUCCESS){
             break;
         }
     }
@@ -260,33 +263,34 @@ void patchFiles(void) {
     
     NSString *board = [NSString stringWithFormat:@"%s", device -> hardware_model];
     const char *boardcmp = [board cStringUsingEncoding:NSASCIIStringEncoding];
-    NSString *LDResourcesPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/LDResources"];
+    NSString *tempipswdir = [[NSString stringWithFormat:@"%@", NSTemporaryDirectory()] stringByAppendingString:@"iPSW"];
+    NSString *LDResourcesPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingString: @"/LDResources"];
     
     irecv_close(client);
-    
+
     if (strcmp(boardcmp, "n51ap") == 0 || strcmp(boardcmp, "n53ap") == 0) {
-        ibsspatch.arguments = @[[LDResourcesPath stringByAppendingString:@"/iPSW/Firmware/dfu/iBSS.iphone6.RELEASE.im4p"], [LDResourcesPath stringByAppendingString:@"/iPSW/Firmware/dfu/iBSS.iphone6.RELEASE.im4p"], [LDResourcesPath stringByAppendingString:@"/Patches/ibss5s.patch"]];
+        ibsspatch.arguments = @[[tempipswdir stringByAppendingString:@"/Firmware/dfu/iBSS.iphone6.RELEASE.im4p"], [tempipswdir stringByAppendingString:@"/Firmware/dfu/iBSS.iphone6.RELEASE.im4p"], [LDResourcesPath stringByAppendingString:@"/Patches/ibss5s.patch"]];
         [ibsspatch launch];
         [ibsspatch waitUntilExit];
-        ibecpatch.arguments = @[[LDResourcesPath stringByAppendingString:@"/iPSW/Firmware/dfu/iBEC.iphone6.RELEASE.im4p"], [LDResourcesPath stringByAppendingString:@"/iPSW/Firmware/dfu/iBEC.iphone6.RELEASE.im4p"], [LDResourcesPath stringByAppendingString:@"/Patches/ibec5s.patch"]];
+        ibecpatch.arguments = @[[tempipswdir stringByAppendingString:@"/Firmware/dfu/iBEC.iphone6.RELEASE.im4p"], [tempipswdir stringByAppendingString:@"/Firmware/dfu/iBEC.iphone6.RELEASE.im4p"], [LDResourcesPath stringByAppendingString:@"/Patches/ibec5s.patch"]];
         [ibecpatch launch];
         [ibecpatch waitUntilExit];
     }
     
     else if (strcmp(boardcmp, "j71ap") == 0 || strcmp(boardcmp, "j72ap") == 0 || strcmp(boardcmp, "j73ap") == 0) {
-        ibsspatch.arguments = @[[LDResourcesPath stringByAppendingString:@"/iPSW/Firmware/dfu/iBSS.ipad4.RELEASE.im4p"], [LDResourcesPath stringByAppendingString:@"/iPSW/Firmware/dfu/iBSS.ipad4.RELEASE.im4p"], [LDResourcesPath stringByAppendingString:@"Patches/ibss_ipad4.patch"]];
+        ibsspatch.arguments = @[[tempipswdir stringByAppendingString:@"/Firmware/dfu/iBSS.ipad4.RELEASE.im4p"], [tempipswdir stringByAppendingString:@"/Firmware/dfu/iBSS.ipad4.RELEASE.im4p"], [LDResourcesPath stringByAppendingString:@"Patches/ibss_ipad4.patch"]];
         [ibsspatch launch];
         [ibsspatch waitUntilExit];
-        ibecpatch.arguments = @[[LDResourcesPath stringByAppendingString:@"/iPSW/Firmware/dfu/iBEC.ipad4.RELEASE.im4p"], [LDResourcesPath stringByAppendingString:@"/iPSW/Firmware/dfu/iBEC.ipad4.RELEASE.im4p"], [LDResourcesPath stringByAppendingString:@"Patches/ibec_ipad4.patch"]];
+        ibecpatch.arguments = @[[tempipswdir stringByAppendingString:@"/Firmware/dfu/iBEC.ipad4.RELEASE.im4p"], [tempipswdir stringByAppendingString:@"/Firmware/dfu/iBEC.ipad4.RELEASE.im4p"], [LDResourcesPath stringByAppendingString:@"Patches/ibec_ipad4.patch"]];
         [ibecpatch launch];
         [ibecpatch waitUntilExit];
     }
     
     else if (strcmp(boardcmp, "j85ap") == 0 || strcmp(boardcmp, "j86ap") == 0 || strcmp(boardcmp, "j87ap") == 0) {
-        ibsspatch.arguments = @[[LDResourcesPath stringByAppendingString:@"/iPSW/Firmware/dfu/iBSS.ipad4b.RELEASE.im4p"], [LDResourcesPath stringByAppendingString:@"/iPSW/Firmware/dfu/iBSS.ipad4b.RELEASE.im4p"], [LDResourcesPath stringByAppendingString:@"Patches/ibss_ipad4b.patch"]];
+        ibsspatch.arguments = @[[tempipswdir stringByAppendingString:@"/Firmware/dfu/iBSS.ipad4b.RELEASE.im4p"], [tempipswdir stringByAppendingString:@"/Firmware/dfu/iBSS.ipad4b.RELEASE.im4p"], [LDResourcesPath stringByAppendingString:@"Patches/ibss_ipad4b.patch"]];
         [ibsspatch launch];
         [ibsspatch waitUntilExit];
-        ibecpatch.arguments = @[[LDResourcesPath stringByAppendingString:@"/iPSW/Firmware/dfu/iBEC.ipad4b.RELEASE.im4p"], [LDResourcesPath stringByAppendingString:@"/iPSW/Firmware/dfu/iBEC.ipad4b.RELEASE.im4p"], [LDResourcesPath stringByAppendingString:@"Patches/ibec_ipad4b.patch"]];
+        ibecpatch.arguments = @[[tempipswdir stringByAppendingString:@"/Firmware/dfu/iBEC.ipad4b.RELEASE.im4p"], [tempipswdir stringByAppendingString:@"/Firmware/dfu/iBEC.ipad4b.RELEASE.im4p"], [LDResourcesPath stringByAppendingString:@"Patches/ibec_ipad4b.patch"]];
         [ibecpatch launch];
         [ibecpatch waitUntilExit];
         
@@ -297,6 +301,16 @@ void patchFiles(void) {
 
 bool firstline = true;
 bool pwned = false;
+- (IBAction)dfuhelperact:(id)sender {
+    
+    // got this trick from Matty's Ramiel app ;)
+    NSStoryboard *storyboard = [NSStoryboard storyboardWithName:@"Main" bundle:nil];
+    NSViewController *yourViewController = [storyboard instantiateControllerWithIdentifier:@"DFUHelper"];
+    dispatch_async(dispatch_get_main_queue(), ^(){
+        [self.view.window.contentViewController presentViewControllerAsSheet:yourViewController];
+    });
+    
+}
 
 - (void)updateStatus:(NSString*)text color:(NSColor*)color1 {
     
@@ -365,7 +379,7 @@ int supported = 0;
         if ([stag containsString:@"PWND:[checkm8]"]) {
             pwned = true;
         }
-        [self infoLog: @"\n\n=============== DEVICE INFO ===============\n" color:[NSColor cyanColor]];
+        [self infoLog: @"\n\n============== DEVICE INFO ==============\n" color:[NSColor cyanColor]];
         [self infoLog: @"\nModel Name: " color:[NSColor cyanColor]];
         [self infoLog: [NSString stringWithFormat:@"%s", tempdev -> display_name] color:[NSColor greenColor]];
         [self infoLog: @"\nHardware Model: " color:[NSColor cyanColor]];
@@ -387,7 +401,7 @@ int supported = 0;
         else {
             [self infoLog: @"No" color:[NSColor greenColor]];
         }
-        [self infoLog: @"\n\n=========================================" color:[NSColor cyanColor]];
+        [self infoLog: @"\n\n=======================================" color:[NSColor cyanColor]];
     }
 }
 
@@ -491,10 +505,15 @@ unsigned long long devCompStr;
         const struct irecv_device_info *devinfo = irecv_get_device_info(client);
         if(!(devinfo->srtg)){
             [self updateStatus:[NSString stringWithFormat:@"Device connected in wrong mode, please put your device in DFU mode to proceed"] color:[NSColor redColor]];
+            
         }
         else {
             
-        
+            dispatch_async(dispatch_get_main_queue(), ^(){
+                _dfuhelpoutlet.enabled = false;
+                _dfuhelpoutlet.alphaValue = 0;
+            });
+            
             NSString *NScpid = [NSString stringWithFormat:@"%@", NSCPID(&devinfo -> cpid)];
             const char *cpid = [NScpid cStringUsingEncoding:NSASCIIStringEncoding];
         
@@ -503,6 +522,7 @@ unsigned long long devCompStr;
                 supported = true;
                 dispatch_async(dispatch_get_main_queue(), ^(){
                     self -> _selectIPSWoutlet.enabled = true;
+                    
                     [self updateStatus:[NSString stringWithFormat: @"%s is supported", dev -> display_name] color:[NSColor greenColor]];
                 
                     irecv_close(client);
@@ -556,8 +576,10 @@ unsigned long long devCompStr;
 
             NSString *filepath = URL.absoluteString;
             filepath = [filepath substringFromIndex:7];
-
-            [self updateStatus:[NSString stringWithFormat:@"iPSW selected at %@ and being extracted to %@", filepath, [[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/LDResources/iPSW"]] color:[NSColor greenColor]];
+            NSString *tempipswdir = [[NSString stringWithFormat:@"%@", NSTemporaryDirectory()] stringByAppendingString:@"iPSW"];
+            [[NSFileManager defaultManager] createDirectoryAtPath:tempipswdir withIntermediateDirectories:NO attributes:NULL error:NULL];
+        
+            [self updateStatus:[NSString stringWithFormat:@"iPSW selected at %@ and being extracted to %@", filepath, tempipswdir] color:[NSColor cyanColor]];
 
             dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
                 
@@ -567,9 +589,10 @@ unsigned long long devCompStr;
                     [self updateStatus:@"Extracting the iPSW please wait..." color:[NSColor greenColor]];
                     [self -> _uselessIndicator startAnimation:nil];
                 });
-                NSString *destination = [[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/LDResources/iPSW"];
-                [SSZipArchive unzipFileAtPath:filepath toDestination: destination];
+            
+                [SSZipArchive unzipFileAtPath:filepath toDestination: tempipswdir];
                 
+        
                 dispatch_async(dispatch_get_main_queue(), ^(){
                     self -> _downgradeButtonOut.enabled = true;
                     self -> _selectIPSWoutlet.enabled = true;
@@ -587,6 +610,8 @@ unsigned long long devCompStr;
     
     irecv_device_t dev = NULL;
     irecv_client_t cli = NULL;
+    
+    NSString *tempipswdir = [[NSString stringWithFormat:@"%@", NSTemporaryDirectory()] stringByAppendingString:@"iPSW"];
     
     NSAlert *alert = [[NSAlert alloc] init];
     [alert setMessageText:@"Warning"];
@@ -630,6 +655,15 @@ unsigned long long devCompStr;
                         dispatch_async(dispatch_get_main_queue(), ^(){
                             [self updateStatus:@"Successfully exploited device!" color:[NSColor cyanColor]];
                         });
+                    }
+                    else {
+                        dispatch_async(dispatch_get_main_queue(), ^(){
+                            [self -> _uselessIndicator stopAnimation:nil];
+                            [self updateStatus:@"Failed to exploit device, please re-enter DFU mode and try again" color:[NSColor redColor]];
+                        });
+                        return;
+                    }
+                }
                         
                         dispatch_async(dispatch_get_main_queue(), ^(){
                             [self updateStatus:@"Patching bootchain" color:[NSColor greenColor]];
@@ -645,9 +679,9 @@ unsigned long long devCompStr;
                     
                         [self sendFile:cli device:dev filename:@"/dev/null"];
                         sleep(5);
-                        [self sendFile:cli device:dev filename: [[[NSBundle mainBundle] resourcePath]   stringByAppendingString:@"/LDResources/iPSW/Firmware/DFU/iBSS.iphone6.release.im4p"]];
+                        [self sendFile:cli device:dev filename: [tempipswdir stringByAppendingString:@"/Firmware/DFU/iBSS.iphone6.release.im4p"]];
                         sleep(5);
-                        [self sendFile:cli device:dev filename: [[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/LDResources/iPSW/Firmware/DFU/iBEC.iphone6.release.im4p"]];
+                        [self sendFile:cli device:dev filename: [tempipswdir stringByAppendingString:@"/Firmware/DFU/iBEC.iphone6.release.im4p"]];
                         dispatch_async(dispatch_get_main_queue(), ^(){
                             [self updateStatus:@"Restoring..." color:[NSColor greenColor]];
                         });
@@ -663,17 +697,7 @@ unsigned long long devCompStr;
                                 [self updateStatus:@"Failed to restore device" color:[NSColor redColor]];
                             });
                         }
-                    }
-                    
-                    else {
-                        dispatch_async(dispatch_get_main_queue(), ^(){
-                            [self -> _uselessIndicator stopAnimation:nil];
-                            [self updateStatus:@"Failed to exploit device, please re-enter DFU mode and try again" color:[NSColor redColor]];
-                            return;
-                        });
-                    }
-                }
-                
+                cleanUp();
             });
         }
         
@@ -688,6 +712,7 @@ unsigned long long devCompStr;
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    
     cleanUp();
     [_uselessIndicator setHidden:NO];
     [_uselessIndicator setIndeterminate:YES];
@@ -704,8 +729,9 @@ unsigned long long devCompStr;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         while (!supported) {
+            
             [self Discover: tempcli device: tempdev];
-            sleep(2);
+            sleep(1);
         }
         irecv_close(tempcli);
     });

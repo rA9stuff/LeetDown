@@ -1,61 +1,61 @@
 {
   "images" : [
     {
-      "filename" : "circle-cropped.png",
+      "filename" : "circle-cropped-11.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "16x16"
     },
     {
-      "filename" : "circle-cropped-10.png",
+      "filename" : "circle-cropped-12.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "16x16"
     },
     {
-      "filename" : "circle-cropped-2.png",
+      "filename" : "circle-cropped-13.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "32x32"
     },
     {
-      "filename" : "circle-cropped-3.png",
+      "filename" : "circle-cropped-14.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "32x32"
     },
     {
-      "filename" : "circle-cropped-4.png",
+      "filename" : "circle-cropped-15.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "128x128"
     },
     {
-      "filename" : "circle-cropped-9.png",
+      "filename" : "circle-cropped-16.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "128x128"
     },
     {
-      "filename" : "circle-cropped-5.png",
+      "filename" : "circle-cropped-17.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "256x256"
     },
     {
-      "filename" : "circle-cropped-8.png",
+      "filename" : "circle-cropped-18.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "256x256"
     },
     {
-      "filename" : "circle-cropped-6.png",
+      "filename" : "circle-cropped-19.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "512x512"
     },
     {
-      "filename" : "circle-cropped-7.png",
+      "filename" : "circle-cropped-20.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "512x512"

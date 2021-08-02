@@ -2,7 +2,7 @@
 //  AppDelegate.m
 //  LeetDown_M
 //
-//  Created by Barış Ulaş Çukur on 12.07.2021.
+//  Created by rA9stuff on 12.07.2021.
 //
 
 #import "AppDelegate.h"
