@@ -27,7 +27,7 @@ LeetDown can run on following environments:
 
 | Intel Macs    | Apple Silicon Macs |
 | ------------- |:-------------:|
-| macOS 10.3+   | macOS 11.0 - 11.2.3 |
+| macOS 10.13+   | macOS 11.0 - 11.2.3 |
 
 # How to Use?
 
