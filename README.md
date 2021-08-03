@@ -3,7 +3,7 @@
 * [Official LeetDown Twitter account](https://twitter.com/LeetDownApp) for updates & support. 
 * [Official LeetDown webpage](https://LeetDown.app)
 
-![alt text](https://i.imgur.com/8uaLelG.png)
+![alt text](https://i.imgur.com/JZDeZmf.png)
 
 an OTA Downgrade Tool for A7 devices.
 
