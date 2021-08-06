@@ -110,10 +110,10 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZJv-6a-Efl">
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZJv-6a-Efl" userLabel="SelectIPSWoutlet">
                                 <rect key="frame" x="95" y="90" width="154" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="push" title="Select 10.3.3 iPSW" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ev1-ew-Rgy">
+                                <buttonCell key="cell" type="push" title="Waiting for a device" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ev1-ew-Rgy">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -210,6 +210,8 @@
                         <outlet property="header" destination="X81-Hw-SP5" id="YEw-jY-yfl"/>
                         <outlet property="ramiel" destination="cam-ls-BFA" id="Nbw-B5-FOS"/>
                         <outlet property="selectIPSWoutlet" destination="ZJv-6a-Efl" id="cN3-dk-2V9"/>
+                        <outlet property="selectiPSWOutlet" destination="ZJv-6a-Efl" id="Zzr-iM-r1A"/>
+                        <outlet property="selectiPSWoutlet" destination="ZJv-6a-Efl" id="xR8-Xv-nYd"/>
                         <outlet property="statusbox" destination="K2L-yj-Yqg" id="nCP-JW-00y"/>
                         <outlet property="statuslabel" destination="b67-hY-VIW" id="jtz-cl-2qR"/>
                         <outlet property="uselessIndicator" destination="JUx-Tm-U7J" id="UnE-YW-efT"/>

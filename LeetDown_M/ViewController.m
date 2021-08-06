@@ -375,7 +375,23 @@ int supported = 0;
         connected = true;
         irecv_devices_get_device_by_client(tempcli, &tempdev);
         const struct irecv_device_info *devinfo = irecv_get_device_info(tempcli);
-        
+        NSString *destination = NULL;
+        const char *chipcmp = [[NSString stringWithFormat:@"%@", NSCPID(&devinfo -> cpid)] cStringUsingEncoding:NSASCIIStringEncoding];
+        if (strcmp(chipcmp, "8960") == 0 || strcmp(chipcmp, "8965") == 0) {
+            destination = @"10.3.3";
+        }
+        else if (strcmp(chipcmp, "8950") == 0 || strcmp(chipcmp, "8955") == 0 || strcmp(chipcmp, "8945") == 0) {
+            destination = @"8.4.1";
+        }
+        else {
+            const char *devmodel = [[NSString stringWithFormat:@"%s", tempdev -> product_type] cStringUsingEncoding:NSASCIIStringEncoding];
+            if (strcmp(devmodel, "iPhone4,1") == 0 || strcmp(devmodel, "iPad2,1") == 0 || strcmp(devmodel, "iPad2,2") == 0 || strcmp(devmodel, "iPad2,3") == 0) {
+                destination = @"6.1.3 or 8.4.1";
+            }
+            else if (strcmp(devmodel, "iPad2,3") == 0) {
+                destination = @"8.4.1";
+            }
+        }
         NSString *stag = [NSString stringWithFormat:@"%s", devinfo -> serial_string];
         if ([stag containsString:@"PWND:[checkm8]"]) {
             pwned = true;
@@ -394,6 +410,8 @@ int supported = 0;
         [self infoLog: [NSString stringWithFormat:@"%@", NSNonce(devinfo -> sep_nonce, devinfo -> sep_nonce_size)] color:[NSColor greenColor]];
         [self infoLog:@"\nCPID: " color:[NSColor cyanColor]];
         [self infoLog: [NSString stringWithFormat:@"%@", NSCPID(&devinfo -> cpid)] color:[NSColor greenColor]];
+        [self infoLog: @"\nDestination firmware: " color:[NSColor cyanColor]];
+        [self infoLog: destination color:[NSColor greenColor]];
         [self infoLog:@"\nPwned: " color:[NSColor cyanColor]];
         irecv_close(tempcli);
         if (ispwned(tempcli, tempdev)) {
@@ -402,7 +420,7 @@ int supported = 0;
         else {
             [self infoLog: @"No" color:[NSColor greenColor]];
         }
-        [self infoLog: @"\n\n=======================================" color:[NSColor cyanColor]];
+        [self infoLog: @"\n=======================================" color:[NSColor cyanColor]];
     }
 }
 
@@ -523,6 +541,7 @@ unsigned long long devCompStr;
                 supported = true;
                 dispatch_async(dispatch_get_main_queue(), ^(){
                     self -> _selectIPSWoutlet.enabled = true;
+                    self -> _selectIPSWoutlet.title = @"Select 10.3.3 iPSW";
                     
                     [self updateStatus:[NSString stringWithFormat: @"%s is supported", dev -> display_name] color:[NSColor greenColor]];
                 
@@ -687,6 +706,7 @@ unsigned long long devCompStr;
                             [self -> _uselessIndicator stopAnimation:nil];
                             [self updateStatus:@"Failed to exploit device, please re-enter DFU mode and try again" color:[NSColor redColor]];
                             _dfuhelpoutlet.enabled = true;
+                            _dfuhelpoutlet.alphaValue = 1;
                             _downgradeButtonOut.enabled = true;
                         });
                         return;
@@ -708,18 +728,18 @@ unsigned long long devCompStr;
                 [self sendFile:cli device:dev filename:@"/dev/null"];
                 sleep(5);
                 
-                if (strcmp(boardcmp, "n51ap") || strcmp(boardcmp, "n53ap")) {
+                if (strcmp(boardcmp, "n51ap") == 0 || strcmp(boardcmp, "n53ap") == 0) {
                     [self sendFile:cli device:dev filename: [tempipswdir stringByAppendingString:@"/Firmware/DFU/iBSS.iphone6.RELEASE.im4p"]];
                     sleep(5);
                     [self sendFile:cli device:dev filename: [tempipswdir stringByAppendingString:@"/Firmware/DFU/iBEC.iphone6.RELEASE.im4p"]];
                 }
                 
-                else if (strcmp(boardcmp, "j71ap") || strcmp(boardcmp, "j72ap") || strcmp(boardcmp, "j73ap")) {
+                else if (strcmp(boardcmp, "j71ap") == 0 || strcmp(boardcmp, "j72ap") == 0 || strcmp(boardcmp, "j73ap") == 0) {
                     [self sendFile:cli device:dev filename: [tempipswdir stringByAppendingString:@"/Firmware/DFU/iBSS.ipad4.RELEASE.im4p"]];
                     sleep(5);
                     [self sendFile:cli device:dev filename: [tempipswdir stringByAppendingString:@"/Firmware/DFU/iBEC.ipad4.RELEASE.im4p"]];
                 }
-                else if (strcmp(boardcmp, "j85ap") || strcmp(boardcmp, "j86ap")) {
+                else if (strcmp(boardcmp, "j85ap") == 0 || strcmp(boardcmp, "j86ap") == 0) {
                     [self sendFile:cli device:dev filename: [tempipswdir stringByAppendingString:@"/Firmware/DFU/iBSS.ipad4b.RELEASE.im4p"]];
                     sleep(5);
                     [self sendFile:cli device:dev filename: [tempipswdir stringByAppendingString:@"/Firmware/DFU/iBEC.ipad4b.RELEASE.im4p"]];
@@ -765,7 +785,6 @@ unsigned long long devCompStr;
         _header.stringValue = @"1337Down";
         _ramiel.stringValue = @"Okay Ramiel did it first but you have 1 in a 1000 chances of seeing\n 1337Down";
     }
-    
     irecv_device_t tempdev = NULL;
     irecv_client_t tempcli = NULL;
     
