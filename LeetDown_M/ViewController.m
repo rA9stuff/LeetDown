@@ -161,6 +161,7 @@ int restore(irecv_client_t client, irecv_device_t device) {
     
     if (strcmp(boardcmp, "n51ap") == 0 || strcmp(boardcmp, "n53ap") == 0) {
         
+        
         irecv_send_file(client, iPhoneLDBoot, 1);
         irecv_send_command(client, "setpicture 0");
         irecv_send_command(client, "bgcolor 255 255 255");
@@ -286,7 +287,7 @@ void patchFiles(void) {
         [ibecpatch waitUntilExit];
     }
     
-    else if (strcmp(boardcmp, "j85ap") == 0 || strcmp(boardcmp, "j86ap") == 0 || strcmp(boardcmp, "j87ap") == 0) {
+    else if (strcmp(boardcmp, "j85ap") == 0 || strcmp(boardcmp, "j86ap") == 0) {
         ibsspatch.arguments = @[[tempipswdir stringByAppendingString:@"/Firmware/dfu/iBSS.ipad4b.RELEASE.im4p"], [tempipswdir stringByAppendingString:@"/Firmware/dfu/iBSS.ipad4b.RELEASE.im4p"], [LDResourcesPath stringByAppendingString:@"Patches/ibss_ipad4b.patch"]];
         [ibsspatch launch];
         [ibsspatch waitUntilExit];
@@ -514,10 +515,10 @@ unsigned long long devCompStr;
                 _dfuhelpoutlet.alphaValue = 0;
             });
             
-            NSString *NScpid = [NSString stringWithFormat:@"%@", NSCPID(&devinfo -> cpid)];
-            const char *cpid = [NScpid cStringUsingEncoding:NSASCIIStringEncoding];
+            NSString *board = [NSString stringWithFormat:@"%s", dev ->hardware_model];
+            const char *boardcmp = [board cStringUsingEncoding:NSASCIIStringEncoding];
         
-            if (strcmp(cpid, "8960") == 0 || strcmp(cpid, "8965") == 0) {
+            if (strcmp(boardcmp, "n51ap") == 0 || strcmp(boardcmp, "n53ap") == 0 || strcmp(boardcmp, "j71ap") == 0 || strcmp(boardcmp, "j72ap") == 0 || strcmp(boardcmp, "j73ap") == 0 || strcmp(boardcmp, "j85ap") == 0 || strcmp(boardcmp, "j86ap") == 0 )  {
                 
                 supported = true;
                 dispatch_async(dispatch_get_main_queue(), ^(){
@@ -610,6 +611,28 @@ unsigned long long devCompStr;
     
     irecv_device_t dev = NULL;
     irecv_client_t cli = NULL;
+    connected = false;
+   
+    while (!connected) {
+        irecv_error_t error = irecv_open_with_ecid(&cli, ecid);
+        printf("Attempting to connect... \n");
+        if (error == IRECV_E_UNSUPPORTED) {
+            fprintf(stderr, "ERROR: %s\n", irecv_strerror(error));
+        }
+        else if (error != IRECV_E_SUCCESS) {
+            usleep(500000);
+        }
+        if (error == IRECV_E_SUCCESS) {
+            connected = true;
+        }
+    }
+    
+    irecv_devices_get_device_by_client(cli, &dev);
+    NSString *board = [NSString stringWithFormat:@"%s", dev ->hardware_model];
+    const char *boardcmp = [board cStringUsingEncoding:NSASCIIStringEncoding];
+    irecv_close(cli);
+    
+    
     
     NSString *tempipswdir = [[NSString stringWithFormat:@"%@", NSTemporaryDirectory()] stringByAppendingString:@"iPSW"];
     
@@ -627,8 +650,11 @@ unsigned long long devCompStr;
                 
                 dispatch_async(dispatch_get_main_queue(), ^(){
                     [self -> _uselessIndicator startAnimation:nil];
+                    _dfuhelpoutlet.enabled = false;
+                    _selectIPSWoutlet.enabled = false;
+                    _downgradeButtonOut.enabled = false;
                 });
-                
+                sleep(1);
                 if (pwned) {
                     dispatch_async(dispatch_get_main_queue(), ^(){
                         [self updateStatus:@"Device was already pwned, skipping exploitation" color:[NSColor cyanColor]];
@@ -660,28 +686,45 @@ unsigned long long devCompStr;
                         dispatch_async(dispatch_get_main_queue(), ^(){
                             [self -> _uselessIndicator stopAnimation:nil];
                             [self updateStatus:@"Failed to exploit device, please re-enter DFU mode and try again" color:[NSColor redColor]];
+                            _dfuhelpoutlet.enabled = true;
+                            _downgradeButtonOut.enabled = true;
                         });
                         return;
                     }
                 }
                         
-                        dispatch_async(dispatch_get_main_queue(), ^(){
-                            [self updateStatus:@"Patching bootchain" color:[NSColor greenColor]];
-                        });
-                        sleep(1);
-                        patchFiles();
+                dispatch_async(dispatch_get_main_queue(), ^(){
+                    [self updateStatus:@"Patching bootchain" color:[NSColor greenColor]];
+                });
+                sleep(1);
+                patchFiles();
                         
-                        dispatch_async(dispatch_get_main_queue(), ^(){
-                            [self updateStatus:@"Fetching iOS 10.3.3 OTA blob..." color:[NSColor greenColor]];
-                        });
+                dispatch_async(dispatch_get_main_queue(), ^(){
+                    [self updateStatus:@"Fetching iOS 10.3.3 OTA blob..." color:[NSColor greenColor]];
+                });
                         
-                        saveOTABlob(cli, dev);
-                    
-                        [self sendFile:cli device:dev filename:@"/dev/null"];
-                        sleep(5);
-                        [self sendFile:cli device:dev filename: [tempipswdir stringByAppendingString:@"/Firmware/DFU/iBSS.iphone6.release.im4p"]];
-                        sleep(5);
-                        [self sendFile:cli device:dev filename: [tempipswdir stringByAppendingString:@"/Firmware/DFU/iBEC.iphone6.release.im4p"]];
+                saveOTABlob(cli, dev);
+            
+                [self sendFile:cli device:dev filename:@"/dev/null"];
+                sleep(5);
+                
+                if (strcmp(boardcmp, "n51ap") || strcmp(boardcmp, "n53ap")) {
+                    [self sendFile:cli device:dev filename: [tempipswdir stringByAppendingString:@"/Firmware/DFU/iBSS.iphone6.RELEASE.im4p"]];
+                    sleep(5);
+                    [self sendFile:cli device:dev filename: [tempipswdir stringByAppendingString:@"/Firmware/DFU/iBEC.iphone6.RELEASE.im4p"]];
+                }
+                
+                else if (strcmp(boardcmp, "j71ap") || strcmp(boardcmp, "j72ap") || strcmp(boardcmp, "j73ap")) {
+                    [self sendFile:cli device:dev filename: [tempipswdir stringByAppendingString:@"/Firmware/DFU/iBSS.ipad4.RELEASE.im4p"]];
+                    sleep(5);
+                    [self sendFile:cli device:dev filename: [tempipswdir stringByAppendingString:@"/Firmware/DFU/iBEC.ipad4.RELEASE.im4p"]];
+                }
+                else if (strcmp(boardcmp, "j85ap") || strcmp(boardcmp, "j86ap")) {
+                    [self sendFile:cli device:dev filename: [tempipswdir stringByAppendingString:@"/Firmware/DFU/iBSS.ipad4b.RELEASE.im4p"]];
+                    sleep(5);
+                    [self sendFile:cli device:dev filename: [tempipswdir stringByAppendingString:@"/Firmware/DFU/iBEC.ipad4b.RELEASE.im4p"]];
+                }
+                        
                         dispatch_async(dispatch_get_main_queue(), ^(){
                             [self updateStatus:@"Restoring..." color:[NSColor greenColor]];
                         });
@@ -711,7 +754,6 @@ unsigned long long devCompStr;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
     
     cleanUp();
     [_uselessIndicator setHidden:NO];

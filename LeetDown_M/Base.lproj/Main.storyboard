@@ -73,11 +73,22 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <box appearanceType="aqua" fixedFrame="YES" boxType="custom" cornerRadius="4" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="mBm-4N-dqx">
-                                <rect key="frame" x="-29" y="-23" width="402" height="529"/>
+                                <rect key="frame" x="-29" y="-22" width="402" height="529"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <view key="contentView" id="NTz-dw-f4F">
                                     <rect key="frame" x="1" y="1" width="400" height="527"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="39M-nV-1b5">
+                                            <rect key="frame" x="113" y="26" width="174" height="16"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <textFieldCell key="cell" lineBreakMode="clipping" title="version: 2.0.1 by @rA9_main" id="0AX-OP-9LK">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                    </subviews>
                                 </view>
                                 <color key="fillColor" red="0.10661250116296109" green="0.30787598844582797" blue="0.31932878002678" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </box>
@@ -100,7 +111,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZJv-6a-Efl">
-                                <rect key="frame" x="95" y="92" width="154" height="32"/>
+                                <rect key="frame" x="95" y="90" width="154" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Select 10.3.3 iPSW" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ev1-ew-Rgy">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -111,7 +122,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2MR-VE-HG2">
-                                <rect key="frame" x="115" y="49" width="110" height="32"/>
+                                <rect key="frame" x="115" y="48" width="110" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Downgrade" bezelStyle="rounded" imagePosition="overlaps" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kef-7B-K0k">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -191,15 +202,6 @@
                                     <action selector="dfuhelperact:" target="XfG-lQ-9wD" id="iEc-E3-eNW"/>
                                 </connections>
                             </button>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="39M-nV-1b5">
-                                <rect key="frame" x="85" y="7" width="174" height="16"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="version: 2.0.1 by @rA9_main" id="0AX-OP-9LK">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                         </subviews>
                     </view>
                     <connections>
@@ -221,7 +223,7 @@
         <scene sceneID="qFQ-Vg-LxJ">
             <objects>
                 <viewController storyboardIdentifier="DFUHelper" id="WEC-IZ-ApL" userLabel="DFUHelper" customClass="DFUHelperViewController" sceneMemberID="viewController">
-                    <view key="view" identifier="DFUHelper" appearanceType="aqua" id="Zj0-DD-API" userLabel="DFUHelperView">
+                    <view key="view" identifier="DFUHelper" id="Zj0-DD-API" userLabel="DFUHelperView">
                         <rect key="frame" x="0.0" y="0.0" width="360" height="484"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
