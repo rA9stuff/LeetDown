@@ -41,7 +41,7 @@ Experimental Apple Silicon support: [As checkra1n team stated](https://checkra.i
 
 # Having issues?
 
-Sure, just open an issue that includes which device you're trying to restore, your host environment and version.
+Sure, just open an issue using [LeetDown issue template](https://github.com/rA9stuff/LeetDown/issues/new/choose).
 
 # Credits:
 
