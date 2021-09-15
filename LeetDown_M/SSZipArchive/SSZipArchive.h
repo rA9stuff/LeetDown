@@ -36,6 +36,10 @@ typedef NS_ENUM(NSInteger, SSZipArchiveErrorCode) {
 + (NSNumber *)payloadSizeForArchiveAtPath:(NSString *)path error:(NSError **)error;
 
 // Unzip
+
+// huge thanks to https://stackoverflow.com/a/25020622 for this
++ (BOOL)unzipEntityName:(NSString *)name fromFilePath:(NSString *)path toDestination:(NSString *)destination;
+
 + (BOOL)unzipFileAtPath:(NSString *)path toDestination:(NSString *)destination;
 + (BOOL)unzipFileAtPath:(NSString *)path toDestination:(NSString *)destination delegate:(nullable id<SSZipArchiveDelegate>)delegate;
 

@@ -6,7 +6,7 @@
 //
 
 #import "DFUHelperViewController.h"
-#import "ViewController.h"
+#import "LeetDownMain.h"
 
 @implementation DFUHelperViewController
 
@@ -47,15 +47,9 @@
             _getreadytext.alphaValue = 0.3;
         });
         
-        for (int i = 0; i < 100; i++) {
-            dispatch_async(dispatch_get_main_queue(), ^(){
-                _lockbuttonimage.alphaValue = 0.01*i;
-                _homebuttonimage.alphaValue = 0.01*i;
-            });
-            usleep(1000);
-        }
-        
         dispatch_async(dispatch_get_main_queue(), ^(){
+            _lockbuttonimage.alphaValue = 1;
+            _homebuttonimage.alphaValue = 1;
             _firsttext.alphaValue = 1;
             _firstcounter.alphaValue = 1;
         });
@@ -93,13 +87,21 @@
     if (complete) {
         
     }
-    
 }
+
+-(void)awakeFromNib
+{
+    NSColor *color = [NSColor greenColor];
+    NSMutableAttributedString *colorTitle = [[NSMutableAttributedString alloc] initWithAttributedString:[_startbutton attributedTitle]];
+    NSRange titleRange = NSMakeRange(0, [colorTitle length]);
+    [colorTitle addAttribute:NSForegroundColorAttributeName value:color range:titleRange];
+    [_startbutton setAttributedTitle:colorTitle];
+}
+
 bool complete = false;
 - (void) viewDidLoad {
     
     [super viewDidLoad];
-    
     
     _getreadyCounter.alphaValue = 0.1;
     _getreadytext.alphaValue = 0.1;
@@ -111,10 +113,6 @@ bool complete = false;
     _homebuttonimage.alphaValue = 0;
     _lockbuttonimage.alphaValue = 0;
     _homebuttonimage.image = [NSImage imageNamed:@"homebuttonimage"];
-    
-    
-    
-    
     
 }
 
