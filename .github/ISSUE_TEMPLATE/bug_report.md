@@ -17,8 +17,8 @@ e.g. macOS 11.1
 e.g. iPhone 5s
 
 **What is the LeetDown version you're using?**
-e.g. 2.0.1
+e.g. 2.1
 
-**Copy and Paste LeetDown log here**
+**Enable debugging in LeetDown's settings and copy and paste LDLog.txt here. **
 
 **Additional info (optional)**
