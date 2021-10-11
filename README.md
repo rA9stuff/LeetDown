@@ -1,4 +1,5 @@
 # LeetDown
+a GUI app to downgrade compatible A7 devices to iOS 10.3.3.
 
 * [Official LeetDown Twitter account](https://twitter.com/LeetDownApp) for updates & support. 
 * [Official LeetDown webpage](https://LeetDown.app)
