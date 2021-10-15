@@ -8,7 +8,7 @@ a GUI app to downgrade compatible A7 devices to iOS 10.3.3.
 ![alt text](https://i.imgur.com/JZDeZmf.png)
 
 
-
+# If you are having issues with iPad restores, please use version 2.0.1 while I investigate the issue.
 
 
 
