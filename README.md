@@ -60,3 +60,5 @@ Sure, just open an issue using [LeetDown issue template](https://github.com/rA9s
 * [ZipArchive](https://github.com/ZipArchive/ZipArchive) for SSZipArchive. 
 
 * [AFNetworking](https://github.com/AFNetworking/AFNetworking) for AFNetworking.
+
+* [@alitek123](https://twitter.com/alitek123) for modified BuildManifests. 
