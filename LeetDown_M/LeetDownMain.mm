@@ -431,7 +431,7 @@ DFUDevice *dfuDevPtr = new DFUDevice; // initialize it with defualt constructor 
         return;
     }
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self updateStatus:@"Failed to connect to device, reconnect the USB cable to your mac to try again" color:[NSColor yellowColor]];
+        [self updateStatus:@"Device was lost, reconnect the USB cable to your mac to resume the upload process" color:[NSColor yellowColor]];
     });
     int i = 0;
     while (dfuDevPtr -> openConnection(5) != 0) {
@@ -1064,6 +1064,11 @@ bool dryRun = true;
             [self comeDiscover];
             usleep(500000);
         }
+        dispatch_async(dispatch_get_main_queue(), ^(){
+            self -> _versionLabel.alphaValue = 1.0;
+            self -> _dfuhelpoutlet.enabled = false;
+            self -> _dfuhelpoutlet.alphaValue = 0;
+        });
     });
 }
 
