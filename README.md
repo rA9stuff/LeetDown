@@ -65,6 +65,6 @@ Sure, just open an issue ~~using [LeetDown issue template](https://github.com/rA
 * [AFNetworking](https://github.com/AFNetworking/AFNetworking) for AFNetworking.
 * [@alitek123](https://twitter.com/alitek123) for OTA BuildManifests. 
 * [@exploit3dguy](https://twitter.com/exploit3dguy) for private testing.
-* [@m3t0ski](https://twitter.com/exploit3dguy) for private testing.
+* [@m3t0ski](https://twitter.com/m3t0ski) for private testing.
 * [@AyyItzRob123](https://twitter.com/AyyItzRob123) for private testing.
 * [Mini-Exploit](https://github.com/Mini-Exploit) for private testing.
