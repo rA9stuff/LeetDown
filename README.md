@@ -1,25 +1,23 @@
 # LeetDown
-a GUI app to downgrade compatible A7 devices to iOS 10.3.3.
+a GUI app to OTA downgrade compatible A6 and A7 devices.
 
 * Latest compiled version can be found [here](https://github.com/rA9stuff/LeetDown/releases).
 * [Official LeetDown Twitter account](https://twitter.com/LeetDownApp) for updates & support. 
 * [Official LeetDown webpage](https://LeetDown.app)
 
-![alt text](https://i.imgur.com/JZDeZmf.png)
+![alt text](https://i.imgur.com/lBxab5S.png)
 
 
-# If you are having issues with iPad restores, please use version 2.0.1 while I investigate the issue.
+# Compatibility   
 
+LeetDown is compatible with the following A6 SoC devices:
 
-
-
-# Compatibility
-
-LeetDown is compatible with the following A7 SoC devices:
-
-
+* iPhone 5
+* iPad 4
+   
+LeetDown is compatible with the following A7 SoC devices:   
 * iPhone 5s
-* iPad Mini 2
+* iPad Mini 2 (excluding J87AP)
 * iPad Air
 
 
@@ -27,7 +25,13 @@ LeetDown can run on following environments:
 
 | Intel Macs    | Apple Silicon Macs |
 | ------------- |:-------------:|
-| macOS 10.13+   | macOS 11.0 - 11.2.3 |
+| macOS 10.13+   | macOS 11.0 and higher |
+
+# Downgrading A7 devices with an M1 mac?   
+
+* Due to the USB stack of M1 macs, the device will disappear after LeetDown uploads iBSS. When you get the prompt `[+] Failed to connect to device, reconnect the
+USB cable to your mac to try again.`, do what it says and the restore will resume automatically.
+* A6 devices are not affected by this issue.
 
 # How to Use?
 
@@ -41,24 +45,26 @@ Experimental Apple Silicon support: [As checkra1n team stated](https://checkra.i
 
 # Having issues?
 
-Sure, just open an issue using [LeetDown issue template](https://github.com/rA9stuff/LeetDown/issues/new/choose).
+Sure, just open an issue ~~using [LeetDown issue template](https://github.com/rA9stuff/LeetDown/issues/new/choose)~~ please copy and paste the log from LeetDown's UI for now.
+
+# Contributors  
+* Will Kellner
+* qqjqqj
 
 # Credits:
 
-* [@axi0mX](https://twitter.com/axi0mX) for the legendary checkm8 exploit.
-
+* [@axi0mX](https://twitter.com/axi0mX) for checkm8 exploit.
 * [@tihmstar](https://twitter.com/tihmstar) for futurerestore.
-
-* [@dora2ios](https://twitter.com/dora2ios) for "iPwnder32" which works amazingly well on A7 SoC.
-
-* [@mosk_i](https://twitter.com/mosk_i) for boot component patches and notarizing the app (honestly can't thank him enough for this).
-
+* [@Cryptiiiic](https://twitter.com/Cryptiiiic) for updated futurerestore.
+* [@\_m1sta](https://twitter.com/_m1sta) for updated futurerestore.
+* [@dora2ios](https://twitter.com/dora2ios) for iPwnder-lite.
+* [@mosk_i](https://twitter.com/mosk_i) for iBoot patches and internal testing.
 * [@libimobiledev](https://twitter.com/libimobiledev) for libirecovery.
-
 * [@ConsoleLogLuke](https://twitter.com/ConsoleLogLuke) for helping with the dependencies and scripts :) (both are purposeless with the version 2.0 but I'll keep it here anyways for his help on the initial release).
-
 * [ZipArchive](https://github.com/ZipArchive/ZipArchive) for SSZipArchive. 
-
 * [AFNetworking](https://github.com/AFNetworking/AFNetworking) for AFNetworking.
-
-* [@alitek123](https://twitter.com/alitek123) for modified BuildManifests. 
+* [@alitek123](https://twitter.com/alitek123) for OTA BuildManifests. 
+* [@exploit3dguy](https://twitter.com/exploit3dguy) for private testing.
+* [@m3t0ski](https://twitter.com/exploit3dguy) for private testing.
+* [@AyyItzRob123](https://twitter.com/AyyItzRob123) for private testing.
+* [Mini-Exploit](https://github.com/Mini-Exploit) for private testing.
