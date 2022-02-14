@@ -115,7 +115,7 @@ bool DFUDevice::checkPwn() {
         this -> setAllDeviceInfo();
     }
     string pwnstr = this -> devinfo -> serial_string;
-    if (pwnstr.find("PWND:[iPwnder]") != string::npos) {
+    if (pwnstr.find("PWND") != string::npos) {
         this -> freeDevice();
         pwned = true;
         return true;
