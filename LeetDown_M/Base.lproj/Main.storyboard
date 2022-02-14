@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="20034" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="20034"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -116,18 +116,18 @@
                                 </contentFilters>
                             </progressIndicator>
                             <scrollView appearanceType="aqua" fixedFrame="YES" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K2L-yj-Yqg">
-                                <rect key="frame" x="9" y="139" width="308" height="241"/>
+                                <rect key="frame" x="9" y="139" width="308" height="245"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <clipView key="contentView" drawsBackground="NO" id="CwN-eY-PhB">
-                                    <rect key="frame" x="0.0" y="0.0" width="308" height="241"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="308" height="245"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textView editable="NO" verticallyResizable="YES" findStyle="bar" allowsCharacterPickerTouchBarItem="NO" allowsDocumentBackgroundColorChange="YES" textCompletion="NO" id="b67-hY-VIW">
-                                            <rect key="frame" x="0.0" y="0.0" width="308" height="241"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="308" height="245"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="textColor" red="0.073524780979999996" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.56180837203045275" colorSpace="custom" customColorSpace="displayP3"/>
-                                            <size key="minSize" width="308" height="241"/>
+                                            <size key="minSize" width="308" height="245"/>
                                             <size key="maxSize" width="344" height="10000000"/>
                                             <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                         </textView>
@@ -144,7 +144,7 @@
                                 </scroller>
                             </scrollView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X81-Hw-SP5">
-                                <rect key="frame" x="60" y="401" width="205" height="39"/>
+                                <rect key="frame" x="60" y="404" width="205" height="39"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" allowsUndo="NO" alignment="center" title="LeetDown" id="iuC-qd-iyU">
                                     <font key="font" metaFont="system" size="33"/>
@@ -153,9 +153,9 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="39M-nV-1b5">
-                                <rect key="frame" x="81" y="7" width="163" height="16"/>
+                                <rect key="frame" x="80" y="6" width="165" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="version: 2.1 by @rA9_main" id="0AX-OP-9LK">
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="version: 2.2 by @rA9_main" id="0AX-OP-9LK">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -182,21 +182,12 @@
                                     <action selector="dfuhelperact:" target="XfG-lQ-9wD" id="iEc-E3-eNW"/>
                                 </connections>
                             </button>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cam-ls-BFA">
-                                <rect key="frame" x="-5" y="376" width="333" height="27"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" id="b0Y-yj-qf9">
-                                    <font key="font" metaFont="miniSystem"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HwI-TX-nm0">
                                 <rect key="frame" x="8" y="6" width="16" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="settingsIcon-128" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="QWR-mx-e04">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system" size="12"/>
+                                    <font key="font" metaFont="cellTitle"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="gotoSettings:" target="XfG-lQ-9wD" id="YSo-jg-273"/>
@@ -211,7 +202,6 @@
                         <outlet property="mainbox" destination="mBm-4N-dqx" id="3Ha-sp-gSX"/>
                         <outlet property="percentage" destination="VLO-5Z-QHv" id="EIU-6K-FXe"/>
                         <outlet property="prefGear" destination="HwI-TX-nm0" id="M8t-fB-WGy"/>
-                        <outlet property="ramiel" destination="cam-ls-BFA" id="Nbw-B5-FOS"/>
                         <outlet property="selectIPSWoutlet" destination="ZJv-6a-Efl" id="dWU-Ha-nYp"/>
                         <outlet property="statusbox" destination="K2L-yj-Yqg" id="nCP-JW-00y"/>
                         <outlet property="statuslabel" destination="b67-hY-VIW" id="jtz-cl-2qR"/>
@@ -370,7 +360,7 @@ Gw
                 </viewController>
                 <customObject id="dAV-ld-sC1" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="528" y="700.5"/>
+            <point key="canvasLocation" x="498" y="710"/>
         </scene>
         <!--SettingsVC-->
         <scene sceneID="BWJ-FM-LbE">
@@ -387,36 +377,75 @@ Gw
                                 <view key="contentView" id="e8o-WA-wHZ">
                                     <rect key="frame" x="1" y="1" width="324" height="464"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="998-Vg-jph">
+                                            <rect key="frame" x="18" y="338" width="136" height="18"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="check" title="Enable debugging" bezelStyle="regularSquare" imagePosition="left" inset="2" id="lwu-rY-n9P">
+                                                <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <color key="contentTintColor" red="1" green="1" blue="1" alpha="0.84954564099999996" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <connections>
+                                                <action selector="debuggingToggle:" target="EDS-DF-x6C" id="upt-tj-hf5"/>
+                                            </connections>
+                                        </button>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Vx-CN-rfr">
+                                            <rect key="frame" x="18" y="299" width="290" height="32"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <textFieldCell key="cell" lineBreakMode="clipping" title="this option is unavailble for now, please copy and paste the log from the UI manually." id="Wve-Zb-teQ">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <color key="backgroundColor" red="0.99425287360000003" green="0.98850574710000005" blue="1" alpha="0.84705882349999995" colorSpace="custom" customColorSpace="displayP3"/>
+                                            </textFieldCell>
+                                        </textField>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="llZ-mZ-DR2">
+                                            <rect key="frame" x="18" y="252" width="128" height="18"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="check" title="Skip iPSW check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Wok-du-AGc">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="md5Action:" target="EDS-DF-x6C" id="wqF-2G-si4"/>
+                                            </connections>
+                                        </button>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nuu-ud-eRI">
+                                            <rect key="frame" x="18" y="229" width="270" height="16"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <textFieldCell key="cell" lineBreakMode="clipping" title="LeetDown won't check iPSW md5 hashsum." id="CDf-7a-g3P">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.79767017159999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </textFieldCell>
+                                        </textField>
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="443-hX-XEr">
+                                            <rect key="frame" x="18" y="183" width="198" height="18"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <buttonCell key="cell" type="check" title="send reset request (A7 only)" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="em7-Mo-vfu">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="resetReqAct:" target="EDS-DF-x6C" id="j3l-at-Yxu"/>
+                                            </connections>
+                                        </button>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eWL-ma-Zzs">
+                                            <rect key="frame" x="18" y="144" width="270" height="32"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <textFieldCell key="cell" lineBreakMode="clipping" id="mxI-a0-H1G">
+                                                <font key="font" metaFont="system"/>
+                                                <string key="title">LeetDown will reset USB connection before 
+uploading iBoot.</string>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.79767017159999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </textFieldCell>
+                                        </textField>
+                                    </subviews>
                                 </view>
                                 <color key="borderColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="fillColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </box>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="998-Vg-jph">
-                                <rect key="frame" x="23" y="332" width="136" height="18"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="check" title="Enable debugging" bezelStyle="regularSquare" imagePosition="left" inset="2" id="lwu-rY-n9P">
-                                    <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <color key="contentTintColor" red="1" green="1" blue="1" alpha="0.84954564099999996" colorSpace="custom" customColorSpace="sRGB"/>
-                                <connections>
-                                    <action selector="debuggingToggle:" target="EDS-DF-x6C" id="upt-tj-hf5"/>
-                                </connections>
-                            </button>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Vx-CN-rfr">
-                                <rect key="frame" x="23" y="222" width="290" height="103"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" id="Wve-Zb-teQ">
-                                    <font key="font" metaFont="system"/>
-                                    <string key="title">Enabling debugging will make LeetDown
-create a log file in your Documents folder
-named "LDLog.txt" to include with your issue.
-LeetDown will restart to capture logs if you
-enable this option.</string>
-                                    <color key="textColor" red="1" green="1" blue="1" alpha="0.55339911841923906" colorSpace="custom" customColorSpace="displayP3"/>
-                                    <color key="backgroundColor" red="0.99425287360000003" green="0.98850574710000005" blue="1" alpha="0.84705882349999995" colorSpace="custom" customColorSpace="displayP3"/>
-                                </textFieldCell>
-                            </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cYW-eT-nYl">
                                 <rect key="frame" x="103" y="20" width="121" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -441,10 +470,12 @@ enable this option.</string>
                     </view>
                     <connections>
                         <outlet property="debugToggle" destination="998-Vg-jph" id="rDH-eO-jXp"/>
+                        <outlet property="md5Toggle" destination="llZ-mZ-DR2" id="bhy-KH-nXZ"/>
+                        <outlet property="resetreq" destination="443-hX-XEr" id="x9E-oa-Kba"/>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-395" y="691"/>
+            <point key="canvasLocation" x="-334" y="700"/>
         </scene>
     </scenes>
     <resources>
