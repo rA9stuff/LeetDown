@@ -29,8 +29,7 @@ LeetDown can run on following environments:
 
 # Downgrading A7 devices with an M1 mac?   
 
-* Due to the USB stack of M1 macs, the device will disappear after LeetDown uploads iBSS. When you get the prompt `[+] Failed to connect to device, reconnect the
-USB cable to your mac to try again.`, do what it says and the restore will resume automatically.
+* Due to the USB stack of M1 macs, the device will disappear after LeetDown uploads iBSS. When you get the prompt `[+] Device was lost, reconnect the USB cable to your mac to resume the upload process`, do what it says and the restore will resume automatically.
 * A6 devices are not affected by this issue.
 
 # How to Use?
