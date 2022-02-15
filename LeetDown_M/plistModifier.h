@@ -2,7 +2,7 @@
 //  plistModifier.h
 //  LeetDown
 //
-//  Created by Baris Cukur on 3.02.2022.
+//  Created by rA9stuff on 3.02.2022.
 //
 
 #ifndef plistModifier_h
