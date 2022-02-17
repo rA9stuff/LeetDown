@@ -42,6 +42,25 @@ Follow the instructions shown in the app.
 
 Experimental Apple Silicon support: [As checkra1n team stated](https://checkra.in/news/2021/04/M1-announcement), Apple Silicon macs might have issues exploiting device or sending boot components. If you have problems with sending boot components, unplug your device after LeetDown sends iBSS, then plug it back in (LeetDown will wait for 5 seconds after sending each boot component to allow you to do this). If you have any other issues on Apple Silicon, feel free to open an issue.
 
+# Build Instructions  
+LeetDown depends on the following libraries:   
+* libcrypto (get it via `brew install openssl`)
+* [libirecovery](https://github.com/libimobiledevice/libirecovery)
+* [libplist](https://github.com/libimobiledevice/libplist)
+* libusb (get it via `brew install libusb`)
+* [libusbmuxd](https://github.com/libimobiledevice/libusbmuxd)   
+ps: If you don't want to compile `libirecovery`, `libplist` and `libusbmuxd` manually, [Nikias Bassen](https://twitter.com/pimskeks) has a [script](https://twitter.com/pimskeks/status/1486147309247283200?s=20&t=nvx4MIq3dSS-zMGE5dBLuw) available that can build all libimobiledevice tools automatically.
+
+Place the libraries in any folder (preferably inside "Frameworks" to build it statically) in your environment, then;
+* Project -> Build Settings -> Library Search Paths -> path_to_your_folder
+
+LeetDown depends on the following frameworks:
+* AFNetworking
+* SSZipArchive
+
+You can install them automatically with cocoapods.   
+Note: SSZipArchive is already placed inside the project, you can skip installing it via pods.   
+
 # Having issues?
 
 Sure, just open an issue ~~using [LeetDown issue template](https://github.com/rA9stuff/LeetDown/issues/new/choose)~~ please copy and paste the log from LeetDown's UI for now.
