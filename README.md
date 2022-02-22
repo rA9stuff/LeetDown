@@ -78,7 +78,7 @@ Sure, just open an issue ~~using [LeetDown issue template](https://github.com/rA
 * [@dora2ios](https://twitter.com/dora2ios) for iPwnder-lite.
 * [@mosk_i](https://twitter.com/mosk_i) for iBoot patches and internal testing.
 * [@libimobiledev](https://twitter.com/libimobiledev) for libirecovery.
-* [@ConsoleLogLuke](https://twitter.com/ConsoleLogLuke) for helping with the dependencies and scripts :) (both are purposeless with the version 2.0 but I'll keep it here anyways for his help on the initial release).
+* [@ConsoleLogLuke](https://twitter.com/ConsoleLogLuke) for helping with the dependencies and scripts for versions < 2.0
 * [ZipArchive](https://github.com/ZipArchive/ZipArchive) for SSZipArchive. 
 * [AFNetworking](https://github.com/AFNetworking/AFNetworking) for AFNetworking.
 * [@alitek123](https://twitter.com/alitek123) for OTA BuildManifests. 
