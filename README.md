@@ -1,5 +1,5 @@
 # LeetDown
-a GUI app to OTA downgrade compatible A6 and A7 devices.
+a GUI macOS app to downgrade compatible A6 and A7 devices to OTA signed firmwares.
 
 * Latest compiled version can be found [here](https://github.com/rA9stuff/LeetDown/releases).
 * [Official LeetDown Twitter account](https://twitter.com/LeetDownApp) for updates & support. 
