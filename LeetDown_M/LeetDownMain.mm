@@ -356,19 +356,11 @@ DFUDevice *dfuDevPtr = new DFUDevice; // initialize it with defualt constructor 
 }
 
 - (int) patchFiles {
-    
     printf("inside patchFiles(), printing dev info\n");
     printf("printing dev info line 372\n");
     printf("SERIAL TAG -> %s\n", dfuDevPtr -> getDevInfo() ->srtg);
     printf("HARDWARE MODEL -> %s\n", dfuDevPtr -> getHardwareModel());
 
-    
-    NSTask *ibsspatch = [[NSTask alloc] init];
-    NSTask *ibecpatch = [[NSTask alloc] init];
-    ibsspatch.launchPath = @"/usr/bin/bspatch";
-    ibsspatch.arguments = @[];
-    ibecpatch.launchPath = @"/usr/bin/bspatch";
-    ibecpatch.arguments = @[];
     
     NSString *board = [NSString stringWithFormat:@"%s", dfuDevPtr -> getHardwareModel()];
     const char *boardcmp = [board cStringUsingEncoding:NSASCIIStringEncoding];
@@ -376,44 +368,43 @@ DFUDevice *dfuDevPtr = new DFUDevice; // initialize it with defualt constructor 
     NSString *LDResourcesPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingString: @"/LDResources"];
     
     if (strcmp(boardcmp, "n51ap") == 0 || strcmp(boardcmp, "n53ap") == 0) {
-        ibsspatch.arguments = @[[tempipswdir stringByAppendingString:@"/Firmware/dfu/iBSS.iphone6.RELEASE.im4p"], [tempipswdir stringByAppendingString:@"/Firmware/dfu/iBSS.iphone6.RELEASE.im4p"], [LDResourcesPath stringByAppendingString:@"/Patches/ibss5s.patch"]];
-        [ibsspatch launch];
-        [ibsspatch waitUntilExit];
-        ibecpatch.arguments = @[[tempipswdir stringByAppendingString:@"/Firmware/dfu/iBEC.iphone6.RELEASE.im4p"], [tempipswdir stringByAppendingString:@"/Firmware/dfu/iBEC.iphone6.RELEASE.im4p"], [LDResourcesPath stringByAppendingString:@"/Patches/ibec5s.patch"]];
-        [ibecpatch launch];
-        [ibecpatch waitUntilExit];
-    }
-    
-    else if (strcmp(boardcmp, "j71ap") == 0 || strcmp(boardcmp, "j72ap") == 0 || strcmp(boardcmp, "j73ap") == 0) {
-        ibsspatch.arguments = @[[tempipswdir stringByAppendingString:@"/Firmware/dfu/iBSS.ipad4.RELEASE.im4p"], [tempipswdir stringByAppendingString:@"/Firmware/dfu/iBSS.ipad4.RELEASE.im4p"], [LDResourcesPath stringByAppendingString:@"/Patches/ibss_ipad4.patch"]];
-        [ibsspatch launch];
-        [ibsspatch waitUntilExit];
-        ibecpatch.arguments = @[[tempipswdir stringByAppendingString:@"/Firmware/dfu/iBEC.ipad4.RELEASE.im4p"], [tempipswdir stringByAppendingString:@"/Firmware/dfu/iBEC.ipad4.RELEASE.im4p"], [LDResourcesPath stringByAppendingString:@"/Patches/ibec_ipad4.patch"]];
-        [ibecpatch launch];
-        [ibecpatch waitUntilExit];
-    }
-    
-    else if (strcmp(boardcmp, "j85ap") == 0 || strcmp(boardcmp, "j86ap") == 0) {
-        ibsspatch.arguments = @[[tempipswdir stringByAppendingString:@"/Firmware/dfu/iBSS.ipad4b.RELEASE.im4p"], [tempipswdir stringByAppendingString:@"/Firmware/dfu/iBSS.ipad4b.RELEASE.im4p"], [LDResourcesPath stringByAppendingString:@"/Patches/ibss_ipad4b.patch"]];
-        [ibsspatch launch];
-        [ibsspatch waitUntilExit];
-        ibecpatch.arguments = @[[tempipswdir stringByAppendingString:@"/Firmware/dfu/iBEC.ipad4b.RELEASE.im4p"], [tempipswdir stringByAppendingString:@"/Firmware/dfu/iBEC.ipad4b.RELEASE.im4p"], [LDResourcesPath stringByAppendingString:@"/Patches/ibec_ipad4b.patch"]];
-        [ibecpatch launch];
-        [ibecpatch waitUntilExit];
+        if(doBSPatch([[tempipswdir stringByAppendingString:@"/Firmware/dfu/iBSS.iphone6.RELEASE.im4p"] cStringUsingEncoding:NSASCIIStringEncoding], [[tempipswdir stringByAppendingString:@"/Firmware/dfu/iBSS.iphone6.RELEASE.im4p"] cStringUsingEncoding:NSASCIIStringEncoding], [[LDResourcesPath stringByAppendingString:@"/Patches/ibss5s.patch"] cStringUsingEncoding:NSASCIIStringEncoding]) != 0) {
+            [self updateStatus:@"Error patching iBSS" color:[NSColor redColor]];
+            return -1;
+        }
+        if(doBSPatch([[tempipswdir stringByAppendingString:@"/Firmware/dfu/iBEC.iphone6.RELEASE.im4p"] cStringUsingEncoding:NSASCIIStringEncoding], [[tempipswdir stringByAppendingString:@"/Firmware/dfu/iBEC.iphone6.RELEASE.im4p"] cStringUsingEncoding:NSASCIIStringEncoding], [[LDResourcesPath stringByAppendingString:@"/Patches/ibec5s.patch"] cStringUsingEncoding:NSASCIIStringEncoding]) != 0) {
+            [self updateStatus:@"Error patching iBEC" color:[NSColor redColor]];
+            return -1;
+        }
         
     }
     
-    int ibssstatus = [ibsspatch terminationStatus];
-    int ibecstatus = [ibecpatch terminationStatus];
+    else if (strcmp(boardcmp, "j71ap") == 0 || strcmp(boardcmp, "j72ap") == 0 || strcmp(boardcmp, "j73ap") == 0) {
+        if(doBSPatch([[tempipswdir stringByAppendingString:@"/Firmware/dfu/iBSS.ipad4.RELEASE.im4p"] cStringUsingEncoding:NSASCIIStringEncoding], [[tempipswdir stringByAppendingString:@"/Firmware/dfu/iBSS.ipad4.RELEASE.im4p"] cStringUsingEncoding:NSASCIIStringEncoding], [[LDResourcesPath stringByAppendingString:@"/Patches/ibss_ipad4.patch"] cStringUsingEncoding:NSASCIIStringEncoding]) != 0) {
+            [self updateStatus:@"Error patching iBSS" color:[NSColor redColor]];
+            return -1;
+        }
+        
+        if(doBSPatch([[tempipswdir stringByAppendingString:@"/Firmware/dfu/iBEC.ipad4.RELEASE.im4p"] cStringUsingEncoding:NSASCIIStringEncoding], [[tempipswdir stringByAppendingString:@"/Firmware/dfu/iBEC.ipad4.RELEASE.im4p"] cStringUsingEncoding:NSASCIIStringEncoding], [[LDResourcesPath stringByAppendingString:@"/Patches/ibec_ipad4.patch"] cStringUsingEncoding:NSASCIIStringEncoding]) != 0) {
+            [self updateStatus:@"Error patching iBEC" color:[NSColor redColor]];
+            return -1;
+        }
+        
+    }
     
-    if (ibssstatus != 0) {
-        [self updateStatus:@"Error patching iBSS" color:[NSColor redColor]];
-        return -1;
+    else if (strcmp(boardcmp, "j85ap") == 0 || strcmp(boardcmp, "j86ap") == 0) {
+        if(doBSPatch([[tempipswdir stringByAppendingString:@"/Firmware/dfu/iBSS.ipad4b.RELEASE.im4p"] cStringUsingEncoding:NSASCIIStringEncoding], [[tempipswdir stringByAppendingString:@"/Firmware/dfu/iBSS.ipad4b.RELEASE.im4p"] cStringUsingEncoding:NSASCIIStringEncoding], [[LDResourcesPath stringByAppendingString:@"/Patches/ibss_ipad4b.patch"] cStringUsingEncoding:NSASCIIStringEncoding]) != 0) {
+            [self updateStatus:@"Error patching iBSS" color:[NSColor redColor]];
+            return -1;
+        }
+        if(doBSPatch([[tempipswdir stringByAppendingString:@"/Firmware/dfu/iBEC.ipad4b.RELEASE.im4p"] cStringUsingEncoding:NSASCIIStringEncoding], [[tempipswdir stringByAppendingString:@"/Firmware/dfu/iBEC.ipad4b.RELEASE.im4p"] cStringUsingEncoding:NSASCIIStringEncoding], [[LDResourcesPath stringByAppendingString:@"/Patches/ibec_ipad4b.patch"] cStringUsingEncoding:NSASCIIStringEncoding]) != 0) {
+            [self updateStatus:@"Error patching iBEC" color:[NSColor redColor]];
+            return -1;
+        }
+        
+        
     }
-    if (ibecstatus != 0) {
-        [self updateStatus:@"Error patching iBEC" color:[NSColor redColor]];
-        return -1;
-    }
+    
     return 0;
 }
 
