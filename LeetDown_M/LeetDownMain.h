@@ -11,6 +11,7 @@
 #import <AFNetworking/AFNetworking.h>
 #import <CommonCrypto/CommonDigest.h>
 #include "libirecovery.h"
+#include "bspatch.h"
 #include <stdlib.h>
 #include "SSZipArchive/SSZipArchive.h"
 #include <stdio.h>
