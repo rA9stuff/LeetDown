@@ -44,8 +44,12 @@ int DFUDevice::sendFile(const char* filename, bool withReconnect) {
     usleep(500000);
     /* for some reason it returns USB upload error even though it uploads
       the file just fine, so we're only worried about IRECV_E_UNABLE_TO_CONNECT here */
-    if (stat == IRECV_E_SUCCESS || stat == IRECV_E_USB_UPLOAD)
+    if (stat == IRECV_E_SUCCESS) {
         return 0;
+    } else if (stat == IRECV_E_USB_UPLOAD) {
+        if (strcmp(filename, "/dev/null") == 0) return 0;
+        else return 2;
+    }
     return 1;
 }
 
