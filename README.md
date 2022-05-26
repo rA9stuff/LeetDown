@@ -10,22 +10,22 @@ a GUI macOS app to downgrade compatible A6 and A7 devices to OTA signed firmware
 
 # Compatibility   
 
-LeetDown is compatible with the following A6 SoC devices:
+### LeetDown is compatible with the following A6 SoC devices for iOS 8.4.1 downgrades:   
 
 * iPhone 5
 * iPad 4
    
-LeetDown is compatible with the following A7 SoC devices:   
+### LeetDown is compatible with the following A7 SoC devices for iOS 10.3.3 downgrades:   
 * iPhone 5s
 * iPad Mini 2 (excluding J87AP)
 * iPad Air
 
 
-LeetDown can run on following environments:
+### LeetDown can run on following environments:
 
 | Intel Macs    | Apple Silicon Macs |
 | ------------- |:-------------:|
-| macOS 10.13+   | macOS 11.0 and higher |
+| macOS 10.13 +   | macOS 11.0 + |
 
 # Downgrading A7 devices with an M1 mac?   
 
