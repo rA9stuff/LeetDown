@@ -22,7 +22,7 @@ int DFUDevice::openConnection(int tries) {
         }
         usleep(500000);
     }
-    return 1;
+    return -1;
 }
 
 int DFUDevice::sendFile(const char* filename, bool withReconnect) {
@@ -33,7 +33,7 @@ int DFUDevice::sendFile(const char* filename, bool withReconnect) {
         usleep(500000);
         if (this -> openConnection(5) != 0) {
             printf("error connecting to device, stopping here\n");
-            return 2;
+            return -1;
         }
         usleep(500000);
         this -> setAllDeviceInfo();
@@ -42,15 +42,16 @@ int DFUDevice::sendFile(const char* filename, bool withReconnect) {
     usleep(500000);
     irecv_error_t stat = irecv_send_file(this -> client, filename, 1);
     usleep(500000);
-    /* for some reason it returns USB upload error even though it uploads
-      the file just fine, so we're only worried about IRECV_E_UNABLE_TO_CONNECT here */
+    
     if (stat == IRECV_E_SUCCESS) {
         return 0;
-    } else if (stat == IRECV_E_USB_UPLOAD) {
-        if (strcmp(filename, "/dev/null") == 0) return 0;
-        else return 2;
+    } 
+    else if (stat == IRECV_E_USB_UPLOAD && strcmp(filename, "/dev/null") == 0) {
+        return 0;
+    else
+        return -1;
     }
-    return 1;
+    return -1;
 }
 
 int DFUDevice::sendCommand(const char *cmd, bool withReconnect) {
@@ -61,26 +62,17 @@ int DFUDevice::sendCommand(const char *cmd, bool withReconnect) {
         usleep(500000);
         if (this -> openConnection(50) != 0) {
             printf("error connecting to device, stopping here\n");
+            return -1;
         }
     }
     
     irecv_error_t stat = irecv_send_command(this -> client, cmd);
-    /*
-    if (stat == IRECV_E_SUCCESS)
-     */
-        return 0;
-   // return 1;
+    return 0;
 }
 
 void DFUDevice::setAllDeviceInfo() {
     
     irecv_devices_get_device_by_client(client, &device);
-/*
-    this -> displayName = "Fake 5s";
-    this -> hardwareModel = "n53ap";
-    this -> productType = "iPhone6,2";
-    this -> devinfo = irecv_get_device_info(this -> client);
- */
     this -> displayName = device -> display_name;
     this -> hardwareModel = device -> hardware_model;
     this -> productType = device -> product_type;
