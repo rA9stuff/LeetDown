@@ -43,14 +43,10 @@ int DFUDevice::sendFile(const char* filename, bool withReconnect) {
     irecv_error_t stat = irecv_send_file(this -> client, filename, 1);
     usleep(500000);
     
-    if (stat == IRECV_E_SUCCESS) {
+    if (stat == IRECV_E_SUCCESS)
         return 0;
-    } 
-    else if (stat == IRECV_E_USB_UPLOAD && strcmp(filename, "/dev/null") == 0) {
+    else if (stat == IRECV_E_USB_UPLOAD && strcmp(filename, "/dev/null") == 0)
         return 0;
-    else
-        return -1;
-    }
     return -1;
 }
 
