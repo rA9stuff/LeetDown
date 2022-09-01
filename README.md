@@ -10,37 +10,43 @@ a GUI macOS app to downgrade compatible A6 and A7 devices to OTA signed firmware
 
 # Compatibility   
 
-### LeetDown is compatible with the following A6 SoC devices for iOS 8.4.1 downgrades:   
+### iOS Device Compatibility
 
-* iPhone 5
-* iPad 4
+| iOS 8.4.1 Downgrade | iOS 10.3.3 Downgrade |
+| :---         | :---         |
+| iPhone 5   | iPhone 5s   |
+| iPad 4   | iPad Mini 2 (excluding J87AP)   |
+| -   | iPad Air   |
    
-### LeetDown is compatible with the following A7 SoC devices for iOS 10.3.3 downgrades:   
-* iPhone 5s
-* iPad Mini 2 (excluding J87AP)
-* iPad Air
+   
+### macOS Compatibility
 
-
-### LeetDown can run on following environments:
-
-| Intel Macs    | Apple Silicon Macs |
-| ------------- |:-------------:|
+| Intel Macs    | ASi Macs (Rosetta 2) |
+| --- | --- |
 | macOS 10.13 +   | macOS 11.0 + |
 
-# Downgrading A7 devices with an M1 mac?   
+### Virtual Machines and Hackintosh Systems
+LeetDown is **not** compatible with virtual machines. Some hackintosh systems were successful running LeetDown, though, exploiting issues you encounter on environments other than real Mac hardware is up to you to resolve. Please do not open an issue for this.
 
-* Due to the USB stack of M1 macs, the device will disappear after LeetDown uploads iBSS. When you get the prompt `[+] Device was lost, reconnect the USB cable to your mac to resume the upload process`, do what it says and the restore will resume automatically.
-* A6 devices are not affected by this issue.
+# Troubleshooting
+### A7 devices and Apple Silicon Macs   
 
-# How to Use?
+* Due to the USB stack of ASi macs, the device will disappear after LeetDown uploads iBSS. When you get the prompt `[+] Device was lost, reconnect the USB cable to your mac to resume the upload process`, do what it says and the restore will resume automatically.
+* Make sure to reconnect the cable **to your mac**. You don't need to replug the cable to your iOS device.
 
-Mount the `LeetDown.dmg` and drag the `LeetDown.app` to your `/Applications` folder.
+### Stuck at exploiting or exploitation failure
+
+* Make sure you're not using any USB Hubs or type-c to lightning cables. If your mac has only USB-C ports, use a lightning to type-a cable with a USB type-c to type-a converter.
+* Make sure you're not running LeetDown under a virtual machine. Check [compatiblity](https://github.com/rA9stuff/LeetDown#compatibility) here.
+* Re-enter DFU mode and try exploiting again with LeetDown.
+* If it's still not working, [download iPwnder-lite](https://github.com/dora2-iOS/ipwnder_lite) and exploit your device manually.   
+
+# Installation
+
+Mount the `LeetDown_[VERSION].dmg` and drag the `LeetDown.app` to your `/Applications` folder.
 
 Follow the instructions shown in the app.
 
-# F.A.Q.
-
-Experimental Apple Silicon support: [As checkra1n team stated](https://checkra.in/news/2021/04/M1-announcement), Apple Silicon macs might have issues exploiting device or sending boot components. If you have problems with sending boot components, unplug your device after LeetDown sends iBSS, then plug it back in (LeetDown will wait for 5 seconds after sending each boot component to allow you to do this). If you have any other issues on Apple Silicon, feel free to open an issue.
 
 # Build Instructions  
 LeetDown depends on the following libraries:   
@@ -59,11 +65,12 @@ LeetDown depends on the following frameworks:
 * SSZipArchive
 
 You can install them automatically with cocoapods.   
-Note: SSZipArchive is already placed inside the project, you can skip installing it via pods.   
+Note: A modified version of SSZipArchive is already placed inside the project, skip installing it via pods.   
 
 # Having issues?
 
-Sure, just open an issue ~~using [LeetDown issue template](https://github.com/rA9stuff/LeetDown/issues/new/choose)~~ please copy and paste the log from LeetDown's UI for now.
+* Enable debugging by clicking the box in LeetDown's settings.
+* Open an issue, fill the template and attach the `LDLog.txt` to it from your `~/Documents` folder
 
 # Contributors  
 * Will Kellner
