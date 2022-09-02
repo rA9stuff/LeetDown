@@ -72,7 +72,7 @@ Note: A modified version of SSZipArchive is already placed inside the project, s
 * Enable debugging by clicking the box in LeetDown's settings.
 * Open an issue, fill the template and attach the `LDLog.txt` to it from your `~/Documents` folder
 
-# Contributors  
+# Donators  
 * Will Kellner
 * qqjqqj
 
