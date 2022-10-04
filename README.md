@@ -41,6 +41,12 @@ LeetDown is **not** compatible with virtual machines. Some hackintosh systems we
 * Re-enter DFU mode and try exploiting again with LeetDown.
 * If it's still not working, [download iPwnder-lite](https://github.com/dora2-iOS/ipwnder_lite) and exploit your device manually.   
 
+### Failed to restore device
+
+* Update to latest iOS version with iTunes/Finder/idevicerestore then try again.
+* Check if your USB cable is working fine.
+* Try with a different USB port (or adapter if running on Apple Silicon).
+
 # Installation
 
 Mount the `LeetDown_[VERSION].dmg` and drag the `LeetDown.app` to your `/Applications` folder.
