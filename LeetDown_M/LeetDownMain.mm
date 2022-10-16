@@ -1047,9 +1047,8 @@ bool dryRun = true;
     }
     cleanUp();
     
-    _versionLabel.enabled = true;
-    _versionLabel.alphaValue = 1;
-    _dfuhelpoutlet.alphaValue = 0;
+    _versionLabel.enabled = false;
+    _versionLabel.alphaValue = 0;
     [_uselessIndicator setHidden:NO];
     [_uselessIndicator setIndeterminate:YES];
     [_uselessIndicator setUsesThreadedAnimation:YES];
