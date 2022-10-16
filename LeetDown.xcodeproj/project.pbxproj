@@ -7,16 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6478D1A527A1A26E00677E18 /* libirecovery-1.0.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6478D1A027A1A26E00677E18 /* libirecovery-1.0.3.dylib */; };
-		6478D1A627A1A26E00677E18 /* libirecovery-1.0.3.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 6478D1A027A1A26E00677E18 /* libirecovery-1.0.3.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		6478D1A727A1A26E00677E18 /* libplist-2.0.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6478D1A127A1A26E00677E18 /* libplist-2.0.3.dylib */; };
-		6478D1A827A1A26E00677E18 /* libplist-2.0.3.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 6478D1A127A1A26E00677E18 /* libplist-2.0.3.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		6478D1A927A1A26E00677E18 /* libusbmuxd-2.0.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6478D1A227A1A26E00677E18 /* libusbmuxd-2.0.6.dylib */; };
-		6478D1AA27A1A26E00677E18 /* libusbmuxd-2.0.6.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 6478D1A227A1A26E00677E18 /* libusbmuxd-2.0.6.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		6478D1AB27A1A26E00677E18 /* libcrypto.1.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6478D1A327A1A26E00677E18 /* libcrypto.1.1.dylib */; };
-		6478D1AC27A1A26E00677E18 /* libcrypto.1.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 6478D1A327A1A26E00677E18 /* libcrypto.1.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		6478D1AD27A1A26E00677E18 /* libusb-1.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6478D1A427A1A26E00677E18 /* libusb-1.0.0.dylib */; };
-		6478D1AE27A1A26E00677E18 /* libusb-1.0.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 6478D1A427A1A26E00677E18 /* libusb-1.0.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		64777D7128FC192A0097B3B8 /* libirecovery-1.0.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 64777D6C28FC192A0097B3B8 /* libirecovery-1.0.3.dylib */; };
+		64777D7228FC192A0097B3B8 /* libusbmuxd-2.0.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 64777D6D28FC192A0097B3B8 /* libusbmuxd-2.0.6.dylib */; };
+		64777D7328FC192A0097B3B8 /* libplist-2.0.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 64777D6E28FC192A0097B3B8 /* libplist-2.0.3.dylib */; };
+		64777D7428FC192A0097B3B8 /* libusb-1.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 64777D6F28FC192A0097B3B8 /* libusb-1.0.0.dylib */; };
+		64777D7528FC192A0097B3B8 /* libcrypto.1.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 64777D7028FC192A0097B3B8 /* libcrypto.1.1.dylib */; };
+		64777D7628FC195F0097B3B8 /* libcrypto.1.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 64777D7028FC192A0097B3B8 /* libcrypto.1.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		64777D7728FC19600097B3B8 /* libirecovery-1.0.3.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 64777D6C28FC192A0097B3B8 /* libirecovery-1.0.3.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		64777D7828FC19620097B3B8 /* libplist-2.0.3.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 64777D6E28FC192A0097B3B8 /* libplist-2.0.3.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		64777D7928FC19630097B3B8 /* libusb-1.0.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 64777D6F28FC192A0097B3B8 /* libusb-1.0.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		64777D7A28FC19640097B3B8 /* libusbmuxd-2.0.6.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 64777D6D28FC192A0097B3B8 /* libusbmuxd-2.0.6.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		6487B43727A9C9740065B016 /* plistModifier.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6487B43627A9C9740065B016 /* plistModifier.mm */; };
 		64F78F5C27A1DA9100E4D412 /* DFUDevice.mm in Sources */ = {isa = PBXBuildFile; fileRef = 64F78F5A27A1DA9100E4D412 /* DFUDevice.mm */; };
 		692DCC12269E3CE7004DC22C /* mz_strm_os_posix.c in Sources */ = {isa = PBXBuildFile; fileRef = 692DCBF0269E3CE6004DC22C /* mz_strm_os_posix.c */; };
@@ -57,11 +57,11 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				6478D1AA27A1A26E00677E18 /* libusbmuxd-2.0.6.dylib in Embed Libraries */,
-				6478D1AE27A1A26E00677E18 /* libusb-1.0.0.dylib in Embed Libraries */,
-				6478D1A627A1A26E00677E18 /* libirecovery-1.0.3.dylib in Embed Libraries */,
-				6478D1A827A1A26E00677E18 /* libplist-2.0.3.dylib in Embed Libraries */,
-				6478D1AC27A1A26E00677E18 /* libcrypto.1.1.dylib in Embed Libraries */,
+				64777D7728FC19600097B3B8 /* libirecovery-1.0.3.dylib in Embed Libraries */,
+				64777D7628FC195F0097B3B8 /* libcrypto.1.1.dylib in Embed Libraries */,
+				64777D7828FC19620097B3B8 /* libplist-2.0.3.dylib in Embed Libraries */,
+				64777D7928FC19630097B3B8 /* libusb-1.0.0.dylib in Embed Libraries */,
+				64777D7A28FC19640097B3B8 /* libusbmuxd-2.0.6.dylib in Embed Libraries */,
 			);
 			name = "Embed Libraries";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -70,11 +70,11 @@
 
 /* Begin PBXFileReference section */
 		1223FBA01A91021A36E504CE /* Pods_LeetDown.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LeetDown.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6478D1A027A1A26E00677E18 /* libirecovery-1.0.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libirecovery-1.0.3.dylib"; path = "../../../Desktop/Frameworks/libirecovery-1.0.3.dylib"; sourceTree = "<group>"; };
-		6478D1A127A1A26E00677E18 /* libplist-2.0.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libplist-2.0.3.dylib"; path = "../../../Desktop/Frameworks/libplist-2.0.3.dylib"; sourceTree = "<group>"; };
-		6478D1A227A1A26E00677E18 /* libusbmuxd-2.0.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libusbmuxd-2.0.6.dylib"; path = "../../../Desktop/Frameworks/libusbmuxd-2.0.6.dylib"; sourceTree = "<group>"; };
-		6478D1A327A1A26E00677E18 /* libcrypto.1.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.1.1.dylib; path = ../../../Desktop/Frameworks/libcrypto.1.1.dylib; sourceTree = "<group>"; };
-		6478D1A427A1A26E00677E18 /* libusb-1.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libusb-1.0.0.dylib"; path = "../../../Desktop/Frameworks/libusb-1.0.0.dylib"; sourceTree = "<group>"; };
+		64777D6C28FC192A0097B3B8 /* libirecovery-1.0.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libirecovery-1.0.3.dylib"; path = "Frameworks/libirecovery-1.0.3.dylib"; sourceTree = "<group>"; };
+		64777D6D28FC192A0097B3B8 /* libusbmuxd-2.0.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libusbmuxd-2.0.6.dylib"; path = "Frameworks/libusbmuxd-2.0.6.dylib"; sourceTree = "<group>"; };
+		64777D6E28FC192A0097B3B8 /* libplist-2.0.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libplist-2.0.3.dylib"; path = "Frameworks/libplist-2.0.3.dylib"; sourceTree = "<group>"; };
+		64777D6F28FC192A0097B3B8 /* libusb-1.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libusb-1.0.0.dylib"; path = "Frameworks/libusb-1.0.0.dylib"; sourceTree = "<group>"; };
+		64777D7028FC192A0097B3B8 /* libcrypto.1.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.1.1.dylib; path = Frameworks/libcrypto.1.1.dylib; sourceTree = "<group>"; };
 		6487B43627A9C9740065B016 /* plistModifier.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = plistModifier.mm; sourceTree = "<group>"; };
 		648EF98827AC59E500B7E2C2 /* plistModifier.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = plistModifier.h; sourceTree = "<group>"; };
 		64F78F5A27A1DA9100E4D412 /* DFUDevice.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = DFUDevice.mm; sourceTree = "<group>"; };
@@ -143,13 +143,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				64777D7228FC192A0097B3B8 /* libusbmuxd-2.0.6.dylib in Frameworks */,
 				69FB665C26E7E2820030120D /* Cocoa.framework in Frameworks */,
-				6478D1A527A1A26E00677E18 /* libirecovery-1.0.3.dylib in Frameworks */,
+				64777D7528FC192A0097B3B8 /* libcrypto.1.1.dylib in Frameworks */,
+				64777D7128FC192A0097B3B8 /* libirecovery-1.0.3.dylib in Frameworks */,
+				64777D7428FC192A0097B3B8 /* libusb-1.0.0.dylib in Frameworks */,
+				64777D7328FC192A0097B3B8 /* libplist-2.0.3.dylib in Frameworks */,
 				69FB665926E7E2780030120D /* Pods_LeetDown.framework in Frameworks */,
-				6478D1AD27A1A26E00677E18 /* libusb-1.0.0.dylib in Frameworks */,
-				6478D1A727A1A26E00677E18 /* libplist-2.0.3.dylib in Frameworks */,
-				6478D1A927A1A26E00677E18 /* libusbmuxd-2.0.6.dylib in Frameworks */,
-				6478D1AB27A1A26E00677E18 /* libcrypto.1.1.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,11 +217,11 @@
 		693782CD269CE5090082F92D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6478D1A327A1A26E00677E18 /* libcrypto.1.1.dylib */,
-				6478D1A027A1A26E00677E18 /* libirecovery-1.0.3.dylib */,
-				6478D1A127A1A26E00677E18 /* libplist-2.0.3.dylib */,
-				6478D1A427A1A26E00677E18 /* libusb-1.0.0.dylib */,
-				6478D1A227A1A26E00677E18 /* libusbmuxd-2.0.6.dylib */,
+				64777D7028FC192A0097B3B8 /* libcrypto.1.1.dylib */,
+				64777D6C28FC192A0097B3B8 /* libirecovery-1.0.3.dylib */,
+				64777D6E28FC192A0097B3B8 /* libplist-2.0.3.dylib */,
+				64777D6F28FC192A0097B3B8 /* libusb-1.0.0.dylib */,
+				64777D6D28FC192A0097B3B8 /* libusbmuxd-2.0.6.dylib */,
 				69FB665B26E7E2820030120D /* Cocoa.framework */,
 				691B8F6B26A1A9C000771658 /* IOKit.framework */,
 				691B8F6926A1A9B700771658 /* CoreFoundation.framework */,
@@ -608,7 +608,6 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/AFNetworking/AFNetworking.framework/Headers\"",
-					"/Users/barisc/Downloads/ipwnder_lite-main/include",
 				);
 				INFOPLIST_FILE = LeetDown_M/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -619,7 +618,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Contents/Frameworks",
-					/Users/mac/Desktop/Frameworks,
+					"$(PROJECT_DIR)/Frameworks",
 				);
 				MACH_O_TYPE = mh_execute;
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
@@ -672,7 +671,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Contents/Frameworks",
-					/Users/mac/Desktop/Frameworks,
+					"$(PROJECT_DIR)/Frameworks",
 				);
 				MACH_O_TYPE = mh_execute;
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
