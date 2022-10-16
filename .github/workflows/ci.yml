@@ -9,13 +9,15 @@ on:
 jobs:
 
   build-macOS-x86_64:
-    runs-on: macos-11
+    runs-on: macos-12
     steps:
     - name: envdetails
       run: ls && echo && pwd
     - uses: actions/checkout@v2
     - name: envdetails
       run: ls && echo && pwd
+    - name: gethash
+      run: git_hash=${GITHUB_SHA::6} && echo $git_hash
     - name: cleanup
       run: rm -rf __MACOSX/ build
     - name: pod install
@@ -27,10 +29,18 @@ jobs:
     - name: install create-dmg
       run: brew install create-dmg
     - name: create nightly dmg
-      run: create-dmg --window-size 430 270 --app-drop-link 300 0 --icon LeetDown.app 100 0 LeetDown_nightly.dmg LeetDown.app
-    - name: release
-      id: release
+      run: create-dmg --window-size 430 270 --app-drop-link 300 0 --icon LeetDown.app 100 0 "LD_Nightly_${GITHUB_SHA::6}.dmg" LeetDown.app
+    - name: upload_LD
+      id: upload_LD
       uses: actions/upload-artifact@v2
       with:
-        name: actions-release-macOS
-        path: /Users/runner/work/LeetDown/LeetDown/LeetDown_nightly.dmg
+        name: "LeetDown-Nightly"
+        path: /Users/runner/work/LeetDown/LeetDown/LD_Nightly_*.dmg
+    - name: create_shasum
+      run: sha512=$(shasum -a 512 LD_Nightly_* | cut -d ' ' -f 1) && touch "sha512_${sha512}"
+    - name: upload_SHA512
+      id: u_sha512
+      uses: actions/upload-artifact@v2
+      with:
+        name: "sha512"
+        path: /Users/runner/work/LeetDown/LeetDown/sha512_*
