@@ -1,11 +1,12 @@
 # LeetDown
+    
 a GUI macOS app to downgrade compatible A6 and A7 devices to OTA signed firmwares.
+<img align="right" src="https://i.imgur.com/lBxab5S.png" width="150px" height="150px">  
+### Downloads
+* [Latest notarized release](https://github.com/rA9stuff/LeetDown/releases)
+* [Nightly builds](https://nightly.link/rA9stuff/LeetDown/workflows/ci/master)
 
-* Latest compiled version can be found [here](https://github.com/rA9stuff/LeetDown/releases).
-* [Official LeetDown Twitter account](https://twitter.com/LeetDownApp) for updates & support. 
-* [Official LeetDown webpage](https://LeetDown.app)
 
-![alt text](https://i.imgur.com/lBxab5S.png)
 
 
 # Compatibility   
@@ -28,6 +29,12 @@ a GUI macOS app to downgrade compatible A6 and A7 devices to OTA signed firmware
 ### Virtual Machines and Hackintosh Systems
 LeetDown is **not** compatible with virtual machines. Some hackintosh systems were successful running LeetDown, though, exploiting issues you encounter on environments other than real Mac hardware is up to you to resolve. Please do not open an issue for this.
 
+# Installation
+
+Mount the `LeetDown_[VERSION].dmg` and drag the `LeetDown.app` to your `/Applications` folder.
+
+Follow the instructions shown in the app.
+
 # Troubleshooting
 ### A7 devices and Apple Silicon Macs   
 
@@ -46,12 +53,6 @@ LeetDown is **not** compatible with virtual machines. Some hackintosh systems we
 * Update to latest iOS version with iTunes/Finder/idevicerestore then try again.
 * Check if your USB cable is working fine.
 * Try with a different USB port (or adapter if running on Apple Silicon).
-
-# Installation
-
-Mount the `LeetDown_[VERSION].dmg` and drag the `LeetDown.app` to your `/Applications` folder.
-
-Follow the instructions shown in the app.
 
 
 # Build Instructions  
