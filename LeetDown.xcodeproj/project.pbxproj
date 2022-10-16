@@ -1,0 +1,711 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 54;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6478D1A527A1A26E00677E18 /* libirecovery-1.0.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6478D1A027A1A26E00677E18 /* libirecovery-1.0.3.dylib */; };
+		6478D1A627A1A26E00677E18 /* libirecovery-1.0.3.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 6478D1A027A1A26E00677E18 /* libirecovery-1.0.3.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		6478D1A727A1A26E00677E18 /* libplist-2.0.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6478D1A127A1A26E00677E18 /* libplist-2.0.3.dylib */; };
+		6478D1A827A1A26E00677E18 /* libplist-2.0.3.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 6478D1A127A1A26E00677E18 /* libplist-2.0.3.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		6478D1A927A1A26E00677E18 /* libusbmuxd-2.0.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6478D1A227A1A26E00677E18 /* libusbmuxd-2.0.6.dylib */; };
+		6478D1AA27A1A26E00677E18 /* libusbmuxd-2.0.6.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 6478D1A227A1A26E00677E18 /* libusbmuxd-2.0.6.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		6478D1AB27A1A26E00677E18 /* libcrypto.1.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6478D1A327A1A26E00677E18 /* libcrypto.1.1.dylib */; };
+		6478D1AC27A1A26E00677E18 /* libcrypto.1.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 6478D1A327A1A26E00677E18 /* libcrypto.1.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		6478D1AD27A1A26E00677E18 /* libusb-1.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6478D1A427A1A26E00677E18 /* libusb-1.0.0.dylib */; };
+		6478D1AE27A1A26E00677E18 /* libusb-1.0.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 6478D1A427A1A26E00677E18 /* libusb-1.0.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		6487B43727A9C9740065B016 /* plistModifier.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6487B43627A9C9740065B016 /* plistModifier.mm */; };
+		64F78F5C27A1DA9100E4D412 /* DFUDevice.mm in Sources */ = {isa = PBXBuildFile; fileRef = 64F78F5A27A1DA9100E4D412 /* DFUDevice.mm */; };
+		692DCC12269E3CE7004DC22C /* mz_strm_os_posix.c in Sources */ = {isa = PBXBuildFile; fileRef = 692DCBF0269E3CE6004DC22C /* mz_strm_os_posix.c */; };
+		692DCC13269E3CE7004DC22C /* mz_strm_pkcrypt.c in Sources */ = {isa = PBXBuildFile; fileRef = 692DCBF1269E3CE6004DC22C /* mz_strm_pkcrypt.c */; };
+		692DCC14269E3CE7004DC22C /* mz_strm_zlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 692DCBF4269E3CE6004DC22C /* mz_strm_zlib.c */; };
+		692DCC15269E3CE7004DC22C /* mz_zip.c in Sources */ = {isa = PBXBuildFile; fileRef = 692DCBF5269E3CE6004DC22C /* mz_zip.c */; };
+		692DCC16269E3CE7004DC22C /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 692DCBF7269E3CE6004DC22C /* LICENSE */; };
+		692DCC17269E3CE7004DC22C /* mz_zip_rw.c in Sources */ = {isa = PBXBuildFile; fileRef = 692DCBF8269E3CE6004DC22C /* mz_zip_rw.c */; };
+		692DCC18269E3CE7004DC22C /* mz_crypt_apple.c in Sources */ = {isa = PBXBuildFile; fileRef = 692DCBFB269E3CE6004DC22C /* mz_crypt_apple.c */; };
+		692DCC19269E3CE7004DC22C /* mz_strm_mem.c in Sources */ = {isa = PBXBuildFile; fileRef = 692DCBFD269E3CE6004DC22C /* mz_strm_mem.c */; };
+		692DCC1A269E3CE7004DC22C /* mz_crypt.c in Sources */ = {isa = PBXBuildFile; fileRef = 692DCBFE269E3CE6004DC22C /* mz_crypt.c */; };
+		692DCC1B269E3CE7004DC22C /* mz_strm_wzaes.c in Sources */ = {isa = PBXBuildFile; fileRef = 692DCBFF269E3CE6004DC22C /* mz_strm_wzaes.c */; };
+		692DCC1C269E3CE7004DC22C /* mz_compat.c in Sources */ = {isa = PBXBuildFile; fileRef = 692DCC01269E3CE6004DC22C /* mz_compat.c */; };
+		692DCC1D269E3CE7004DC22C /* mz_os.c in Sources */ = {isa = PBXBuildFile; fileRef = 692DCC04269E3CE7004DC22C /* mz_os.c */; };
+		692DCC1E269E3CE7004DC22C /* mz_os_posix.c in Sources */ = {isa = PBXBuildFile; fileRef = 692DCC06269E3CE7004DC22C /* mz_os_posix.c */; };
+		692DCC1F269E3CE7004DC22C /* mz_strm_buf.c in Sources */ = {isa = PBXBuildFile; fileRef = 692DCC08269E3CE7004DC22C /* mz_strm_buf.c */; };
+		692DCC20269E3CE7004DC22C /* mz_strm_split.c in Sources */ = {isa = PBXBuildFile; fileRef = 692DCC09269E3CE7004DC22C /* mz_strm_split.c */; };
+		692DCC21269E3CE7004DC22C /* mz_strm.c in Sources */ = {isa = PBXBuildFile; fileRef = 692DCC0C269E3CE7004DC22C /* mz_strm.c */; };
+		692DCC22269E3CE7004DC22C /* SSZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 692DCC10269E3CE7004DC22C /* SSZipArchive.m */; };
+		692DCC23269E3CE7004DC22C /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 692DCC11269E3CE7004DC22C /* Info.plist */; };
+		69387BF426B6C7FF00A5EAF6 /* DFUHelperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69387BF326B6C7FF00A5EAF6 /* DFUHelperViewController.m */; };
+		6938CBD626DBF4B300094628 /* com.rA9.LeetDownPreferences.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6938CBD526DBF4B300094628 /* com.rA9.LeetDownPreferences.plist */; };
+		698823C426D9212D001CE088 /* SettingsVC.mm in Sources */ = {isa = PBXBuildFile; fileRef = 693F642F26D916CE0098D043 /* SettingsVC.mm */; };
+		69AFA6EE269CE0DC0020D40D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 69AFA6ED269CE0DC0020D40D /* AppDelegate.m */; };
+		69AFA6F1269CE0DC0020D40D /* LeetDownMain.mm in Sources */ = {isa = PBXBuildFile; fileRef = 69AFA6F0269CE0DC0020D40D /* LeetDownMain.mm */; };
+		69AFA6F3269CE0DD0020D40D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69AFA6F2269CE0DD0020D40D /* Assets.xcassets */; };
+		69AFA6F6269CE0DD0020D40D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69AFA6F4269CE0DD0020D40D /* Main.storyboard */; };
+		69AFA6F9269CE0DD0020D40D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 69AFA6F8269CE0DD0020D40D /* main.m */; };
+		69D5D65A26AE39EA0079CF85 /* LDResources in Resources */ = {isa = PBXBuildFile; fileRef = 69D5D65926AE39EA0079CF85 /* LDResources */; };
+		69FB665926E7E2780030120D /* Pods_LeetDown.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1223FBA01A91021A36E504CE /* Pods_LeetDown.framework */; };
+		69FB665C26E7E2820030120D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69FB665B26E7E2820030120D /* Cocoa.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		6478D1AF27A1A26E00677E18 /* Embed Libraries */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				6478D1AA27A1A26E00677E18 /* libusbmuxd-2.0.6.dylib in Embed Libraries */,
+				6478D1AE27A1A26E00677E18 /* libusb-1.0.0.dylib in Embed Libraries */,
+				6478D1A627A1A26E00677E18 /* libirecovery-1.0.3.dylib in Embed Libraries */,
+				6478D1A827A1A26E00677E18 /* libplist-2.0.3.dylib in Embed Libraries */,
+				6478D1AC27A1A26E00677E18 /* libcrypto.1.1.dylib in Embed Libraries */,
+			);
+			name = "Embed Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		1223FBA01A91021A36E504CE /* Pods_LeetDown.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LeetDown.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6478D1A027A1A26E00677E18 /* libirecovery-1.0.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libirecovery-1.0.3.dylib"; path = "../../../Desktop/Frameworks/libirecovery-1.0.3.dylib"; sourceTree = "<group>"; };
+		6478D1A127A1A26E00677E18 /* libplist-2.0.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libplist-2.0.3.dylib"; path = "../../../Desktop/Frameworks/libplist-2.0.3.dylib"; sourceTree = "<group>"; };
+		6478D1A227A1A26E00677E18 /* libusbmuxd-2.0.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libusbmuxd-2.0.6.dylib"; path = "../../../Desktop/Frameworks/libusbmuxd-2.0.6.dylib"; sourceTree = "<group>"; };
+		6478D1A327A1A26E00677E18 /* libcrypto.1.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.1.1.dylib; path = ../../../Desktop/Frameworks/libcrypto.1.1.dylib; sourceTree = "<group>"; };
+		6478D1A427A1A26E00677E18 /* libusb-1.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libusb-1.0.0.dylib"; path = "../../../Desktop/Frameworks/libusb-1.0.0.dylib"; sourceTree = "<group>"; };
+		6487B43627A9C9740065B016 /* plistModifier.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = plistModifier.mm; sourceTree = "<group>"; };
+		648EF98827AC59E500B7E2C2 /* plistModifier.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = plistModifier.h; sourceTree = "<group>"; };
+		64F78F5A27A1DA9100E4D412 /* DFUDevice.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = DFUDevice.mm; sourceTree = "<group>"; };
+		64F78F5B27A1DA9100E4D412 /* DFUDevice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DFUDevice.h; sourceTree = "<group>"; };
+		691B8F6926A1A9B700771658 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		691B8F6B26A1A9C000771658 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		692DCBEE269E3CE6004DC22C /* ZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZipArchive.h; sourceTree = "<group>"; };
+		692DCBF0269E3CE6004DC22C /* mz_strm_os_posix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mz_strm_os_posix.c; sourceTree = "<group>"; };
+		692DCBF1269E3CE6004DC22C /* mz_strm_pkcrypt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mz_strm_pkcrypt.c; sourceTree = "<group>"; };
+		692DCBF2269E3CE6004DC22C /* mz_strm_wzaes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mz_strm_wzaes.h; sourceTree = "<group>"; };
+		692DCBF3269E3CE6004DC22C /* mz_compat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mz_compat.h; sourceTree = "<group>"; };
+		692DCBF4269E3CE6004DC22C /* mz_strm_zlib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mz_strm_zlib.c; sourceTree = "<group>"; };
+		692DCBF5269E3CE6004DC22C /* mz_zip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mz_zip.c; sourceTree = "<group>"; };
+		692DCBF6269E3CE6004DC22C /* mz_os.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mz_os.h; sourceTree = "<group>"; };
+		692DCBF7269E3CE6004DC22C /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		692DCBF8269E3CE6004DC22C /* mz_zip_rw.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mz_zip_rw.c; sourceTree = "<group>"; };
+		692DCBF9269E3CE6004DC22C /* mz_strm_split.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mz_strm_split.h; sourceTree = "<group>"; };
+		692DCBFA269E3CE6004DC22C /* mz_strm_buf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mz_strm_buf.h; sourceTree = "<group>"; };
+		692DCBFB269E3CE6004DC22C /* mz_crypt_apple.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mz_crypt_apple.c; sourceTree = "<group>"; };
+		692DCBFC269E3CE6004DC22C /* mz_strm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mz_strm.h; sourceTree = "<group>"; };
+		692DCBFD269E3CE6004DC22C /* mz_strm_mem.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mz_strm_mem.c; sourceTree = "<group>"; };
+		692DCBFE269E3CE6004DC22C /* mz_crypt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mz_crypt.c; sourceTree = "<group>"; };
+		692DCBFF269E3CE6004DC22C /* mz_strm_wzaes.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mz_strm_wzaes.c; sourceTree = "<group>"; };
+		692DCC00269E3CE6004DC22C /* mz_strm_zlib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mz_strm_zlib.h; sourceTree = "<group>"; };
+		692DCC01269E3CE6004DC22C /* mz_compat.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mz_compat.c; sourceTree = "<group>"; };
+		692DCC02269E3CE6004DC22C /* mz_strm_pkcrypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mz_strm_pkcrypt.h; sourceTree = "<group>"; };
+		692DCC03269E3CE6004DC22C /* mz_zip_rw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mz_zip_rw.h; sourceTree = "<group>"; };
+		692DCC04269E3CE7004DC22C /* mz_os.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mz_os.c; sourceTree = "<group>"; };
+		692DCC05269E3CE7004DC22C /* mz_zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mz_zip.h; sourceTree = "<group>"; };
+		692DCC06269E3CE7004DC22C /* mz_os_posix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mz_os_posix.c; sourceTree = "<group>"; };
+		692DCC07269E3CE7004DC22C /* mz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mz.h; sourceTree = "<group>"; };
+		692DCC08269E3CE7004DC22C /* mz_strm_buf.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mz_strm_buf.c; sourceTree = "<group>"; };
+		692DCC09269E3CE7004DC22C /* mz_strm_split.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mz_strm_split.c; sourceTree = "<group>"; };
+		692DCC0A269E3CE7004DC22C /* mz_crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mz_crypt.h; sourceTree = "<group>"; };
+		692DCC0B269E3CE7004DC22C /* mz_strm_mem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mz_strm_mem.h; sourceTree = "<group>"; };
+		692DCC0C269E3CE7004DC22C /* mz_strm.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mz_strm.c; sourceTree = "<group>"; };
+		692DCC0D269E3CE7004DC22C /* mz_strm_os.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mz_strm_os.h; sourceTree = "<group>"; };
+		692DCC0E269E3CE7004DC22C /* SSZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSZipArchive.h; sourceTree = "<group>"; };
+		692DCC0F269E3CE7004DC22C /* SSZipCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSZipCommon.h; sourceTree = "<group>"; };
+		692DCC10269E3CE7004DC22C /* SSZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSZipArchive.m; sourceTree = "<group>"; };
+		692DCC11269E3CE7004DC22C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		693782CB269CE44B0082F92D /* libirecovery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libirecovery.h; sourceTree = "<group>"; };
+		69387BF326B6C7FF00A5EAF6 /* DFUHelperViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DFUHelperViewController.m; sourceTree = "<group>"; };
+		69387BF526B6C81600A5EAF6 /* DFUHelperViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DFUHelperViewController.h; sourceTree = "<group>"; };
+		6938CBD526DBF4B300094628 /* com.rA9.LeetDownPreferences.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = com.rA9.LeetDownPreferences.plist; sourceTree = "<group>"; };
+		693F642E26D916CE0098D043 /* SettingsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsVC.h; sourceTree = "<group>"; };
+		693F642F26D916CE0098D043 /* SettingsVC.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = SettingsVC.mm; sourceTree = "<group>"; };
+		69AFA6E9269CE0DC0020D40D /* LeetDown.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LeetDown.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		69AFA6EC269CE0DC0020D40D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		69AFA6ED269CE0DC0020D40D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		69AFA6EF269CE0DC0020D40D /* LeetDownMain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LeetDownMain.h; sourceTree = "<group>"; };
+		69AFA6F0269CE0DC0020D40D /* LeetDownMain.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = LeetDownMain.mm; sourceTree = "<group>"; };
+		69AFA6F2269CE0DD0020D40D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		69AFA6F5269CE0DD0020D40D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		69AFA6F7269CE0DD0020D40D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		69AFA6F8269CE0DD0020D40D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		69AFA6FA269CE0DD0020D40D /* LeetDown_M.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LeetDown_M.entitlements; sourceTree = "<group>"; };
+		69D5D65926AE39EA0079CF85 /* LDResources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = LDResources; sourceTree = "<group>"; };
+		69FB665B26E7E2820030120D /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		99C432163EBA4DCCF1F5E008 /* Pods-LeetDown.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeetDown.debug.xcconfig"; path = "Target Support Files/Pods-LeetDown/Pods-LeetDown.debug.xcconfig"; sourceTree = "<group>"; };
+		B1FAFEE716CF24519E567E5C /* Pods-LeetDown.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeetDown.release.xcconfig"; path = "Target Support Files/Pods-LeetDown/Pods-LeetDown.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		69AFA6E6269CE0DC0020D40D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				69FB665C26E7E2820030120D /* Cocoa.framework in Frameworks */,
+				6478D1A527A1A26E00677E18 /* libirecovery-1.0.3.dylib in Frameworks */,
+				69FB665926E7E2780030120D /* Pods_LeetDown.framework in Frameworks */,
+				6478D1AD27A1A26E00677E18 /* libusb-1.0.0.dylib in Frameworks */,
+				6478D1A727A1A26E00677E18 /* libplist-2.0.3.dylib in Frameworks */,
+				6478D1A927A1A26E00677E18 /* libusbmuxd-2.0.6.dylib in Frameworks */,
+				6478D1AB27A1A26E00677E18 /* libcrypto.1.1.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		692DCBEC269E3CE6004DC22C /* SSZipArchive */ = {
+			isa = PBXGroup;
+			children = (
+				692DCBED269E3CE6004DC22C /* include */,
+				692DCBEF269E3CE6004DC22C /* minizip */,
+				692DCC0E269E3CE7004DC22C /* SSZipArchive.h */,
+				692DCC0F269E3CE7004DC22C /* SSZipCommon.h */,
+				692DCC10269E3CE7004DC22C /* SSZipArchive.m */,
+				692DCC11269E3CE7004DC22C /* Info.plist */,
+			);
+			path = SSZipArchive;
+			sourceTree = "<group>";
+		};
+		692DCBED269E3CE6004DC22C /* include */ = {
+			isa = PBXGroup;
+			children = (
+				692DCBEE269E3CE6004DC22C /* ZipArchive.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		692DCBEF269E3CE6004DC22C /* minizip */ = {
+			isa = PBXGroup;
+			children = (
+				692DCBF0269E3CE6004DC22C /* mz_strm_os_posix.c */,
+				692DCBF1269E3CE6004DC22C /* mz_strm_pkcrypt.c */,
+				692DCBF2269E3CE6004DC22C /* mz_strm_wzaes.h */,
+				692DCBF3269E3CE6004DC22C /* mz_compat.h */,
+				692DCBF4269E3CE6004DC22C /* mz_strm_zlib.c */,
+				692DCBF5269E3CE6004DC22C /* mz_zip.c */,
+				692DCBF6269E3CE6004DC22C /* mz_os.h */,
+				692DCBF7269E3CE6004DC22C /* LICENSE */,
+				692DCBF8269E3CE6004DC22C /* mz_zip_rw.c */,
+				692DCBF9269E3CE6004DC22C /* mz_strm_split.h */,
+				692DCBFA269E3CE6004DC22C /* mz_strm_buf.h */,
+				692DCBFB269E3CE6004DC22C /* mz_crypt_apple.c */,
+				692DCBFC269E3CE6004DC22C /* mz_strm.h */,
+				692DCBFD269E3CE6004DC22C /* mz_strm_mem.c */,
+				692DCBFE269E3CE6004DC22C /* mz_crypt.c */,
+				692DCBFF269E3CE6004DC22C /* mz_strm_wzaes.c */,
+				692DCC00269E3CE6004DC22C /* mz_strm_zlib.h */,
+				692DCC01269E3CE6004DC22C /* mz_compat.c */,
+				692DCC02269E3CE6004DC22C /* mz_strm_pkcrypt.h */,
+				692DCC03269E3CE6004DC22C /* mz_zip_rw.h */,
+				692DCC04269E3CE7004DC22C /* mz_os.c */,
+				692DCC05269E3CE7004DC22C /* mz_zip.h */,
+				692DCC06269E3CE7004DC22C /* mz_os_posix.c */,
+				692DCC07269E3CE7004DC22C /* mz.h */,
+				692DCC08269E3CE7004DC22C /* mz_strm_buf.c */,
+				692DCC09269E3CE7004DC22C /* mz_strm_split.c */,
+				692DCC0A269E3CE7004DC22C /* mz_crypt.h */,
+				692DCC0B269E3CE7004DC22C /* mz_strm_mem.h */,
+				692DCC0C269E3CE7004DC22C /* mz_strm.c */,
+				692DCC0D269E3CE7004DC22C /* mz_strm_os.h */,
+			);
+			path = minizip;
+			sourceTree = "<group>";
+		};
+		693782CD269CE5090082F92D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6478D1A327A1A26E00677E18 /* libcrypto.1.1.dylib */,
+				6478D1A027A1A26E00677E18 /* libirecovery-1.0.3.dylib */,
+				6478D1A127A1A26E00677E18 /* libplist-2.0.3.dylib */,
+				6478D1A427A1A26E00677E18 /* libusb-1.0.0.dylib */,
+				6478D1A227A1A26E00677E18 /* libusbmuxd-2.0.6.dylib */,
+				69FB665B26E7E2820030120D /* Cocoa.framework */,
+				691B8F6B26A1A9C000771658 /* IOKit.framework */,
+				691B8F6926A1A9B700771658 /* CoreFoundation.framework */,
+				1223FBA01A91021A36E504CE /* Pods_LeetDown.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		69AFA6E0269CE0DC0020D40D = {
+			isa = PBXGroup;
+			children = (
+				69D5D65926AE39EA0079CF85 /* LDResources */,
+				69AFA6EB269CE0DC0020D40D /* LeetDown_M */,
+				69AFA6EA269CE0DC0020D40D /* Products */,
+				693782CD269CE5090082F92D /* Frameworks */,
+				9948104B923EBA54CFAB95A4 /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		69AFA6EA269CE0DC0020D40D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				69AFA6E9269CE0DC0020D40D /* LeetDown.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		69AFA6EB269CE0DC0020D40D /* LeetDown_M */ = {
+			isa = PBXGroup;
+			children = (
+				69AFA6EC269CE0DC0020D40D /* AppDelegate.h */,
+				69AFA6ED269CE0DC0020D40D /* AppDelegate.m */,
+				69AFA6EF269CE0DC0020D40D /* LeetDownMain.h */,
+				69AFA6F0269CE0DC0020D40D /* LeetDownMain.mm */,
+				6487B43627A9C9740065B016 /* plistModifier.mm */,
+				648EF98827AC59E500B7E2C2 /* plistModifier.h */,
+				64F78F5A27A1DA9100E4D412 /* DFUDevice.mm */,
+				64F78F5B27A1DA9100E4D412 /* DFUDevice.h */,
+				69387BF326B6C7FF00A5EAF6 /* DFUHelperViewController.m */,
+				69387BF526B6C81600A5EAF6 /* DFUHelperViewController.h */,
+				69AFA6F2269CE0DD0020D40D /* Assets.xcassets */,
+				69AFA6F4269CE0DD0020D40D /* Main.storyboard */,
+				693F642E26D916CE0098D043 /* SettingsVC.h */,
+				693F642F26D916CE0098D043 /* SettingsVC.mm */,
+				692DCBEC269E3CE6004DC22C /* SSZipArchive */,
+				69AFA6F7269CE0DD0020D40D /* Info.plist */,
+				69AFA6F8269CE0DD0020D40D /* main.m */,
+				69AFA6FA269CE0DD0020D40D /* LeetDown_M.entitlements */,
+				693782CB269CE44B0082F92D /* libirecovery.h */,
+				6938CBD526DBF4B300094628 /* com.rA9.LeetDownPreferences.plist */,
+			);
+			path = LeetDown_M;
+			sourceTree = "<group>";
+		};
+		9948104B923EBA54CFAB95A4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				99C432163EBA4DCCF1F5E008 /* Pods-LeetDown.debug.xcconfig */,
+				B1FAFEE716CF24519E567E5C /* Pods-LeetDown.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		69AFA6E8269CE0DC0020D40D /* LeetDown */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 69AFA713269CE0DE0020D40D /* Build configuration list for PBXNativeTarget "LeetDown" */;
+			buildPhases = (
+				B7C761893CE20065C46EE652 /* [CP] Check Pods Manifest.lock */,
+				69AFA6E5269CE0DC0020D40D /* Sources */,
+				69AFA6E6269CE0DC0020D40D /* Frameworks */,
+				69AFA6E7269CE0DC0020D40D /* Resources */,
+				279353221E2BEE2775EAE233 /* [CP] Embed Pods Frameworks */,
+				6478D1AF27A1A26E00677E18 /* Embed Libraries */,
+				6955414C26B81F9500B23CB0 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LeetDown;
+			productName = LeetDown_M;
+			productReference = 69AFA6E9269CE0DC0020D40D /* LeetDown.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		69AFA6E1269CE0DC0020D40D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1250;
+				TargetAttributes = {
+					69AFA6E8269CE0DC0020D40D = {
+						CreatedOnToolsVersion = 12.5.1;
+					};
+				};
+			};
+			buildConfigurationList = 69AFA6E4269CE0DC0020D40D /* Build configuration list for PBXProject "LeetDown" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 69AFA6E0269CE0DC0020D40D;
+			productRefGroup = 69AFA6EA269CE0DC0020D40D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				69AFA6E8269CE0DC0020D40D /* LeetDown */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		69AFA6E7269CE0DC0020D40D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				69D5D65A26AE39EA0079CF85 /* LDResources in Resources */,
+				69AFA6F3269CE0DD0020D40D /* Assets.xcassets in Resources */,
+				6938CBD626DBF4B300094628 /* com.rA9.LeetDownPreferences.plist in Resources */,
+				69AFA6F6269CE0DD0020D40D /* Main.storyboard in Resources */,
+				692DCC16269E3CE7004DC22C /* LICENSE in Resources */,
+				692DCC23269E3CE7004DC22C /* Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		279353221E2BEE2775EAE233 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LeetDown/Pods-LeetDown-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LeetDown/Pods-LeetDown-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LeetDown/Pods-LeetDown-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6955414C26B81F9500B23CB0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nset -e\necho @rpath\ncodesign --force --deep --options=runtime --sign \"${EXPANDED_CODE_SIGN_IDENTITY_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Contents/Resources/LDResources/Binaries/futurerestore\"\ncodesign --force --deep --options=runtime --sign \"${EXPANDED_CODE_SIGN_IDENTITY_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Contents/Resources/LDResources/Binaries/futurerestore64\"\ncodesign --force --options=runtime --sign \"${EXPANDED_CODE_SIGN_IDENTITY_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Contents/Resources/LDResources/Binaries/ipwnder_macosx\"\ncodesign --force --options=runtime --sign \"${EXPANDED_CODE_SIGN_IDENTITY_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Contents/Resources/LDResources/Binaries/tsschecker\"\n\n# now we gotta take care of dylib rpaths\n\nldlocation=\"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Contents/MacOS/LeetDown\"\n\ninstall_name_tool -change /usr/local/opt/libirecovery/lib/libirecovery-1.0.3.dylib @rpath/libirecovery-1.0.3.dylib $ldlocation\ninstall_name_tool -change @@HOMEBREW_PREFIX@@/opt/libusb/lib/libusb-1.0.0.dylib @rpath/libusb-1.0.0.dylib $ldlocation\ninstall_name_tool -change /usr/local/opt/libusbmuxd/lib/libusbmuxd-2.0.6.dylib @rpath/libusbmuxd-2.0.6.dylib $ldlocation\ninstall_name_tool -change /usr/local/opt/libplist/lib/libplist-2.0.3.dylib @rpath/libplist-2.0.3.dylib $ldlocation\ninstall_name_tool -change /usr/local/opt/gnutls/lib/libgnutls.30.dylib @rpath/libgnutls.30.dylib $ldlocation\ninstall_name_tool -change /usr/local/opt/p11-kit/lib/libp11-kit.0.dylib @rpath/libp11-kit.0.dylib $ldlocation\n\n\ninstall_name_tool -change /usr/local/opt/libplist/lib/libplist-2.0.3.dylib /Applications/LeetDown.app/Contents/Frameworks/libplist-2.0.3.dylib \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Contents/Frameworks/libusbmuxd-2.0.6.dylib\"\n\ninstall_name_tool -change /usr/local/opt/openssl@1.1/lib/libcrypto.1.1.dylib @rpath/libcrypto.1.1.dylib $ldlocation\n";
+		};
+		B7C761893CE20065C46EE652 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LeetDown-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		69AFA6E5269CE0DC0020D40D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				692DCC1E269E3CE7004DC22C /* mz_os_posix.c in Sources */,
+				692DCC15269E3CE7004DC22C /* mz_zip.c in Sources */,
+				692DCC21269E3CE7004DC22C /* mz_strm.c in Sources */,
+				692DCC1B269E3CE7004DC22C /* mz_strm_wzaes.c in Sources */,
+				6487B43727A9C9740065B016 /* plistModifier.mm in Sources */,
+				692DCC22269E3CE7004DC22C /* SSZipArchive.m in Sources */,
+				64F78F5C27A1DA9100E4D412 /* DFUDevice.mm in Sources */,
+				69AFA6F1269CE0DC0020D40D /* LeetDownMain.mm in Sources */,
+				69387BF426B6C7FF00A5EAF6 /* DFUHelperViewController.m in Sources */,
+				692DCC1C269E3CE7004DC22C /* mz_compat.c in Sources */,
+				692DCC1D269E3CE7004DC22C /* mz_os.c in Sources */,
+				692DCC1F269E3CE7004DC22C /* mz_strm_buf.c in Sources */,
+				692DCC13269E3CE7004DC22C /* mz_strm_pkcrypt.c in Sources */,
+				692DCC20269E3CE7004DC22C /* mz_strm_split.c in Sources */,
+				692DCC1A269E3CE7004DC22C /* mz_crypt.c in Sources */,
+				69AFA6F9269CE0DD0020D40D /* main.m in Sources */,
+				692DCC18269E3CE7004DC22C /* mz_crypt_apple.c in Sources */,
+				692DCC14269E3CE7004DC22C /* mz_strm_zlib.c in Sources */,
+				692DCC17269E3CE7004DC22C /* mz_zip_rw.c in Sources */,
+				698823C426D9212D001CE088 /* SettingsVC.mm in Sources */,
+				692DCC12269E3CE7004DC22C /* mz_strm_os_posix.c in Sources */,
+				692DCC19269E3CE7004DC22C /* mz_strm_mem.c in Sources */,
+				69AFA6EE269CE0DC0020D40D /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		69AFA6F4269CE0DD0020D40D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				69AFA6F5269CE0DD0020D40D /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		69AFA711269CE0DE0020D40D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.3;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		69AFA712269CE0DE0020D40D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		69AFA714269CE0DE0020D40D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 99C432163EBA4DCCF1F5E008 /* Pods-LeetDown.debug.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CODE_SIGN_ENTITLEMENTS = LeetDown_M/LeetDown_M.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
+				EXCLUDED_ARCHS = arm64;
+				FRAMEWORK_SEARCH_PATHS = (
+					"@executable_path/../Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					HAVE_INTTYPES_H,
+					HAVE_PKCRYPT,
+					HAVE_STDINT_H,
+					HAVE_WZAES,
+					HAVE_ZLIB,
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/AFNetworking/AFNetworking.framework/Headers\"",
+					"/Users/barisc/Downloads/ipwnder_lite-main/include",
+				);
+				INFOPLIST_FILE = LeetDown_M/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Contents/Frameworks",
+					/Users/mac/Desktop/Frameworks,
+				);
+				MACH_O_TYPE = mh_execute;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MARKETING_VERSION = 2.2_RELEASE;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = rA9.LeetDown;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+			};
+			name = Debug;
+		};
+		69AFA715269CE0DE0020D40D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B1FAFEE716CF24519E567E5C /* Pods-LeetDown.release.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CODE_SIGN_ENTITLEMENTS = LeetDown_M/LeetDown_M.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = "";
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
+				EXCLUDED_ARCHS = arm64;
+				FRAMEWORK_SEARCH_PATHS = (
+					"@executable_path/../Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					HAVE_INTTYPES_H,
+					HAVE_PKCRYPT,
+					HAVE_STDINT_H,
+					HAVE_WZAES,
+					HAVE_ZLIB,
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				INFOPLIST_FILE = LeetDown_M/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Contents/Frameworks",
+					/Users/mac/Desktop/Frameworks,
+				);
+				MACH_O_TYPE = mh_execute;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MARKETING_VERSION = 2.2_RELEASE;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = rA9.LeetDown;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		69AFA6E4269CE0DC0020D40D /* Build configuration list for PBXProject "LeetDown" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				69AFA711269CE0DE0020D40D /* Debug */,
+				69AFA712269CE0DE0020D40D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		69AFA713269CE0DE0020D40D /* Build configuration list for PBXNativeTarget "LeetDown" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				69AFA714269CE0DE0020D40D /* Debug */,
+				69AFA715269CE0DE0020D40D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 69AFA6E1269CE0DC0020D40D /* Project object */;
+}
