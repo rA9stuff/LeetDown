@@ -24,11 +24,13 @@ jobs:
       run: xcodebuild -workspace LeetDown.xcworkspace -scheme LeetDown_M CONFIGURATION_BUILD_DIR=/Users/runner/work/LeetDown/LeetDown
     - name: envdetails2
       run: ls && echo && pwd
-    - name: zip
-      run: zip -r LD_Actions_x86_64.zip LeetDown.app
+    - name: install create-dmg
+      run: brew install create-dmg
+    - name: create nightly dmg
+      run: create-dmg --window-size 430 270 --app-drop-link 300 0 --icon LeetDown.app 100 0 LeetDown_nightly.dmg LeetDown.app
     - name: release
       id: release
       uses: actions/upload-artifact@v2
       with:
         name: actions-release-macOS
-        path: /Users/runner/work/LeetDown/LeetDown/LD_Actions_x86_64.zip
+        path: /Users/runner/work/LeetDown/LeetDown/LeetDown_nightly.dmg
