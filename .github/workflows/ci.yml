@@ -19,7 +19,7 @@ jobs:
     - name: gethash
       run: git_hash=${GITHUB_SHA::6} && echo $git_hash
     - name: addNightlyHash
-      run: plutil -replace nightlyHash -string ${GITHUB_SHA}::6 /Users/runner/work/LeetDown/LeetDown/LeetDown_M/com.rA9.LeetDownPreferences.plist
+      run: plutil -replace nightlyHash -string "${GITHUB_SHA::6}" /Users/runner/work/LeetDown/LeetDown/LeetDown_M/com.rA9.LeetDownPreferences.plist
     - name: cleanup
       run: rm -rf __MACOSX/ build
     - name: pod install
