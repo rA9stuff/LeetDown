@@ -55,7 +55,7 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
-      useCustomWorkingDirectory = "YES"
+      useCustomWorkingDirectory = "NO"
       customWorkingDirectory = "/Users/mac/Desktop/xcode_projects/LeetDown-master"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"

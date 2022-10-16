@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>resetreq</key>
+	<string>1</string>
+	<key>iPad64MD5</key>
+	<string>6e0d069555b365cdcee519c5fb1b97c7</string>
+	<key>iPad3,6MD5</key>
+	<string>9083a352867aa3b208fed511da4dcbf6</string>
+	<key>iPad3,5MD5</key>
+	<string>bc58e14e6144f3162667d02674406033</string>
+	<key>iPad3,4MD5</key>
+	<string>b94f6ac764fa5fc4474cd041f389a9b3</string>
+	<key>iPhone5,2MD5</key>
+	<string>c059bc187a9a797d91a1622c9264f314</string>
+	<key>iPhone5,1MD5</key>
+	<string>10d1e057e9bed80a3ed7edcb554fde1e</string>
+	<key>iPhone64MD5</key>
+	<string>8bb80cae8e6ac9525be24873add61b25</string>
+	<key>destinationFW</key>
+	<string></string>
+	<key>32iPSWLoc</key>
+	<string></string>
+	<key>skipMD5</key>
+	<string>0</string>
+	<key>DebugEnabled</key>
+	<integer>0</integer>
+	<key>RestoreLog</key>
+	<integer>0</integer>
+</dict>
+</plist>

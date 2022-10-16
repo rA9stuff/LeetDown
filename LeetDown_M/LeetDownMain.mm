@@ -1,5 +1,3 @@
-
-  
 #import "LeetDownMain.h"
 #include "DFUDevice.h"
 #include "plistModifier.h"
@@ -10,7 +8,6 @@ bool connected = false;
 
 NSString* NSCPID(const unsigned int *buf) {
     NSMutableString *mstr=[[NSMutableString alloc] init];
-
     [mstr appendFormat:@"%04x", buf[0]];
     return mstr;
 }
@@ -1042,10 +1039,17 @@ bool dryRun = true;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // check if this is a nightly build
+    plistModifier *ptr = new plistModifier;
+    NSString *res = ptr -> getPref(@"nightlyHash");
+    if (strcmp(res.UTF8String, "") != 0) {
+        _versionLabel.stringValue = [@"Nightly " stringByAppendingString:res];
+    }
     cleanUp();
     
-    _versionLabel.enabled = false;
-    _versionLabel.alphaValue = 0;
+    _versionLabel.enabled = true;
+    _versionLabel.alphaValue = 1;
+    _dfuhelpoutlet.alphaValue = 0;
     [_uselessIndicator setHidden:NO];
     [_uselessIndicator setIndeterminate:YES];
     [_uselessIndicator setUsesThreadedAnimation:YES];
