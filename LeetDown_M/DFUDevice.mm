@@ -63,7 +63,9 @@ int DFUDevice::sendCommand(const char *cmd, bool withReconnect) {
     }
     
     irecv_error_t stat = irecv_send_command(this -> client, cmd);
-    return 0;
+    if (stat == IRECV_E_SUCCESS)
+        return 0;
+    return -1;
 }
 
 void DFUDevice::setAllDeviceInfo() {
@@ -74,6 +76,28 @@ void DFUDevice::setAllDeviceInfo() {
     this -> productType = device -> product_type;
     this -> devinfo = irecv_get_device_info(this -> client);
     
+}
+
+const char* DFUDevice::getDeviceMode() {
+    int ret, mode;
+    ret = irecv_get_mode(this -> client, &mode);
+    switch (mode) {
+        case IRECV_K_RECOVERY_MODE_1:
+        case IRECV_K_RECOVERY_MODE_2:
+        case IRECV_K_RECOVERY_MODE_3:
+        case IRECV_K_RECOVERY_MODE_4:
+            return "Recovery";
+            break;
+        case IRECV_K_DFU_MODE:
+            return "DFU";
+            break;
+        case IRECV_K_WTF_MODE:
+            return "WTF";
+            break;
+        default:
+            return "Unknown";
+            break;
+    }
 }
 
 void DFUDevice::freeDevice() {

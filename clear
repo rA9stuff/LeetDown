@@ -1,0 +1,4 @@
+#!/bin/sh
+rm -rf LeetDown.app
+rm -rf Podfile.lock
+rm -rf Pods

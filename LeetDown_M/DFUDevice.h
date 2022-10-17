@@ -44,6 +44,7 @@ public:
     bool deviceConnected();
     void freeDevice();
     bool checkPwn();
+    const char* getDeviceMode();
     int sendFile(const char*, bool);
     int sendCommand(const char*, bool);
     void sendDataToNSA();
@@ -55,6 +56,7 @@ private:
     const char *displayName;
     const char *hardwareModel;
     const char* productType;
+    const char* deviceMode;
     
     uint64_t initECID;
 };

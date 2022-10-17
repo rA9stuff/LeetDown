@@ -1,0 +1,4 @@
+App can now run from anywhere (could only run from /Applications before)
+DFUDevice::getDeviceMode() func
+Removal of unneeded binaries and .img4s
+Better error handling overall

@@ -284,7 +284,7 @@ DFUDevice *dfuDevPtr = new DFUDevice; // initialize it with defualt constructor 
     });
 
     [exploit setArguments:@[@"-p"]];
-    [exploit setCurrentDirectoryPath:@"/Applications/LeetDown.app/Contents/Resources/LDResources"];
+    [exploit setCurrentDirectoryPath: [NSString stringWithFormat: @"%@/LDResources", [[NSBundle mainBundle] resourcePath]]];
     [exploit launch];
     [exploit waitUntilExit];
 
@@ -317,7 +317,7 @@ DFUDevice *dfuDevPtr = new DFUDevice; // initialize it with defualt constructor 
         NSTask *iBootUpload = [[NSTask alloc] init];
         [iBootUpload setLaunchPath:[[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/LDResources/Binaries/ipwnder_macosx"]];
         [iBootUpload setArguments:@[@"--upload-iboot"]];
-        [iBootUpload setCurrentDirectoryPath:@"/Applications/LeetDown.app/Contents/Resources/LDResources"];
+        [iBootUpload setCurrentDirectoryPath: [NSString stringWithFormat: @"%@/LDResources", [[NSBundle mainBundle] resourcePath]]];
         [iBootUpload launch];
         [iBootUpload waitUntilExit];
         sleep(1);
@@ -357,7 +357,7 @@ DFUDevice *dfuDevPtr = new DFUDevice; // initialize it with defualt constructor 
 - (int) patchFiles {
     
     printf("inside patchFiles(), printing dev info\n");
-    printf("printing dev info line 372\n");
+    printf("printing dev info line 360\n");
     printf("SERIAL TAG -> %s\n", dfuDevPtr -> getDevInfo() ->srtg);
     printf("HARDWARE MODEL -> %s\n", dfuDevPtr -> getHardwareModel());
 
@@ -416,7 +416,6 @@ DFUDevice *dfuDevPtr = new DFUDevice; // initialize it with defualt constructor 
     if (dfuDevPtr -> sendFile(filename.UTF8String, reconnect) == 0) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self updateStatus:[NSString stringWithFormat:@"Successfully booted %@", filename] color:[NSColor cyanColor]];
-            [self updateStatus:@"5 second cooldown, re-plug now if needed on Apple Silicon" color:[NSColor whiteColor]];
         });
         return;
     }
@@ -519,12 +518,12 @@ unsigned long long devCompStr;
 NSString *newECID = NULL;
 NSString *oldECID = NULL;
 
-- (int) comeDiscover {
+- (int) discoverDevices {
     
     /*
      LeetDown should check for two conditions here:
      
-     1: If the device is supported by 10.3.3 OTA downgrade
+     1: If the device is supported by OTA downgrade
      2: If the device is connected in anything other than DFU mode
      */
 
@@ -553,17 +552,10 @@ NSString *oldECID = NULL;
     firstrun = false;
     oldECID = newECID;
         
-    // now check if the device is in any other mode other than DFU.
-    if (!(dfuDevPtr -> getDevInfo() -> srtg)) {
-        [self updateStatus:[NSString stringWithFormat:@"%@ with ECID: %@ is connected in wrong mode, please place it in DFU mode to proceed", [NSString stringWithUTF8String:dfuDevPtr -> getDisplayName()], newECID] color:[NSColor redColor]];
-        dfuDevPtr -> freeDevice();
-        usleep(500000);
-        return -1;
-    }
+    // create a plistModifier object to modify the "destinationFW" value.
+    plistModifier plistObject;
     
-    plistModifier plistObject; // create a plistModifier object to modify the "destinationFW" value.
-    
-        // check if the device is compatible.
+    // check if the device is compatible.
     NSString *boardConfig = [NSString stringWithFormat:@"%s", dfuDevPtr -> getHardwareModel()];
     if (strcmp(boardConfig.UTF8String, "n51ap") == 0 || strcmp(boardConfig.UTF8String, "n53ap") == 0 || strcmp(boardConfig.UTF8String, "j71ap") == 0 || strcmp(boardConfig.UTF8String, "j72ap") == 0 || strcmp(boardConfig.UTF8String, "j73ap") == 0 || strcmp(boardConfig.UTF8String, "j85ap") == 0 || strcmp(boardConfig.UTF8String, "j86ap") == 0) {
         
@@ -594,7 +586,17 @@ NSString *oldECID = NULL;
     else {
         [self updateStatus:[NSString stringWithFormat: @"%s is not supported", dfuDevPtr -> getDisplayName()] color:[NSColor redColor]];
         dfuDevPtr -> freeDevice();
+        return -1;
     }
+    
+    // now check if the device is in any other mode other than DFU.
+    if (!(dfuDevPtr -> getDevInfo() -> srtg)) {
+        [self updateStatus:[NSString stringWithFormat:@"%@ with ECID: %@ is connected in %@ mode, please place it in DFU mode to proceed", [NSString stringWithUTF8String:dfuDevPtr -> getDisplayName()], newECID, [NSString stringWithUTF8String:dfuDevPtr -> getDeviceMode()]] color:[NSColor redColor]];
+        dfuDevPtr -> freeDevice();
+        usleep(500000);
+        return -1;
+    }
+    
 
     return 0;
 }
@@ -633,7 +635,7 @@ NSString *oldECID = NULL;
 - (int) restore64 {
     
     printf("inside restore64(), printing dev info\n");
-    printf("printing dev info line 657\n");
+    printf("printing dev info line 639\n");
     printf("SERIAL TAG -> %s\n", dfuDevPtr -> getDevInfo() -> srtg);
     printf("HARDWARE MODEL -> %s\n", dfuDevPtr -> getHardwareModel());
 
@@ -644,10 +646,8 @@ NSString *oldECID = NULL;
    
     if ([self sendBootchain] != 0) {
         [self updateStatus:@"Error sending bootchain" color:[NSColor redColor]];
-        printf("line 669\n");
         return -1;
     }
-    printf("line 672\n");
     sleep(1);
             
     NSString *devmodel = [NSString stringWithFormat:@"%s", dfuDevPtr -> getProductType()];
@@ -1038,7 +1038,7 @@ bool dryRun = true;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     // check if this is a nightly build
     plistModifier *ptr = new plistModifier;
     NSString *res = ptr -> getPref(@"nightlyHash");
@@ -1057,7 +1057,7 @@ bool dryRun = true;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         printf("initial device scan started\n");
         while (!supported) {
-            [self comeDiscover];
+            [self discoverDevices];
             usleep(500000);
         }
         dispatch_async(dispatch_get_main_queue(), ^(){

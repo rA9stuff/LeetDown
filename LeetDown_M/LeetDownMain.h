@@ -25,7 +25,6 @@
 @property (assign) IBOutlet NSButton *selectIPSWoutlet;
 @property (assign) IBOutlet NSTextField *versionLabel;
 @property (assign) IBOutlet NSBox *mainbox;
-@property (weak) IBOutlet NSTextField *ramiel;
 @property (weak) IBOutlet NSButton *downgradeButtonOut;
 @property (weak) IBOutlet NSProgressIndicator *uselessIndicator;
 @property (assign) IBOutlet NSButton *dfuhelpoutlet;
