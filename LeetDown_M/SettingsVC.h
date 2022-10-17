@@ -17,4 +17,6 @@ void modifyPreference(NSNumber *val, NSString *preference);
 @property (assign) IBOutlet NSButton *debugToggle;
 @property (assign) IBOutlet NSButton *md5Toggle;
 @property (nonatomic, assign) BOOL locationUseBool;
+@property (assign) IBOutlet NSButton *downgradeBBoutlet;
+
 @end

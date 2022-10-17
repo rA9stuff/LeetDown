@@ -617,15 +617,33 @@ NSString *oldECID = NULL;
     NSString *ticket = [[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/LDResources/SHSH/blob.shsh"];
     NSString *preferencePlist = [[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/com.rA9.LeetDownPreferences.plist"];
     NSDictionary *dict=[[NSDictionary alloc] initWithContentsOfFile:preferencePlist];
-    NSString *stringValue=dict[@"32iPSWLoc"];
+    NSString *ipswPath=dict[@"32iPSWLoc"];
     
     if (strcmp(boardcmp, "n41ap") == 0 || strcmp(boardcmp, "n42ap") == 0 || strcmp(boardcmp, "p102ap") == 0 || strcmp(boardcmp, "p103ap") == 0) {
-        bb = @"--latest-baseband";
+        plistModifier *bbcheck = new plistModifier;
+        bool downgradeBB = [bbcheck -> getPref(@"downgradeBB") boolValue];
+        if (downgradeBB) {
+            bb = @"--latest-baseband";
+            restore.arguments = @[@"-t", ticket, bb, @"--use-pwndfu", ipswPath];
+        }
+        else {
+            NSString *tempipswdir = [[NSString stringWithFormat:@"%@", NSTemporaryDirectory()] stringByAppendingString:@"iPSW"];
+            NSString *bbDestination = [tempipswdir stringByAppendingString:@"/Mav5-8.02.00.Release.bbfw"];
+            [[NSFileManager defaultManager] createDirectoryAtPath:tempipswdir withIntermediateDirectories:NO attributes:NULL error:NULL];
+            NSString *baseband = @"Firmware/Mav5-8.02.00.Release.bbfw";
+            [SSZipArchive unzipEntityName:baseband fromFilePath:ipswPath toDestination:bbDestination];
+            bb = bbDestination;
+            
+            NSString *devmodel = [NSString stringWithFormat:@"%s", dfuDevPtr -> getProductType()];
+            NSString *bm =[[[[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/LDResources/BuildManifests/"] stringByAppendingString:[NSString stringWithFormat:@"%@", devmodel]] stringByAppendingString:@".plist"];
+            restore.arguments = @[@"-t", ticket, @"-b", bb, @"-p", bm, @"--use-pwndfu", ipswPath];
+        }
     }
     else {
         bb = @"--no-baseband";
+        restore.arguments = @[@"-t", ticket, bb, @"--use-pwndfu", ipswPath];
     }
-    restore.arguments = @[@"-t", ticket, bb, @"--use-pwndfu", stringValue];
+    
     [restore launch];
     [restore waitUntilExit];
     
@@ -635,7 +653,7 @@ NSString *oldECID = NULL;
 - (int) restore64 {
     
     printf("inside restore64(), printing dev info\n");
-    printf("printing dev info line 639\n");
+    printf("printing dev info line 638\n");
     printf("SERIAL TAG -> %s\n", dfuDevPtr -> getDevInfo() -> srtg);
     printf("HARDWARE MODEL -> %s\n", dfuDevPtr -> getHardwareModel());
 
@@ -939,10 +957,11 @@ NSString *oldECID = NULL;
                             
                             plistModifier destinationObject;
                             if (strcmp(destinationObject.getPref(@"destinationFW").UTF8String, "10.3.3") == 0) {
-                                printf("printing dev info line 1012\n");
+                                printf("printing dev info line 942\n");
                                 printf("SERIAL TAG -> %s\n", dfuDevPtr -> getDevInfo() ->srtg);
                                 printf("HARDWARE MODEL -> %s\n", dfuDevPtr -> getHardwareModel());
-                                if ([self restore64] == 0) {
+                                int restoreCode = [self restore64];
+                                if (restoreCode == 0) {
                                     dispatch_async(dispatch_get_main_queue(), ^(){
                                         [self updateStatus:@"Restore succeeded!" color:[NSColor cyanColor]];
                                         [self -> _uselessIndicator stopAnimation:nil];
@@ -953,13 +972,14 @@ NSString *oldECID = NULL;
                                 else {
                                     dispatch_async(dispatch_get_main_queue(), ^(){
                                         [self -> _uselessIndicator stopAnimation:nil];
-                                        [self updateStatus:@"Failed to restore device" color:[NSColor redColor]];
+                                        [self updateStatus:[NSString stringWithFormat:@"Restore failed with error code %i", restoreCode] color:[NSColor redColor]];
                                     });
                                 }
                                 return;
                             }
                             dfuDevPtr -> freeDevice();
-                            if ([self restore32] == 0) {
+                            int restoreCode = [self restore32];
+                            if (restoreCode == 0) {
                                 dispatch_async(dispatch_get_main_queue(), ^() {
                                     [self updateStatus:@"Restore succeeded!" color:[NSColor cyanColor]];
                                     [self -> _uselessIndicator stopAnimation:nil];
@@ -970,7 +990,7 @@ NSString *oldECID = NULL;
                             else {
                                 dispatch_async(dispatch_get_main_queue(), ^(){
                                     [self -> _uselessIndicator stopAnimation:nil];
-                                    [self updateStatus:@"Failed to restore device" color:[NSColor redColor]];
+                                    [self updateStatus:[NSString stringWithFormat:@"Restore failed with error code %i", restoreCode] color:[NSColor redColor]];
                                 });
                             }
                             });
@@ -985,10 +1005,11 @@ NSString *oldECID = NULL;
             
                         plistModifier destinationObject;
                         if (strcmp(destinationObject.getPref(@"destinationFW").UTF8String, "10.3.3") == 0) {
-                            printf("printing dev info line 1012\n");
+                            printf("printing dev info line 990\n");
                             printf("SERIAL TAG -> %s\n", dfuDevPtr -> getDevInfo() ->srtg);
                             printf("HARDWARE MODEL -> %s\n", dfuDevPtr -> getHardwareModel());
-                            if ([self restore64] == 0) {
+                            int restoreCode = [self restore64];
+                            if (restoreCode == 0) {
                                 dispatch_async(dispatch_get_main_queue(), ^(){
                                     [self updateStatus:@"Restore succeeded!" color:[NSColor cyanColor]];
                                     [self -> _uselessIndicator stopAnimation:nil];
@@ -999,13 +1020,14 @@ NSString *oldECID = NULL;
                             else {
                                 dispatch_async(dispatch_get_main_queue(), ^(){
                                     [self -> _uselessIndicator stopAnimation:nil];
-                                    [self updateStatus:@"Failed to restore device" color:[NSColor redColor]];
+                                    [self updateStatus:[NSString stringWithFormat:@"Restore failed with error code %i", restoreCode] color:[NSColor redColor]];
                                 });
                             }
                             return;
                         }
                         dfuDevPtr -> freeDevice();
-                        if ([self restore32] == 0) {
+                        int restoreCode = [self restore32];
+                        if (restoreCode == 0) {
                             dispatch_async(dispatch_get_main_queue(), ^() {
                                 [self updateStatus:@"Restore succeeded!" color:[NSColor cyanColor]];
                                 [self -> _uselessIndicator stopAnimation:nil];
@@ -1016,7 +1038,7 @@ NSString *oldECID = NULL;
                         else {
                             dispatch_async(dispatch_get_main_queue(), ^(){
                                 [self -> _uselessIndicator stopAnimation:nil];
-                                [self updateStatus:@"Failed to restore device" color:[NSColor redColor]];
+                                [self updateStatus:[NSString stringWithFormat:@"Restore failed with error code %i", restoreCode] color:[NSColor redColor]];
                             });
                         }
                                         
@@ -1038,14 +1060,14 @@ bool dryRun = true;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     // check if this is a nightly build
     plistModifier *ptr = new plistModifier;
     NSString *res = ptr -> getPref(@"nightlyHash");
     if (strcmp(res.UTF8String, "") != 0) {
         _versionLabel.stringValue = [@"Nightly " stringByAppendingString:res];
     }
-    cleanUp();
+    //cleanUp();
     
     _versionLabel.enabled = false;
     _versionLabel.alphaValue = 0;

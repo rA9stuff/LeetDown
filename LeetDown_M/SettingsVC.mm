@@ -29,13 +29,16 @@ plistModifier plistObject;
 }
 
 - (IBAction)md5Action:(id)sender {
-
     plistObject.modifyPref(@"skipMD5", [NSString stringWithFormat:@"%ld", (long)_md5Toggle.state]);
 }
 
 - (IBAction)resetReqAct:(id)sender {
     plistObject.modifyPref(@"resetreq", [NSString stringWithFormat:@"%ld", (long)_resetreq.state]);
 }
+- (IBAction)downgradeBBAct:(id)sender {
+    plistObject.modifyPref(@"downgradeBB", [NSString stringWithFormat:@"%ld", (long)_downgradeBBoutlet.state]);
+}
+
 
 
 - (IBAction)closeVC:(id)sender {
@@ -58,9 +61,11 @@ plistModifier plistObject;
     NSString *resetreq = plistObject.getPref(@"resetreq");
     NSString *debugStr = plistObject.getPref(@"DebugEnabled");
     NSString *md5Str = plistObject.getPref(@"skipMD5");
+    NSString *downgradeBBstr = plistObject.getPref(@"downgradeBB");
     _debugToggle.state = debugStr.longLongValue;
     _md5Toggle.state = md5Str.longLongValue;
     _resetreq.state = resetreq.longLongValue;
+    _downgradeBBoutlet.state = downgradeBBstr.longLongValue;
 
 }
 @end

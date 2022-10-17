@@ -371,96 +371,115 @@ Gw
                 <customObject id="Xe6-Yg-tT7" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="SettingsController" id="EDS-DF-x6C" customClass="SettingsVC" sceneMemberID="viewController">
                     <view key="view" id="FSa-T8-FkR">
-                        <rect key="frame" x="0.0" y="0.0" width="326" height="466"/>
+                        <rect key="frame" x="0.0" y="0.0" width="326" height="543"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <box fixedFrame="YES" boxType="custom" cornerRadius="4" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="Wdm-Yw-Aon">
-                                <rect key="frame" x="0.0" y="0.0" width="326" height="466"/>
+                            <view id="FhV-AO-MUv">
+                                <rect key="frame" x="1" y="48" width="324" height="476"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <view key="contentView" id="e8o-WA-wHZ">
-                                    <rect key="frame" x="1" y="1" width="324" height="464"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="998-Vg-jph">
-                                            <rect key="frame" x="27" y="338" width="136" height="18"/>
-                                            <buttonCell key="cell" type="check" title="Enable debugging" bezelStyle="regularSquare" imagePosition="left" inset="2" id="lwu-rY-n9P">
-                                                <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <connections>
-                                                <action selector="debuggingToggle:" target="EDS-DF-x6C" id="upt-tj-hf5"/>
-                                            </connections>
-                                        </button>
-                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="llZ-mZ-DR2">
-                                            <rect key="frame" x="27" y="254" width="128" height="18"/>
-                                            <buttonCell key="cell" type="check" title="Skip iPSW check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Wok-du-AGc">
-                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <connections>
-                                                <action selector="md5Action:" target="EDS-DF-x6C" id="wqF-2G-si4"/>
-                                            </connections>
-                                        </button>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nuu-ud-eRI">
-                                            <rect key="frame" x="29" y="215" width="266" height="32"/>
-                                            <textFieldCell key="cell" lineBreakMode="clipping" id="CDf-7a-g3P">
-                                                <font key="font" metaFont="system"/>
-                                                <string key="title">LeetDown won't check iPSW md5 hashsum
+                                <subviews>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VfC-MQ-7ck">
+                                        <rect key="frame" x="27" y="379" width="136" height="18"/>
+                                        <buttonCell key="cell" type="check" title="Enable debugging" bezelStyle="regularSquare" imagePosition="left" inset="2" id="fPw-DJ-S6E">
+                                            <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="debuggingToggle:" target="EDS-DF-x6C" id="o5a-ny-lFv"/>
+                                        </connections>
+                                    </button>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8vS-tw-a4p">
+                                        <rect key="frame" x="27" y="295" width="128" height="18"/>
+                                        <buttonCell key="cell" type="check" title="Skip iPSW check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="h1G-4d-qg0">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="md5Action:" target="EDS-DF-x6C" id="lRH-x4-axF"/>
+                                        </connections>
+                                    </button>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="63G-1h-k9g">
+                                        <rect key="frame" x="29" y="256" width="266" height="32"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" id="RWg-ew-PWf">
+                                            <font key="font" metaFont="system"/>
+                                            <string key="title">LeetDown won't check iPSW md5 hashsum
 when this option is enabled.</string>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.79767017159999998" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </textFieldCell>
-                                        </textField>
-                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="443-hX-XEr">
-                                            <rect key="frame" x="27" y="170" width="198" height="18"/>
-                                            <buttonCell key="cell" type="check" title="send reset request (A7 only)" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="em7-Mo-vfu">
-                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                <font key="font" metaFont="system"/>
-                                            </buttonCell>
-                                            <connections>
-                                                <action selector="resetReqAct:" target="EDS-DF-x6C" id="j3l-at-Yxu"/>
-                                            </connections>
-                                        </button>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eWL-ma-Zzs">
-                                            <rect key="frame" x="27" y="131" width="270" height="32"/>
-                                            <textFieldCell key="cell" lineBreakMode="clipping" id="mxI-a0-H1G">
-                                                <font key="font" metaFont="system"/>
-                                                <string key="title">LeetDown will reset USB connection before 
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.79767017159999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2T3-Cp-5YM">
+                                        <rect key="frame" x="27" y="211" width="198" height="18"/>
+                                        <buttonCell key="cell" type="check" title="send reset request (A7 only)" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="bHF-bq-yA4">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="resetReqAct:" target="EDS-DF-x6C" id="jxb-Cr-xq9"/>
+                                        </connections>
+                                    </button>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="02L-h8-BaA">
+                                        <rect key="frame" x="27" y="172" width="270" height="32"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" id="3pK-Qd-ZFO">
+                                            <font key="font" metaFont="system"/>
+                                            <string key="title">LeetDown will reset USB connection before 
 uploading iBoot.</string>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.79767017159999998" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </textFieldCell>
-                                        </textField>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0Vx-CN-rfr">
-                                            <rect key="frame" x="25" y="299" width="275" height="32"/>
-                                            <textFieldCell key="cell" lineBreakMode="clipping" id="Wve-Zb-teQ">
-                                                <font key="font" metaFont="system"/>
-                                                <string key="title">Enable this option to attach the log with your
-issue</string>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <color key="backgroundColor" red="0.99425287360000003" green="0.98850574710000005" blue="1" alpha="0.84705882349999995" colorSpace="custom" customColorSpace="displayP3"/>
-                                            </textFieldCell>
-                                        </textField>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="998-Vg-jph" firstAttribute="top" secondItem="e8o-WA-wHZ" secondAttribute="top" constant="109" id="6au-lZ-Fq6"/>
-                                        <constraint firstItem="443-hX-XEr" firstAttribute="leading" secondItem="e8o-WA-wHZ" secondAttribute="leading" constant="29" id="7Rc-Ma-R1o"/>
-                                        <constraint firstItem="nuu-ud-eRI" firstAttribute="top" secondItem="llZ-mZ-DR2" secondAttribute="bottom" constant="8" symbolic="YES" id="7dh-jS-tbj"/>
-                                        <constraint firstItem="eWL-ma-Zzs" firstAttribute="centerX" secondItem="e8o-WA-wHZ" secondAttribute="centerX" id="BNB-Zy-9Ww"/>
-                                        <constraint firstItem="0Vx-CN-rfr" firstAttribute="top" secondItem="998-Vg-jph" secondAttribute="bottom" constant="8" symbolic="YES" id="BdO-QD-Qv6"/>
-                                        <constraint firstItem="llZ-mZ-DR2" firstAttribute="leading" secondItem="e8o-WA-wHZ" secondAttribute="leading" constant="29" id="Eux-Sz-mac"/>
-                                        <constraint firstItem="eWL-ma-Zzs" firstAttribute="top" secondItem="443-hX-XEr" secondAttribute="bottom" constant="8" symbolic="YES" id="GOu-nD-vLb"/>
-                                        <constraint firstItem="eWL-ma-Zzs" firstAttribute="top" secondItem="443-hX-XEr" secondAttribute="bottom" constant="8" id="O9p-Xz-34e"/>
-                                        <constraint firstItem="998-Vg-jph" firstAttribute="leading" secondItem="e8o-WA-wHZ" secondAttribute="leading" constant="29" id="OL1-SW-W1K"/>
-                                        <constraint firstItem="443-hX-XEr" firstAttribute="top" secondItem="nuu-ud-eRI" secondAttribute="bottom" constant="28" id="SIr-Ea-X5r"/>
-                                        <constraint firstItem="llZ-mZ-DR2" firstAttribute="top" secondItem="0Vx-CN-rfr" secondAttribute="bottom" constant="28" id="UqC-Rd-P5b"/>
-                                        <constraint firstItem="nuu-ud-eRI" firstAttribute="centerX" secondItem="e8o-WA-wHZ" secondAttribute="centerX" id="eX1-MZ-Org"/>
-                                        <constraint firstItem="0Vx-CN-rfr" firstAttribute="centerX" secondItem="e8o-WA-wHZ" secondAttribute="centerX" id="qiP-r9-bgi"/>
-                                    </constraints>
-                                </view>
-                                <color key="borderColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="fillColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </box>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.79767017159999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dKh-TK-Vp9">
+                                        <rect key="frame" x="27" y="340" width="275" height="32"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" id="R8p-xt-f8N">
+                                            <font key="font" metaFont="system"/>
+                                            <string key="title">Enable this option to attach the log with your
+issue.</string>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <color key="backgroundColor" red="0.99425287360000003" green="0.98850574710000005" blue="1" alpha="0.84705882349999995" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hnd-lq-Gpf">
+                                        <rect key="frame" x="27" y="127" width="218" height="18"/>
+                                        <buttonCell key="cell" type="check" title="Downgrade baseband (A6 only)" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="E0b-rV-0Up">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="downgradeBBAct:" target="EDS-DF-x6C" id="wLL-2j-AaI"/>
+                                        </connections>
+                                    </button>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7BT-51-dsc">
+                                        <rect key="frame" x="27" y="72" width="260" height="48"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" id="X1M-m9-hqG">
+                                            <font key="font" metaFont="system"/>
+                                            <string key="title">Downgrade baseband instead of using the
+latest signed version. Experimental and 
+untested. Things may break.</string>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="02L-h8-BaA" firstAttribute="top" secondItem="2T3-Cp-5YM" secondAttribute="bottom" constant="8" symbolic="YES" id="5Ql-EV-5t8"/>
+                                    <constraint firstItem="02L-h8-BaA" firstAttribute="top" secondItem="2T3-Cp-5YM" secondAttribute="bottom" constant="8" id="8rP-Qo-luK"/>
+                                    <constraint firstItem="2T3-Cp-5YM" firstAttribute="top" secondItem="63G-1h-k9g" secondAttribute="bottom" constant="28" id="8ud-Yb-lcC"/>
+                                    <constraint firstItem="02L-h8-BaA" firstAttribute="centerX" secondItem="FhV-AO-MUv" secondAttribute="centerX" id="8vg-Vl-LGH"/>
+                                    <constraint firstItem="VfC-MQ-7ck" firstAttribute="top" secondItem="FhV-AO-MUv" secondAttribute="top" constant="80" id="N3q-Ym-fj5"/>
+                                    <constraint firstItem="hnd-lq-Gpf" firstAttribute="top" secondItem="02L-h8-BaA" secondAttribute="bottom" constant="28" id="Tew-gd-Y9o"/>
+                                    <constraint firstItem="63G-1h-k9g" firstAttribute="top" secondItem="8vS-tw-a4p" secondAttribute="bottom" constant="8" symbolic="YES" id="VeW-Np-bsW"/>
+                                    <constraint firstItem="7BT-51-dsc" firstAttribute="leading" secondItem="FhV-AO-MUv" secondAttribute="leading" constant="29" id="X4E-mw-dgf"/>
+                                    <constraint firstItem="63G-1h-k9g" firstAttribute="centerX" secondItem="FhV-AO-MUv" secondAttribute="centerX" id="hGe-Ug-bZC"/>
+                                    <constraint firstItem="VfC-MQ-7ck" firstAttribute="leading" secondItem="FhV-AO-MUv" secondAttribute="leading" constant="29" id="kbB-SG-5Ys"/>
+                                    <constraint firstItem="dKh-TK-Vp9" firstAttribute="leading" secondItem="FhV-AO-MUv" secondAttribute="leading" constant="29" id="mfc-EO-Yto"/>
+                                    <constraint firstItem="hnd-lq-Gpf" firstAttribute="leading" secondItem="FhV-AO-MUv" secondAttribute="leading" constant="29" id="pZq-A0-co5"/>
+                                    <constraint firstItem="8vS-tw-a4p" firstAttribute="top" secondItem="dKh-TK-Vp9" secondAttribute="bottom" constant="28" id="qKt-ng-NFh"/>
+                                    <constraint firstItem="8vS-tw-a4p" firstAttribute="leading" secondItem="FhV-AO-MUv" secondAttribute="leading" constant="29" id="qQJ-2M-QTT"/>
+                                    <constraint firstItem="dKh-TK-Vp9" firstAttribute="top" secondItem="VfC-MQ-7ck" secondAttribute="bottom" constant="8" symbolic="YES" id="rSb-y6-Hvv"/>
+                                    <constraint firstItem="2T3-Cp-5YM" firstAttribute="leading" secondItem="FhV-AO-MUv" secondAttribute="leading" constant="29" id="xrI-6f-4oZ"/>
+                                    <constraint firstItem="7BT-51-dsc" firstAttribute="top" secondItem="hnd-lq-Gpf" secondAttribute="bottom" constant="8" symbolic="YES" id="zRV-4e-tUc"/>
+                                </constraints>
+                            </view>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cYW-eT-nYl">
                                 <rect key="frame" x="99" y="21" width="128" height="32"/>
                                 <buttonCell key="cell" type="push" title="Save and Close" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="KPY-4A-x27">
@@ -472,7 +491,7 @@ issue</string>
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jop-Us-BAX">
-                                <rect key="frame" x="109" y="405" width="108" height="33"/>
+                                <rect key="frame" x="109" y="482" width="108" height="33"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Settings" id="8AG-G6-FKB">
                                     <font key="font" metaFont="system" size="28"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="0.85208576228342903" colorSpace="custom" customColorSpace="sRGB"/>
@@ -488,13 +507,11 @@ issue</string>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="debugToggle" destination="998-Vg-jph" id="rDH-eO-jXp"/>
-                        <outlet property="md5Toggle" destination="llZ-mZ-DR2" id="bhy-KH-nXZ"/>
-                        <outlet property="resetreq" destination="443-hX-XEr" id="x9E-oa-Kba"/>
+                        <outlet property="downgradeBBoutlet" destination="hnd-lq-Gpf" id="0Xy-x5-To9"/>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-334" y="700"/>
+            <point key="canvasLocation" x="-334" y="738.5"/>
         </scene>
     </scenes>
     <resources>
