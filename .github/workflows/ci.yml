@@ -38,6 +38,12 @@ jobs:
       with:
         name: "LeetDown-Nightly"
         path: /Users/runner/work/LeetDown/LeetDown/LD_Nightly_*.dmg
+    - name: upload nightly changes
+      id: u_changes
+      uses: actions/upload-artifact@v2
+      with:
+        name: "Nightly Changelog"
+        path: /Users/runner/work/LeetDown/LeetDown/nightly_changes.txt
     - name: create_shasum
       run: sha512=$(shasum -a 512 LD_Nightly_* | cut -d ' ' -f 1) && touch "sha512_${sha512}"
     - name: upload_SHA512
