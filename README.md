@@ -56,30 +56,22 @@ Follow the instructions shown in the app.
 
 
 # Build Instructions  
-LeetDown depends on the following libraries:   
-* libcrypto (get it via `brew install openssl`)
-* [libirecovery](https://github.com/libimobiledevice/libirecovery)
-* [libplist](https://github.com/libimobiledevice/libplist)
-* libusb (get it via `brew install libusb`)
-* [libusbmuxd](https://github.com/libimobiledevice/libusbmuxd)   
-ps: If you don't want to compile `libirecovery`, `libplist` and `libusbmuxd` manually, [Nikias Bassen](https://twitter.com/pimskeks) has a [script](https://twitter.com/pimskeks/status/1486147309247283200?s=20&t=nvx4MIq3dSS-zMGE5dBLuw) available that can build all libimobiledevice tools automatically.
+### With Xcode
+`cd` to project directory   
+run `pod install`   
+open `.xcworkspace` and run it    
 
-Place the libraries in any folder (preferably inside "Frameworks" to build it statically) in your environment, then;
-* Project -> Build Settings -> Library Search Paths -> path_to_your_folder
-
-LeetDown depends on the following frameworks:
-* AFNetworking
-* SSZipArchive
-
-You can install them automatically with cocoapods.   
-Note: A modified version of SSZipArchive is already placed inside the project, skip installing it via pods.   
+### With CLI
+`cd` to project directory   
+run `pod install`   
+run `xcodebuild -workspace LeetDown.xcworkspace -scheme LeetDown_M` 
 
 # Having issues?
 
 * Enable debugging by clicking the box in LeetDown's settings.
 * Open an issue, fill the template and attach the `LDLog.txt` to it from your `~/Documents` folder
 
-# Donators  
+# Supporters  
 * Will Kellner
 * qqjqqj
 
