@@ -1,2 +1,1 @@
-untested baseband downgrade option for A6 devices
-settings ui improvements
+modern-era icon
