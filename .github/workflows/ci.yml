@@ -19,7 +19,7 @@ jobs:
     - name: gethash
       run: git_hash=${GITHUB_SHA::6} && echo $git_hash
     - name: addNightlyHash
-      run: plutil -replace nightlyHash -string "${GITHUB_SHA::6}" /Users/runner/work/LeetDown/LeetDown/LeetDown_M/com.rA9.LeetDownPreferences.plist
+      run: plutil -replace nightlyHash -string "${GITHUB_SHA::7}" /Users/runner/work/LeetDown/LeetDown/LeetDown_M/com.rA9.LeetDownPreferences.plist
     - name: cleanup
       run: rm -rf __MACOSX/ build
     - name: pod install
@@ -31,7 +31,7 @@ jobs:
     - name: install create-dmg
       run: brew install create-dmg
     - name: create nightly dmg
-      run: create-dmg --window-size 430 270 --app-drop-link 300 0 --icon LeetDown.app 100 0 "LD_Nightly_${GITHUB_SHA::6}.dmg" LeetDown.app
+      run: create-dmg --window-size 430 270 --app-drop-link 300 0 --icon LeetDown.app 100 0 "LD_Nightly_${GITHUB_SHA::7}.dmg" LeetDown.app
     - name: upload_LD
       id: upload_LD
       uses: actions/upload-artifact@v2
