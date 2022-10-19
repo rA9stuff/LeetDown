@@ -43,6 +43,7 @@ void cleanUp(void) {
 
 bool firstline = true;
 bool pwned = false;
+double uzip_progress = 0;
 
 irecv_client_t client = NULL;
 irecv_device_t device = NULL;
@@ -95,7 +96,6 @@ DFUDevice *dfuDevPtr = new DFUDevice; // initialize it with defualt constructor 
     NSData *ipswData = [NSData dataWithContentsOfURL:ipswLocation];
     plistModifier correctMD5;
     if (strcmp([self MD5:ipswData].UTF8String, correctMD5.getPref(md5CheckValue).UTF8String) != 0) {
-        
         dispatch_async(dispatch_get_main_queue(), ^(){
             [self updateStatus:@"iPSW is corrupt! If you think this is a mistake, disable MD5 check in settings" color:[NSColor redColor]];
             self -> _selectIPSWoutlet.enabled = true;
@@ -215,27 +215,44 @@ DFUDevice *dfuDevPtr = new DFUDevice; // initialize it with defualt constructor 
             dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
                                 
                 dispatch_async(dispatch_get_main_queue(), ^(){
+                    [[self dfuhelpoutlet] setHidden:TRUE];
+                    [[self dfuhelpoutlet] setEnabled:false];
                     [self updateStatus:[NSString stringWithFormat:@"iPSW selected at %@ and being extracted to %@", urlns, tempipswdir] color:[NSColor whiteColor]];
-                    [self updateStatus:@"Extracting the iPSW please wait..." color:[NSColor greenColor]];
+                    [self updateStatus:@"Extracting the iPSW" color:[NSColor greenColor]];
+                    [self->_uselessIndicator setIndeterminate:NO];
                 });
-                [SSZipArchive unzipFileAtPath:urlns toDestination: tempipswdir];
-                dispatch_async(dispatch_get_main_queue(), ^(){
-                    if ([[NSFileManager defaultManager] fileExistsAtPath:[tempipswdir stringByAppendingString:@"/Firmware"]]) {
-                        [self updateStatus: @"Successfully extracted the iPSW" color:[NSColor cyanColor]];
-                        self -> _downgradeButtonOut.enabled = true;
-                        self -> _selectIPSWoutlet.enabled = true;
-                        [self->_uselessIndicator stopAnimation:nil];
-                        
-                        plistModifier locationObject;
-                        locationObject.modifyPref(@"32iPSWLoc", tempipswdir);
-                    }
-                    else {
-                        [self updateStatus:@"An error occured extracting the iPSW, please check your free space and try again" color:[NSColor redColor]];
-                        self -> _downgradeButtonOut.enabled = false;
-                        self -> _selectIPSWoutlet.enabled = true;
-                        [self->_uselessIndicator stopAnimation:nil];
-                    }
-                });
+                [SSZipArchive unzipFileAtPath:urlns toDestination:tempipswdir progressHandler:^(NSString *entry, unz_file_info zipInfo, long entryNumber, long total) {
+                    dispatch_async(dispatch_get_main_queue(), ^(){
+                        __block NSString *percentageStr = [NSString stringWithFormat:@"%f", uzip_progress];
+                        percentageStr = [percentageStr substringToIndex:[percentageStr length] -4];
+                        percentageStr = [percentageStr substringFromIndex:2];
+                        [_percentage setStringValue:[NSString stringWithFormat:@"%@%%", percentageStr]];
+                        [self -> _uselessIndicator setDoubleValue:uzip_progress];
+                    });
+                } completionHandler:^(NSString *path, BOOL succeeded, NSError* err) {
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^(){
+                        if (succeeded) {
+                            [self updateStatus: @"Successfully extracted the iPSW" color:[NSColor cyanColor]];
+                            [self -> _versionLabel setAlphaValue:1.0];
+                            [self -> _uselessIndicator setHidden:YES];
+                            self -> _percentage.hidden = true;
+                            self -> _versionLabel.hidden = false;
+                            self -> _downgradeButtonOut.enabled = true;
+                            self -> _selectIPSWoutlet.enabled = true;
+                            [self->_uselessIndicator stopAnimation:nil];
+                            
+                            plistModifier locationObject;
+                            locationObject.modifyPref(@"32iPSWLoc", tempipswdir);
+                        }
+                        else {
+                            [self updateStatus:@"An error occured extracting the iPSW, please check your free space and try again" color:[NSColor redColor]];
+                            self -> _downgradeButtonOut.enabled = false;
+                            self -> _selectIPSWoutlet.enabled = true;
+                            [self->_uselessIndicator stopAnimation:nil];
+                        }
+                    });
+                }];
             });
         });
     }];
@@ -833,28 +850,44 @@ NSString *oldECID = NULL;
                         return;
                     }
                     dispatch_async(dispatch_get_main_queue(), ^(){
+                        [[self dfuhelpoutlet] setHidden:TRUE];
+                        [[self dfuhelpoutlet] setEnabled:false];
                         [self updateStatus:[NSString stringWithFormat:@"iPSW selected at %@ and being extracted to %@", filepath, tempipswdir] color:[NSColor whiteColor]];
-                        [self updateStatus:@"Extracting the iPSW please wait..." color:[NSColor greenColor]];
-                        [self->_uselessIndicator startAnimation:nil];
+                        [self updateStatus:@"Extracting the iPSW" color:[NSColor greenColor]];
+                        [self->_uselessIndicator setIndeterminate:NO];
                     });
-
-                    [SSZipArchive unzipFileAtPath:filepath toDestination: tempipswdir];
-                            
-                    dispatch_async(dispatch_get_main_queue(), ^(){
+                    [SSZipArchive unzipFileAtPath:filepath toDestination:tempipswdir progressHandler:^(NSString *entry, unz_file_info zipInfo, long entryNumber, long total) {
+                        dispatch_async(dispatch_get_main_queue(), ^(){
+                            __block NSString *percentageStr = [NSString stringWithFormat:@"%f", uzip_progress];
+                            percentageStr = [percentageStr substringToIndex:[percentageStr length] -4];
+                            percentageStr = [percentageStr substringFromIndex:2];
+                            [_percentage setStringValue:[NSString stringWithFormat:@"%@%%", percentageStr]];
+                            [self -> _uselessIndicator setDoubleValue:uzip_progress];
+                        });
+                    } completionHandler:^(NSString *path, BOOL succeeded, NSError* err) {
+                        
+                        dispatch_async(dispatch_get_main_queue(), ^(){
+                            if (succeeded) {
+                                [self updateStatus: @"Successfully extracted the iPSW" color:[NSColor cyanColor]];
+                                [self -> _versionLabel setAlphaValue:1.0];
+                                [self -> _uselessIndicator setHidden:YES];
+                                self -> _percentage.hidden = true;
+                                self -> _versionLabel.hidden = false;
+                                self -> _downgradeButtonOut.enabled = true;
+                                self -> _selectIPSWoutlet.enabled = true;
+                                [self->_uselessIndicator stopAnimation:nil];
                                 
-                        if ([[NSFileManager defaultManager] fileExistsAtPath:[tempipswdir stringByAppendingString:@"/Firmware"]]) {
-                            [self updateStatus: @"Successfully extracted the iPSW" color:[NSColor cyanColor]];
-                            self -> _downgradeButtonOut.enabled = true;
-                            self -> _selectIPSWoutlet.enabled = true;
-                            [self->_uselessIndicator stopAnimation:nil];
-                        }
-                        else {
-                            [self updateStatus:@"An error occured extracting the iPSW, please check your free space and try again" color:[NSColor redColor]];
-                            self -> _downgradeButtonOut.enabled = false;
-                            self -> _selectIPSWoutlet.enabled = true;
-                            [self->_uselessIndicator stopAnimation:nil];
-                        }
-                    });
+                                plistModifier locationObject;
+                                locationObject.modifyPref(@"32iPSWLoc", tempipswdir);
+                            }
+                            else {
+                                [self updateStatus:@"An error occured extracting the iPSW, please check your free space and try again" color:[NSColor redColor]];
+                                self -> _downgradeButtonOut.enabled = false;
+                                self -> _selectIPSWoutlet.enabled = true;
+                                [self->_uselessIndicator stopAnimation:nil];
+                            }
+                        });
+                    }];
                 });
             }
         }
@@ -880,6 +913,9 @@ NSString *oldECID = NULL;
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             
             dispatch_async(dispatch_get_main_queue(), ^(){
+                [self -> _uselessIndicator setUsesThreadedAnimation:NO];
+                [self -> _uselessIndicator setHidden:NO];
+                [self -> _uselessIndicator setIndeterminate:YES];
                 [self -> _uselessIndicator startAnimation:nil];
                 _dfuhelpoutlet.enabled = false;
                 _dfuhelpoutlet.alphaValue = 0;
@@ -1067,7 +1103,7 @@ bool dryRun = true;
     if (strcmp(res.UTF8String, "") != 0) {
         _versionLabel.stringValue = [@"Nightly " stringByAppendingString:res];
     }
-    //cleanUp();
+    cleanUp();
     
     _versionLabel.enabled = false;
     _versionLabel.alphaValue = 0;

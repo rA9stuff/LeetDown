@@ -11,8 +11,12 @@
 #include "minizip/mz_os.h"
 #include <zlib.h>
 #include <sys/stat.h>
+#include "LeetDownMain.h"
 
 NSString *const SSZipArchiveErrorDomain = @"SSZipArchiveErrorDomain";
+
+double totalbytesread = 0.0;
+extern double uzip_progress;
 
 #define CHUNK 16384
 
@@ -355,7 +359,8 @@ BOOL _fileIsSymbolicLink(const unz_file_info *fileInfo);
 
                      if (readBytes > 0) {
                          fwrite(buffer, readBytes, 1, fp );
-                     } else {
+                     }
+                     else {
                          break;
                      }
                  }
@@ -602,7 +607,7 @@ BOOL _fileIsSymbolicLink(const unz_file_info *fileInfo);
                 ret = unzGoToNextFile(zip);
                 continue;
             }
-            
+            unsigned long long zipfile_sz = [[[NSFileManager defaultManager] attributesOfItemAtPath:path error:nil] fileSize];
             if (isDirectory && !fileIsSymbolicLink) {
                 // nothing to read/write for a directory
             } else if (!fileIsSymbolicLink) {
@@ -612,6 +617,12 @@ BOOL _fileIsSymbolicLink(const unz_file_info *fileInfo);
                     FILE *fp = fopen(fullPath.fileSystemRepresentation, "wb");
                     while (fp) {
                         if (readBytes > 0) {
+                            
+                            totalbytesread += 4096;
+                            uzip_progress = (double)totalbytesread/zipfile_sz;
+                            if (progressHandler) {
+                                progressHandler(strPath, fileInfo, currentFileNumber, totalbytesread);
+                            }
                             if (0 == fwrite(buffer, readBytes, 1, fp)) {
                                 if (ferror(fp)) {
                                     NSString *message = [NSString stringWithFormat:@"Failed to write file (check your free space)"];
@@ -803,7 +814,7 @@ BOOL _fileIsSymbolicLink(const unz_file_info *fileInfo);
             
             if (progressHandler)
             {
-                progressHandler(strPath, fileInfo, currentFileNumber, globalInfo.number_entry);
+                progressHandler(strPath, fileInfo, currentFileNumber, totalbytesread/zipfile_sz);
             }
         }
     } while (ret == UNZ_OK && success);

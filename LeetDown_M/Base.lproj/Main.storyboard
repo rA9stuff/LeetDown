@@ -143,9 +143,8 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X81-Hw-SP5">
-                                <rect key="frame" x="60" y="404" width="205" height="39"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="X81-Hw-SP5">
+                                <rect key="frame" x="87" y="407" width="153" height="39"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" allowsUndo="NO" alignment="center" title="LeetDown" id="iuC-qd-iyU">
                                     <font key="font" metaFont="system" size="33"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="0.85434717709999997" colorSpace="custom" customColorSpace="sRGB"/>
@@ -195,6 +194,8 @@
                         </subviews>
                         <constraints>
                             <constraint firstItem="39M-nV-1b5" firstAttribute="centerX" secondItem="9al-AR-6pH" secondAttribute="centerX" id="NCH-Fx-1Jh"/>
+                            <constraint firstItem="X81-Hw-SP5" firstAttribute="top" secondItem="9al-AR-6pH" secondAttribute="top" constant="20" symbolic="YES" id="Ssa-Pn-p5R"/>
+                            <constraint firstItem="X81-Hw-SP5" firstAttribute="centerX" secondItem="9al-AR-6pH" secondAttribute="centerX" id="eZC-Ey-Bnj"/>
                             <constraint firstAttribute="bottom" secondItem="39M-nV-1b5" secondAttribute="bottom" constant="6" id="fQO-ST-LXU"/>
                         </constraints>
                     </view>

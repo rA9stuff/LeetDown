@@ -9,7 +9,7 @@
 #define _SSZIPARCHIVE_H
 
 #import <Foundation/Foundation.h>
-
+#import <Cocoa/Cocoa.h>
 #import "SSZipCommon.h"
 
 NS_ASSUME_NONNULL_BEGIN
