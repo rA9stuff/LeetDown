@@ -13,9 +13,9 @@ plistModifier plistObject;
 
 - (IBAction)debuggingToggle:(id)sender {
     
-    plistObject.modifyPref(@"DebugEnabled", [NSString stringWithFormat:@"%ld", (long)_debugToggle.state]);
+    plistObject.modifyPref(@"DebugEnabled", [NSString stringWithFormat:@"%ld", (long)_debugEnabledToggle.state]);
 
-    if (_debugToggle.state) {
+    if (_debugEnabledToggle.state) {
 
         plistObject.modifyPref(@"DebugEnabled", @"1");
         NSTask *restart = [[NSTask alloc] init];
@@ -29,11 +29,11 @@ plistModifier plistObject;
 }
 
 - (IBAction)md5Action:(id)sender {
-    plistObject.modifyPref(@"skipMD5", [NSString stringWithFormat:@"%ld", (long)_md5Toggle.state]);
+    plistObject.modifyPref(@"skipMD5", [NSString stringWithFormat:@"%ld", (long)_skipipswCheckToggle.state]);
 }
 
 - (IBAction)resetReqAct:(id)sender {
-    plistObject.modifyPref(@"resetreq", [NSString stringWithFormat:@"%ld", (long)_resetreq.state]);
+    plistObject.modifyPref(@"resetreq", [NSString stringWithFormat:@"%ld", (long)_reestRequestToggle.state]);
 }
 - (IBAction)downgradeBBAct:(id)sender {
     plistObject.modifyPref(@"downgradeBB", [NSString stringWithFormat:@"%ld", (long)_downgradeBBoutlet.state]);
@@ -50,10 +50,10 @@ plistModifier plistObject;
 -(void)awakeFromNib {
     
     NSColor *color = [NSColor whiteColor];
-    NSMutableAttributedString *debugTitle = [[NSMutableAttributedString alloc] initWithAttributedString:[_debugToggle attributedTitle]];
+    NSMutableAttributedString *debugTitle = [[NSMutableAttributedString alloc] initWithAttributedString:[_debugEnabledToggle attributedTitle]];
     NSRange debugRange = NSMakeRange(0, [debugTitle length]);
     [debugTitle addAttribute:NSForegroundColorAttributeName value:color range:debugRange];
-    [_debugToggle setAttributedTitle:debugTitle];
+    [_debugEnabledToggle setAttributedTitle:debugTitle];
 }
 
 - (void)viewDidLoad {
@@ -62,10 +62,9 @@ plistModifier plistObject;
     NSString *debugStr = plistObject.getPref(@"DebugEnabled");
     NSString *md5Str = plistObject.getPref(@"skipMD5");
     NSString *downgradeBBstr = plistObject.getPref(@"downgradeBB");
-    _debugToggle.state = debugStr.longLongValue;
-    _md5Toggle.state = md5Str.longLongValue;
-    _resetreq.state = resetreq.longLongValue;
-    _downgradeBBoutlet.state = downgradeBBstr.longLongValue;
-
+    _debugEnabledToggle.state = ([debugStr isEqualToString:@"1"]) ? YES : NO;
+    _skipipswCheckToggle.state = ([md5Str isEqualToString:@"1"]) ? YES : NO;
+    _reestRequestToggle.state = ([resetreq isEqualToString:@"1"]) ? YES : NO;
+    _downgradeBBoutlet.state = ([downgradeBBstr isEqualToString:@"1"]) ? YES : NO;
 }
 @end

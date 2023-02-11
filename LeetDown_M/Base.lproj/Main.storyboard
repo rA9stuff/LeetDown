@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21225"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -203,6 +203,7 @@
                         <outlet property="dfuhelpoutlet" destination="pxG-hw-60c" id="uhp-LJ-UXL"/>
                         <outlet property="downgradeButtonOut" destination="2MR-VE-HG2" id="fNj-mK-Riy"/>
                         <outlet property="header" destination="X81-Hw-SP5" id="YEw-jY-yfl"/>
+                        <outlet property="mainView" destination="9al-AR-6pH" id="DRB-sb-gdA"/>
                         <outlet property="mainbox" destination="mBm-4N-dqx" id="3Ha-sp-gSX"/>
                         <outlet property="percentage" destination="VLO-5Z-QHv" id="EIU-6K-FXe"/>
                         <outlet property="prefGear" destination="HwI-TX-nm0" id="M8t-fB-WGy"/>
@@ -381,7 +382,7 @@ Gw
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VfC-MQ-7ck">
                                         <rect key="frame" x="27" y="379" width="136" height="18"/>
-                                        <buttonCell key="cell" type="check" title="Enable debugging" bezelStyle="regularSquare" imagePosition="left" inset="2" id="fPw-DJ-S6E">
+                                        <buttonCell key="cell" type="check" title="Enable debugging" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="fPw-DJ-S6E">
                                             <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
@@ -392,7 +393,7 @@ Gw
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8vS-tw-a4p">
                                         <rect key="frame" x="27" y="295" width="128" height="18"/>
                                         <buttonCell key="cell" type="check" title="Skip iPSW check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="h1G-4d-qg0">
-                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
@@ -410,9 +411,9 @@ when this option is enabled.</string>
                                         </textFieldCell>
                                     </textField>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2T3-Cp-5YM">
-                                        <rect key="frame" x="27" y="211" width="198" height="18"/>
-                                        <buttonCell key="cell" type="check" title="send reset request (A7 only)" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="bHF-bq-yA4">
-                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                        <rect key="frame" x="27" y="211" width="220" height="18"/>
+                                        <buttonCell key="cell" type="check" title="Reset USB connection (A7 only)" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="bHF-bq-yA4">
+                                            <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
@@ -420,11 +421,11 @@ when this option is enabled.</string>
                                         </connections>
                                     </button>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="02L-h8-BaA">
-                                        <rect key="frame" x="27" y="172" width="270" height="32"/>
+                                        <rect key="frame" x="26" y="156" width="272" height="48"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" id="3pK-Qd-ZFO">
                                             <font key="font" metaFont="system"/>
                                             <string key="title">LeetDown will reset USB connection before 
-uploading iBoot.</string>
+uploading iBoot. Disabling this toggle could  cause bootchain upload issues on ASi macs.</string>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.79767017159999998" colorSpace="custom" customColorSpace="sRGB"/>
                                         </textFieldCell>
@@ -440,9 +441,9 @@ issue.</string>
                                         </textFieldCell>
                                     </textField>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hnd-lq-Gpf">
-                                        <rect key="frame" x="27" y="127" width="218" height="18"/>
+                                        <rect key="frame" x="27" y="111" width="218" height="18"/>
                                         <buttonCell key="cell" type="check" title="Downgrade baseband (A6 only)" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="E0b-rV-0Up">
-                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
@@ -450,12 +451,11 @@ issue.</string>
                                         </connections>
                                     </button>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7BT-51-dsc">
-                                        <rect key="frame" x="27" y="72" width="260" height="48"/>
+                                        <rect key="frame" x="27" y="56" width="275" height="48"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" id="X1M-m9-hqG">
                                             <font key="font" metaFont="system"/>
-                                            <string key="title">Downgrade baseband instead of using the
-latest signed version. Experimental and 
-untested. Things may break.</string>
+                                            <string key="title">Downgrade baseband instead of flashing the
+latest signed version. Enabling this toggle  could cause activation issues.</string>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
@@ -482,8 +482,8 @@ untested. Things may break.</string>
                                 </constraints>
                             </view>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cYW-eT-nYl">
-                                <rect key="frame" x="99" y="21" width="128" height="32"/>
-                                <buttonCell key="cell" type="push" title="Save and Close" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="KPY-4A-x27">
+                                <rect key="frame" x="105" y="21" width="116" height="32"/>
+                                <buttonCell key="cell" type="push" title="Save settings" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="KPY-4A-x27">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -508,7 +508,10 @@ untested. Things may break.</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="debugEnabledToggle" destination="VfC-MQ-7ck" id="2cM-08-pLV"/>
                         <outlet property="downgradeBBoutlet" destination="hnd-lq-Gpf" id="0Xy-x5-To9"/>
+                        <outlet property="reestRequestToggle" destination="2T3-Cp-5YM" id="Rqe-Qi-6in"/>
+                        <outlet property="skipipswCheckToggle" destination="8vS-tw-a4p" id="3vo-DW-aqb"/>
                     </connections>
                 </viewController>
             </objects>

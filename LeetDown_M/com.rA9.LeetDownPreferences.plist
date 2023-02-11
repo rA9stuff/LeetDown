@@ -29,7 +29,7 @@
 	<key>skipMD5</key>
 	<string>0</string>
 	<key>DebugEnabled</key>
-	<integer>0</integer>
+	<string>0</string>
 	<key>RestoreLog</key>
 	<integer>0</integer>
 </dict>

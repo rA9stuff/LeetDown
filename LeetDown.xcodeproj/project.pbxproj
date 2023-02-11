@@ -18,7 +18,10 @@
 		64777D7928FC19630097B3B8 /* libusb-1.0.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 64777D6F28FC192A0097B3B8 /* libusb-1.0.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		64777D7A28FC19640097B3B8 /* libusbmuxd-2.0.6.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 64777D6D28FC192A0097B3B8 /* libusbmuxd-2.0.6.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		6487B43727A9C9740065B016 /* plistModifier.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6487B43627A9C9740065B016 /* plistModifier.mm */; };
-		64F78F5C27A1DA9100E4D412 /* DFUDevice.mm in Sources */ = {isa = PBXBuildFile; fileRef = 64F78F5A27A1DA9100E4D412 /* DFUDevice.mm */; };
+		64A788712996CB5C00865370 /* USBUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 64A788702996CB5C00865370 /* USBUtils.mm */; };
+		64A788722996CBB700865370 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 691B8F6B26A1A9C000771658 /* IOKit.framework */; };
+		64A788742996F25A00865370 /* SFMonoRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 64A788732996F25A00865370 /* SFMonoRegular.otf */; };
+		64F78F5C27A1DA9100E4D412 /* LDD.mm in Sources */ = {isa = PBXBuildFile; fileRef = 64F78F5A27A1DA9100E4D412 /* LDD.mm */; };
 		692DCC12269E3CE7004DC22C /* mz_strm_os_posix.c in Sources */ = {isa = PBXBuildFile; fileRef = 692DCBF0269E3CE6004DC22C /* mz_strm_os_posix.c */; };
 		692DCC13269E3CE7004DC22C /* mz_strm_pkcrypt.c in Sources */ = {isa = PBXBuildFile; fileRef = 692DCBF1269E3CE6004DC22C /* mz_strm_pkcrypt.c */; };
 		692DCC14269E3CE7004DC22C /* mz_strm_zlib.c in Sources */ = {isa = PBXBuildFile; fileRef = 692DCBF4269E3CE6004DC22C /* mz_strm_zlib.c */; };
@@ -37,7 +40,7 @@
 		692DCC21269E3CE7004DC22C /* mz_strm.c in Sources */ = {isa = PBXBuildFile; fileRef = 692DCC0C269E3CE7004DC22C /* mz_strm.c */; };
 		692DCC22269E3CE7004DC22C /* SSZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 692DCC10269E3CE7004DC22C /* SSZipArchive.m */; };
 		692DCC23269E3CE7004DC22C /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 692DCC11269E3CE7004DC22C /* Info.plist */; };
-		69387BF426B6C7FF00A5EAF6 /* DFUHelperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 69387BF326B6C7FF00A5EAF6 /* DFUHelperViewController.m */; };
+		69387BF426B6C7FF00A5EAF6 /* DFUHelperViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 69387BF326B6C7FF00A5EAF6 /* DFUHelperViewController.mm */; };
 		6938CBD626DBF4B300094628 /* com.rA9.LeetDownPreferences.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6938CBD526DBF4B300094628 /* com.rA9.LeetDownPreferences.plist */; };
 		698823C426D9212D001CE088 /* SettingsVC.mm in Sources */ = {isa = PBXBuildFile; fileRef = 693F642F26D916CE0098D043 /* SettingsVC.mm */; };
 		69AFA6EE269CE0DC0020D40D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 69AFA6ED269CE0DC0020D40D /* AppDelegate.m */; };
@@ -77,8 +80,11 @@
 		64777D7028FC192A0097B3B8 /* libcrypto.1.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.1.1.dylib; path = Frameworks/libcrypto.1.1.dylib; sourceTree = "<group>"; };
 		6487B43627A9C9740065B016 /* plistModifier.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = plistModifier.mm; sourceTree = "<group>"; };
 		648EF98827AC59E500B7E2C2 /* plistModifier.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = plistModifier.h; sourceTree = "<group>"; };
-		64F78F5A27A1DA9100E4D412 /* DFUDevice.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = DFUDevice.mm; sourceTree = "<group>"; };
-		64F78F5B27A1DA9100E4D412 /* DFUDevice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DFUDevice.h; sourceTree = "<group>"; };
+		64A7886F2996CB5C00865370 /* USBUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = USBUtils.h; sourceTree = "<group>"; };
+		64A788702996CB5C00865370 /* USBUtils.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = USBUtils.mm; sourceTree = "<group>"; };
+		64A788732996F25A00865370 /* SFMonoRegular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SFMonoRegular.otf; sourceTree = "<group>"; };
+		64F78F5A27A1DA9100E4D412 /* LDD.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = LDD.mm; sourceTree = "<group>"; };
+		64F78F5B27A1DA9100E4D412 /* LDD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LDD.h; sourceTree = "<group>"; };
 		691B8F6926A1A9B700771658 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		691B8F6B26A1A9C000771658 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		692DCBEE269E3CE6004DC22C /* ZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZipArchive.h; sourceTree = "<group>"; };
@@ -117,7 +123,7 @@
 		692DCC10269E3CE7004DC22C /* SSZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSZipArchive.m; sourceTree = "<group>"; };
 		692DCC11269E3CE7004DC22C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		693782CB269CE44B0082F92D /* libirecovery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libirecovery.h; sourceTree = "<group>"; };
-		69387BF326B6C7FF00A5EAF6 /* DFUHelperViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DFUHelperViewController.m; sourceTree = "<group>"; };
+		69387BF326B6C7FF00A5EAF6 /* DFUHelperViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = DFUHelperViewController.mm; sourceTree = "<group>"; };
 		69387BF526B6C81600A5EAF6 /* DFUHelperViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DFUHelperViewController.h; sourceTree = "<group>"; };
 		6938CBD526DBF4B300094628 /* com.rA9.LeetDownPreferences.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = com.rA9.LeetDownPreferences.plist; sourceTree = "<group>"; };
 		693F642E26D916CE0098D043 /* SettingsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsVC.h; sourceTree = "<group>"; };
@@ -146,6 +152,7 @@
 				64777D7228FC192A0097B3B8 /* libusbmuxd-2.0.6.dylib in Frameworks */,
 				69FB665C26E7E2820030120D /* Cocoa.framework in Frameworks */,
 				64777D7528FC192A0097B3B8 /* libcrypto.1.1.dylib in Frameworks */,
+				64A788722996CBB700865370 /* IOKit.framework in Frameworks */,
 				64777D7128FC192A0097B3B8 /* libirecovery-1.0.3.dylib in Frameworks */,
 				64777D7428FC192A0097B3B8 /* libusb-1.0.0.dylib in Frameworks */,
 				64777D7328FC192A0097B3B8 /* libplist-2.0.3.dylib in Frameworks */,
@@ -256,16 +263,19 @@
 				69AFA6ED269CE0DC0020D40D /* AppDelegate.m */,
 				69AFA6EF269CE0DC0020D40D /* LeetDownMain.h */,
 				69AFA6F0269CE0DC0020D40D /* LeetDownMain.mm */,
+				64A7886F2996CB5C00865370 /* USBUtils.h */,
+				64A788702996CB5C00865370 /* USBUtils.mm */,
 				6487B43627A9C9740065B016 /* plistModifier.mm */,
 				648EF98827AC59E500B7E2C2 /* plistModifier.h */,
-				64F78F5A27A1DA9100E4D412 /* DFUDevice.mm */,
-				64F78F5B27A1DA9100E4D412 /* DFUDevice.h */,
-				69387BF326B6C7FF00A5EAF6 /* DFUHelperViewController.m */,
+				64F78F5A27A1DA9100E4D412 /* LDD.mm */,
+				64F78F5B27A1DA9100E4D412 /* LDD.h */,
+				69387BF326B6C7FF00A5EAF6 /* DFUHelperViewController.mm */,
 				69387BF526B6C81600A5EAF6 /* DFUHelperViewController.h */,
 				69AFA6F2269CE0DD0020D40D /* Assets.xcassets */,
 				69AFA6F4269CE0DD0020D40D /* Main.storyboard */,
 				693F642E26D916CE0098D043 /* SettingsVC.h */,
 				693F642F26D916CE0098D043 /* SettingsVC.mm */,
+				64A788732996F25A00865370 /* SFMonoRegular.otf */,
 				692DCBEC269E3CE6004DC22C /* SSZipArchive */,
 				69AFA6F7269CE0DD0020D40D /* Info.plist */,
 				69AFA6F8269CE0DD0020D40D /* main.m */,
@@ -345,6 +355,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				64A788742996F25A00865370 /* SFMonoRegular.otf in Resources */,
 				69D5D65A26AE39EA0079CF85 /* LDResources in Resources */,
 				69AFA6F3269CE0DD0020D40D /* Assets.xcassets in Resources */,
 				6938CBD626DBF4B300094628 /* com.rA9.LeetDownPreferences.plist in Resources */,
@@ -427,14 +438,15 @@
 				692DCC1B269E3CE7004DC22C /* mz_strm_wzaes.c in Sources */,
 				6487B43727A9C9740065B016 /* plistModifier.mm in Sources */,
 				692DCC22269E3CE7004DC22C /* SSZipArchive.m in Sources */,
-				64F78F5C27A1DA9100E4D412 /* DFUDevice.mm in Sources */,
+				64F78F5C27A1DA9100E4D412 /* LDD.mm in Sources */,
 				69AFA6F1269CE0DC0020D40D /* LeetDownMain.mm in Sources */,
-				69387BF426B6C7FF00A5EAF6 /* DFUHelperViewController.m in Sources */,
+				69387BF426B6C7FF00A5EAF6 /* DFUHelperViewController.mm in Sources */,
 				692DCC1C269E3CE7004DC22C /* mz_compat.c in Sources */,
 				692DCC1D269E3CE7004DC22C /* mz_os.c in Sources */,
 				692DCC1F269E3CE7004DC22C /* mz_strm_buf.c in Sources */,
 				692DCC13269E3CE7004DC22C /* mz_strm_pkcrypt.c in Sources */,
 				692DCC20269E3CE7004DC22C /* mz_strm_split.c in Sources */,
+				64A788712996CB5C00865370 /* USBUtils.mm in Sources */,
 				692DCC1A269E3CE7004DC22C /* mz_crypt.c in Sources */,
 				69AFA6F9269CE0DD0020D40D /* main.m in Sources */,
 				692DCC18269E3CE7004DC22C /* mz_crypt_apple.c in Sources */,

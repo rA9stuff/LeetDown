@@ -22,5 +22,5 @@ NSString* plistModifier::getPref(NSString* key) {
     
     NSString *preferencePlist = [[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/com.rA9.LeetDownPreferences.plist"];
     NSDictionary *dict=[[NSDictionary alloc] initWithContentsOfFile:preferencePlist];
-    return dict[key];
+    return [dict objectForKey:key];
 }

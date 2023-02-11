@@ -1,12 +1,12 @@
 //
-//  DFUDevice.hpp
+//  LDD.hpp
 //  LeetDown
 //
 //  Created by rA9stuff on 26.01.2022.
 //
 
-#ifndef DFUDevice_h
-#define DFUDevice_h
+#ifndef LDD_h
+#define LDD_h
 
 #include <iostream>
 #include "libirecovery.h"
@@ -15,13 +15,13 @@
 #import <Foundation/Foundation.h>
 #import "LeetDownMain.h"
 
-class DFUDevice {
+class LDD {
 
 public:
     
-    DFUDevice(): initECID(0) {}
+    LDD(): initECID(0) {}
 
-    DFUDevice(irecv_client_t &givenClient, irecv_device_t &givenDevice): client(givenClient), device(givenDevice), initECID(0) {
+    LDD(irecv_client_t &givenClient, irecv_device_t &givenDevice): client(givenClient), device(givenDevice), initECID(0) {
         
         if (deviceConnected()) {
             openConnection(5);
@@ -33,12 +33,12 @@ public:
     void setAllDeviceInfo();
     
     // getters
-    const char* getDisplayName() { return this -> displayName; }
-    const char* getHardwareModel() { return this -> hardwareModel; }
-    const char* getProductType() { return this -> productType; }
-    const struct irecv_device_info* getDevInfo() { return this -> devinfo; }
-    irecv_client_t getClient() { return this -> client; }
-    irecv_device_t getDevice() { return this -> device; }
+    const char* getDisplayName() { return displayName; }
+    const char* getHardwareModel() { return hardwareModel; }
+    const char* getProductType() { return productType; }
+    const struct irecv_device_info* getDevInfo() { return devinfo; }
+    irecv_client_t getClient() { return client; }
+    irecv_device_t getDevice() { return device; }
     
     // functions
     bool deviceConnected();
@@ -61,4 +61,4 @@ private:
     uint64_t initECID;
 };
 
-#endif /* DFUDevice_h */
+#endif /* LDD_h */

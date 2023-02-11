@@ -18,7 +18,7 @@
 #include <sys/sysctl.h>
 
 @interface ViewController : NSViewController
-
+@property (assign) IBOutlet NSView *mainView;
 @property (weak) IBOutlet NSTextField *header;
 @property (weak) IBOutlet NSScrollView *statusbox;
 @property (unsafe_unretained) IBOutlet NSTextView *statuslabel;
@@ -30,6 +30,14 @@
 @property (assign) IBOutlet NSButton *dfuhelpoutlet;
 @property (assign) IBOutlet NSButton *prefGear;
 @property (assign) IBOutlet NSTextField *percentage;
+- (int) discoverDevices;
+- (void)updateStatus:(NSString*)text color:(NSColor*)color1;
+
+@end
+
+@protocol USBDeviceDetectedDelegate <NSObject>
+
+- (void)deviceDetected;
 
 @end
 

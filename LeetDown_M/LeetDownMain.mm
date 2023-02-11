@@ -1,6 +1,7 @@
 #import "LeetDownMain.h"
-#include "DFUDevice.h"
+#include "LDD.h"
 #include "plistModifier.h"
+#include "USBUtils.h"
 #define USB_TIMEOUT 10000
 
 uint64_t ecid = 0;
@@ -47,22 +48,28 @@ double uzip_progress = 0;
 
 irecv_client_t client = NULL;
 irecv_device_t device = NULL;
-DFUDevice *dfuDevPtr = new DFUDevice; // initialize it with defualt constructor first, since we only need ECID not to be NULL to connect to device
+LDD *dfuDevPtr = new LDD; // initialize it with defualt constructor first, since we only need ECID not to be NULL to connect to device
 
 - (NSString*)MD5:(NSData*)input
 {
-  // Create byte array of unsigned chars
-  unsigned char md5Buffer[CC_MD5_DIGEST_LENGTH];
-
-  // Create 16 byte MD5 hash value, store in buffer
-  CC_MD5(input.bytes, input.length, md5Buffer);
-
-  // Convert unsigned char buffer to NSString of hex values
-  NSMutableString *output = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
-  for(int i = 0; i < CC_MD5_DIGEST_LENGTH; i++)
-    [output appendFormat:@"%02x",md5Buffer[i]];
+    // Create byte array of unsigned chars
+    unsigned char md5Buffer[CC_MD5_DIGEST_LENGTH];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [_uselessIndicator setUsesThreadedAnimation:NO];
+        [_uselessIndicator setIndeterminate:YES];
+        [_uselessIndicator startAnimation:nil];
+    });
+    // Create 16 byte MD5 hash value, store in buffer
+    CC_MD5(input.bytes, input.length, md5Buffer);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [_uselessIndicator stopAnimation:nil];
+    });
+    // Convert unsigned char buffer to NSString of hex values
+    NSMutableString *output = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
+    for (int i = 0; i < CC_MD5_DIGEST_LENGTH; i++)
+        [output appendFormat:@"%02x",md5Buffer[i]];
     NSString *md5val = [NSString stringWithFormat:@"%@", output];
-  return md5val;
+    return md5val;
 }
 
 - (const char*) ipswVersion:(NSString*)ipswPath {
@@ -77,12 +84,10 @@ DFUDevice *dfuDevPtr = new DFUDevice; // initialize it with defualt constructor 
     NSString *versionStringValue=ipswDict[@"ProductVersion"];
     const char *versionOfIPSW = [versionStringValue cStringUsingEncoding:NSASCIIStringEncoding];
     return versionOfIPSW;
-
 }
 
 - (int) iPSWcheck:(NSURL*) ipswLocation {
     NSString *md5CheckValue;
-    //NSString* cpid = @"8960";
     NSString* cpid = NSCPID(&dfuDevPtr -> getDevInfo() -> cpid);
     if (strcmp(cpid.UTF8String, "8960") != 0 && strcmp(cpid.UTF8String, "8965") != 0) {
         md5CheckValue = [[NSString stringWithFormat:@"%s", dfuDevPtr -> getProductType()] stringByAppendingString:@"MD5"];
@@ -95,7 +100,8 @@ DFUDevice *dfuDevPtr = new DFUDevice; // initialize it with defualt constructor 
     }
     NSData *ipswData = [NSData dataWithContentsOfURL:ipswLocation];
     plistModifier correctMD5;
-    if (strcmp([self MD5:ipswData].UTF8String, correctMD5.getPref(md5CheckValue).UTF8String) != 0) {
+    NSString* result = [self MD5:ipswData];
+    if ([result isEqualToString: correctMD5.getPref(md5CheckValue)]) {
         dispatch_async(dispatch_get_main_queue(), ^(){
             [self updateStatus:@"iPSW is corrupt! If you think this is a mistake, disable MD5 check in settings" color:[NSColor redColor]];
             self -> _selectIPSWoutlet.enabled = true;
@@ -200,10 +206,10 @@ DFUDevice *dfuDevPtr = new DFUDevice; // initialize it with defualt constructor 
             plistModifier md5check;
             
             if ([md5check.getPref(@"skipMD5")  isEqual: @"0"]) {
-                dispatch_async(dispatch_get_main_queue(), ^{
                     [self updateStatus:@"Checking md5 of the iPSW..." color:[NSColor cyanColor]];
+                dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
+                    [self iPSWcheck:filePath];
                 });
-                [self iPSWcheck:filePath];
                 
             }
             NSString *tempipswdir = [[NSString stringWithFormat:@"%@", NSTemporaryDirectory()] stringByAppendingString:@"iPSW"];
@@ -362,22 +368,15 @@ DFUDevice *dfuDevPtr = new DFUDevice; // initialize it with defualt constructor 
         logtext = [logtext stringByAppendingString:text];
         NSColor *color = color1;
         NSFont* font = [NSFont fontWithName:@"Helvetica Neue" size:13.37];
-     
+         
         NSDictionary *attrs = @{ NSForegroundColorAttributeName : color, NSFontAttributeName : font};
         NSAttributedString *attrStr = [[NSAttributedString alloc] initWithString:logtext attributes:attrs];
         [[self->_statuslabel textStorage] appendAttributedString:attrStr];
         [self->_statuslabel scrollRangeToVisible:NSMakeRange([[self->_statuslabel string] length], 0)];
-        
     });
 }
 
 - (int) patchFiles {
-    
-    printf("inside patchFiles(), printing dev info\n");
-    printf("printing dev info line 360\n");
-    printf("SERIAL TAG -> %s\n", dfuDevPtr -> getDevInfo() ->srtg);
-    printf("HARDWARE MODEL -> %s\n", dfuDevPtr -> getHardwareModel());
-
     
     NSTask *ibsspatch = [[NSTask alloc] init];
     NSTask *ibecpatch = [[NSTask alloc] init];
@@ -530,10 +529,9 @@ int supported = 0;
 
 
 bool firstrun = true;
-bool newdevice = true;
+bool discoverStateEnded = false;
 unsigned long long devCompStr;
-NSString *newECID = NULL;
-NSString *oldECID = NULL;
+NSString *ECID = NULL;
 
 - (int) discoverDevices {
     
@@ -542,32 +540,36 @@ NSString *oldECID = NULL;
      
      1: If the device is supported by OTA downgrade
      2: If the device is connected in anything other than DFU mode
+     3: wow much skill issues
      */
-
-    if (!dfuDevPtr -> deviceConnected()) {
-        firstrun = true;
+    if (discoverStateEnded) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self updateStatus:@"Warning: Device reconnected" color:[NSColor yellowColor]];
+        });
+        return 0;
+    }
+    if (dfuDevPtr -> openConnection(5) != 0) {
+        [self updateStatus:@"An unknown error occured connecting to iOS device" color:[NSColor redColor]];
         return -1;
     }
-        
-    dfuDevPtr = new DFUDevice(client, device); // we can now initalize the ptr with the custom constructor and place all the info to this DFUDevice struct.
-    if (oldECID == NULL) {
-            
-        oldECID = [NSString stringWithFormat:@"%llu", dfuDevPtr -> getDevInfo() -> ecid];
-        newECID = [NSString stringWithFormat:@"%llu", dfuDevPtr -> getDevInfo() -> ecid];
-        NSLog(@"%@", oldECID);
-        firstrun = true;
-    }
-    newECID = [NSString stringWithFormat:@"%llu", dfuDevPtr -> getDevInfo() -> ecid];
     
-    // check if we're looking at a different device or we're running this block for the first time.
-    if (strcmp(oldECID.UTF8String, newECID.UTF8String) == 0 && !firstrun) {
-        usleep(500000);
+    ECID = [NSString stringWithFormat:@"%llu", dfuDevPtr -> getDevInfo() -> ecid];
+    
+    // now check if the device is in any other mode other than DFU.
+    if (!(dfuDevPtr -> getDevInfo() -> srtg)) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (strcmp(dfuDevPtr -> getDeviceMode(), "Unknown") == 0) {
+                [self updateStatus:@"Device is in an invalid state, please place it in DFU mode to proceed" color:[NSColor redColor]];
+            }
+            else {
+                [self updateStatus:[NSString stringWithFormat:@"%@ with ECID: %@ is connected in %@ mode instead of DFU mode, please place it in DFU mode to proceed", [NSString stringWithUTF8String:dfuDevPtr -> getDisplayName()], ECID, [NSString stringWithUTF8String:dfuDevPtr -> getDeviceMode()]] color:[NSColor redColor]];
+            }
+        });
         dfuDevPtr -> freeDevice();
+        supported = false;
+        usleep(500000);
         return -1;
     }
-                
-    firstrun = false;
-    oldECID = newECID;
         
     // create a plistModifier object to modify the "destinationFW" value.
     plistModifier plistObject;
@@ -578,11 +580,10 @@ NSString *oldECID = NULL;
         
         plistObject.modifyPref(@"destinationFW", @"10.3.3");
         supported = true;
-        [self updateStatus:[NSString stringWithFormat: @"%s is supported", dfuDevPtr -> getDisplayName()] color:[NSColor greenColor]];
-        [self PrintDevInfo];
-        dfuDevPtr -> openConnection(5);
-        dfuDevPtr -> setAllDeviceInfo();
+
         dispatch_async(dispatch_get_main_queue(), ^{
+            [self updateStatus:[NSString stringWithFormat: @"%s is supported", dfuDevPtr -> getDisplayName()] color:[NSColor greenColor]];
+            [self PrintDevInfo];
             self -> _selectIPSWoutlet.enabled = true;
             self -> _selectIPSWoutlet.title = [NSString stringWithFormat:@"Select 10.3.3 iPSW"];
             _mainbox.fillColor = [NSColor colorWithSRGBRed:0.105882352941176f green:0.305882352941176f blue:0.317647058823529f alpha:1.0f];
@@ -592,9 +593,9 @@ NSString *oldECID = NULL;
         
         plistObject.modifyPref(@"destinationFW", @"8.4.1");
         supported = true;
-        [self updateStatus:[NSString stringWithFormat: @"%s is supported", dfuDevPtr -> getDisplayName()] color:[NSColor greenColor]];
-        [self PrintDevInfo];
         dispatch_async(dispatch_get_main_queue(), ^{
+            [self updateStatus:[NSString stringWithFormat: @"%s is supported", dfuDevPtr -> getDisplayName()] color:[NSColor greenColor]];
+            [self PrintDevInfo];
             self -> _selectIPSWoutlet.enabled = true;
             self -> _selectIPSWoutlet.title = [NSString stringWithFormat:@"Select 8.4.1 iPSW"];
             _mainbox.fillColor = [NSColor colorWithRed:44.0f/255.0f green:33.0f/255.0f blue:54.0f/255.0f alpha:1.0];
@@ -605,15 +606,6 @@ NSString *oldECID = NULL;
         dfuDevPtr -> freeDevice();
         return -1;
     }
-    
-    // now check if the device is in any other mode other than DFU.
-    if (!(dfuDevPtr -> getDevInfo() -> srtg)) {
-        [self updateStatus:[NSString stringWithFormat:@"%@ with ECID: %@ is connected in %@ mode, please place it in DFU mode to proceed", [NSString stringWithUTF8String:dfuDevPtr -> getDisplayName()], newECID, [NSString stringWithUTF8String:dfuDevPtr -> getDeviceMode()]] color:[NSColor redColor]];
-        dfuDevPtr -> freeDevice();
-        usleep(500000);
-        return -1;
-    }
-    
 
     return 0;
 }
@@ -661,6 +653,22 @@ NSString *oldECID = NULL;
         restore.arguments = @[@"-t", ticket, bb, @"--use-pwndfu", ipswPath];
     }
     
+    
+    NSPipe *stdoutPipe = [NSPipe pipe];
+    [restore setStandardOutput:stdoutPipe];
+
+    NSFileHandle *stdoutHandle = [stdoutPipe fileHandleForReading];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        NSData *dataRead = [stdoutHandle availableData];
+        while ([dataRead length] > 0) {
+            NSString *stringRead = [[NSString alloc] initWithData:dataRead encoding:NSUTF8StringEncoding];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self infoLog:stringRead color:[NSColor whiteColor]];
+            });
+            dataRead = [stdoutHandle availableData];
+        }
+    });
+    
     [restore launch];
     [restore waitUntilExit];
     
@@ -668,11 +676,6 @@ NSString *oldECID = NULL;
 }
 
 - (int) restore64 {
-    
-    printf("inside restore64(), printing dev info\n");
-    printf("printing dev info line 638\n");
-    printf("SERIAL TAG -> %s\n", dfuDevPtr -> getDevInfo() -> srtg);
-    printf("HARDWARE MODEL -> %s\n", dfuDevPtr -> getHardwareModel());
 
     if ([self patchFiles] != 0) {
         [self updateStatus:@"Error patching bootchain" color:[NSColor redColor]];
@@ -730,6 +733,7 @@ NSString *oldECID = NULL;
 - (IBAction)selectIPSW:(id)sender {
     
     cleanUp();
+    discoverStateEnded = true;
     NSString *tempipswdir = [[NSString stringWithFormat:@"%@", NSTemporaryDirectory()] stringByAppendingString:@"iPSW"];
     
     NSAlert *alert = [[NSAlert alloc] init];
@@ -811,10 +815,15 @@ NSString *oldECID = NULL;
                 _uselessIndicator.indeterminate = true;
                     
                 plistModifier *destinationCheck = NULL;
-                
-                if (strcmp([self ipswVersion:filepath], destinationCheck -> getPref(@"destinationFW").UTF8String) != 0) {
-                        
-                    [self updateStatus:@"Destination firmware of the connected device does not match with the selected iPSW" color:[NSColor redColor]];
+                const char* selected_ipsw_version = [self ipswVersion:filepath];
+                const char* required_ipsw_version = destinationCheck -> getPref(@"destinationFW").UTF8String;
+                if (selected_ipsw_version == NULL) {
+                    [self updateStatus:@"Selected iPSW is corrupt" color:[NSColor redColor]];
+                    self -> _selectIPSWoutlet.enabled = true;
+                    return;
+                }
+                if (strcmp(selected_ipsw_version, required_ipsw_version) != 0) {
+                    [self updateStatus:[NSString stringWithFormat: @"This device only supports iOS %s downgrade, but the selected iPSW is for iOS %s", required_ipsw_version, selected_ipsw_version] color:[NSColor redColor]];
                     self -> _downgradeButtonOut.enabled = false;
                     self -> _selectIPSWoutlet.enabled = true;
                     return;
@@ -823,7 +832,6 @@ NSString *oldECID = NULL;
                 dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
                     
                     plistModifier md5check;
-                    
                     if ([md5check.getPref(@"skipMD5") isEqual:@"0"]) {
                         
                         dispatch_async(dispatch_get_main_queue(), ^(){
@@ -993,9 +1001,6 @@ NSString *oldECID = NULL;
                             
                             plistModifier destinationObject;
                             if (strcmp(destinationObject.getPref(@"destinationFW").UTF8String, "10.3.3") == 0) {
-                                printf("printing dev info line 942\n");
-                                printf("SERIAL TAG -> %s\n", dfuDevPtr -> getDevInfo() ->srtg);
-                                printf("HARDWARE MODEL -> %s\n", dfuDevPtr -> getHardwareModel());
                                 int restoreCode = [self restore64];
                                 if (restoreCode == 0) {
                                     dispatch_async(dispatch_get_main_queue(), ^(){
@@ -1041,9 +1046,6 @@ NSString *oldECID = NULL;
             
                         plistModifier destinationObject;
                         if (strcmp(destinationObject.getPref(@"destinationFW").UTF8String, "10.3.3") == 0) {
-                            printf("printing dev info line 990\n");
-                            printf("SERIAL TAG -> %s\n", dfuDevPtr -> getDevInfo() ->srtg);
-                            printf("HARDWARE MODEL -> %s\n", dfuDevPtr -> getHardwareModel());
                             int restoreCode = [self restore64];
                             if (restoreCode == 0) {
                                 dispatch_async(dispatch_get_main_queue(), ^(){
@@ -1097,12 +1099,17 @@ bool dryRun = true;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // search for USB devices
+    USBUtils* USB_VC = [[USBUtils alloc] init];
+    [USB_VC startMonitoringUSBDevices:self];
+    
     // check if this is a nightly build
     plistModifier *ptr = new plistModifier;
     NSString *res = ptr -> getPref(@"nightlyHash");
     if (strcmp(res.UTF8String, "") != 0) {
         _versionLabel.stringValue = [@"Nightly " stringByAppendingString:res];
     }
+    free(ptr);
     cleanUp();
     
     _versionLabel.enabled = false;
@@ -1110,21 +1117,10 @@ bool dryRun = true;
     [_uselessIndicator setHidden:NO];
     [_uselessIndicator setIndeterminate:YES];
     [_uselessIndicator setUsesThreadedAnimation:YES];
-    [self updateStatus:@"Waiting for a device in DFU Mode" color:[NSColor greenColor]];
-
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        printf("initial device scan started\n");
-        while (!supported) {
-            [self discoverDevices];
-            usleep(500000);
-        }
-        dispatch_async(dispatch_get_main_queue(), ^(){
-            self -> _versionLabel.alphaValue = 1.0;
-            self -> _dfuhelpoutlet.enabled = false;
-            self -> _dfuhelpoutlet.alphaValue = 0;
-        });
-    });
+    [self updateStatus:@"Waiting for a device in DFU Mode" color:[NSColor whiteColor]];
+    
 }
+
 
 - (void)setRepresentedObject:(id)representedObject {
     [super setRepresentedObject:representedObject];

@@ -1,4 +1,7 @@
-unzip progress on the ui
-unzip logic improvements
-kinda new appicon
-skill-issue-code fixes
+Use IOKit with IONotificationPortRef to detect devices instead of inefficiently running libimobiledevice in a loop
+Warn if a USB Hub is connected
+Fix SettingsVC outlet connections
+Improve LDD class (formerly DFUDevice)
+Improve corrupt iPSW detection
+Redirect futurerestore logs to NSTextView
+Fix frozen UI when checking for MD5 of iPSW

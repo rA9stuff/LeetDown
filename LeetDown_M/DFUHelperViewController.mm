@@ -7,6 +7,7 @@
 
 #import "DFUHelperViewController.h"
 #import "LeetDownMain.h"
+#import "LDD.h"
 
 @implementation DFUHelperViewController
 
@@ -81,12 +82,7 @@
         dispatch_async(dispatch_get_main_queue(), ^(){
             [self.view.window.contentViewController dismissViewController:self];
         });
-        complete = true;
     });
-    
-    if (complete) {
-        
-    }
 }
 
 -(void)awakeFromNib
@@ -113,6 +109,27 @@ bool complete = false;
     _homebuttonimage.alphaValue = 0;
     _lockbuttonimage.alphaValue = 0;
     _homebuttonimage.image = [NSImage imageNamed:@"homebuttonimage"];
+    
+    // automatically dismiss the view if a DFU device is detected.
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        LDD *devptr = new LDD();  // init a temporary device to check if the client device has entered DFU mode.
+        
+        while (true) {
+            if (devptr -> openConnection(1) == 0) {
+                devptr -> setAllDeviceInfo();
+                if (strcmp(devptr -> getDeviceMode(), "DFU") == 0) {
+                    dispatch_async(dispatch_get_main_queue(), ^(){
+                        [self.view.window.contentViewController dismissViewController:self];
+                    });
+                    complete = true;
+                    devptr->freeDevice();
+                    break;
+                }
+            }
+            sleep(1);
+        }
+    });
     
 }
 
