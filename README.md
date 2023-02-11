@@ -1,12 +1,15 @@
 # LeetDown
     
-a GUI macOS app to downgrade compatible A6 and A7 devices to OTA signed firmwares.    
+a GUI macOS app to downgrade compatible A6 and A7 devices to OTA signed firmwares.   
+    
+[![CI](https://img.shields.io/github/actions/workflow/status/rA9stuff/LeetDown/ci.yml?branch=master&style=for-the-badge)](https://github.com/rA9stuff/LeetDown/actions)
+[![Stars](https://img.shields.io/github/stars/rA9stuff/leetdown?style=for-the-badge)](https://github.com/rA9stuff/LeetDown/stargazers)
+[![Licence](https://img.shields.io/github/license/rA9stuff/leetdown?style=for-the-badge)](https://github.com/rA9stuff/LeetDown/blob/master/LICENSE.md)
 <br/>
-<img align="right" src="https://i.imgur.com/lBxab5S.png" width="130px" height="130px">
+<img align="right" src="https://i.imgur.com/5lI2lIo.png" width="130px" height="130px">
 ### Downloads
-* [Latest notarized release](https://github.com/rA9stuff/LeetDown/releases)
-* [Nightly builds](https://nightly.link/rA9stuff/LeetDown/workflows/ci/master)
-* You might need to `xattr -cr /path/to/LeetDown.app && sudo codesign --force --deep --sign - /path/to/LeetDown.app` when launching nightly builds as they're not notarized.
+* [Latest notarized release (Recommended)](https://github.com/rA9stuff/LeetDown/releases)
+* [Nightly builds (Experimental)](https://nightly.link/rA9stuff/LeetDown/workflows/ci/master)
 
 
 # Compatibility   
