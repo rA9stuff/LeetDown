@@ -44,6 +44,7 @@ void cleanUp(void) {
 
 bool firstline = true;
 bool pwned = false;
+bool restoreStarted = false;
 double uzip_progress = 0;
 
 irecv_client_t client = NULL;
@@ -101,7 +102,7 @@ LDD *dfuDevPtr = new LDD; // initialize it with defualt constructor first, since
     NSData *ipswData = [NSData dataWithContentsOfURL:ipswLocation];
     plistModifier correctMD5;
     NSString* result = [self MD5:ipswData];
-    if ([result isEqualToString: correctMD5.getPref(md5CheckValue)]) {
+    if (![result isEqualToString: correctMD5.getPref(md5CheckValue)]) {
         dispatch_async(dispatch_get_main_queue(), ^(){
             [self updateStatus:@"iPSW is corrupt! If you think this is a mistake, disable MD5 check in settings" color:[NSColor redColor]];
             self -> _selectIPSWoutlet.enabled = true;
@@ -658,20 +659,22 @@ NSString *ECID = NULL;
     [restore setStandardOutput:stdoutPipe];
 
     NSFileHandle *stdoutHandle = [stdoutPipe fileHandleForReading];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+    [stdoutHandle waitForDataInBackgroundAndNotify];
+    id observer = [[NSNotificationCenter defaultCenter] addObserverForName:NSFileHandleDataAvailableNotification
+                                                                    object:stdoutHandle queue:nil
+                                                                usingBlock:^(NSNotification *note)
+    {
         NSData *dataRead = [stdoutHandle availableData];
-        while ([dataRead length] > 0) {
-            NSString *stringRead = [[NSString alloc] initWithData:dataRead encoding:NSUTF8StringEncoding];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self infoLog:stringRead color:[NSColor whiteColor]];
-            });
-            dataRead = [stdoutHandle availableData];
-        }
-    });
+        NSString *stringRead = [[NSString alloc] initWithData:dataRead encoding:NSUTF8StringEncoding];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self infoLog:stringRead color:[NSColor whiteColor]];
+        });
+        [stdoutHandle waitForDataInBackgroundAndNotify];
+    }];
     
     [restore launch];
     [restore waitUntilExit];
-    
+    [[NSNotificationCenter defaultCenter] removeObserver:observer];
     return [restore terminationStatus];
 }
 
@@ -919,7 +922,7 @@ NSString *ECID = NULL;
         }
             
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            
+            restoreStarted = true;
             dispatch_async(dispatch_get_main_queue(), ^(){
                 [self -> _uselessIndicator setUsesThreadedAnimation:NO];
                 [self -> _uselessIndicator setHidden:NO];
@@ -1001,39 +1004,17 @@ NSString *ECID = NULL;
                             
                             plistModifier destinationObject;
                             if (strcmp(destinationObject.getPref(@"destinationFW").UTF8String, "10.3.3") == 0) {
-                                int restoreCode = [self restore64];
-                                if (restoreCode == 0) {
-                                    dispatch_async(dispatch_get_main_queue(), ^(){
-                                        [self updateStatus:@"Restore succeeded!" color:[NSColor cyanColor]];
-                                        [self -> _uselessIndicator stopAnimation:nil];
-                                        _selectIPSWoutlet.enabled = true;
-                                                            
-                                    });
-                                }
-                                else {
-                                    dispatch_async(dispatch_get_main_queue(), ^(){
-                                        [self -> _uselessIndicator stopAnimation:nil];
-                                        [self updateStatus:[NSString stringWithFormat:@"Restore failed with error code %i", restoreCode] color:[NSColor redColor]];
-                                    });
-                                }
+                                [self restore64];
+                                [self -> _uselessIndicator stopAnimation:nil];
+                                _selectIPSWoutlet.enabled = true;
                                 return;
                             }
                             dfuDevPtr -> freeDevice();
-                            int restoreCode = [self restore32];
-                            if (restoreCode == 0) {
-                                dispatch_async(dispatch_get_main_queue(), ^() {
-                                    [self updateStatus:@"Restore succeeded!" color:[NSColor cyanColor]];
+                            [self restore32];
+                                dispatch_async(dispatch_get_main_queue(), ^{
                                     [self -> _uselessIndicator stopAnimation:nil];
                                     _selectIPSWoutlet.enabled = true;
-                                                        
                                 });
-                            }
-                            else {
-                                dispatch_async(dispatch_get_main_queue(), ^(){
-                                    [self -> _uselessIndicator stopAnimation:nil];
-                                    [self updateStatus:[NSString stringWithFormat:@"Restore failed with error code %i", restoreCode] color:[NSColor redColor]];
-                                });
-                            }
                             });
                         }];
                         
@@ -1046,42 +1027,22 @@ NSString *ECID = NULL;
             
                         plistModifier destinationObject;
                         if (strcmp(destinationObject.getPref(@"destinationFW").UTF8String, "10.3.3") == 0) {
-                            int restoreCode = [self restore64];
-                            if (restoreCode == 0) {
-                                dispatch_async(dispatch_get_main_queue(), ^(){
-                                    [self updateStatus:@"Restore succeeded!" color:[NSColor cyanColor]];
-                                    [self -> _uselessIndicator stopAnimation:nil];
-                                    _selectIPSWoutlet.enabled = true;
-                                                        
-                                });
-                            }
-                            else {
-                                dispatch_async(dispatch_get_main_queue(), ^(){
-                                    [self -> _uselessIndicator stopAnimation:nil];
-                                    [self updateStatus:[NSString stringWithFormat:@"Restore failed with error code %i", restoreCode] color:[NSColor redColor]];
-                                });
-                            }
+                            [self restore64];
+                            dispatch_async(dispatch_get_main_queue(), ^(){
+                                [self -> _uselessIndicator stopAnimation:nil];
+                                _selectIPSWoutlet.enabled = true;
+                            });
                             return;
                         }
                         dfuDevPtr -> freeDevice();
-                        int restoreCode = [self restore32];
-                        if (restoreCode == 0) {
-                            dispatch_async(dispatch_get_main_queue(), ^() {
-                                [self updateStatus:@"Restore succeeded!" color:[NSColor cyanColor]];
-                                [self -> _uselessIndicator stopAnimation:nil];
-                                _selectIPSWoutlet.enabled = true;
-                                                    
-                            });
-                        }
-                        else {
-                            dispatch_async(dispatch_get_main_queue(), ^(){
-                                [self -> _uselessIndicator stopAnimation:nil];
-                                [self updateStatus:[NSString stringWithFormat:@"Restore failed with error code %i", restoreCode] color:[NSColor redColor]];
-                            });
-                        }
-                                        
+                        [self restore32];
+                        dispatch_async(dispatch_get_main_queue(), ^(){
+                            [self -> _uselessIndicator stopAnimation:nil];
+                            _selectIPSWoutlet.enabled = true;
+                                                
+                        });
                     });
-                    }
+                }
             }];
         });
     });

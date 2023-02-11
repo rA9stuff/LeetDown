@@ -10,6 +10,8 @@
 #include "LDD.h"
 #include "LeetDownMain.h"
 
+extern bool restoreStarted;
+
 @implementation USBUtils : NSObject
 
 - (NSString*) getNameOfUSBDevice: (io_object_t) usbDevice {
@@ -43,7 +45,7 @@
     while ((usbDevice = IOIteratorNext(iterator))) {
         NSLog(@"USB device detected");
         NSString* name = [self getNameOfUSBDevice:usbDevice];
-        if ([name isEqualToString:@"USB3.1 Hub"]) {
+        if ([name isEqualToString:@"USB2.1 Hub"]) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 NSAlert *alert = [[NSAlert alloc] init];
                 [alert setMessageText:@"A USB Hub is connected"];
@@ -59,7 +61,8 @@
         }
         else if ([name isEqualToString:@"Apple Mobile Device (Recovery Mode)"]) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.vc updateStatus:@"Device is connected in recovery mode, place it in DFU mode to proceed" color:[NSColor redColor]];
+                if (!restoreStarted)
+                    [self.vc updateStatus:@"Device is connected in recovery mode, place it in DFU mode to proceed" color:[NSColor redColor]];
             });
         }
         IOObjectRelease(usbDevice);
