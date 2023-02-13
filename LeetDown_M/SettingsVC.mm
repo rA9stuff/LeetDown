@@ -66,5 +66,6 @@ plistModifier plistObject;
     _skipipswCheckToggle.state = ([md5Str isEqualToString:@"1"]) ? YES : NO;
     _reestRequestToggle.state = ([resetreq isEqualToString:@"1"]) ? YES : NO;
     _downgradeBBoutlet.state = ([downgradeBBstr isEqualToString:@"1"]) ? YES : NO;
+    [self setPreferredContentSize: self.view.frame.size];
 }
 @end

@@ -372,7 +372,7 @@ Gw
             <objects>
                 <customObject id="Xe6-Yg-tT7" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="SettingsController" id="EDS-DF-x6C" customClass="SettingsVC" sceneMemberID="viewController">
-                    <view key="view" id="FSa-T8-FkR">
+                    <view key="view" autoresizesSubviews="NO" id="FSa-T8-FkR">
                         <rect key="frame" x="0.0" y="0.0" width="326" height="543"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>

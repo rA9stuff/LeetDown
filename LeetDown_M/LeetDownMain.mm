@@ -61,7 +61,7 @@ LDD *dfuDevPtr = new LDD; // initialize it with defualt constructor first, since
         [_uselessIndicator startAnimation:nil];
     });
     // Create 16 byte MD5 hash value, store in buffer
-    CC_MD5(input.bytes, input.length, md5Buffer);
+    CC_MD5(input.bytes, (unsigned int)input.length, md5Buffer);
     dispatch_async(dispatch_get_main_queue(), ^{
         [_uselessIndicator stopAnimation:nil];
     });

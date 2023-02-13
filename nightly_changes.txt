@@ -5,3 +5,11 @@ Improve LDD class (formerly DFUDevice)
 Improve corrupt iPSW detection
 Redirect futurerestore logs to NSTextView
 Fix frozen UI when checking for MD5 of iPSW
+
+==================================
+14th Feb 2023
+
+fix some compile warnings
+disable window resizing on settings viewcontroller
+add SHSH folder to github to fix restore issues on nightly builds
+bump version to 2.3 alpha (A6 ready, A7 optimizations tbd)

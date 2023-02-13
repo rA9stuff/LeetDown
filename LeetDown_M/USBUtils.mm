@@ -2,7 +2,7 @@
 //  USBUtils.c
 //  LeetDown
 //
-//  Created by Baris U. Cukur on 10.02.2023.
+//  Created by rA9stuff on 10.02.2023.
 //
 
 #include "USBUtils.h"
