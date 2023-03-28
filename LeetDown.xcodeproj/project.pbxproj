@@ -629,7 +629,6 @@
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Contents/Frameworks",
 					"$(PROJECT_DIR)/Frameworks",
 				);
 				MACH_O_TYPE = mh_execute;
@@ -682,7 +681,6 @@
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Contents/Frameworks",
 					"$(PROJECT_DIR)/Frameworks",
 				);
 				MACH_O_TYPE = mh_execute;

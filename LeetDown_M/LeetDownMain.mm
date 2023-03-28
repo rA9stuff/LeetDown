@@ -699,7 +699,7 @@ NSString *ECID = NULL;
     NSTask *restore = [[NSTask alloc]init];
     restore.launchPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/LDResources/Binaries/futurerestore64"];
     restore.arguments = @[];
-    NSString *BootLogo = [[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/LDResources/Bootlogos/bootlogo.img4"];
+    NSString *BootLogo = [[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/LDResources/Bootlogos/ldlogo_a7.img4"];
     const char *LDBootlogo = [BootLogo cStringUsingEncoding:NSASCIIStringEncoding];
     NSString *bm =[[[[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/LDResources/BuildManifests/"] stringByAppendingString:[NSString stringWithFormat:@"%@", devmodel]] stringByAppendingString:@".plist"];
     NSString *bb = [tempipswdir stringByAppendingString:@"/Firmware/Mav7Mav8-7.60.00.Release.bbfw"];
@@ -709,7 +709,7 @@ NSString *ECID = NULL;
     NSString *ticket = [[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/LDResources/SHSH/blob.shsh"];
     
     dfuDevPtr -> sendFile(LDBootlogo, true);
-    dfuDevPtr -> sendCommand("setpicture 0", false);
+    dfuDevPtr -> sendCommand("setpicture 0x1", false);
     
     if (strcmp(boardcmp, "n51ap") == 0 || strcmp(boardcmp, "n53ap") == 0) {
         restore.arguments = @[@"-t", ticket, @"-b", bb, @"-p", bm, @"-m", bm, @"-s", sep, tempipswdir];
