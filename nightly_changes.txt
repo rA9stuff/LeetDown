@@ -13,3 +13,13 @@ fix some compile warnings
 disable window resizing on settings viewcontroller
 add SHSH folder to github to fix restore issues on nightly builds
 bump version to 2.3 alpha (A6 ready, A7 optimizations tbd)
+
+==================================
+21 Jun 2023
+
+add an option to capture stdout to logview
+improve unzip progress view
+improve memory usage
+rebrand PlistUtils (formerly plistModifier)
+fix leetdown bootlogo on A7
+bump version to 2.3 rc (A6 and A7 ready)

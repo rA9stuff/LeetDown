@@ -130,13 +130,12 @@ bool LDD::checkPwn() {
         if (openConnection(5) != 0)  // we need to take over the device after iPwnder completes.
             return false;
         setAllDeviceInfo();
+        sleep(1);
     }
     string pwnstr = devinfo -> serial_string;
     if (pwnstr.find("PWND") != string::npos) {
-        freeDevice();
         pwned = true;
         return true;
     }
-    freeDevice();
     return false;
 }

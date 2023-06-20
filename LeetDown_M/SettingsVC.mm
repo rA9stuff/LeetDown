@@ -9,7 +9,7 @@
 
 @implementation SettingsVC
 
-plistModifier plistObject;
+PlistUtils plistObject;
 
 - (IBAction)debuggingToggle:(id)sender {
     

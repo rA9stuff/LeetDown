@@ -8,7 +8,7 @@
 #import <Cocoa/Cocoa.h>
 #import "LeetDownMain.h"
 #import "libirecovery.h"
-#include "plistModifier.h"
+#include "PlistUtils.h"
 
 void modifyPreference(NSNumber *val, NSString *preference);
 @interface SettingsVC : NSViewController

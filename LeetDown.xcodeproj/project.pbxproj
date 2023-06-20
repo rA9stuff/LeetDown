@@ -17,7 +17,7 @@
 		64777D7828FC19620097B3B8 /* libplist-2.0.3.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 64777D6E28FC192A0097B3B8 /* libplist-2.0.3.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		64777D7928FC19630097B3B8 /* libusb-1.0.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 64777D6F28FC192A0097B3B8 /* libusb-1.0.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		64777D7A28FC19640097B3B8 /* libusbmuxd-2.0.6.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 64777D6D28FC192A0097B3B8 /* libusbmuxd-2.0.6.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		6487B43727A9C9740065B016 /* plistModifier.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6487B43627A9C9740065B016 /* plistModifier.mm */; };
+		6487B43727A9C9740065B016 /* PlistUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6487B43627A9C9740065B016 /* PlistUtils.mm */; };
 		64A788712996CB5C00865370 /* USBUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 64A788702996CB5C00865370 /* USBUtils.mm */; };
 		64A788722996CBB700865370 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 691B8F6B26A1A9C000771658 /* IOKit.framework */; };
 		64A788742996F25A00865370 /* SFMonoRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 64A788732996F25A00865370 /* SFMonoRegular.otf */; };
@@ -78,8 +78,8 @@
 		64777D6E28FC192A0097B3B8 /* libplist-2.0.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libplist-2.0.3.dylib"; path = "Frameworks/libplist-2.0.3.dylib"; sourceTree = "<group>"; };
 		64777D6F28FC192A0097B3B8 /* libusb-1.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libusb-1.0.0.dylib"; path = "Frameworks/libusb-1.0.0.dylib"; sourceTree = "<group>"; };
 		64777D7028FC192A0097B3B8 /* libcrypto.1.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.1.1.dylib; path = Frameworks/libcrypto.1.1.dylib; sourceTree = "<group>"; };
-		6487B43627A9C9740065B016 /* plistModifier.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = plistModifier.mm; sourceTree = "<group>"; };
-		648EF98827AC59E500B7E2C2 /* plistModifier.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = plistModifier.h; sourceTree = "<group>"; };
+		6487B43627A9C9740065B016 /* PlistUtils.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PlistUtils.mm; sourceTree = "<group>"; };
+		648EF98827AC59E500B7E2C2 /* PlistUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlistUtils.h; sourceTree = "<group>"; };
 		64A7886F2996CB5C00865370 /* USBUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = USBUtils.h; sourceTree = "<group>"; };
 		64A788702996CB5C00865370 /* USBUtils.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = USBUtils.mm; sourceTree = "<group>"; };
 		64A788732996F25A00865370 /* SFMonoRegular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SFMonoRegular.otf; sourceTree = "<group>"; };
@@ -265,8 +265,8 @@
 				69AFA6F0269CE0DC0020D40D /* LeetDownMain.mm */,
 				64A7886F2996CB5C00865370 /* USBUtils.h */,
 				64A788702996CB5C00865370 /* USBUtils.mm */,
-				6487B43627A9C9740065B016 /* plistModifier.mm */,
-				648EF98827AC59E500B7E2C2 /* plistModifier.h */,
+				6487B43627A9C9740065B016 /* PlistUtils.mm */,
+				648EF98827AC59E500B7E2C2 /* PlistUtils.h */,
 				64F78F5A27A1DA9100E4D412 /* LDD.mm */,
 				64F78F5B27A1DA9100E4D412 /* LDD.h */,
 				69387BF326B6C7FF00A5EAF6 /* DFUHelperViewController.mm */,
@@ -436,7 +436,7 @@
 				692DCC15269E3CE7004DC22C /* mz_zip.c in Sources */,
 				692DCC21269E3CE7004DC22C /* mz_strm.c in Sources */,
 				692DCC1B269E3CE7004DC22C /* mz_strm_wzaes.c in Sources */,
-				6487B43727A9C9740065B016 /* plistModifier.mm in Sources */,
+				6487B43727A9C9740065B016 /* PlistUtils.mm in Sources */,
 				692DCC22269E3CE7004DC22C /* SSZipArchive.m in Sources */,
 				64F78F5C27A1DA9100E4D412 /* LDD.mm in Sources */,
 				69AFA6F1269CE0DC0020D40D /* LeetDownMain.mm in Sources */,
@@ -634,7 +634,7 @@
 				MACH_O_TYPE = mh_execute;
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MARKETING_VERSION = 2.3_alpha;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = rA9.LeetDown;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -686,7 +686,7 @@
 				MACH_O_TYPE = mh_execute;
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MARKETING_VERSION = 2.3_alpha;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = rA9.LeetDown;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

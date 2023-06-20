@@ -11,8 +11,36 @@
 
 @implementation DFUHelperViewController
 
+- (void) searchForDevices {
+    
+    _shouldStopSearch = false;
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        static bool complete = false;
+        
+        LDD *devptr = new LDD();  // init a temporary device to check if the client device has entered DFU mode.
+        
+        while (!_shouldStopSearch) {
+            if (devptr -> openConnection(1) == 0) {
+                devptr -> setAllDeviceInfo();
+                if (strcmp(devptr -> getDeviceMode(), "DFU") == 0) {
+                    dispatch_async(dispatch_get_main_queue(), ^(){
+                        [self.view.window.contentViewController dismissViewController:self];
+                    });
+                    complete = true;
+                    devptr->freeDevice();
+                    break;
+                }
+            }
+            sleep(1);
+        }
+    });
+}
+
 - (IBAction)cancel:(id)sender {
     
+    _shouldStopSearch = true;
     dispatch_async(dispatch_get_main_queue(), ^(){
         [self.view.window.contentViewController dismissViewController:self];
     });
@@ -20,7 +48,6 @@
 }
 
 - (IBAction)startbutton:(id)sender {
-    
     
     _startbutton.enabled = false;
     _startbutton.alphaValue = 0;
@@ -80,13 +107,13 @@
             sleep(1);
         }
         dispatch_async(dispatch_get_main_queue(), ^(){
+            _shouldStopSearch = true;
             [self.view.window.contentViewController dismissViewController:self];
         });
     });
 }
 
--(void)awakeFromNib
-{
+- (void)awakeFromNib {
     NSColor *color = [NSColor greenColor];
     NSMutableAttributedString *colorTitle = [[NSMutableAttributedString alloc] initWithAttributedString:[_startbutton attributedTitle]];
     NSRange titleRange = NSMakeRange(0, [colorTitle length]);
@@ -94,8 +121,7 @@
     [_startbutton setAttributedTitle:colorTitle];
 }
 
-bool complete = false;
-- (void) viewDidLoad {
+- (void)viewDidLoad {
     
     [super viewDidLoad];
     
@@ -110,27 +136,7 @@ bool complete = false;
     _lockbuttonimage.alphaValue = 0;
     _homebuttonimage.image = [NSImage imageNamed:@"homebuttonimage"];
     
-    // automatically dismiss the view if a DFU device is detected.
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        LDD *devptr = new LDD();  // init a temporary device to check if the client device has entered DFU mode.
-        
-        while (true) {
-            if (devptr -> openConnection(1) == 0) {
-                devptr -> setAllDeviceInfo();
-                if (strcmp(devptr -> getDeviceMode(), "DFU") == 0) {
-                    dispatch_async(dispatch_get_main_queue(), ^(){
-                        [self.view.window.contentViewController dismissViewController:self];
-                    });
-                    complete = true;
-                    devptr->freeDevice();
-                    break;
-                }
-            }
-            sleep(1);
-        }
-    });
-    
+    [self searchForDevices];
 }
 
 @end

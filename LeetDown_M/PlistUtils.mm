@@ -1,15 +1,14 @@
 //
-//  plistModifier.m
+//  PlistUtils.m
 //  LeetDown
 //
 //  Created by rA9stuff on 1.02.2022.
 //
 
+#include "PlistUtils.h"
 
-#include "plistModifier.h"
 
-
-void plistModifier::modifyPref(NSString* key, NSString* val) {
+void PlistUtils::modifyPref(NSString* key, NSString* val) {
     
     NSString* preferencePlist = [[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/com.rA9.LeetDownPreferences.plist"];
     NSDictionary* dict=[[NSDictionary alloc] initWithContentsOfFile:preferencePlist];
@@ -18,7 +17,7 @@ void plistModifier::modifyPref(NSString* key, NSString* val) {
     
 }
 
-NSString* plistModifier::getPref(NSString* key) {
+NSString* PlistUtils::getPref(NSString* key) {
     
     NSString *preferencePlist = [[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/com.rA9.LeetDownPreferences.plist"];
     NSDictionary *dict=[[NSDictionary alloc] initWithContentsOfFile:preferencePlist];

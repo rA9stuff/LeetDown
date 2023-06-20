@@ -19,7 +19,7 @@
 @property (assign) IBOutlet NSImageView *iphonepic;
 @property (assign) IBOutlet NSButton *startbutton;
 @property (assign) IBOutlet NSButton *cancelout;
-
+@property (nonatomic, assign) BOOL shouldStopSearch;
 
 
 @end

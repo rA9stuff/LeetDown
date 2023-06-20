@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -153,7 +153,7 @@
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="39M-nV-1b5">
                                 <rect key="frame" x="81" y="6" width="165" height="16"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="version: 2.2 by @rA9_main" id="0AX-OP-9LK">
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="version: 2.3 by @rA9_main" id="0AX-OP-9LK">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -171,7 +171,7 @@
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pxG-hw-60c">
                                 <rect key="frame" x="62" y="4" width="202" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="bevel" title="need help entering DFU mode?" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="aPH-Ys-aNW">
+                                <buttonCell key="cell" type="bevel" title="DFU mode instructions" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="aPH-Ys-aNW">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -381,8 +381,8 @@ Gw
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VfC-MQ-7ck">
-                                        <rect key="frame" x="27" y="379" width="136" height="18"/>
-                                        <buttonCell key="cell" type="check" title="Enable debugging" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="fPw-DJ-S6E">
+                                        <rect key="frame" x="27" y="379" width="117" height="18"/>
+                                        <buttonCell key="cell" type="check" title="Capture stdout" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="fPw-DJ-S6E">
                                             <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
@@ -391,7 +391,7 @@ Gw
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8vS-tw-a4p">
-                                        <rect key="frame" x="27" y="295" width="128" height="18"/>
+                                        <rect key="frame" x="27" y="279" width="128" height="18"/>
                                         <buttonCell key="cell" type="check" title="Skip iPSW check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="h1G-4d-qg0">
                                             <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -401,7 +401,7 @@ Gw
                                         </connections>
                                     </button>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="63G-1h-k9g">
-                                        <rect key="frame" x="29" y="256" width="266" height="32"/>
+                                        <rect key="frame" x="29" y="240" width="266" height="32"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" id="RWg-ew-PWf">
                                             <font key="font" metaFont="system"/>
                                             <string key="title">LeetDown won't check iPSW md5 hashsum
@@ -411,7 +411,7 @@ when this option is enabled.</string>
                                         </textFieldCell>
                                     </textField>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2T3-Cp-5YM">
-                                        <rect key="frame" x="27" y="211" width="220" height="18"/>
+                                        <rect key="frame" x="27" y="195" width="220" height="18"/>
                                         <buttonCell key="cell" type="check" title="Reset USB connection (A7 only)" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="bHF-bq-yA4">
                                             <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -421,7 +421,7 @@ when this option is enabled.</string>
                                         </connections>
                                     </button>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="02L-h8-BaA">
-                                        <rect key="frame" x="26" y="156" width="272" height="48"/>
+                                        <rect key="frame" x="26" y="140" width="272" height="48"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" id="3pK-Qd-ZFO">
                                             <font key="font" metaFont="system"/>
                                             <string key="title">LeetDown will reset USB connection before 
@@ -431,17 +431,18 @@ uploading iBoot. Disabling this toggle could  cause bootchain upload issues on
                                         </textFieldCell>
                                     </textField>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dKh-TK-Vp9">
-                                        <rect key="frame" x="27" y="340" width="275" height="32"/>
+                                        <rect key="frame" x="27" y="324" width="279" height="48"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" id="R8p-xt-f8N">
                                             <font key="font" metaFont="system"/>
-                                            <string key="title">Enable this option to attach the log with your
-issue.</string>
+                                            <string key="title">LeetDown will capture the stdout of itself and
+the child processes it creates. A log file will
+be placed into your Documents folder.</string>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
                                             <color key="backgroundColor" red="0.99425287360000003" green="0.98850574710000005" blue="1" alpha="0.84705882349999995" colorSpace="custom" customColorSpace="displayP3"/>
                                         </textFieldCell>
                                     </textField>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hnd-lq-Gpf">
-                                        <rect key="frame" x="27" y="111" width="218" height="18"/>
+                                        <rect key="frame" x="27" y="95" width="218" height="18"/>
                                         <buttonCell key="cell" type="check" title="Downgrade baseband (A6 only)" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="E0b-rV-0Up">
                                             <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -451,7 +452,7 @@ issue.</string>
                                         </connections>
                                     </button>
                                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7BT-51-dsc">
-                                        <rect key="frame" x="27" y="56" width="275" height="48"/>
+                                        <rect key="frame" x="27" y="40" width="275" height="48"/>
                                         <textFieldCell key="cell" lineBreakMode="clipping" id="X1M-m9-hqG">
                                             <font key="font" metaFont="system"/>
                                             <string key="title">Downgrade baseband instead of flashing the

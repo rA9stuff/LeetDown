@@ -19,23 +19,23 @@ extern bool restoreStarted;
     CFMutableDictionaryRef properties = NULL;
     kernResult = IORegistryEntryCreateCFProperties(usbDevice, &properties, kCFAllocatorDefault, kNilOptions);
     if (kernResult != KERN_SUCCESS) {
-        NSLog(@"Unable to access USB device properties");
+        printf("Unable to access USB device properties\n");
         return @"err";
     }
     CFTypeRef nameRef = CFDictionaryGetValue(properties, CFSTR(kUSBProductString));
     if (!nameRef) {
-        NSLog(@"Name not found");
+        printf("Name not found\n");
         return @"err";
     }
     CFStringRef nameStrRef = (CFStringRef)nameRef;
     char nameCStr[1024];
     if (!CFStringGetCString(nameStrRef, nameCStr, 1024, kCFStringEncodingUTF8)) {
-        NSLog(@"Unable to get C string representation of name");
+        printf("Unable to get C string representation of name\n");
         return @"err";
     }
 
     NSString *name = [NSString stringWithCString:nameCStr encoding:NSUTF8StringEncoding];
-    NSLog(@"Name: %@", name);
+    printf("Name: %s\n", name.UTF8String);
     CFRelease(properties);
     return name;
 }
@@ -43,7 +43,7 @@ extern bool restoreStarted;
 - (void) USBDeviceDetectedCallback:(void *)refcon iterator: (io_iterator_t) iterator {
     io_object_t usbDevice;
     while ((usbDevice = IOIteratorNext(iterator))) {
-        NSLog(@"USB device detected");
+        printf("New USB device detected\n");
         NSString* name = [self getNameOfUSBDevice:usbDevice];
         if ([name isEqualToString:@"USB2.1 Hub"]) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -78,7 +78,7 @@ static void DeviceAdded(void *refCon, io_iterator_t iterator)
 - (void) registerForUSBDeviceNotifications {
     CFMutableDictionaryRef matchingDict = IOServiceMatching(kIOUSBDeviceClassName);
     if (!matchingDict) {
-        NSLog(@"Unable to create matching dictionary for USB device detection");
+        printf("Unable to create matching dictionary for USB device detection\n");
         return;
     }
     io_iterator_t iterator;
@@ -89,7 +89,7 @@ static void DeviceAdded(void *refCon, io_iterator_t iterator)
                                                                 matchingDict, DeviceAdded, (__bridge void*)self, &iterator);
 
     if (kernResult != kIOReturnSuccess) {
-        NSLog(@"Unable to register for USB device detection notifications");
+        printf("Unable to register for USB device detection notifications\n");
         return;
     }
     [self USBDeviceDetectedCallback:NULL iterator: iterator];
