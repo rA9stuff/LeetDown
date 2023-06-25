@@ -39,6 +39,8 @@ void cleanUp(void) {
 bool pwned = false;
 bool restoreStarted = false;
 double uzip_progress = 0;
+NSString *ECID = NULL;
+bool discoverStateEnded = false;
 
 LDD *dfuDevPtr = new LDD; // initialize it with defualt constructor first, since we only need ECID not to be NULL to connect to device
 
@@ -473,13 +475,16 @@ LDD *dfuDevPtr = new LDD; // initialize it with defualt constructor first, since
         return;
     }
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self updateStatus:@"Device got lost, reconnect the USB cable to your mac to resume the upload process" color:[NSColor yellowColor]];
+        [self showAlert:@"DFU device got lost" content:@"Please reconnect the USB cable to your Mac. LeetDown will automatically continue when it detects a device"];
     });
     int i = 0;
     while (dfuDevPtr -> openConnection(5) != 0) {
         printf("reconnect attempt %i\n", i);
         i++;
     }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self dismissAlert];
+    });
     dfuDevPtr -> setAllDeviceInfo();
     [self bootchainUploadManager:filename reconnect:false];
     
@@ -533,7 +538,7 @@ LDD *dfuDevPtr = new LDD; // initialize it with defualt constructor first, since
     });
 }
 
-int supported = 0;
+
 
 - (int) PrintDevInfo  {
 
@@ -564,10 +569,11 @@ int supported = 0;
     return 0;
 }
 
-NSString *ECID = NULL;
-static bool discoverStateEnded = false;
+
 
 - (int) discoverDevices {
+    
+    static bool supported = false;
 
     if (discoverStateEnded) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -976,8 +982,10 @@ static bool discoverStateEnded = false;
                 if ([self exploitDevice] != 0) {
                     return;
                 }
-                //dfuDevPtr -> openConnection(5); // now reconnect to device
-                //dfuDevPtr -> setAllDeviceInfo(); // set the rest
+                if (dfuDevPtr -> getClient() == NULL) {
+                    dfuDevPtr -> openConnection(5); // now reconnect to device
+                    dfuDevPtr -> setAllDeviceInfo(); // set the rest
+                }
             }
                 
             dispatch_async(dispatch_get_main_queue(), ^(){
@@ -1086,6 +1094,24 @@ static bool discoverStateEnded = false;
      freopen([pathForLog cStringUsingEncoding:NSASCIIStringEncoding],"a+",stdout);
 }
 
+- (void)showAlert:(NSString*)title content:(NSString*)content {
+    
+    self.alert = [[NSAlert alloc] init];
+    [self.alert setMessageText:title];
+    [self.alert setInformativeText:content];
+    [self.alert addButtonWithTitle:@"OK"];
+    NSButton *button = [[self.alert buttons] objectAtIndex:0];
+    [button setHidden:YES];
+    [self.alert beginSheetModalForWindow:self.view.window completionHandler:^(NSModalResponse returnCode) {
+
+        }];
+}
+
+- (void)dismissAlert {
+    [self.view.window endSheet:self.alert.window];
+}
+
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -1114,7 +1140,7 @@ static bool discoverStateEnded = false;
     [_uselessIndicator setIndeterminate:YES];
     [_uselessIndicator setUsesThreadedAnimation:YES];
     [self updateStatus:@"Waiting for a device in DFU Mode\n" color:[NSColor whiteColor]];
-    
+
 }
 
 @end

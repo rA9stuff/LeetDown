@@ -32,7 +32,8 @@
 @property (assign) IBOutlet NSTextField *percentage;
 - (int) discoverDevices;
 - (void)updateStatus:(NSString*)text color:(NSColor*)color1;
-
+// Declare a property for your custom NSWindow instance
+@property (strong, nonatomic) NSAlert *alert;
 @end
 
 @protocol USBDeviceDetectedDelegate <NSObject>

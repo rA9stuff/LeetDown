@@ -23,3 +23,10 @@ improve memory usage
 rebrand PlistUtils (formerly plistModifier)
 fix leetdown bootlogo on A7
 bump version to 2.3 rc (A6 and A7 ready)
+
+==================================
+25 Jun 2023
+
+add NSAlert for reconnect request
+improve memory usage
+
