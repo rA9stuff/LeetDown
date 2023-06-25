@@ -353,9 +353,9 @@ LDD *dfuDevPtr = new LDD; // initialize it with defualt constructor first, since
             [self updateStatus:@"Exploit failed, please re-enter DFU mode to try again" color:[NSColor redColor]];
             [_uselessIndicator stopAnimation:nil];
             _downgradeButtonOut.enabled = true;
-            _versionLabel.alphaValue = 0;
+            _versionLabel.alphaValue = 0.0;
             _versionLabel.enabled = false;
-            _dfuhelpoutlet.alphaValue = 1;
+            _dfuhelpoutlet.alphaValue = 1.0;
             _dfuhelpoutlet.enabled = true;
         });
         return -1;
@@ -940,6 +940,29 @@ LDD *dfuDevPtr = new LDD; // initialize it with defualt constructor first, since
     }];
 }
 
+- (void) backupBlob {
+        
+    NSString *bloblocation = [[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/LDResources/SHSH/blob.shsh"];
+    NSSavePanel *panel = [NSSavePanel savePanel];
+    
+    [panel setMessage:@"Please select a location to save SHSH blob."];
+    [panel setAllowsOtherFileTypes:YES];
+    [panel setExtensionHidden:NO];
+    [panel setCanCreateDirectories:YES];
+    [panel setTitle:@"Save your blob"];
+    [panel setNameFieldStringValue:@"(give a name to your blob)"];
+    [panel beginWithCompletionHandler:^(NSInteger result) {
+        
+        if (result == NSModalResponseOK) {
+            NSString *path = [[panel URL] path];
+            NSURL *saveLocation = [NSURL fileURLWithPath:path];
+            NSURL *origBlobLoc = [NSURL fileURLWithPath:bloblocation];
+            [[NSFileManager defaultManager] copyItemAtURL:origBlobLoc toURL:saveLocation error:nil];
+            [self updateStatus:[NSString stringWithFormat:@"Saved blob to %@. Keep it safe!", saveLocation] color:[NSColor cyanColor]];
+        }
+    }];
+}
+
 - (IBAction)downgradeButtonAct:(id)sender {
     
     NSAlert *alert = [[NSAlert alloc] init];
@@ -954,7 +977,7 @@ LDD *dfuDevPtr = new LDD; // initialize it with defualt constructor first, since
             [self updateStatus:@"Restore was cancelled by user" color:[NSColor yellowColor]];
             return;
         }
-            
+        
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             restoreStarted = true;
             dispatch_async(dispatch_get_main_queue(), ^(){
@@ -974,7 +997,7 @@ LDD *dfuDevPtr = new LDD; // initialize it with defualt constructor first, since
                     [self updateStatus:@"Device was already pwned, skipping exploitation" color:[NSColor cyanColor]];
                 });
             }
-                
+            
             else {
                 dfuDevPtr -> freeDevice(); // need to free the device so that iPwnder32 can take over
                 if ([self exploitDevice] != 0) {
@@ -985,11 +1008,11 @@ LDD *dfuDevPtr = new LDD; // initialize it with defualt constructor first, since
                     dfuDevPtr -> setAllDeviceInfo(); // set the rest
                 }
             }
-                
+            
             dispatch_async(dispatch_get_main_queue(), ^(){
                 [self updateStatus:@"Fetching OTA blob" color:[NSColor greenColor]];
             });
-                    
+            
             if ([self saveOTABlob] == -2) {
                 dispatch_async(dispatch_get_main_queue(), ^(){
                     
@@ -997,7 +1020,7 @@ LDD *dfuDevPtr = new LDD; // initialize it with defualt constructor first, since
                     return;
                 });
             }
-                    
+            
             dispatch_async(dispatch_get_main_queue(), ^(){
                 NSAlert *alert = [[NSAlert alloc] init];
                 [alert setMessageText:@"Backup your blob"];
@@ -1006,83 +1029,59 @@ LDD *dfuDevPtr = new LDD; // initialize it with defualt constructor first, since
                 [alert addButtonWithTitle:@"Skip"];
                 [alert setAlertStyle:NSAlertStyleWarning];
                 [alert beginSheetModalForWindow:self.view.window completionHandler:^(NSModalResponse returnCode) {
-                /*
-                 ===================== BEWARE! ====================
-                 || YOU ARE ABOUT TO WITNESS MADNESS !!!         ||
-                 || MADNESS OF A GUY WHO COULDN'T FIGURE OUT     ||
-                 || HOW TO PROPERLY USE completionHandler        ||
-                 || THERE IS NO GOING BACK, YOU HAVE BEEN WARNED ||
-                 ==================================================
-                 */
                     if (returnCode == NSAlertFirstButtonReturn) {
-                        NSString *bloblocation = [[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/LDResources/SHSH/blob.shsh"];
-                        NSSavePanel *panel = [NSSavePanel savePanel];
-                        [panel setMessage:@"Please select a location to save SHSH blob."];
-                        [panel setAllowsOtherFileTypes:YES];
-                        [panel setExtensionHidden:NO];
-                        [panel setCanCreateDirectories:YES];
-                        [panel setTitle:@"Save your blob"];
-                        [panel setNameFieldStringValue:@"(give a name to your blob)"];
-                        [panel beginWithCompletionHandler:^(NSInteger result) {
-                                
-                            if (result == NSModalResponseOK) {
-                                NSString *path = [[panel URL] path];
-                                NSURL *saveLocation = [NSURL fileURLWithPath:path];
-                                NSURL *a = [NSURL fileURLWithPath:bloblocation];
-                                NSError *e = nil;
-                                [[NSFileManager defaultManager] copyItemAtURL:a toURL:saveLocation error:&e];
-                                [self updateStatus: [NSString stringWithFormat:@"Saved blob to %@. Keep it safe!", saveLocation] color:[NSColor cyanColor]];
-                            }
-                            else {
-                                [self updateStatus:@"Skipped saving a copy of the blob" color:[NSColor yellowColor]];
-                            }
-                            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                            
-                            PlistUtils destinationObject;
-                            if (strcmp(destinationObject.getPref(@"destinationFW").UTF8String, "10.3.3") == 0) {
-                                [self restore64];
-                                [self -> _uselessIndicator stopAnimation:nil];
-                                _selectIPSWoutlet.enabled = true;
-                                return;
-                            }
-                            dfuDevPtr -> freeDevice();
-                            [self restore32];
-                                dispatch_async(dispatch_get_main_queue(), ^{
-                                    [self -> _uselessIndicator stopAnimation:nil];
-                                    _selectIPSWoutlet.enabled = true;
-                                });
-                            });
+                        [self backupBlobWithCompletion:^{
+                            [self restoreWrapper];
                         }];
-                        
+                    } else {
+                        [self restoreWrapper];
                     }
-                
-                    else if (returnCode == NSAlertSecondButtonReturn) {
-                
-                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                        
-            
-                        PlistUtils destinationObject;
-                        if (strcmp(destinationObject.getPref(@"destinationFW").UTF8String, "10.3.3") == 0) {
-                            [self restore64];
-                            dispatch_async(dispatch_get_main_queue(), ^(){
-                                [self -> _uselessIndicator stopAnimation:nil];
-                                _selectIPSWoutlet.enabled = true;
-                            });
-                            return;
-                        }
-                        dfuDevPtr -> freeDevice();
-                        [self restore32];
-                        dispatch_async(dispatch_get_main_queue(), ^(){
-                            [self -> _uselessIndicator stopAnimation:nil];
-                            _selectIPSWoutlet.enabled = true;
-                                                
-                        });
-                    });
-                }
-            }];
+                }];
+            });
+        });
+    }];
+}
+
+- (void)backupBlobWithCompletion:(void (^)(void))completion {
+    NSString *bloblocation = [[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/LDResources/SHSH/blob.shsh"];
+    NSSavePanel *panel = [NSSavePanel savePanel];
+    [panel setMessage:@"Please select a location to save SHSH blob."];
+    [panel setAllowsOtherFileTypes:YES];
+    [panel setExtensionHidden:NO];
+    [panel setCanCreateDirectories:YES];
+    [panel setTitle:@"Save your blob"];
+    [panel setNameFieldStringValue:@"(give a name to your blob)"];
+    [panel beginWithCompletionHandler:^(NSInteger result) {
+        if (result == NSModalResponseOK) {
+            NSString *path = [[panel URL] path];
+            NSURL *saveLocation = [NSURL fileURLWithPath:path];
+            NSURL *a = [NSURL fileURLWithPath:bloblocation];
+            NSError *e = nil;
+            [[NSFileManager defaultManager] copyItemAtURL:a toURL:saveLocation error:&e];
+            [self updateStatus:[NSString stringWithFormat:@"Saved blob to %@. Keep it safe!", saveLocation] color:[NSColor cyanColor]];
+        }
+        completion();
+    }];
+}
+
+- (void)restoreWrapper {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        PlistUtils destinationObject;
+        if (strcmp(destinationObject.getPref(@"destinationFW").UTF8String, "10.3.3") == 0) {
+            [self restore64];
+            dispatch_async(dispatch_get_main_queue(), ^(){
+                [self -> _uselessIndicator stopAnimation:nil];
+                _selectIPSWoutlet.enabled = true;
+            });
+            return;
+        }
+        dfuDevPtr -> freeDevice();
+        [self restore32];
+        dispatch_async(dispatch_get_main_queue(), ^(){
+            [self -> _uselessIndicator stopAnimation:nil];
+            _selectIPSWoutlet.enabled = true;
         });
     });
-    }];
 }
 
 - (void)redirectLogToDocuments {
