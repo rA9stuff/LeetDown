@@ -8,20 +8,20 @@
 	<string></string>
 	<key>resetreq</key>
 	<string>1</string>
-	<key>iPad64MD5</key>
-	<string>6e0d069555b365cdcee519c5fb1b97c7</string>
-	<key>iPad3,6MD5</key>
-	<string>9083a352867aa3b208fed511da4dcbf6</string>
-	<key>iPad3,5MD5</key>
-	<string>bc58e14e6144f3162667d02674406033</string>
-	<key>iPad3,4MD5</key>
-	<string>b94f6ac764fa5fc4474cd041f389a9b3</string>
-	<key>iPhone5,2MD5</key>
-	<string>c059bc187a9a797d91a1622c9264f314</string>
-	<key>iPhone5,1MD5</key>
-	<string>10d1e057e9bed80a3ed7edcb554fde1e</string>
-	<key>iPhone64MD5</key>
-	<string>8bb80cae8e6ac9525be24873add61b25</string>
+	<key>iPad64Size</key>
+	<string>2443546142</string>
+	<key>iPad3,6Size</key>
+	<string>1845205928</string>
+	<key>iPad3,5Size</key>
+	<string>1842909590</string>
+	<key>iPad3,4Size</key>
+	<string>1802659950</string>
+	<key>iPhone5,2Size</key>
+	<string>1656563298</string>
+	<key>iPhone5,1Size</key>
+	<string>1657778104</string>
+	<key>iPhone64Size</key>
+	<string>2541278062</string>
 	<key>destinationFW</key>
 	<string></string>
 	<key>32iPSWLoc</key>

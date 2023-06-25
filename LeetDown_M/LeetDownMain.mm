@@ -87,27 +87,26 @@ LDD *dfuDevPtr = new LDD; // initialize it with defualt constructor first, since
 }
 
 
-- (NSString*)MD5:(NSData*)input
-{
-    // Create byte array of unsigned chars
-    unsigned char md5Buffer[CC_MD5_DIGEST_LENGTH];
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [_uselessIndicator setUsesThreadedAnimation:NO];
-        [_uselessIndicator setIndeterminate:YES];
-        [_uselessIndicator startAnimation:nil];
-    });
-    // Create 16 byte MD5 hash value, store in buffer
-    CC_MD5(input.bytes, (unsigned int)input.length, md5Buffer);
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [_uselessIndicator stopAnimation:nil];
-    });
-    // Convert unsigned char buffer to NSString of hex values
-    NSMutableString *output = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
-    for (int i = 0; i < CC_MD5_DIGEST_LENGTH; i++)
-        [output appendFormat:@"%02x",md5Buffer[i]];
-    NSString *md5val = [NSString stringWithFormat:@"%@", output];
-    return md5val;
+- (unsigned long long)fileSizeAtPath:(NSString *)filePath {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSError *error = nil;
+    NSDictionary *fileAttributes = [fileManager attributesOfItemAtPath:[filePath substringFromIndex:6] error:&error];
+    
+    if (error || !fileAttributes) {
+        // Error retrieving file attributes
+        return 0;
+    }
+    
+    NSNumber *fileSizeNumber = [fileAttributes objectForKey:NSFileSize];
+    
+    if (!fileSizeNumber) {
+        // File size attribute not found
+        return 0;
+    }
+    
+    return [fileSizeNumber unsignedLongLongValue];
 }
+
 
 - (const char*) ipswVersion:(NSString*)ipswPath {
     
@@ -124,23 +123,22 @@ LDD *dfuDevPtr = new LDD; // initialize it with defualt constructor first, since
 }
 
 - (int) iPSWcheck:(NSURL*) ipswLocation {
-    NSString *md5CheckValue;
+    NSString *sizeCheckValue;
     NSString* cpid = NSCPID(&dfuDevPtr -> getDevInfo() -> cpid);
     if (strcmp(cpid.UTF8String, "8960") != 0 && strcmp(cpid.UTF8String, "8965") != 0) {
-        md5CheckValue = [[NSString stringWithFormat:@"%s", dfuDevPtr -> getProductType()] stringByAppendingString:@"MD5"];
+        sizeCheckValue = [[NSString stringWithFormat:@"%s", dfuDevPtr -> getProductType()] stringByAppendingString:@"Size"];
     }
     else if (strcmp(dfuDevPtr -> getProductType(), "iPhone6,1") == 0 || strcmp(dfuDevPtr -> getProductType(), "iPhone6,2") == 0) {
-        md5CheckValue = @"iPhone64MD5";
+        sizeCheckValue = @"iPhone64Size";
     }
     else {
-        md5CheckValue = @"iPad64MD5";
+        sizeCheckValue = @"iPad64Size";
     }
-    NSData *ipswData = [NSData dataWithContentsOfURL:ipswLocation];
-    PlistUtils correctMD5;
-    NSString* result = [self MD5:ipswData];
-    if (![result isEqualToString: correctMD5.getPref(md5CheckValue)]) {
+    PlistUtils correctsize;
+    NSString* result = [NSString stringWithFormat:@"%llu", [self fileSizeAtPath:ipswLocation.absoluteString]];
+    if (![result isEqualToString: correctsize.getPref(sizeCheckValue)]) {
         dispatch_async(dispatch_get_main_queue(), ^(){
-            [self updateStatus:@"iPSW is corrupt! If you think this is a mistake, disable MD5 check in settings" color:[NSColor redColor]];
+            [self updateStatus:@"iPSW is corrupt! If you think this is a mistake, disable iPSW check in settings" color:[NSColor redColor]];
             self -> _selectIPSWoutlet.enabled = true;
         });
         return -1;
@@ -240,10 +238,10 @@ LDD *dfuDevPtr = new LDD; // initialize it with defualt constructor first, since
             [_percentage setStringValue:@""];
             [_versionLabel setAlphaValue:1];
             
-            PlistUtils md5check;
+            PlistUtils szcheck;
             
-            if ([md5check.getPref(@"skipMD5")  isEqual: @"0"]) {
-                    [self updateStatus:@"Checking md5 of the iPSW..." color:[NSColor cyanColor]];
+            if ([szcheck.getPref(@"skipCheck")  isEqual: @"0"]) {
+                    [self updateStatus:@"Checking iPSW size..." color:[NSColor cyanColor]];
                 dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
                     [self iPSWcheck:filePath];
                 });
@@ -871,11 +869,11 @@ LDD *dfuDevPtr = new LDD; // initialize it with defualt constructor first, since
                 
                 dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
                     
-                    PlistUtils md5check;
-                    if ([md5check.getPref(@"skipMD5") isEqual:@"0"]) {
+                    PlistUtils szcheck;
+                    if ([szcheck.getPref(@"skipCheck") isEqual:@"0"]) {
                         
                         dispatch_async(dispatch_get_main_queue(), ^(){
-                            [self updateStatus:@"Checking md5 of the iPSW..." color:[NSColor cyanColor]];
+                            [self updateStatus:@"Checking iPSW size..." color:[NSColor cyanColor]];
                         });
                         if ([self iPSWcheck:URL] != 0) {
                             return;

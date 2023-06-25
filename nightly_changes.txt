@@ -29,4 +29,4 @@ bump version to 2.3 rc (A6 and A7 ready)
 
 add NSAlert for reconnect request
 improve memory usage
-
+check ipsw size instead of md5
