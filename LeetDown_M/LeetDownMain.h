@@ -17,7 +17,7 @@
 #include <sys/types.h>
 #include <sys/sysctl.h>
 
-@interface ViewController : NSViewController
+@interface ViewController : NSViewController <DFUHelperViewControllerDelegate>
 @property (assign) IBOutlet NSView *mainView;
 @property (weak) IBOutlet NSTextField *header;
 @property (weak) IBOutlet NSScrollView *statusbox;
@@ -30,16 +30,21 @@
 @property (assign) IBOutlet NSButton *dfuhelpoutlet;
 @property (assign) IBOutlet NSButton *prefGear;
 @property (assign) IBOutlet NSTextField *percentage;
-- (int) discoverDevices;
+- (int) discoverRestoreDevices:(int)mode;
+- (int) discoverNormalDevices;
 - (void)updateStatus:(NSString*)text color:(NSColor*)color1;
+- (int)exploitDevice;
 // Declare a property for your custom NSWindow instance
 @property (strong, nonatomic) NSAlert *alert;
+
 @end
 
 @protocol USBDeviceDetectedDelegate <NSObject>
 
 - (void)deviceDetected;
+- (int) discoverRestoreDevices:(int)mode;
 
 @end
+
 
 

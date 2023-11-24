@@ -18,5 +18,6 @@ void modifyPreference(NSNumber *val, NSString *preference);
 @property (nonatomic, assign) BOOL locationUseBool;
 @property (assign) IBOutlet NSButton *downgradeBBoutlet;
 @property (assign) IBOutlet NSButton *skipipswCheckToggle;
+@property (assign) IBOutlet NSPopUpButtonCell *exploitSelectionBox;
 
 @end

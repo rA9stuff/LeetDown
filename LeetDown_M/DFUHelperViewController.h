@@ -7,6 +7,10 @@
 
 #import <Cocoa/Cocoa.h>
 
+@protocol DFUHelperViewControllerDelegate <NSObject>
+- (void)viewControllerDidDismiss;
+@end
+
 @interface DFUHelperViewController : NSViewController
 @property (assign) IBOutlet NSTextField *getreadytext;
 @property (assign) IBOutlet NSTextField *getreadyCounter;
@@ -20,6 +24,5 @@
 @property (assign) IBOutlet NSButton *startbutton;
 @property (assign) IBOutlet NSButton *cancelout;
 @property (nonatomic, assign) BOOL shouldStopSearch;
-
-
 @end
+

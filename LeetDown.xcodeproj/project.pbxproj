@@ -7,16 +7,41 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		64777D7128FC192A0097B3B8 /* libirecovery-1.0.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 64777D6C28FC192A0097B3B8 /* libirecovery-1.0.3.dylib */; };
-		64777D7228FC192A0097B3B8 /* libusbmuxd-2.0.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 64777D6D28FC192A0097B3B8 /* libusbmuxd-2.0.6.dylib */; };
-		64777D7328FC192A0097B3B8 /* libplist-2.0.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 64777D6E28FC192A0097B3B8 /* libplist-2.0.3.dylib */; };
-		64777D7428FC192A0097B3B8 /* libusb-1.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 64777D6F28FC192A0097B3B8 /* libusb-1.0.0.dylib */; };
-		64777D7528FC192A0097B3B8 /* libcrypto.1.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 64777D7028FC192A0097B3B8 /* libcrypto.1.1.dylib */; };
-		64777D7628FC195F0097B3B8 /* libcrypto.1.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 64777D7028FC192A0097B3B8 /* libcrypto.1.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		64777D7728FC19600097B3B8 /* libirecovery-1.0.3.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 64777D6C28FC192A0097B3B8 /* libirecovery-1.0.3.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		64777D7828FC19620097B3B8 /* libplist-2.0.3.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 64777D6E28FC192A0097B3B8 /* libplist-2.0.3.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		64777D7928FC19630097B3B8 /* libusb-1.0.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 64777D6F28FC192A0097B3B8 /* libusb-1.0.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		64777D7A28FC19640097B3B8 /* libusbmuxd-2.0.6.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 64777D6D28FC192A0097B3B8 /* libusbmuxd-2.0.6.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		602B49762A77A4DB00F7973E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 602B49752A77A4DB00F7973E /* AVFoundation.framework */; };
+		604CB52B2A4B044300B9CF6A /* NormalModeOperations.mm in Sources */ = {isa = PBXBuildFile; fileRef = 604CB5292A4B044300B9CF6A /* NormalModeOperations.mm */; };
+		6065568D2A54411000354FAA /* libimobiledevice-glue-1.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 606556852A54411000354FAA /* libimobiledevice-glue-1.0.0.dylib */; };
+		6065568E2A54411000354FAA /* libimobiledevice-glue-1.0.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 606556852A54411000354FAA /* libimobiledevice-glue-1.0.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		6065568F2A54411000354FAA /* libcrypto.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 606556862A54411000354FAA /* libcrypto.3.dylib */; };
+		606556902A54411000354FAA /* libcrypto.3.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 606556862A54411000354FAA /* libcrypto.3.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		606556912A54411000354FAA /* libusbmuxd-2.0.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 606556872A54411000354FAA /* libusbmuxd-2.0.6.dylib */; };
+		606556922A54411000354FAA /* libusbmuxd-2.0.6.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 606556872A54411000354FAA /* libusbmuxd-2.0.6.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		606556932A54411000354FAA /* libideviceactivation-1.0.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 606556882A54411000354FAA /* libideviceactivation-1.0.2.dylib */; };
+		606556942A54411000354FAA /* libideviceactivation-1.0.2.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 606556882A54411000354FAA /* libideviceactivation-1.0.2.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		606556952A54411000354FAA /* libimobiledevice-1.0.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 606556892A54411000354FAA /* libimobiledevice-1.0.6.dylib */; };
+		606556962A54411000354FAA /* libimobiledevice-1.0.6.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 606556892A54411000354FAA /* libimobiledevice-1.0.6.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		606556972A54411000354FAA /* libplist-2.0.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6065568A2A54411000354FAA /* libplist-2.0.4.dylib */; };
+		606556982A54411000354FAA /* libplist-2.0.4.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 6065568A2A54411000354FAA /* libplist-2.0.4.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		606556992A54411000354FAA /* libirecovery-1.0.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6065568B2A54411000354FAA /* libirecovery-1.0.3.dylib */; };
+		6065569A2A54411000354FAA /* libirecovery-1.0.3.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 6065568B2A54411000354FAA /* libirecovery-1.0.3.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		6065569B2A54411000354FAA /* libusb-1.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6065568C2A54411000354FAA /* libusb-1.0.0.dylib */; };
+		6065569C2A54411000354FAA /* libusb-1.0.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 6065568C2A54411000354FAA /* libusb-1.0.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		608232BE2B109E83004035CD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 608232BD2B109E83004035CD /* main.m */; };
+		608AB0782A72B44200AB12B1 /* checkm8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 608AB0722A72B44200AB12B1 /* checkm8.a */; };
+		608AB0792A72B44200AB12B1 /* ircv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 608AB0732A72B44200AB12B1 /* ircv.a */; };
+		608AB07A2A72B44200AB12B1 /* partial.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 608AB0742A72B44200AB12B1 /* partial.a */; };
+		608AB07B2A72B44200AB12B1 /* ipwnder32.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 608AB0752A72B44200AB12B1 /* ipwnder32.a */; };
+		608AB07C2A72B44200AB12B1 /* payload.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 608AB0762A72B44200AB12B1 /* payload.a */; };
+		608AB07D2A72B44200AB12B1 /* boot.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 608AB0772A72B44200AB12B1 /* boot.a */; };
+		608AB0852A72B45B00AB12B1 /* common.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 608AB07E2A72B45B00AB12B1 /* common.a */; };
+		608AB0862A72B45B00AB12B1 /* limera1n.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 608AB07F2A72B45B00AB12B1 /* limera1n.a */; };
+		608AB0872A72B45B00AB12B1 /* main.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 608AB0802A72B45B00AB12B1 /* main.a */; };
+		608AB0882A72B45B00AB12B1 /* payload.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 608AB0812A72B45B00AB12B1 /* payload.a */; };
+		608AB0892A72B45B00AB12B1 /* checkm8_arm64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 608AB0822A72B45B00AB12B1 /* checkm8_arm64.a */; };
+		608AB08A2A72B45B00AB12B1 /* s5l8950x.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 608AB0832A72B45B00AB12B1 /* s5l8950x.a */; };
+		608AB08B2A72B45B00AB12B1 /* iousb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 608AB0842A72B45B00AB12B1 /* iousb.a */; };
+		608F5A3E2A555BC400D949AE /* libssl.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 608F5A3D2A555BC400D949AE /* libssl.3.dylib */; };
+		608F5A3F2A555BD700D949AE /* libssl.3.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 608F5A3D2A555BC400D949AE /* libssl.3.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		60C081FF2B0FAB5200A31616 /* UpdateController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 60C081FE2B0FAB5200A31616 /* UpdateController.mm */; };
 		6487B43727A9C9740065B016 /* PlistUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6487B43627A9C9740065B016 /* PlistUtils.mm */; };
 		64A788712996CB5C00865370 /* USBUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 64A788702996CB5C00865370 /* USBUtils.mm */; };
 		64A788722996CBB700865370 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 691B8F6B26A1A9C000771658 /* IOKit.framework */; };
@@ -53,31 +78,78 @@
 		69FB665C26E7E2820030120D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69FB665B26E7E2820030120D /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		608232C22B10A297004035CD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 69AFA6E1269CE0DC0020D40D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 608232BA2B109E83004035CD;
+			remoteInfo = LDUpdater;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
-		6478D1AF27A1A26E00677E18 /* Embed Libraries */ = {
+		606556842A5440A300354FAA /* Embed Libraries */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				64777D7728FC19600097B3B8 /* libirecovery-1.0.3.dylib in Embed Libraries */,
-				64777D7628FC195F0097B3B8 /* libcrypto.1.1.dylib in Embed Libraries */,
-				64777D7828FC19620097B3B8 /* libplist-2.0.3.dylib in Embed Libraries */,
-				64777D7928FC19630097B3B8 /* libusb-1.0.0.dylib in Embed Libraries */,
-				64777D7A28FC19640097B3B8 /* libusbmuxd-2.0.6.dylib in Embed Libraries */,
+				608F5A3F2A555BD700D949AE /* libssl.3.dylib in Embed Libraries */,
+				606556942A54411000354FAA /* libideviceactivation-1.0.2.dylib in Embed Libraries */,
+				606556962A54411000354FAA /* libimobiledevice-1.0.6.dylib in Embed Libraries */,
+				606556982A54411000354FAA /* libplist-2.0.4.dylib in Embed Libraries */,
+				6065569A2A54411000354FAA /* libirecovery-1.0.3.dylib in Embed Libraries */,
+				606556922A54411000354FAA /* libusbmuxd-2.0.6.dylib in Embed Libraries */,
+				606556902A54411000354FAA /* libcrypto.3.dylib in Embed Libraries */,
+				6065568E2A54411000354FAA /* libimobiledevice-glue-1.0.0.dylib in Embed Libraries */,
+				6065569C2A54411000354FAA /* libusb-1.0.0.dylib in Embed Libraries */,
 			);
 			name = "Embed Libraries";
 			runOnlyForDeploymentPostprocessing = 0;
+		};
+		608232B92B109E83004035CD /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1223FBA01A91021A36E504CE /* Pods_LeetDown.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LeetDown.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		64777D6C28FC192A0097B3B8 /* libirecovery-1.0.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libirecovery-1.0.3.dylib"; path = "Frameworks/libirecovery-1.0.3.dylib"; sourceTree = "<group>"; };
-		64777D6D28FC192A0097B3B8 /* libusbmuxd-2.0.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libusbmuxd-2.0.6.dylib"; path = "Frameworks/libusbmuxd-2.0.6.dylib"; sourceTree = "<group>"; };
-		64777D6E28FC192A0097B3B8 /* libplist-2.0.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libplist-2.0.3.dylib"; path = "Frameworks/libplist-2.0.3.dylib"; sourceTree = "<group>"; };
-		64777D6F28FC192A0097B3B8 /* libusb-1.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libusb-1.0.0.dylib"; path = "Frameworks/libusb-1.0.0.dylib"; sourceTree = "<group>"; };
-		64777D7028FC192A0097B3B8 /* libcrypto.1.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.1.1.dylib; path = Frameworks/libcrypto.1.1.dylib; sourceTree = "<group>"; };
+		602B49752A77A4DB00F7973E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		604CB5292A4B044300B9CF6A /* NormalModeOperations.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NormalModeOperations.mm; sourceTree = "<group>"; };
+		604CB52A2A4B044300B9CF6A /* NormalModeOperations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NormalModeOperations.h; sourceTree = "<group>"; };
+		606556852A54411000354FAA /* libimobiledevice-glue-1.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libimobiledevice-glue-1.0.0.dylib"; path = "Frameworks/libimobiledevice-glue-1.0.0.dylib"; sourceTree = "<group>"; };
+		606556862A54411000354FAA /* libcrypto.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.3.dylib; path = Frameworks/libcrypto.3.dylib; sourceTree = "<group>"; };
+		606556872A54411000354FAA /* libusbmuxd-2.0.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libusbmuxd-2.0.6.dylib"; path = "Frameworks/libusbmuxd-2.0.6.dylib"; sourceTree = "<group>"; };
+		606556882A54411000354FAA /* libideviceactivation-1.0.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libideviceactivation-1.0.2.dylib"; path = "Frameworks/libideviceactivation-1.0.2.dylib"; sourceTree = "<group>"; };
+		606556892A54411000354FAA /* libimobiledevice-1.0.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libimobiledevice-1.0.6.dylib"; path = "Frameworks/libimobiledevice-1.0.6.dylib"; sourceTree = "<group>"; };
+		6065568A2A54411000354FAA /* libplist-2.0.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libplist-2.0.4.dylib"; path = "Frameworks/libplist-2.0.4.dylib"; sourceTree = "<group>"; };
+		6065568B2A54411000354FAA /* libirecovery-1.0.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libirecovery-1.0.3.dylib"; path = "Frameworks/libirecovery-1.0.3.dylib"; sourceTree = "<group>"; };
+		6065568C2A54411000354FAA /* libusb-1.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libusb-1.0.0.dylib"; path = "Frameworks/libusb-1.0.0.dylib"; sourceTree = "<group>"; };
+		608232BB2B109E83004035CD /* LDUpdater */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LDUpdater; sourceTree = BUILT_PRODUCTS_DIR; };
+		608232BD2B109E83004035CD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		608AB0722A72B44200AB12B1 /* checkm8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = checkm8.a; path = Frameworks/iPwnder32/checkm8.a; sourceTree = "<group>"; };
+		608AB0732A72B44200AB12B1 /* ircv.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = ircv.a; path = Frameworks/iPwnder32/ircv.a; sourceTree = "<group>"; };
+		608AB0742A72B44200AB12B1 /* partial.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = partial.a; path = Frameworks/iPwnder32/partial.a; sourceTree = "<group>"; };
+		608AB0752A72B44200AB12B1 /* ipwnder32.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = ipwnder32.a; path = Frameworks/iPwnder32/ipwnder32.a; sourceTree = "<group>"; };
+		608AB0762A72B44200AB12B1 /* payload.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = payload.a; path = Frameworks/iPwnder32/payload.a; sourceTree = "<group>"; };
+		608AB0772A72B44200AB12B1 /* boot.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = boot.a; path = Frameworks/iPwnder32/boot.a; sourceTree = "<group>"; };
+		608AB07E2A72B45B00AB12B1 /* common.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = common.a; path = Frameworks/ipwnder_lite/common.a; sourceTree = "<group>"; };
+		608AB07F2A72B45B00AB12B1 /* limera1n.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = limera1n.a; path = Frameworks/ipwnder_lite/limera1n.a; sourceTree = "<group>"; };
+		608AB0802A72B45B00AB12B1 /* main.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = main.a; path = Frameworks/ipwnder_lite/main.a; sourceTree = "<group>"; };
+		608AB0812A72B45B00AB12B1 /* payload.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = payload.a; path = Frameworks/ipwnder_lite/payload.a; sourceTree = "<group>"; };
+		608AB0822A72B45B00AB12B1 /* checkm8_arm64.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = checkm8_arm64.a; path = Frameworks/ipwnder_lite/checkm8_arm64.a; sourceTree = "<group>"; };
+		608AB0832A72B45B00AB12B1 /* s5l8950x.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = s5l8950x.a; path = Frameworks/ipwnder_lite/s5l8950x.a; sourceTree = "<group>"; };
+		608AB0842A72B45B00AB12B1 /* iousb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = iousb.a; path = Frameworks/ipwnder_lite/iousb.a; sourceTree = "<group>"; };
+		608F5A3D2A555BC400D949AE /* libssl.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libssl.3.dylib; path = Frameworks/libssl.3.dylib; sourceTree = "<group>"; };
+		60C081FE2B0FAB5200A31616 /* UpdateController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = UpdateController.mm; sourceTree = "<group>"; };
+		60C082002B0FAB5B00A31616 /* UpdateController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UpdateController.h; sourceTree = "<group>"; };
 		6487B43627A9C9740065B016 /* PlistUtils.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PlistUtils.mm; sourceTree = "<group>"; };
 		648EF98827AC59E500B7E2C2 /* PlistUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlistUtils.h; sourceTree = "<group>"; };
 		64A7886F2996CB5C00865370 /* USBUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = USBUtils.h; sourceTree = "<group>"; };
@@ -145,17 +217,42 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		608232B82B109E83004035CD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		69AFA6E6269CE0DC0020D40D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				64777D7228FC192A0097B3B8 /* libusbmuxd-2.0.6.dylib in Frameworks */,
+				608AB0852A72B45B00AB12B1 /* common.a in Frameworks */,
+				608AB0862A72B45B00AB12B1 /* limera1n.a in Frameworks */,
+				608AB0872A72B45B00AB12B1 /* main.a in Frameworks */,
+				608AB0882A72B45B00AB12B1 /* payload.a in Frameworks */,
+				608AB0892A72B45B00AB12B1 /* checkm8_arm64.a in Frameworks */,
+				608AB08A2A72B45B00AB12B1 /* s5l8950x.a in Frameworks */,
+				608AB08B2A72B45B00AB12B1 /* iousb.a in Frameworks */,
+				608AB0782A72B44200AB12B1 /* checkm8.a in Frameworks */,
+				608AB0792A72B44200AB12B1 /* ircv.a in Frameworks */,
+				608AB07A2A72B44200AB12B1 /* partial.a in Frameworks */,
+				608AB07B2A72B44200AB12B1 /* ipwnder32.a in Frameworks */,
+				608AB07C2A72B44200AB12B1 /* payload.a in Frameworks */,
+				602B49762A77A4DB00F7973E /* AVFoundation.framework in Frameworks */,
+				608AB07D2A72B44200AB12B1 /* boot.a in Frameworks */,
+				606556912A54411000354FAA /* libusbmuxd-2.0.6.dylib in Frameworks */,
+				6065568F2A54411000354FAA /* libcrypto.3.dylib in Frameworks */,
+				606556992A54411000354FAA /* libirecovery-1.0.3.dylib in Frameworks */,
+				6065569B2A54411000354FAA /* libusb-1.0.0.dylib in Frameworks */,
 				69FB665C26E7E2820030120D /* Cocoa.framework in Frameworks */,
-				64777D7528FC192A0097B3B8 /* libcrypto.1.1.dylib in Frameworks */,
+				6065568D2A54411000354FAA /* libimobiledevice-glue-1.0.0.dylib in Frameworks */,
+				608F5A3E2A555BC400D949AE /* libssl.3.dylib in Frameworks */,
+				606556932A54411000354FAA /* libideviceactivation-1.0.2.dylib in Frameworks */,
+				606556972A54411000354FAA /* libplist-2.0.4.dylib in Frameworks */,
 				64A788722996CBB700865370 /* IOKit.framework in Frameworks */,
-				64777D7128FC192A0097B3B8 /* libirecovery-1.0.3.dylib in Frameworks */,
-				64777D7428FC192A0097B3B8 /* libusb-1.0.0.dylib in Frameworks */,
-				64777D7328FC192A0097B3B8 /* libplist-2.0.3.dylib in Frameworks */,
+				606556952A54411000354FAA /* libimobiledevice-1.0.6.dylib in Frameworks */,
 				69FB665926E7E2780030120D /* Pods_LeetDown.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -163,6 +260,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		608232BC2B109E83004035CD /* LDUpdater */ = {
+			isa = PBXGroup;
+			children = (
+				608232BD2B109E83004035CD /* main.m */,
+			);
+			path = LDUpdater;
+			sourceTree = "<group>";
+		};
 		692DCBEC269E3CE6004DC22C /* SSZipArchive */ = {
 			isa = PBXGroup;
 			children = (
@@ -224,11 +329,29 @@
 		693782CD269CE5090082F92D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				64777D7028FC192A0097B3B8 /* libcrypto.1.1.dylib */,
-				64777D6C28FC192A0097B3B8 /* libirecovery-1.0.3.dylib */,
-				64777D6E28FC192A0097B3B8 /* libplist-2.0.3.dylib */,
-				64777D6F28FC192A0097B3B8 /* libusb-1.0.0.dylib */,
-				64777D6D28FC192A0097B3B8 /* libusbmuxd-2.0.6.dylib */,
+				602B49752A77A4DB00F7973E /* AVFoundation.framework */,
+				608AB0822A72B45B00AB12B1 /* checkm8_arm64.a */,
+				608AB07E2A72B45B00AB12B1 /* common.a */,
+				608AB0842A72B45B00AB12B1 /* iousb.a */,
+				608AB07F2A72B45B00AB12B1 /* limera1n.a */,
+				608AB0802A72B45B00AB12B1 /* main.a */,
+				608AB0812A72B45B00AB12B1 /* payload.a */,
+				608AB0832A72B45B00AB12B1 /* s5l8950x.a */,
+				608AB0772A72B44200AB12B1 /* boot.a */,
+				608AB0722A72B44200AB12B1 /* checkm8.a */,
+				608AB0752A72B44200AB12B1 /* ipwnder32.a */,
+				608AB0732A72B44200AB12B1 /* ircv.a */,
+				608AB0742A72B44200AB12B1 /* partial.a */,
+				608AB0762A72B44200AB12B1 /* payload.a */,
+				608F5A3D2A555BC400D949AE /* libssl.3.dylib */,
+				606556862A54411000354FAA /* libcrypto.3.dylib */,
+				606556882A54411000354FAA /* libideviceactivation-1.0.2.dylib */,
+				606556892A54411000354FAA /* libimobiledevice-1.0.6.dylib */,
+				606556852A54411000354FAA /* libimobiledevice-glue-1.0.0.dylib */,
+				6065568B2A54411000354FAA /* libirecovery-1.0.3.dylib */,
+				6065568A2A54411000354FAA /* libplist-2.0.4.dylib */,
+				6065568C2A54411000354FAA /* libusb-1.0.0.dylib */,
+				606556872A54411000354FAA /* libusbmuxd-2.0.6.dylib */,
 				69FB665B26E7E2820030120D /* Cocoa.framework */,
 				691B8F6B26A1A9C000771658 /* IOKit.framework */,
 				691B8F6926A1A9B700771658 /* CoreFoundation.framework */,
@@ -242,6 +365,7 @@
 			children = (
 				69D5D65926AE39EA0079CF85 /* LDResources */,
 				69AFA6EB269CE0DC0020D40D /* LeetDown_M */,
+				608232BC2B109E83004035CD /* LDUpdater */,
 				69AFA6EA269CE0DC0020D40D /* Products */,
 				693782CD269CE5090082F92D /* Frameworks */,
 				9948104B923EBA54CFAB95A4 /* Pods */,
@@ -252,6 +376,7 @@
 			isa = PBXGroup;
 			children = (
 				69AFA6E9269CE0DC0020D40D /* LeetDown.app */,
+				608232BB2B109E83004035CD /* LDUpdater */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -263,6 +388,8 @@
 				69AFA6ED269CE0DC0020D40D /* AppDelegate.m */,
 				69AFA6EF269CE0DC0020D40D /* LeetDownMain.h */,
 				69AFA6F0269CE0DC0020D40D /* LeetDownMain.mm */,
+				60C082002B0FAB5B00A31616 /* UpdateController.h */,
+				60C081FE2B0FAB5200A31616 /* UpdateController.mm */,
 				64A7886F2996CB5C00865370 /* USBUtils.h */,
 				64A788702996CB5C00865370 /* USBUtils.mm */,
 				6487B43627A9C9740065B016 /* PlistUtils.mm */,
@@ -271,6 +398,8 @@
 				64F78F5B27A1DA9100E4D412 /* LDD.h */,
 				69387BF326B6C7FF00A5EAF6 /* DFUHelperViewController.mm */,
 				69387BF526B6C81600A5EAF6 /* DFUHelperViewController.h */,
+				604CB52A2A4B044300B9CF6A /* NormalModeOperations.h */,
+				604CB5292A4B044300B9CF6A /* NormalModeOperations.mm */,
 				69AFA6F2269CE0DD0020D40D /* Assets.xcassets */,
 				69AFA6F4269CE0DD0020D40D /* Main.storyboard */,
 				693F642E26D916CE0098D043 /* SettingsVC.h */,
@@ -298,21 +427,39 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		608232BA2B109E83004035CD /* LDUpdater */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 608232C12B109E83004035CD /* Build configuration list for PBXNativeTarget "LDUpdater" */;
+			buildPhases = (
+				608232B72B109E83004035CD /* Sources */,
+				608232B82B109E83004035CD /* Frameworks */,
+				608232B92B109E83004035CD /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LDUpdater;
+			productName = LDUpdater;
+			productReference = 608232BB2B109E83004035CD /* LDUpdater */;
+			productType = "com.apple.product-type.tool";
+		};
 		69AFA6E8269CE0DC0020D40D /* LeetDown */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 69AFA713269CE0DE0020D40D /* Build configuration list for PBXNativeTarget "LeetDown" */;
 			buildPhases = (
 				B7C761893CE20065C46EE652 /* [CP] Check Pods Manifest.lock */,
 				69AFA6E5269CE0DC0020D40D /* Sources */,
+				606556842A5440A300354FAA /* Embed Libraries */,
 				69AFA6E6269CE0DC0020D40D /* Frameworks */,
 				69AFA6E7269CE0DC0020D40D /* Resources */,
 				279353221E2BEE2775EAE233 /* [CP] Embed Pods Frameworks */,
-				6478D1AF27A1A26E00677E18 /* Embed Libraries */,
 				6955414C26B81F9500B23CB0 /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				608232C32B10A297004035CD /* PBXTargetDependency */,
 			);
 			name = LeetDown;
 			productName = LeetDown_M;
@@ -327,6 +474,9 @@
 			attributes = {
 				LastUpgradeCheck = 1250;
 				TargetAttributes = {
+					608232BA2B109E83004035CD = {
+						CreatedOnToolsVersion = 15.0;
+					};
 					69AFA6E8269CE0DC0020D40D = {
 						CreatedOnToolsVersion = 12.5.1;
 					};
@@ -346,6 +496,7 @@
 			projectRoot = "";
 			targets = (
 				69AFA6E8269CE0DC0020D40D /* LeetDown */,
+				608232BA2B109E83004035CD /* LDUpdater */,
 			);
 		};
 /* End PBXProject section */
@@ -401,7 +552,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nset -e\necho @rpath\necho \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}\"\nchmod +x \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Contents/Resources/LDResources/Binaries/futurerestore\"\nchmod +x \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Contents/Resources/LDResources/Binaries/futurerestore64\"\nchmod +x \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Contents/Resources/LDResources/Binaries/ipwnder_macosx\"\nchmod +x \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Contents/Resources/LDResources/Binaries/tsschecker\"\ncodesign --force --deep --options=runtime --sign \"${EXPANDED_CODE_SIGN_IDENTITY_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Contents/Resources/LDResources/Binaries/futurerestore\"\ncodesign --force --deep --options=runtime --sign \"${EXPANDED_CODE_SIGN_IDENTITY_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Contents/Resources/LDResources/Binaries/futurerestore64\"\ncodesign --force --options=runtime --sign \"${EXPANDED_CODE_SIGN_IDENTITY_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Contents/Resources/LDResources/Binaries/ipwnder_macosx\"\ncodesign --force --options=runtime --sign \"${EXPANDED_CODE_SIGN_IDENTITY_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Contents/Resources/LDResources/Binaries/tsschecker\"\n\n# now we gotta take care of dylib rpaths\n\nldlocation=\"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Contents/MacOS/LeetDown\"\n\ninstall_name_tool -change /usr/local/opt/libirecovery/lib/libirecovery-1.0.3.dylib @rpath/libirecovery-1.0.3.dylib $ldlocation\ninstall_name_tool -change @@HOMEBREW_PREFIX@@/opt/libusb/lib/libusb-1.0.0.dylib @rpath/libusb-1.0.0.dylib $ldlocation\ninstall_name_tool -change /usr/local/opt/libusbmuxd/lib/libusbmuxd-2.0.6.dylib @rpath/libusbmuxd-2.0.6.dylib $ldlocation\ninstall_name_tool -change /usr/local/opt/libplist/lib/libplist-2.0.3.dylib @rpath/libplist-2.0.3.dylib $ldlocation\ninstall_name_tool -change /usr/local/opt/gnutls/lib/libgnutls.30.dylib @rpath/libgnutls.30.dylib $ldlocation\ninstall_name_tool -change /usr/local/opt/p11-kit/lib/libp11-kit.0.dylib @rpath/libp11-kit.0.dylib $ldlocation\ninstall_name_tool -change /usr/local/opt/libplist/lib/libplist-2.0.3.dylib @rpath/libplist-2.0.3.dylib \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Contents/Frameworks/libusbmuxd-2.0.6.dylib\"\n\ninstall_name_tool -change /usr/local/opt/openssl@1.1/lib/libcrypto.1.1.dylib @rpath/libcrypto.1.1.dylib $ldlocation\n\ninstall_name_tool -change /Applications/LeetDown.app/Contents/Frameworks/libplist-2.0.3.dylib @rpath/libplist-2.0.3.dylib \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Contents/Frameworks/libusbmuxd-2.0.6.dylib\"\n\ncodesign --force --deep --sign - $ldlocation\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nset -e\necho @rpath\necho \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}\"\nchmod +x \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Contents/Resources/LDResources/Binaries/futurerestore\"\nchmod +x \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Contents/Resources/LDResources/Binaries/futurerestore64\"\nchmod +x \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Contents/Resources/LDResources/Binaries/tsschecker\"\ncodesign --force --deep --options=runtime --sign \"${EXPANDED_CODE_SIGN_IDENTITY_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Contents/Resources/LDResources/Binaries/futurerestore\"\ncodesign --force --deep --options=runtime --sign \"${EXPANDED_CODE_SIGN_IDENTITY_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Contents/Resources/LDResources/Binaries/futurerestore64\"\ncodesign --force --options=runtime --sign \"${EXPANDED_CODE_SIGN_IDENTITY_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Contents/Resources/LDResources/Binaries/tsschecker\"\nmv \"${BUILT_PRODUCTS_DIR}/LDUpdater\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Contents/MacOS/\"\n\n# now we gotta take care of dylib rpaths\n\nldlocation=\"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Contents/MacOS/LeetDown\"\n\ninstall_name_tool -change /usr/local/opt/openssl@3/lib/libcrypto.3.dylib @rpath/libcrypto.3.dylib $ldlocation\n\ninstall_name_tool -change /usr/local/opt/libusb/lib/libusb-1.0.0.dylib @rpath/libusb-1.0.0.dylib $ldlocation\n\ninstall_name_tool -change /usr/local/lib/libusbmuxd-2.0.6.dylib @rpath/libusbmuxd-2.0.6.dylib $ldlocation\n\ninstall_name_tool -change /usr/local/lib/libirecovery-1.0.3.dylib @rpath/libirecovery-1.0.3.dylib $ldlocation\n\ninstall_name_tool -change /usr/local/lib/libimobiledevice-glue-1.0.0.dylib @rpath/libimobiledevice-glue-1.0.0.dylib $ldlocation\n\ninstall_name_tool -change /usr/local/lib/libideviceactivation-1.0.2.dylib @rpath/libideviceactivation-1.0.2.dylib $ldlocation\n\ninstall_name_tool -change /usr/local/lib/libplist-2.0.4.dylib @rpath/libplist-2.0.4.dylib $ldlocation\n\ninstall_name_tool -change /usr/local/lib/libimobiledevice-1.0.6.dylib @rpath/libimobiledevice-1.0.6.dylib $ldlocation\n\ninstall_name_tool -change /usr/local/opt/openssl@3/lib/libssl.3.dylib @rpath/libssl.3.dylib \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Contents/Frameworks/libideviceactivation-1.0.2.dylib\"\n\ninstall_name_tool -change /usr/local/opt/openssl@3/lib/libssl.3.dylib @rpath/libssl.3.dylib $ldlocation\n\ninstall_name_tool -change /usr/local/opt/openssl@3/lib/libssl.3.dylib @rpath/libssl.3.dylib \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Contents/Frameworks/libimobiledevice-1.0.6.dylib\"\n\ninstall_name_tool -change /usr/local/Cellar/openssl@3/3.1.1_1/lib/libcrypto.3.dylib @rpath/libcrypto.3.dylib \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Contents/Frameworks/libssl.3.dylib\"\n\ncodesign --force --deep --sign - $ldlocation\n";
 		};
 		B7C761893CE20065C46EE652 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -428,6 +579,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		608232B72B109E83004035CD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				608232BE2B109E83004035CD /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		69AFA6E5269CE0DC0020D40D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -445,6 +604,7 @@
 				692DCC1D269E3CE7004DC22C /* mz_os.c in Sources */,
 				692DCC1F269E3CE7004DC22C /* mz_strm_buf.c in Sources */,
 				692DCC13269E3CE7004DC22C /* mz_strm_pkcrypt.c in Sources */,
+				604CB52B2A4B044300B9CF6A /* NormalModeOperations.mm in Sources */,
 				692DCC20269E3CE7004DC22C /* mz_strm_split.c in Sources */,
 				64A788712996CB5C00865370 /* USBUtils.mm in Sources */,
 				692DCC1A269E3CE7004DC22C /* mz_crypt.c in Sources */,
@@ -453,6 +613,7 @@
 				692DCC14269E3CE7004DC22C /* mz_strm_zlib.c in Sources */,
 				692DCC17269E3CE7004DC22C /* mz_zip_rw.c in Sources */,
 				698823C426D9212D001CE088 /* SettingsVC.mm in Sources */,
+				60C081FF2B0FAB5200A31616 /* UpdateController.mm in Sources */,
 				692DCC12269E3CE7004DC22C /* mz_strm_os_posix.c in Sources */,
 				692DCC19269E3CE7004DC22C /* mz_strm_mem.c in Sources */,
 				69AFA6EE269CE0DC0020D40D /* AppDelegate.m in Sources */,
@@ -460,6 +621,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		608232C32B10A297004035CD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 608232BA2B109E83004035CD /* LDUpdater */;
+			targetProxy = 608232C22B10A297004035CD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		69AFA6F4269CE0DD0020D40D /* Main.storyboard */ = {
@@ -473,6 +642,34 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		608232BF2B109E83004035CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		608232C02B109E83004035CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		69AFA711269CE0DE0020D40D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -595,11 +792,11 @@
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_ENTITLEMENTS = LeetDown_M/LeetDown_M.entitlements;
-				CODE_SIGN_IDENTITY = "-";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = KDKJ9R2CR6;
 				DYLIB_COMPATIBILITY_VERSION = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_TESTING_SEARCH_PATHS = YES;
@@ -620,6 +817,12 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/AFNetworking/AFNetworking.framework/Headers\"",
+					"$(HOME)/limd-build",
+					"$(HOME)/limd-build/libimobiledevice/include",
+					"$(HOME)/limd-build/libplist/include",
+					"$(HOME)/limd-build/libimobiledevice-glue/include",
+					"$(HOME)/limd-build/libimobiledevice-glue/src",
+					"$(HOME)/limd-build/libideviceactivation/include",
 				);
 				INFOPLIST_FILE = LeetDown_M/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -630,10 +833,14 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
+					/opt/homebrew/Cellar/libusb/1.0.26/lib,
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Frameworks/ipwnder_lite",
+					"$(PROJECT_DIR)/Frameworks/iPwnder32",
 				);
 				MACH_O_TYPE = mh_execute;
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				MARKETING_VERSION = 2.3_alpha;
+				MARKETING_VERSION = 2.3.0;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = rA9.LeetDown;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -651,11 +858,11 @@
 				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_ENTITLEMENTS = LeetDown_M/LeetDown_M.entitlements;
-				CODE_SIGN_IDENTITY = "-";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = KDKJ9R2CR6;
 				DYLIB_COMPATIBILITY_VERSION = "";
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_TESTING_SEARCH_PATHS = YES;
@@ -673,6 +880,15 @@
 					"$(inherited)",
 					"DEBUG=1",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/AFNetworking/AFNetworking.framework/Headers\"",
+					"$(HOME)/limd-build",
+					"$(HOME)/limd-build/libimobiledevice/include",
+					"$(HOME)/limd-build/libplist/include",
+					"$(HOME)/limd-build/libimobiledevice-glue/include",
+					"$(HOME)/limd-build/libimobiledevice-glue/src",
+				);
 				INFOPLIST_FILE = LeetDown_M/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -682,10 +898,14 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
+					/opt/homebrew/Cellar/libusb/1.0.26/lib,
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Frameworks/ipwnder_lite",
+					"$(PROJECT_DIR)/Frameworks/iPwnder32",
 				);
 				MACH_O_TYPE = mh_execute;
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				MARKETING_VERSION = 2.3_alpha;
+				MARKETING_VERSION = 2.3.0;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = rA9.LeetDown;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -696,6 +916,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		608232C12B109E83004035CD /* Build configuration list for PBXNativeTarget "LDUpdater" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				608232BF2B109E83004035CD /* Debug */,
+				608232C02B109E83004035CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		69AFA6E4269CE0DC0020D40D /* Build configuration list for PBXProject "LeetDown" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

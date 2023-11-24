@@ -16,17 +16,13 @@
 @interface USBUtils : NSObject
 
 - (void)startMonitoringUSBDevices:(ViewController *) vc;
+- (void)stopMonitoringUSBDevices;
 - (NSString*) getNameOfUSBDevice:(io_object_t) usbDevice;
 - (void) USBDeviceDetectedCallback:(void *)refcon iterator: (io_iterator_t) iterator;
 - (void) registerForUSBDeviceNotifications;
 @property (nonatomic, strong) ViewController* vc;
 
 @end
-
-//NSString* getNameOfUSBDevice(io_object_t usbDevice);
-//void USBDeviceDetectedCallback(void *refcon, io_iterator_t iterator);
-//void registerForUSBDeviceNotifications();
-//void startMonitoringUSBDevices();
 
 
 #endif /* USBUtils_h */

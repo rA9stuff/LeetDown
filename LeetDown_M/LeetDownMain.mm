@@ -2,8 +2,14 @@
 #include "LDD.h"
 #include "PlistUtils.h"
 #include "USBUtils.h"
+#include "NormalModeOperations.h"
+#include "UpdateController.h"
+#import <Sparkle/SUUpdater.h>
 #define USB_TIMEOUT 10000
 
+extern BOOL LD_signalReceived;
+extern NSCondition *LD_conditionVariable;
+USBUtils* USB_VC = [[USBUtils alloc] init];
 
 NSString* NSCPID(const unsigned int *buf) {
     NSMutableString *mstr=[[NSMutableString alloc] init];
@@ -134,9 +140,9 @@ LDD *dfuDevPtr = new LDD; // initialize it with defualt constructor first, since
     else {
         sizeCheckValue = @"iPad64Size";
     }
-    PlistUtils correctsize;
+
     NSString* result = [NSString stringWithFormat:@"%llu", [self fileSizeAtPath:ipswLocation.absoluteString]];
-    if (![result isEqualToString: correctsize.getPref(sizeCheckValue)]) {
+    if (![result isEqualToString: getPref(sizeCheckValue)]) {
         dispatch_async(dispatch_get_main_queue(), ^(){
             [self updateStatus:@"iPSW is corrupt! If you think this is a mistake, disable iPSW check in settings" color:[NSColor redColor]];
             self -> _selectIPSWoutlet.enabled = true;
@@ -194,7 +200,6 @@ LDD *dfuDevPtr = new LDD; // initialize it with defualt constructor first, since
     NSURLRequest *request = [NSURLRequest requestWithURL:formattedURL];
     NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
     NSURL *fullURL = [documentsDirectoryURL URLByAppendingPathComponent:name];
-    NSString *urlns = [[NSString stringWithFormat:@"%@", fullURL] substringFromIndex:7];
     
     [manager setDownloadTaskDidWriteDataBlock:^(NSURLSession *session, NSURLSessionDownloadTask *downloadTask, int64_t bytesWritten, int64_t totalBytesWritten, int64_t totalBytesExpectedToWrite) {
         
@@ -238,70 +243,71 @@ LDD *dfuDevPtr = new LDD; // initialize it with defualt constructor first, since
             [_percentage setStringValue:@""];
             [_versionLabel setAlphaValue:1];
             
-            PlistUtils szcheck;
             
-            if ([szcheck.getPref(@"skipCheck")  isEqual: @"0"]) {
-                    [self updateStatus:@"Checking iPSW size..." color:[NSColor cyanColor]];
-                dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
-                    [self iPSWcheck:filePath];
-                });
-                
-            }
-            NSString *tempipswdir = [[NSString stringWithFormat:@"%@", NSTemporaryDirectory()] stringByAppendingString:@"iPSW"];
-            NSString *zipEntityToExtract = @"BuildManifest.plist";
-            NSString *destinationFilePath = [tempipswdir stringByAppendingString:@"/BuildManifest.plist"];
-            NSString *zipPath = urlns;
-            [SSZipArchive unzipEntityName:zipEntityToExtract fromFilePath:zipPath toDestination:destinationFilePath];
-          
-            dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
-                                
-                dispatch_async(dispatch_get_main_queue(), ^(){
-                    [[self dfuhelpoutlet] setHidden:TRUE];
-                    [[self dfuhelpoutlet] setEnabled:false];
-                    [self updateStatus:[NSString stringWithFormat:@"iPSW selected at %@ and being extracted to %@", urlns, tempipswdir] color:[NSColor whiteColor]];
-                    [self updateStatus:@"Extracting the iPSW" color:[NSColor greenColor]];
-                    [self->_uselessIndicator setIndeterminate:NO];
-                });
-                [SSZipArchive unzipFileAtPath:urlns toDestination:tempipswdir progressHandler:^(NSString *entry, unz_file_info zipInfo, long entryNumber, long total) {
-                    
-                    dispatch_async(dispatch_get_main_queue(), ^(){
-                        __block NSString *percentageStr = [NSString stringWithFormat:@"%f", uzip_progress];
-                        percentageStr = [percentageStr substringToIndex:[percentageStr length] -4];
-                        percentageStr = [percentageStr substringFromIndex:2];
-                        [_percentage setStringValue:[NSString stringWithFormat:@"%@%%", percentageStr]];
-                        [self -> _uselessIndicator setDoubleValue:uzip_progress];
-                    });
-                } completionHandler:^(NSString *path, BOOL succeeded, NSError* err) {
-                    
-                    dispatch_async(dispatch_get_main_queue(), ^(){
-                        if (succeeded) {
-                            [self updateStatus: @"Successfully extracted the iPSW" color:[NSColor cyanColor]];
-                            [self -> _versionLabel setAlphaValue:1.0];
-                            [self -> _uselessIndicator setHidden:YES];
-                            self -> _percentage.hidden = true;
-                            self -> _versionLabel.hidden = false;
-                            self -> _downgradeButtonOut.enabled = true;
-                            self -> _selectIPSWoutlet.enabled = true;
-                            [self->_uselessIndicator stopAnimation:nil];
-                            
-                            PlistUtils locationObject;
-                            locationObject.modifyPref(@"32iPSWLoc", tempipswdir);
-                        }
-                        else {
-                            [self updateStatus:@"An error occured extracting the iPSW, please check your free space and try again" color:[NSColor redColor]];
-                            self -> _downgradeButtonOut.enabled = false;
-                            self -> _selectIPSWoutlet.enabled = true;
-                            [self->_uselessIndicator stopAnimation:nil];
-                        }
-                    });
-                }];
-            });
         });
     }];
     
     [downloadTask resume];
 }
 
+- (void)extractIPSW:(NSURL*)filePath {
+    
+    NSString *urlns = [[NSString stringWithFormat:@"%@", filePath] substringFromIndex:7];
+    NSString *tempipswdir = [[NSString stringWithFormat:@"%@", NSTemporaryDirectory()] stringByAppendingString:@"iPSW"];
+    NSString *zipEntityToExtract = @"BuildManifest.plist";
+    NSString *destinationFilePath = [tempipswdir stringByAppendingString:@"/BuildManifest.plist"];
+    NSString *zipPath = urlns;
+    [SSZipArchive unzipEntityName:zipEntityToExtract fromFilePath:zipPath toDestination:destinationFilePath];
+  
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
+                        
+        dispatch_async(dispatch_get_main_queue(), ^(){
+            [[self dfuhelpoutlet] setHidden:TRUE];
+            [[self dfuhelpoutlet] setEnabled:false];
+            [self updateStatus:[NSString stringWithFormat:@"iPSW selected at %@ and being extracted to %@", urlns, tempipswdir] color:[NSColor whiteColor]];
+            [self updateStatus:@"Extracting the iPSW" color:[NSColor greenColor]];
+            [self->_uselessIndicator setIndeterminate:NO];
+        });
+        [SSZipArchive unzipFileAtPath:urlns toDestination:tempipswdir progressHandler:^(NSString *entry, unz_file_info zipInfo, long entryNumber, long total) {
+            
+            dispatch_async(dispatch_get_main_queue(), ^(){
+                __block NSString *percentageStr = [NSString stringWithFormat:@"%f", uzip_progress];
+                percentageStr = [percentageStr substringToIndex:[percentageStr length] -4];
+                percentageStr = [percentageStr substringFromIndex:2];
+                [_percentage setStringValue:[NSString stringWithFormat:@"%@%%", percentageStr]];
+                [self -> _uselessIndicator setDoubleValue:uzip_progress];
+            });
+        } completionHandler:^(NSString *path, BOOL succeeded, NSError* err) {
+            
+            dispatch_async(dispatch_get_main_queue(), ^(){
+                if (succeeded) {
+                    [self updateStatus: @"Successfully extracted the iPSW" color:[NSColor cyanColor]];
+                    [self -> _versionLabel setAlphaValue:1.0];
+                    [self -> _uselessIndicator setHidden:YES];
+                    self -> _percentage.hidden = true;
+                    self -> _versionLabel.hidden = false;
+                    self -> _downgradeButtonOut.enabled = true;
+                    self -> _selectIPSWoutlet.enabled = true;
+                    [self->_uselessIndicator stopAnimation:nil];
+                    
+                    modifyPref(@"32iPSWLoc", tempipswdir);
+                }
+                else {
+                    [self updateStatus:@"An error occured extracting the iPSW, please check your free space and try again" color:[NSColor redColor]];
+                    self -> _downgradeButtonOut.enabled = false;
+                    self -> _selectIPSWoutlet.enabled = true;
+                    [self->_uselessIndicator stopAnimation:nil];
+                }
+            });
+        }];
+    });
+}
+
+- (void)verifyIPSW:(NSString*)filepath {
+    
+    
+    
+}
 
 - (void)redirectNSLogToFile {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -325,7 +331,7 @@ LDD *dfuDevPtr = new LDD; // initialize it with defualt constructor first, since
 - (IBAction)gotoSettings:(id)sender {
     
     NSStoryboard *storyboard = [NSStoryboard storyboardWithName:@"Main" bundle:nil];
-    NSViewController *yourViewController = [storyboard instantiateControllerWithIdentifier:@"SettingsController"];
+    NSViewController *yourViewController = [storyboard instantiateControllerWithIdentifier:@"UpdateController"];
     dispatch_async(dispatch_get_main_queue(), ^(){
         [self.view.window.contentViewController presentViewControllerAsSheet:yourViewController];
     });
@@ -334,6 +340,36 @@ LDD *dfuDevPtr = new LDD; // initialize it with defualt constructor first, since
 
 - (int)exploitDevice {
     
+    int exploitIndex = getPref(@"exploit_index").intValue;
+    NSString *exploitName = NULL;
+    
+    switch (exploitIndex) {
+        case 0:
+            exploitName = @"iPwnder32";
+            break;
+        case 1:
+            exploitName = @"ipwnder_lite";
+            break;
+        case 2:
+            exploitName = @"gaster";
+            break;
+        default:
+            break;
+    }
+    
+    if (exploitName == NULL) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self updateStatus:[NSString stringWithFormat:@"Invalid exploit index: %i, unable to continue.", exploitIndex] color:[NSColor greenColor]];
+        });
+    }
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self updateStatus:[NSString stringWithFormat:@"Pwning device with %@...", exploitName] color:[NSColor greenColor]];
+    });
+    
+    checkm8_32_exploit(dfuDevPtr -> getClient(), dfuDevPtr -> getDevice(), dfuDevPtr -> getDevInfo());
+    
+    /*
     sleep(1);
     NSTask *exploit = [[NSTask alloc] init];
     [exploit setLaunchPath:[[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/LDResources/Binaries/ipwnder_macosx"]];
@@ -367,9 +403,8 @@ LDD *dfuDevPtr = new LDD; // initialize it with defualt constructor first, since
     
     // we want to minimize the # of times we connect to devices for stability reasons
     // so, get the info from the plist instead.
-    PlistUtils version;
     
-    if (strcmp(version.getPref(@"destinationFW").UTF8String, "8.4.1") == 0) {
+    if (strcmp(getPref(@"destinationFW").UTF8String, "8.4.1") == 0) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self updateStatus:@"Uploading pwned iBoot..." color:[NSColor cyanColor]];
         });
@@ -385,6 +420,7 @@ LDD *dfuDevPtr = new LDD; // initialize it with defualt constructor first, since
         sleep(1);
         dfuDevPtr -> freeDevice();
     }
+     */
     return 0;
 }
 
@@ -493,9 +529,8 @@ LDD *dfuDevPtr = new LDD; // initialize it with defualt constructor first, since
     NSString *tempipswdir = [[NSString stringWithFormat:@"%@", NSTemporaryDirectory()] stringByAppendingString:@"iPSW"];
     NSString *board = [NSString stringWithFormat:@"%s", dfuDevPtr -> getHardwareModel()];
     const char *boardcmp = [board cStringUsingEncoding:NSASCIIStringEncoding];
-    PlistUtils resetToggle;
     
-    if ([resetToggle.getPref(@"resetreq") isEqual:@"1"]) {
+    if ([getPref(@"resetreq") isEqual:@"1"]) {
         [self bootchainUploadManager:@"/dev/null" reconnect:false];
         sleep(5);
     }
@@ -540,7 +575,6 @@ LDD *dfuDevPtr = new LDD; // initialize it with defualt constructor first, since
 
 - (int) PrintDevInfo  {
 
-    PlistUtils destinationObject;
     [self infoLog: @"\n\n============= DEVICE INFO =============\n" color:[NSColor cyanColor]];
     [self infoLog: @"\nModel Name: " color:[NSColor cyanColor]];
     [self infoLog: [NSString stringWithFormat:@"%s", dfuDevPtr -> getDisplayName()] color:[NSColor greenColor]];
@@ -555,7 +589,7 @@ LDD *dfuDevPtr = new LDD; // initialize it with defualt constructor first, since
     [self infoLog:@"\nCPID: " color:[NSColor cyanColor]];
     [self infoLog: [NSString stringWithFormat:@"%@", NSCPID(&dfuDevPtr -> getDevInfo() -> cpid)] color:[NSColor greenColor]];
     [self infoLog: @"\nDestination Firmware: " color:[NSColor cyanColor]];
-    [self infoLog: destinationObject.getPref(@"destinationFW") color:[NSColor greenColor]];
+    [self infoLog: getPref(@"destinationFW") color:[NSColor greenColor]];
     [self infoLog:@"\nPwned: " color:[NSColor cyanColor]];
     if (dfuDevPtr -> checkPwn()) {
         [self infoLog: @"Yes" color:[NSColor greenColor]];
@@ -567,11 +601,88 @@ LDD *dfuDevPtr = new LDD; // initialize it with defualt constructor first, since
     return 0;
 }
 
+lockdownd_client_t lockdown = NULL;
+idevice_t devptr = NULL;
 
-
-- (int) discoverDevices {
+- (int) discoverNormalDevices {
     
     static bool supported = false;
+    
+    if (openNormalModeConnection(devptr, 5) != 0) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self updateStatus:@"Failed to connect, please reconnect to try again" color:[NSColor redColor]];
+        });
+        return -1;
+    }
+    
+    NSString* devname = getDeviceName(devptr, lockdown);
+    if ([devname isEqualToString:@"err_pair"]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self updateStatus:[NSString stringWithFormat:@"Tap the \"trust\" button on your device and reconnect to continue"] color:[NSColor yellowColor]];
+        });
+        return -1;
+    }
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self updateStatus:[NSString stringWithFormat:@"Successfully connected to %@", getDeviceName(devptr, lockdown)] color:[NSColor greenColor]];
+    });
+    char* ecid = queryKey(lockdown, "UniqueChipID");
+    char* hwModel = queryKey(lockdown, "HardwareModel");
+    
+    if (ecid == NULL || hwModel == NULL) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self updateStatus:@"Failed to access device details, unable to start a restore session" color:[NSColor redColor]];
+        });
+        return -1;
+    }
+    
+    NSString *destination;
+    
+    // check if the device is compatible.
+    if (strcmp(hwModel, "N51AP") == 0 || strcmp(hwModel, "N53AP") == 0 || strcmp(hwModel, "J71AP") == 0 || strcmp(hwModel, "J72AP") == 0 || strcmp(hwModel, "J73AP") == 0 || strcmp(hwModel, "J85AP") == 0 || strcmp(hwModel, "J86AP") == 0) {
+        
+        destination = @"10.3.3";
+        supported = true;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            _mainbox.fillColor = [NSColor colorWithSRGBRed:0.105882352941176f green:0.305882352941176f blue:0.317647058823529f alpha:1.0f];
+        });
+        
+    }
+    else if (strcmp(hwModel, "N41AP") == 0 || strcmp(hwModel, "N42AP") == 0 || strcmp(hwModel, "P101AP") == 0 || strcmp(hwModel, "P102AP") == 0 || strcmp(hwModel, "P103AP") == 0) {
+        
+        destination = @"8.4.1";
+        supported = true;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            _mainbox.fillColor = [NSColor colorWithRed:44.0f/255.0f green:33.0f/255.0f blue:54.0f/255.0f alpha:1.0];
+        });
+    }
+    else {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self updateStatus:[NSString stringWithFormat: @"%s is not supported", hwModel] color:[NSColor redColor]];
+        });
+        dfuDevPtr -> freeDevice();
+        return -1;
+    }
+    
+    modifyPref(@"destinationFW", destination);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[self dfuhelpoutlet] setEnabled:false];
+        [[self dfuhelpoutlet] setHidden:true];
+        [[self versionLabel] setAlphaValue:1.0];
+        
+        [self updateStatus:[NSString stringWithFormat:@"Telling %s to enter recovery mode", hwModel] color:[NSColor whiteColor]];
+    });
+    lockdownd_enter_recovery(lockdown);
+    
+    [self discoverRestoreDevices:0];
+    return 0;
+}
+
+- (int) discoverRestoreDevices:(int)mode {
+    
+    // mode = 0: rec
+    // mode = 1: dfu
+    static bool dfuPhase = false;
 
     if (discoverStateEnded) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -579,72 +690,67 @@ LDD *dfuDevPtr = new LDD; // initialize it with defualt constructor first, since
         });
         return 0;
     }
-    if (dfuDevPtr -> openConnection(5) != 0) {
-        [self updateStatus:@"An unknown error occured connecting to iOS device" color:[NSColor redColor]];
+    if (dfuDevPtr -> openConnection(50) != 0) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self updateStatus:@"An unknown error occured connecting to iOS device" color:[NSColor redColor]];
+        });
+        return -1;
+    }
+    if (strcmp(dfuDevPtr -> getDeviceMode(), "Unknown") == 0) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self updateStatus:@"Device is in an invalid state, please place it in DFU mode to proceed" color:[NSColor redColor]];
+        });
         return -1;
     }
     
     ECID = [NSString stringWithFormat:@"%llu", dfuDevPtr -> getDevInfo() -> ecid];
     
-    // now check if the device is in any other mode other than DFU.
-    if (!(dfuDevPtr -> getDevInfo() -> srtg)) {
+    if (mode == 0 && (strcmp(dfuDevPtr -> getDeviceMode(), "Recovery") == 0)) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            if (strcmp(dfuDevPtr -> getDeviceMode(), "Unknown") == 0) {
-                [self updateStatus:@"Device is in an invalid state, please place it in DFU mode to proceed" color:[NSColor redColor]];
-            }
-            else {
-                [self updateStatus:[NSString stringWithFormat:@"%@ with ECID: %@ is connected in %@ mode instead of DFU mode, please place it in DFU mode to proceed", [NSString stringWithUTF8String:dfuDevPtr -> getDisplayName()], ECID, [NSString stringWithUTF8String:dfuDevPtr -> getDeviceMode()]] color:[NSColor redColor]];
-            }
+            [self updateStatus:@"Device successfully entered recovery mode" color:[NSColor greenColor]];
         });
-        dfuDevPtr -> freeDevice();
-        supported = false;
-        usleep(500000);
-        return -1;
-    }
+        dfuPhase = true;
         
-    // create a PlistUtils object to modify the "destinationFW" value.
-    PlistUtils plistObject;
-    
-    NSString *destination;
-    
-    // check if the device is compatible.
-    NSString *boardConfig = [NSString stringWithFormat:@"%s", dfuDevPtr -> getHardwareModel()];
-    if (strcmp(boardConfig.UTF8String, "n51ap") == 0 || strcmp(boardConfig.UTF8String, "n53ap") == 0 || strcmp(boardConfig.UTF8String, "j71ap") == 0 || strcmp(boardConfig.UTF8String, "j72ap") == 0 || strcmp(boardConfig.UTF8String, "j73ap") == 0 || strcmp(boardConfig.UTF8String, "j85ap") == 0 || strcmp(boardConfig.UTF8String, "j86ap") == 0) {
-        
-        destination = @"10.3.3";
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            _mainbox.fillColor = [NSColor colorWithSRGBRed:0.105882352941176f green:0.305882352941176f blue:0.317647058823529f alpha:1.0f];
+        NSStoryboard *storyboard = [NSStoryboard storyboardWithName:@"Main" bundle:nil];
+        NSViewController *dfuhelpervc = [storyboard instantiateControllerWithIdentifier:@"DFUHelper"];
+        dispatch_async(dispatch_get_main_queue(), ^(){
+            [self.view.window.contentViewController presentViewControllerAsSheet:dfuhelpervc];
         });
+     
+        // sleep until the signal
+        while (!LD_signalReceived) {
+            [LD_conditionVariable wait];
+        }
+        [self discoverRestoreDevices:1];
+        return 0;
         
-    }
-    else if (strcmp(boardConfig.UTF8String, "n41ap") == 0 || strcmp(boardConfig.UTF8String, "n42ap") == 0 || strcmp(boardConfig.UTF8String, "p101ap") == 0 || strcmp(boardConfig.UTF8String, "p102ap") == 0 || strcmp(boardConfig.UTF8String, "p103ap") == 0) {
-        
-        destination = @"8.4.1";
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            _mainbox.fillColor = [NSColor colorWithRed:44.0f/255.0f green:33.0f/255.0f blue:54.0f/255.0f alpha:1.0];
-        });
-    }
-    else {
-        [self updateStatus:[NSString stringWithFormat: @"%s is not supported", dfuDevPtr -> getDisplayName()] color:[NSColor redColor]];
-        dfuDevPtr -> freeDevice();
-        return -1;
     }
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self updateStatus:[NSString stringWithFormat: @"%s is supported", dfuDevPtr -> getDisplayName()] color:[NSColor greenColor]];
-        [self PrintDevInfo];
-        self -> _selectIPSWoutlet.enabled = true;
-        self -> _selectIPSWoutlet.title = [[@"Select " stringByAppendingString:destination] stringByAppendingString:@" iPSW"];
-        
-    });
-    supported = true;
-    plistObject.modifyPref(@"destinationFW", destination);
-    [[self dfuhelpoutlet] setEnabled:false];
-    [[self dfuhelpoutlet] setHidden:true];
-    [[self versionLabel] setAlphaValue:1.0];
-    return 0;
+    if (mode == 1) {
+        // now check if the device is in any other mode other than DFU.
+        if (!(dfuDevPtr -> getDevInfo() -> srtg)) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (strcmp(dfuDevPtr -> getDeviceMode(), "Unknown") == 0) {
+                    [self updateStatus:@"Device is in an invalid state, please place it in DFU mode to proceed" color:[NSColor redColor]];
+                }
+                else {
+                    [self updateStatus:[NSString stringWithFormat:@"%@ with ECID: %@ is connected in %@ mode instead of DFU mode, please place it in DFU mode to proceed", [NSString stringWithUTF8String:dfuDevPtr -> getDisplayName()], ECID, [NSString stringWithUTF8String:dfuDevPtr -> getDeviceMode()]] color:[NSColor redColor]];
+                }
+            });
+            dfuDevPtr -> freeDevice();
+            usleep(500000);
+            return -1;
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self updateStatus:[NSString stringWithFormat: @"%s is supported", dfuDevPtr -> getDisplayName()] color:[NSColor greenColor]];
+            [self PrintDevInfo];
+            self -> _selectIPSWoutlet.enabled = true;
+            self -> _selectIPSWoutlet.title = [[@"Select " stringByAppendingString:getPref(@"destinationFW")] stringByAppendingString:@" iPSW"];
+        });
+        return 0;
+    }
+
+    return -1;
 }
 
 - (int) restore32 {
@@ -666,8 +772,8 @@ LDD *dfuDevPtr = new LDD; // initialize it with defualt constructor first, since
     NSString *ipswPath=dict[@"32iPSWLoc"];
     
     if (strcmp(boardcmp, "n41ap") == 0 || strcmp(boardcmp, "n42ap") == 0 || strcmp(boardcmp, "p102ap") == 0 || strcmp(boardcmp, "p103ap") == 0) {
-        PlistUtils *bbcheck = new PlistUtils;
-        bool downgradeBB = [bbcheck -> getPref(@"downgradeBB") boolValue];
+
+        bool downgradeBB = [getPref(@"downgradeBB") boolValue];
         if (downgradeBB) {
             bb = @"--latest-baseband";
             restore.arguments = @[@"-t", ticket, bb, @"--use-pwndfu", ipswPath];
@@ -771,8 +877,8 @@ LDD *dfuDevPtr = new LDD; // initialize it with defualt constructor first, since
 - (IBAction)selectIPSW:(id)sender {
     
     cleanUp();
-    discoverStateEnded = true;
     NSString *tempipswdir = [[NSString stringWithFormat:@"%@", NSTemporaryDirectory()] stringByAppendingString:@"iPSW"];
+    __block NSString *ipswLocation = @"";
     
     NSAlert *alert = [[NSAlert alloc] init];
     [alert setMessageText:@"Select iPSW"];
@@ -787,23 +893,23 @@ LDD *dfuDevPtr = new LDD; // initialize it with defualt constructor first, since
             
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             const char *devmodel = dfuDevPtr -> getProductType();
-            PlistUtils version;
-            NSString *ipswname = [[[[NSString stringWithFormat:@"%s", devmodel] stringByAppendingString: @"_"] stringByAppendingString:version.getPref(@"destinationFW")] stringByAppendingString:@"_stock.ipsw"];
-            NSString *ipswLocation = [[[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingString:@"/"] stringByAppendingString:ipswname];
+
+            NSString *ipswname = [[[[NSString stringWithFormat:@"%s", devmodel] stringByAppendingString: @"_"] stringByAppendingString:getPref(@"destinationFW")] stringByAppendingString:@"_stock.ipsw"];
+            ipswLocation = [[[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingString:@"/"] stringByAppendingString:ipswname];
             if ([[NSFileManager defaultManager] fileExistsAtPath:ipswLocation]) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [self updateStatus:[NSString stringWithFormat: @"You already have an iPSW in your Documents folder named \"%@\". Either delete that iPSW or specify it by clicking \"Browse for an iPSW\".", ipswname] color:[NSColor redColor]];
+                    [self updateStatus:[NSString stringWithFormat: @"You already have an iPSW in your Documents folder named \"%@\". Either delete the iPSW or specify it by clicking \"Browse for an iPSW\" button.", ipswname] color:[NSColor redColor]];
                 });
             return;
             }
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                PlistUtils destinationObject;
+
                 _selectIPSWoutlet.enabled = false;
                 _dfuhelpoutlet.alphaValue = 0;
                 _percentage.stringValue = @"%0";
                 [self infoLog:@"\n" color:[NSColor whiteColor]];
-                [self updateStatus:[NSString stringWithFormat:@"Downloading iOS %@ iPSW for %s...", destinationObject.getPref(@"destinationFW"), devmodel] color:[NSColor greenColor]];
+                [self updateStatus:[NSString stringWithFormat:@"Downloading iOS %@ iPSW for %s...", getPref(@"destinationFW"), devmodel] color:[NSColor greenColor]];
                 [_uselessIndicator setIndeterminate:NO];
                 [_uselessIndicator setMaxValue:1];
             });
@@ -829,10 +935,11 @@ LDD *dfuDevPtr = new LDD; // initialize it with defualt constructor first, since
             else if (strcmp(devmodel, "iPad3,6") == 0) {
                 [self downloadiPSW:@"http://appldnld.apple.com/ios8.4.1/031-31187-20150812-751A8A7E-3C8F-11E5-B300-B71A3A53DB92/iPad3,6_8.4.1_12H321_Restore.ipsw" name:ipswname];
             }
+            [self extractIPSW:[NSURL URLWithString:ipswLocation]];
         });
     }
     else {
-            
+        NSString *filepath = @"";
         NSOpenPanel* openDlg = [NSOpenPanel openPanel];
         NSArray* fileTypes = [NSArray arrayWithObjects:@"ipsw", @"IPSW", nil];
         [openDlg setCanChooseFiles:YES];
@@ -840,21 +947,28 @@ LDD *dfuDevPtr = new LDD; // initialize it with defualt constructor first, since
         [openDlg setAllowedFileTypes:fileTypes];
 
         if ([openDlg runModal] == NSModalResponseOK) {
-                
+            
             for (NSURL* URL in [openDlg URLs]) {
-
-                NSString *filepath = URL.absoluteString;
-                filepath = [filepath substringFromIndex:7];
+                
+                filepath = URL.absoluteString;
+                
+                if (URL == NULL) {
+                    [self updateStatus:@"Provided path is invalid" color:[NSColor redColor]];
+                    return;
+                }
+                
                 [[NSFileManager defaultManager] createDirectoryAtPath:tempipswdir withIntermediateDirectories:NO attributes:NULL error:NULL];
-
+                [self extractIPSW:URL];
+            }
+        }
                 self -> _downgradeButtonOut.enabled = false;
                 self -> _selectIPSWoutlet.enabled = false;
                 [self updateStatus:@"Verifying iPSW" color:[NSColor greenColor]];
                 _uselessIndicator.indeterminate = true;
                     
-                PlistUtils *destinationCheck = NULL;
                 const char* selected_ipsw_version = [self ipswVersion:filepath];
-                const char* required_ipsw_version = destinationCheck -> getPref(@"destinationFW").UTF8String;
+        //const char* selected_ipsw_version = "";
+                const char* required_ipsw_version = getPref(@"destinationFW").UTF8String;
                 if (selected_ipsw_version == NULL) {
                     [self updateStatus:@"Selected iPSW is corrupt" color:[NSColor redColor]];
                     self -> _selectIPSWoutlet.enabled = true;
@@ -869,25 +983,24 @@ LDD *dfuDevPtr = new LDD; // initialize it with defualt constructor first, since
                 
                 dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
                     
-                    PlistUtils szcheck;
-                    if ([szcheck.getPref(@"skipCheck") isEqual:@"0"]) {
+                    if ([getPref(@"skipCheck") isEqual:@"0"]) {
                         
                         dispatch_async(dispatch_get_main_queue(), ^(){
                             [self updateStatus:@"Checking iPSW size..." color:[NSColor cyanColor]];
                         });
-                        if ([self iPSWcheck:URL] != 0) {
+                        //if ([self iPSWcheck:URL] != 0) {
                             return;
-                        }
+                        //}
                     }
                     dispatch_async(dispatch_get_main_queue(), ^(){
                         [self updateStatus:@"Successfully verified the iPSW" color:[NSColor cyanColor]];
                             
                     });
                     // if it's an A6 device, set plist but do not extract anything
-                    if (strcmp(destinationCheck -> getPref(@"destinationFW").UTF8String, "8.4.1") == 0) {
+                    if (strcmp(getPref(@"destinationFW").UTF8String, "8.4.1") == 0) {
                         NSString *preferencePlist = [[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/com.rA9.LeetDownPreferences.plist"];
                         NSDictionary *dict=[[NSDictionary alloc] initWithContentsOfFile:preferencePlist];
-                        [dict setValue:filepath forKey:@"32iPSWLoc"];
+                        //[dict setValue:filepath forKey:@"32iPSWLoc"];
                         [dict writeToFile:preferencePlist atomically:YES];
                         dispatch_async(dispatch_get_main_queue(), ^(){
                             self -> _downgradeButtonOut.enabled = true;
@@ -895,48 +1008,12 @@ LDD *dfuDevPtr = new LDD; // initialize it with defualt constructor first, since
                         });
                         return;
                     }
-                    // if it's an A7 device, extract the iPSW to patch bootchain
+                    // if it's an A7 device or an A6 device with "downgrade baseband" option selected, extract the iPSW
                     dispatch_async(dispatch_get_main_queue(), ^(){
-                        //[[self dfuhelpoutlet] setHidden:TRUE];
-                        //[[self dfuhelpoutlet] setEnabled:false];
-                        [self updateStatus:[NSString stringWithFormat:@"iPSW selected at %@ and being extracted to %@", filepath, tempipswdir] color:[NSColor whiteColor]];
-                        [self updateStatus:@"Extracting the iPSW" color:[NSColor greenColor]];
-                        [self->_uselessIndicator setIndeterminate:NO];
+                            
                     });
-                    [SSZipArchive unzipFileAtPath:filepath toDestination:tempipswdir progressHandler:^(NSString *entry, unz_file_info zipInfo, long entryNumber, long total) {
-                        
-                        dispatch_async(dispatch_get_main_queue(), ^(){
-                            [self -> _uselessIndicator setDoubleValue:uzip_progress];
-                        });
-                         
-                    } completionHandler:^(NSString *path, BOOL succeeded, NSError* err) {
-                        
-                        dispatch_async(dispatch_get_main_queue(), ^(){
-                            if (succeeded) {
-                                [self updateStatus: @"Successfully extracted the iPSW" color:[NSColor cyanColor]];
-                                [self -> _versionLabel setAlphaValue:1.0];
-                                [self -> _uselessIndicator setHidden:YES];
-                                self -> _percentage.hidden = true;
-                                self -> _versionLabel.hidden = false;
-                                self -> _downgradeButtonOut.enabled = true;
-                                self -> _selectIPSWoutlet.enabled = true;
-                                [self->_uselessIndicator stopAnimation:nil];
-                                
-                                PlistUtils locationObject;
-                                locationObject.modifyPref(@"32iPSWLoc", tempipswdir);
-                            }
-                            else {
-                                [self updateStatus:@"An error occured extracting the iPSW, please check your free space and try again" color:[NSColor redColor]];
-                                self -> _downgradeButtonOut.enabled = false;
-                                self -> _selectIPSWoutlet.enabled = true;
-                                [self->_uselessIndicator stopAnimation:nil];
-                            }
-                        });
-                    }];
                 });
             }
-        }
-    }
     }];
 }
 
@@ -991,8 +1068,8 @@ LDD *dfuDevPtr = new LDD; // initialize it with defualt constructor first, since
                 _downgradeButtonOut.enabled = false;
                 _versionLabel.alphaValue = 1;
             });
-            static PlistUtils destination;
-            if (pwned && strcmp(destination.getPref(@"destinationFW").UTF8String, "10.3.3") == 0) {
+
+            if (pwned && strcmp(getPref(@"destinationFW").UTF8String, "10.3.3") == 0) {
                 dispatch_async(dispatch_get_main_queue(), ^(){
                     [self updateStatus:@"Device was already pwned, skipping exploitation" color:[NSColor cyanColor]];
                 });
@@ -1000,7 +1077,9 @@ LDD *dfuDevPtr = new LDD; // initialize it with defualt constructor first, since
             
             else {
                 dfuDevPtr -> freeDevice(); // need to free the device so that iPwnder32 can take over
-                if ([self exploitDevice] != 0) {
+                [USB_VC stopMonitoringUSBDevices];
+                dfuDevPtr -> pwnDevice();
+                if (dfuDevPtr -> checkPwn() != 0) {
                     return;
                 }
                 if (dfuDevPtr -> getClient() == NULL) {
@@ -1016,7 +1095,7 @@ LDD *dfuDevPtr = new LDD; // initialize it with defualt constructor first, since
             if ([self saveOTABlob] == -2) {
                 dispatch_async(dispatch_get_main_queue(), ^(){
                     
-                    [self updateStatus:[NSString stringWithFormat: @"Failed to save %@ OTA blob. Is it being signed?", destination.getPref(@"destinationFW")]  color: [NSColor redColor]];
+                    [self updateStatus:[NSString stringWithFormat: @"Failed to save %@ OTA blob. Is it being signed?", getPref(@"destinationFW")]  color: [NSColor redColor]];
                     return;
                 });
             }
@@ -1066,8 +1145,8 @@ LDD *dfuDevPtr = new LDD; // initialize it with defualt constructor first, since
 
 - (void)restoreWrapper {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        PlistUtils destinationObject;
-        if (strcmp(destinationObject.getPref(@"destinationFW").UTF8String, "10.3.3") == 0) {
+
+        if (strcmp(getPref(@"destinationFW").UTF8String, "10.3.3") == 0) {
             [self restore64];
             dispatch_async(dispatch_get_main_queue(), ^(){
                 [self -> _uselessIndicator stopAnimation:nil];
@@ -1108,35 +1187,112 @@ LDD *dfuDevPtr = new LDD; // initialize it with defualt constructor first, since
     [self.view.window endSheet:self.alert.window];
 }
 
+- (int)checkActivation {
+    [self updateStatus:@"Querying the device for activation" color:[NSColor whiteColor]];
+    
+    plist_t state = NULL;
+    lockdownd_get_value(lockdown, NULL, "ActivationState", &state);
+    
+    if (!state) {
+        [self updateStatus:@"Unable to determine the activation state of the device" color:[NSColor redColor]];
+        return -1;
+    }
+    
+    char *state_str = NULL;
+    plist_get_string_val(state, &state_str);
+    
+    if (state_str && strcmp(state_str, "Unactivated") == 0) {
+        [self updateStatus:@"Please active the connected device and reconnect to continue" color:[NSColor redColor]];
+        return -1;
+    }
+    [self updateStatus:@"Device is activated, continuing" color:[NSColor greenColor]];
+    return 0;
+}
+
+- (void) checkNotarizedUpdates {
+    NSString *urlString = @"https://api.github.com/repos/rA9stuff/LeetDown/releases/latest";
+    [UpdateController sendGETRequestWithURL:urlString completion:^(NSDictionary *response, NSError *error) {
+        if (error) {
+            NSLog(@"LeetDown could not check for notarized updates: %@", error.localizedDescription);
+        } 
+        else {
+            NSLog(@"Latest notarized LeetDown version: %@", response[@"tag_name"]);
+            
+            // check if current version number is less than the latest version number
+            if ([[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"] compare:response[@"tag_name"] options:NSNumericSearch] == NSOrderedDescending) {
+                // nsalert with update button
+                dispatch_async(dispatch_get_main_queue(), ^(){
+                    NSAlert *alert = [[NSAlert alloc] init];
+                    [alert setMessageText:@"Update available"];
+                    [alert setInformativeText:[NSString stringWithFormat: @"A new version of LeetDown (%@) is available. Would you like to download it?", response[@"tag_name"]]];
+                    [alert addButtonWithTitle:@"Update"];
+                    [alert addButtonWithTitle:@"Cancel"];
+                    [alert setAlertStyle:NSAlertStyleWarning];
+                    [alert beginSheetModalForWindow:self.view.window completionHandler:^(NSModalResponse returnCode) {
+                        if (returnCode == NSAlertFirstButtonReturn) {
+                            [self createUpdateView];
+                        }
+                    }];
+                });
+            }
+        }
+    }];
+}
+
+- (void) checkNightlyUpdates {
+    NSString *urlString = @"https://api.github.com/repos/rA9stuff/LeetDown/actions/artifacts";
+    [UpdateController sendGETRequestWithURL:urlString completion:^(NSDictionary *response, NSError *error) {
+        if (error) {
+            NSLog(@"LeetDown could not check for nightly updates: %@", error.localizedDescription);
+        } else {
+            NSString* hash = [response[@"artifacts"][0][@"workflow_run"][@"head_sha"] substringToIndex:7];
+            NSLog(@"Latest nightly LeetDown hash: %@", hash);
+        }
+    }];
+}
+
+- (void) createUpdateView {
+    
+    NSStoryboard *storyboard = [NSStoryboard storyboardWithName:@"Main" bundle:nil];
+    NSViewController *yourViewController = [storyboard instantiateControllerWithIdentifier:@"UpdateController"];
+    dispatch_async(dispatch_get_main_queue(), ^(){
+        [self.view.window.contentViewController presentViewControllerAsSheet:yourViewController];
+    });
+}
+
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    PlistUtils *ptr = new PlistUtils;
-    NSString *res = ptr -> getPref(@"DebugEnabled");
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
+        [self checkNotarizedUpdates];
+    });
+
+    LD_conditionVariable = [[NSCondition alloc] init];
+    LD_signalReceived = NO;
+    
+    NSString *res = getPref(@"DebugEnabled");
     
     if ([res isEqualToString:@"1"])
         [self startMonitoringStdout];
     
     // search for USB devices
-    USBUtils* USB_VC = [[USBUtils alloc] init];
     [USB_VC startMonitoringUSBDevices:self];
     
     // check if this is a nightly build
-    res = ptr -> getPref(@"nightlyHash");
+    res = getPref(@"nightlyHash");
     if (strcmp(res.UTF8String, "") != 0)
         _versionLabel.stringValue = [@"Nightly " stringByAppendingString:res];
 
-    free(ptr);
     cleanUp();
     
-    _versionLabel.enabled = false;
-    _versionLabel.alphaValue = 0;
+    _versionLabel.enabled = true;
+    _versionLabel.alphaValue = 1.0;
     [_uselessIndicator setHidden:NO];
     [_uselessIndicator setIndeterminate:YES];
     [_uselessIndicator setUsesThreadedAnimation:YES];
-    [self updateStatus:@"Waiting for a device in DFU Mode\n" color:[NSColor whiteColor]];
+    [self updateStatus:@"Waiting for a device in Normal Mode" color:[NSColor whiteColor]];
 
 }
 

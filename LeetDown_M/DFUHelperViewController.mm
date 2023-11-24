@@ -9,9 +9,13 @@
 #import "LeetDownMain.h"
 #import "LDD.h"
 
+extern LDD* dfuDevPtr;
+NSCondition *LD_conditionVariable;
+BOOL LD_signalReceived;
+
 @implementation DFUHelperViewController
 
-- (void) searchForDevices {
+- (void) deviceDidEnterDFUMode {
     
     _shouldStopSearch = false;
     
@@ -19,17 +23,19 @@
         
         static bool complete = false;
         
-        LDD *devptr = new LDD();  // init a temporary device to check if the client device has entered DFU mode.
+        dfuDevPtr = new LDD();  // init a temporary device to check if the client device has entered DFU mode.
         
         while (!_shouldStopSearch) {
-            if (devptr -> openConnection(1) == 0) {
-                devptr -> setAllDeviceInfo();
-                if (strcmp(devptr -> getDeviceMode(), "DFU") == 0) {
+            if (dfuDevPtr -> openConnection(1) == 0) {
+                dfuDevPtr -> setAllDeviceInfo();
+                if (strcmp(dfuDevPtr -> getDeviceMode(), "DFU") == 0) {
                     dispatch_async(dispatch_get_main_queue(), ^(){
                         [self.view.window.contentViewController dismissViewController:self];
                     });
                     complete = true;
-                    devptr->freeDevice();
+                    dfuDevPtr->freeDevice();
+                    LD_signalReceived = YES;
+                    [LD_conditionVariable signal];
                     break;
                 }
             }
@@ -82,10 +88,18 @@
             _firstcounter.alphaValue = 1;
         });
         
-        for (int i = 10; i > 0; i--) {
+        
+        
+        for (int i = 5; i > 0; i--) {
             dispatch_async(dispatch_get_main_queue(), ^(){
                 _firstcounter.stringValue = [[NSString stringWithFormat:@"%d", i] stringByAppendingString:@" seconds"];
             });
+            if (i == 3) {
+                if (dfuDevPtr -> sendCommand("reset", NO) != 0) {
+                    printf("unable to send reset request\n");
+                    return;
+                }
+            }
             sleep(1);
         }
         
@@ -100,15 +114,22 @@
             _lockbuttonimage.alphaValue = 0;
         });
         
+        // initiate the dfu device search
+        [self deviceDidEnterDFUMode];
+        
         for (int i = 10; i > 0; i--) {
             dispatch_async(dispatch_get_main_queue(), ^(){
                 _secondcounter.stringValue = [[NSString stringWithFormat:@"%d", i] stringByAppendingString:@" seconds"];
             });
             sleep(1);
         }
+        
         dispatch_async(dispatch_get_main_queue(), ^(){
             _shouldStopSearch = true;
             [self.view.window.contentViewController dismissViewController:self];
+            // send signal to wake up the main thread
+            LD_signalReceived = YES;
+            [LD_conditionVariable signal];
         });
     });
 }
@@ -136,7 +157,6 @@
     _lockbuttonimage.alphaValue = 0;
     _homebuttonimage.image = [NSImage imageNamed:@"homebuttonimage"];
     
-    [self searchForDevices];
 }
 
 @end

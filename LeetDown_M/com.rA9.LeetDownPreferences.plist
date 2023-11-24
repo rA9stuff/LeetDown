@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>normalModeFirst</key>
+	<string>1</string>
+	<key>track_index</key>
+	<string>0</string>
+	<key>exploit_index</key>
+	<string>0</string>
 	<key>downgradeBB</key>
 	<string>0</string>
 	<key>nightlyHash</key>
@@ -26,7 +32,7 @@
 	<string></string>
 	<key>32iPSWLoc</key>
 	<string></string>
-	<key>skipMD5</key>
+	<key>skipCheck</key>
 	<string>0</string>
 	<key>DebugEnabled</key>
 	<string>0</string>

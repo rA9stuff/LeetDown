@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="22113.3" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22113.3"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22154"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -41,17 +41,46 @@
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="0.0"/>
+            <point key="canvasLocation" x="75" y="-131"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" title="Windows" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" appearanceType="darkAqua" animationBehavior="default" titlebarAppearsTransparent="YES" titleVisibility="hidden" id="IQv-IB-iLA">
+                    <window key="window" title="LeetDown" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" appearanceType="darkAqua" animationBehavior="default" titlebarAppearsTransparent="YES" toolbarStyle="compact" titleVisibility="hidden" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" texturedBackground="YES" fullSizeContentView="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="620" y="511" width="480" height="270"/>
+                        <rect key="contentRect" x="620" y="491" width="480" height="290"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+                        <toolbar key="toolbar" implicitIdentifier="2E53CE04-FF4C-45C2-B44A-BEA63D358C1C" autosavesConfiguration="NO" displayMode="iconOnly" sizeMode="regular" id="bOH-ez-gnz">
+                            <allowedToolbarItems>
+                                <toolbarItem implicitItemIdentifier="15D7268A-5D7A-4964-B097-51BA9AE31BEA" label="Custom View" paletteLabel="Custom View" sizingBehavior="auto" id="Wcb-UM-bba">
+                                    <nil key="toolTip"/>
+                                    <textField key="view" focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" id="UT5-yP-KmG">
+                                        <rect key="frame" x="6" y="14" width="65" height="16"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" allowsUndo="NO" title="LeetDown" id="MSW-95-wc8">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="ZDL-U9-xyT"/>
+                                <toolbarItem implicitItemIdentifier="93C25151-58E8-4810-AAE2-0EDD46D23674" label="Toolbar Item" paletteLabel="Toolbar Item" tag="-1" image="gearshape.fill" catalog="system" bordered="YES" id="cg1-ZU-3TA">
+                                    <size key="minSize" width="28" height="25"/>
+                                    <size key="maxSize" width="28" height="25"/>
+                                    <connections>
+                                        <segue destination="EDS-DF-x6C" kind="sheet" id="0Zg-pJ-bD6"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="uq3-4g-mjW"/>
+                            </allowedToolbarItems>
+                            <defaultToolbarItems>
+                                <toolbarItem reference="ZDL-U9-xyT"/>
+                                <toolbarItem reference="cg1-ZU-3TA"/>
+                            </defaultToolbarItems>
+                        </toolbar>
                         <connections>
                             <outlet property="delegate" destination="B8D-0N-5wS" id="98r-iN-zZc"/>
                         </connections>
@@ -61,13 +90,17 @@
                     </connections>
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <toolbarItem implicitItemIdentifier="97090EAA-0A04-42C8-A0EF-26D0A5600BE8" label="Toolbar Item" paletteLabel="Toolbar Item" tag="-1" bordered="YES" title="hey" id="tgp-eZ-3vf">
+                    <size key="minSize" width="4" height="16"/>
+                    <size key="maxSize" width="26" height="16"/>
+                </toolbarItem>
             </objects>
-            <point key="canvasLocation" x="75" y="250"/>
+            <point key="canvasLocation" x="74" y="168"/>
         </scene>
-        <!--View Controller-->
+        <!--LeetDown-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController storyboardIdentifier="main" id="XfG-lQ-9wD" customClass="ViewController" sceneMemberID="viewController">
+                <viewController title="LeetDown" storyboardIdentifier="main" id="XfG-lQ-9wD" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" identifier="main" wantsLayer="YES" id="9al-AR-6pH">
                         <rect key="frame" x="0.0" y="0.0" width="326" height="466"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -143,14 +176,6 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
-                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="X81-Hw-SP5">
-                                <rect key="frame" x="87" y="407" width="153" height="39"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" allowsUndo="NO" alignment="center" title="LeetDown" id="iuC-qd-iyU">
-                                    <font key="font" metaFont="system" size="33"/>
-                                    <color key="textColor" red="1" green="1" blue="1" alpha="0.85434717709999997" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="39M-nV-1b5">
                                 <rect key="frame" x="81" y="6" width="165" height="16"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="version: 2.3 by @rA9_main" id="0AX-OP-9LK">
@@ -168,45 +193,27 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pxG-hw-60c">
-                                <rect key="frame" x="62" y="4" width="202" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="bevel" title="DFU mode instructions" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="aPH-Ys-aNW">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <color key="contentTintColor" red="0.45136180994630315" green="0.79165343019806911" blue="0.94298821687698364" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <connections>
-                                    <action selector="dfuhelperact:" target="XfG-lQ-9wD" id="iEc-E3-eNW"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HwI-TX-nm0">
-                                <rect key="frame" x="8" y="6" width="16" height="16"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="bevel" bezelStyle="rounded" image="settingsIcon-128" imagePosition="overlaps" alignment="center" imageScaling="proportionallyDown" inset="2" id="QWR-mx-e04">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="cellTitle"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="gotoSettings:" target="XfG-lQ-9wD" id="YSo-jg-273"/>
-                                </connections>
-                            </button>
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UFN-rR-XeW">
+                                <rect key="frame" x="98" y="408" width="131" height="33"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="LeetDown" id="XqW-mO-LJO">
+                                    <font key="font" metaFont="systemMedium" size="28"/>
+                                    <color key="textColor" red="0.87477878200000003" green="0.89000000000000001" blue="0.8865630645" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="UFN-rR-XeW" firstAttribute="top" secondItem="9al-AR-6pH" secondAttribute="top" constant="25" id="2Ub-IL-oWR"/>
                             <constraint firstItem="39M-nV-1b5" firstAttribute="centerX" secondItem="9al-AR-6pH" secondAttribute="centerX" id="NCH-Fx-1Jh"/>
-                            <constraint firstItem="X81-Hw-SP5" firstAttribute="top" secondItem="9al-AR-6pH" secondAttribute="top" constant="20" symbolic="YES" id="Ssa-Pn-p5R"/>
-                            <constraint firstItem="X81-Hw-SP5" firstAttribute="centerX" secondItem="9al-AR-6pH" secondAttribute="centerX" id="eZC-Ey-Bnj"/>
                             <constraint firstAttribute="bottom" secondItem="39M-nV-1b5" secondAttribute="bottom" constant="6" id="fQO-ST-LXU"/>
+                            <constraint firstItem="UFN-rR-XeW" firstAttribute="centerX" secondItem="9al-AR-6pH" secondAttribute="centerX" id="zzH-Zp-FfH"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="dfuhelpoutlet" destination="pxG-hw-60c" id="uhp-LJ-UXL"/>
                         <outlet property="downgradeButtonOut" destination="2MR-VE-HG2" id="fNj-mK-Riy"/>
-                        <outlet property="header" destination="X81-Hw-SP5" id="YEw-jY-yfl"/>
                         <outlet property="mainView" destination="9al-AR-6pH" id="DRB-sb-gdA"/>
                         <outlet property="mainbox" destination="mBm-4N-dqx" id="3Ha-sp-gSX"/>
                         <outlet property="percentage" destination="VLO-5Z-QHv" id="EIU-6K-FXe"/>
-                        <outlet property="prefGear" destination="HwI-TX-nm0" id="M8t-fB-WGy"/>
                         <outlet property="selectIPSWoutlet" destination="ZJv-6a-Efl" id="dWU-Ha-nYp"/>
                         <outlet property="statusbox" destination="K2L-yj-Yqg" id="nCP-JW-00y"/>
                         <outlet property="statuslabel" destination="b67-hY-VIW" id="jtz-cl-2qR"/>
@@ -215,8 +222,12 @@
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <toolbarItem implicitItemIdentifier="97090EAA-0A04-42C8-A0EF-26D0A5600BE8" label="Toolbar Item" paletteLabel="Toolbar Item" tag="-1" image="iphoneDFU" bordered="YES" id="3ky-JG-xs9">
+                    <size key="minSize" width="24" height="25"/>
+                    <size key="maxSize" width="24" height="25"/>
+                </toolbarItem>
             </objects>
-            <point key="canvasLocation" x="72" y="700"/>
+            <point key="canvasLocation" x="98" y="753"/>
         </scene>
         <!--DFUHelper-->
         <scene sceneID="qFQ-Vg-LxJ">
@@ -313,7 +324,7 @@ button for</string>
                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JC9-F7-fjW">
                                 <rect key="frame" x="285" y="310" width="73" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="10 seconds" id="QzR-pM-fpE">
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="5 seconds" id="QzR-pM-fpE">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="displayP3"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -322,10 +333,8 @@ button for</string>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nb2-uf-aBX">
                                 <rect key="frame" x="0.0" y="1" width="360" height="484"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="bevel" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="s1t-DL-Iwn">
+                                <buttonCell key="cell" type="bevel" title="Please follow the instructions on the screen to enter DFU mode. Click anywhere on the screen to proceed." bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="s1t-DL-Iwn">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <string key="title">Click anywhere on the screen
-to start the instructions</string>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <color key="contentTintColor" red="0.98144220644942226" green="0.99227990420296286" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -365,7 +374,57 @@ Gw
                 </viewController>
                 <customObject id="dAV-ld-sC1" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="498" y="710"/>
+            <point key="canvasLocation" x="507" y="763"/>
+        </scene>
+        <!--Update Controller-->
+        <scene sceneID="HGT-vB-ZsY">
+            <objects>
+                <viewController storyboardIdentifier="UpdateController" id="nfs-eW-AdK" customClass="UpdateController" sceneMemberID="viewController">
+                    <view key="view" id="juf-dx-gZT">
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="180"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5Rv-vm-UDN">
+                                <rect key="frame" x="112" y="64" width="76" height="16"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="update_str" id="DCB-kB-v3V">
+                                    <font key="font" metaFont="systemBold"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <progressIndicator maxValue="1" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="AiK-gu-UOh">
+                                <rect key="frame" x="70" y="29" width="160" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="160" id="U7W-1b-PHx"/>
+                                </constraints>
+                            </progressIndicator>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="X5b-gb-YFf">
+                                <rect key="frame" x="118" y="93" width="64" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="HSM-ho-0mj"/>
+                                    <constraint firstAttribute="width" constant="64" id="i1m-Cx-Sqy"/>
+                                </constraints>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="command.circle.fill" catalog="system" id="qUa-a3-fKv"/>
+                            </imageView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="AiK-gu-UOh" secondAttribute="bottom" constant="30" id="2U0-Bv-c0T"/>
+                            <constraint firstItem="AiK-gu-UOh" firstAttribute="centerX" secondItem="juf-dx-gZT" secondAttribute="centerX" id="BnY-XE-mJh"/>
+                            <constraint firstItem="X5b-gb-YFf" firstAttribute="top" secondItem="juf-dx-gZT" secondAttribute="top" constant="20" symbolic="YES" id="Mnq-Mb-fch"/>
+                            <constraint firstItem="5Rv-vm-UDN" firstAttribute="top" secondItem="X5b-gb-YFf" secondAttribute="bottom" constant="16" id="dtJ-yV-UjN"/>
+                            <constraint firstItem="5Rv-vm-UDN" firstAttribute="centerX" secondItem="juf-dx-gZT" secondAttribute="centerX" id="mFY-2Z-aak"/>
+                            <constraint firstItem="X5b-gb-YFf" firstAttribute="centerX" secondItem="juf-dx-gZT" secondAttribute="centerX" id="zA0-Nm-qRL"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="LDIcon" destination="X5b-gb-YFf" id="p9w-EO-Xqe"/>
+                        <outlet property="statusStr" destination="5Rv-vm-UDN" id="xT6-eN-1IH"/>
+                        <outlet property="updateProgress" destination="AiK-gu-UOh" id="8z8-zB-Rch"/>
+                    </connections>
+                </viewController>
+                <customObject id="0mj-Lu-GVd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="477" y="1188"/>
         </scene>
         <!--SettingsVC-->
         <scene sceneID="BWJ-FM-LbE">
@@ -373,156 +432,220 @@ Gw
                 <customObject id="Xe6-Yg-tT7" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="SettingsController" id="EDS-DF-x6C" customClass="SettingsVC" sceneMemberID="viewController">
                     <view key="view" autoresizesSubviews="NO" id="FSa-T8-FkR">
-                        <rect key="frame" x="0.0" y="0.0" width="326" height="543"/>
+                        <rect key="frame" x="0.0" y="0.0" width="625" height="454"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <view id="FhV-AO-MUv">
-                                <rect key="frame" x="1" y="48" width="324" height="476"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <subviews>
-                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VfC-MQ-7ck">
-                                        <rect key="frame" x="27" y="379" width="117" height="18"/>
-                                        <buttonCell key="cell" type="check" title="Capture stdout" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="fPw-DJ-S6E">
-                                            <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="debuggingToggle:" target="EDS-DF-x6C" id="o5a-ny-lFv"/>
-                                        </connections>
-                                    </button>
-                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8vS-tw-a4p">
-                                        <rect key="frame" x="27" y="279" width="128" height="18"/>
-                                        <buttonCell key="cell" type="check" title="Skip iPSW check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="h1G-4d-qg0">
-                                            <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="md5Action:" target="EDS-DF-x6C" id="lRH-x4-axF"/>
-                                        </connections>
-                                    </button>
-                                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="63G-1h-k9g">
-                                        <rect key="frame" x="27" y="240" width="275" height="32"/>
-                                        <textFieldCell key="cell" lineBreakMode="clipping" id="RWg-ew-PWf">
-                                            <font key="font" metaFont="system"/>
-                                            <string key="title">LeetDown won't check iPSW size when this
-option is enabled.</string>
-                                            <color key="textColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.79767017159999998" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2T3-Cp-5YM">
-                                        <rect key="frame" x="27" y="195" width="220" height="18"/>
-                                        <buttonCell key="cell" type="check" title="Reset USB connection (A7 only)" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="bHF-bq-yA4">
-                                            <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="resetReqAct:" target="EDS-DF-x6C" id="jxb-Cr-xq9"/>
-                                        </connections>
-                                    </button>
-                                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="02L-h8-BaA">
-                                        <rect key="frame" x="26" y="140" width="272" height="48"/>
-                                        <textFieldCell key="cell" lineBreakMode="clipping" id="3pK-Qd-ZFO">
-                                            <font key="font" metaFont="system"/>
-                                            <string key="title">LeetDown will reset USB connection before 
+                            <box boxType="custom" translatesAutoresizingMaskIntoConstraints="NO" id="b8D-WF-Uv8">
+                                <rect key="frame" x="0.0" y="0.0" width="625" height="454"/>
+                                <view key="contentView" id="KJ6-nZ-lAc">
+                                    <rect key="frame" x="1" y="1" width="623" height="452"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jop-Us-BAX">
+                                            <rect key="frame" x="258" y="399" width="108" height="33"/>
+                                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Settings" id="8AG-G6-FKB">
+                                                <font key="font" metaFont="system" size="28"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="0.85208576228342903" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cYW-eT-nYl">
+                                            <rect key="frame" x="254" y="28" width="116" height="32"/>
+                                            <buttonCell key="cell" type="push" title="Save settings" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="KPY-4A-x27">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <action selector="closeVC:" target="EDS-DF-x6C" id="GZR-rz-DPl"/>
+                                            </connections>
+                                        </button>
+                                        <view id="FhV-AO-MUv">
+                                            <rect key="frame" x="0.0" y="75" width="623" height="289"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <subviews>
+                                                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VfC-MQ-7ck">
+                                                    <rect key="frame" x="27" y="272" width="117" height="18"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <buttonCell key="cell" type="check" title="Capture stdout" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="fPw-DJ-S6E">
+                                                        <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                    <connections>
+                                                        <action selector="debuggingToggle:" target="EDS-DF-x6C" id="o5a-ny-lFv"/>
+                                                    </connections>
+                                                </button>
+                                                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dKh-TK-Vp9">
+                                                    <rect key="frame" x="27" y="217" width="286" height="48"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <textFieldCell key="cell" lineBreakMode="clipping" id="R8p-xt-f8N">
+                                                        <font key="font" metaFont="system"/>
+                                                        <string key="title">LeetDown will capture the stdout of itself and
+the child processes it creates to ~/Documents.</string>
+                                                        <color key="textColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <color key="backgroundColor" red="0.99425287360000003" green="0.98850574710000005" blue="1" alpha="0.84705882349999995" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    </textFieldCell>
+                                                    <string key="userLabel">LeetDown will capture the stdout of itself and the child processes it creates. A log file will be placed into your Documents folder.</string>
+                                                </textField>
+                                                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8vS-tw-a4p">
+                                                    <rect key="frame" x="333" y="272" width="128" height="18"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <buttonCell key="cell" type="check" title="Skip iPSW check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="h1G-4d-qg0">
+                                                        <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                    <connections>
+                                                        <action selector="md5Action:" target="EDS-DF-x6C" id="lRH-x4-axF"/>
+                                                    </connections>
+                                                </button>
+                                                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="63G-1h-k9g">
+                                                    <rect key="frame" x="335" y="217" width="266" height="48"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <textFieldCell key="cell" lineBreakMode="clipping" id="RWg-ew-PWf">
+                                                        <font key="font" metaFont="system"/>
+                                                        <string key="title">LeetDown won't check iPSW size when
+this toggle is enabled.</string>
+                                                        <color key="textColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.79767017159999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2T3-Cp-5YM">
+                                                    <rect key="frame" x="27" y="196" width="220" height="18"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <buttonCell key="cell" type="check" title="Reset USB connection (A7 only)" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="bHF-bq-yA4">
+                                                        <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                    <connections>
+                                                        <action selector="resetReqAct:" target="EDS-DF-x6C" id="jxb-Cr-xq9"/>
+                                                    </connections>
+                                                </button>
+                                                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="02L-h8-BaA">
+                                                    <rect key="frame" x="27" y="136" width="272" height="53"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <textFieldCell key="cell" lineBreakMode="clipping" id="3pK-Qd-ZFO">
+                                                        <font key="font" metaFont="system"/>
+                                                        <string key="title">LeetDown will reset USB connection before 
 uploading iBoot. Disabling this toggle could  cause bootchain upload issues on ASi macs.</string>
-                                            <color key="textColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.79767017159999998" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dKh-TK-Vp9">
-                                        <rect key="frame" x="27" y="324" width="279" height="48"/>
-                                        <textFieldCell key="cell" lineBreakMode="clipping" id="R8p-xt-f8N">
-                                            <font key="font" metaFont="system"/>
-                                            <string key="title">LeetDown will capture the stdout of itself and
-the child processes it creates. A log file will
-be placed into your Documents folder.</string>
-                                            <color key="textColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
-                                            <color key="backgroundColor" red="0.99425287360000003" green="0.98850574710000005" blue="1" alpha="0.84705882349999995" colorSpace="custom" customColorSpace="displayP3"/>
-                                        </textFieldCell>
-                                    </textField>
-                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hnd-lq-Gpf">
-                                        <rect key="frame" x="27" y="95" width="218" height="18"/>
-                                        <buttonCell key="cell" type="check" title="Downgrade baseband (A6 only)" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="E0b-rV-0Up">
-                                            <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
-                                            <font key="font" metaFont="system"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="downgradeBBAct:" target="EDS-DF-x6C" id="wLL-2j-AaI"/>
-                                        </connections>
-                                    </button>
-                                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7BT-51-dsc">
-                                        <rect key="frame" x="27" y="40" width="275" height="48"/>
-                                        <textFieldCell key="cell" lineBreakMode="clipping" id="X1M-m9-hqG">
-                                            <font key="font" metaFont="system"/>
-                                            <string key="title">Downgrade baseband instead of flashing the
-latest signed version. Enabling this toggle  could cause activation issues.</string>
-                                            <color key="textColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="02L-h8-BaA" firstAttribute="top" secondItem="2T3-Cp-5YM" secondAttribute="bottom" constant="8" symbolic="YES" id="5Ql-EV-5t8"/>
-                                    <constraint firstItem="02L-h8-BaA" firstAttribute="top" secondItem="2T3-Cp-5YM" secondAttribute="bottom" constant="8" id="8rP-Qo-luK"/>
-                                    <constraint firstItem="2T3-Cp-5YM" firstAttribute="top" secondItem="63G-1h-k9g" secondAttribute="bottom" constant="28" id="8ud-Yb-lcC"/>
-                                    <constraint firstItem="02L-h8-BaA" firstAttribute="centerX" secondItem="FhV-AO-MUv" secondAttribute="centerX" id="8vg-Vl-LGH"/>
-                                    <constraint firstItem="VfC-MQ-7ck" firstAttribute="top" secondItem="FhV-AO-MUv" secondAttribute="top" constant="80" id="N3q-Ym-fj5"/>
-                                    <constraint firstItem="hnd-lq-Gpf" firstAttribute="top" secondItem="02L-h8-BaA" secondAttribute="bottom" constant="28" id="Tew-gd-Y9o"/>
-                                    <constraint firstItem="63G-1h-k9g" firstAttribute="top" secondItem="8vS-tw-a4p" secondAttribute="bottom" constant="8" symbolic="YES" id="VeW-Np-bsW"/>
-                                    <constraint firstItem="7BT-51-dsc" firstAttribute="leading" secondItem="FhV-AO-MUv" secondAttribute="leading" constant="29" id="X4E-mw-dgf"/>
-                                    <constraint firstItem="63G-1h-k9g" firstAttribute="centerX" secondItem="FhV-AO-MUv" secondAttribute="centerX" id="hGe-Ug-bZC"/>
-                                    <constraint firstItem="VfC-MQ-7ck" firstAttribute="leading" secondItem="FhV-AO-MUv" secondAttribute="leading" constant="29" id="kbB-SG-5Ys"/>
-                                    <constraint firstItem="dKh-TK-Vp9" firstAttribute="leading" secondItem="FhV-AO-MUv" secondAttribute="leading" constant="29" id="mfc-EO-Yto"/>
-                                    <constraint firstItem="hnd-lq-Gpf" firstAttribute="leading" secondItem="FhV-AO-MUv" secondAttribute="leading" constant="29" id="pZq-A0-co5"/>
-                                    <constraint firstItem="8vS-tw-a4p" firstAttribute="top" secondItem="dKh-TK-Vp9" secondAttribute="bottom" constant="28" id="qKt-ng-NFh"/>
-                                    <constraint firstItem="8vS-tw-a4p" firstAttribute="leading" secondItem="FhV-AO-MUv" secondAttribute="leading" constant="29" id="qQJ-2M-QTT"/>
-                                    <constraint firstItem="dKh-TK-Vp9" firstAttribute="top" secondItem="VfC-MQ-7ck" secondAttribute="bottom" constant="8" symbolic="YES" id="rSb-y6-Hvv"/>
-                                    <constraint firstItem="2T3-Cp-5YM" firstAttribute="leading" secondItem="FhV-AO-MUv" secondAttribute="leading" constant="29" id="xrI-6f-4oZ"/>
-                                    <constraint firstItem="7BT-51-dsc" firstAttribute="top" secondItem="hnd-lq-Gpf" secondAttribute="bottom" constant="8" symbolic="YES" id="zRV-4e-tUc"/>
-                                </constraints>
-                            </view>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cYW-eT-nYl">
-                                <rect key="frame" x="105" y="21" width="116" height="32"/>
-                                <buttonCell key="cell" type="push" title="Save settings" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="KPY-4A-x27">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="closeVC:" target="EDS-DF-x6C" id="GZR-rz-DPl"/>
-                                </connections>
-                            </button>
-                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jop-Us-BAX">
-                                <rect key="frame" x="109" y="482" width="108" height="33"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Settings" id="8AG-G6-FKB">
-                                    <font key="font" metaFont="system" size="28"/>
-                                    <color key="textColor" red="1" green="1" blue="1" alpha="0.85208576228342903" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
+                                                        <color key="textColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.79767017159999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7BT-51-dsc">
+                                                    <rect key="frame" x="335" y="136" width="259" height="53"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Downgrades baseband instead of flashing the latest signed version. Enabling this toggle could cause activation issues." id="X1M-m9-hqG">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BEo-CB-PKb">
+                                                    <rect key="frame" x="333" y="59" width="236" height="40"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <textFieldCell key="cell" lineBreakMode="clipping" id="twi-ch-sAt">
+                                                        <font key="font" metaFont="system"/>
+                                                        <string key="title">Choose which method LeetDown uses
+to pwn the connected device.</string>
+                                                        <color key="textColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lvo-tz-HCo">
+                                                    <rect key="frame" x="27" y="106" width="156" height="18"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <buttonCell key="cell" type="check" title="Enforce normal mode" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="yad-co-GMp">
+                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                </button>
+                                                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Nh-Kg-jbn">
+                                                    <rect key="frame" x="333" y="107" width="106" height="16"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Pwn device with:" id="tih-Om-gMM">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                                <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lcJ-Ws-SSR">
+                                                    <rect key="frame" x="438" y="101" width="124" height="25"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <popUpButtonCell key="cell" type="push" title="iPwnder32" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Gba-Sb-dXM" id="McT-Gj-Luf">
+                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                        <font key="font" metaFont="menu"/>
+                                                        <menu key="menu" id="ecC-PP-PhA">
+                                                            <items>
+                                                                <menuItem title="iPwnder32" state="on" id="Gba-Sb-dXM"/>
+                                                                <menuItem title="ipwnder_lite" id="9Wb-22-KE0"/>
+                                                                <menuItem title="gaster" id="N47-8a-9ET"/>
+                                                            </items>
+                                                        </menu>
+                                                        <connections>
+                                                            <action selector="modifyExploitPref:" target="EDS-DF-x6C" id="dd6-rl-jZo"/>
+                                                        </connections>
+                                                    </popUpButtonCell>
+                                                </popUpButton>
+                                                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fdZ-77-JHS">
+                                                    <rect key="frame" x="27" y="35" width="289" height="64"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <textFieldCell key="cell" lineBreakMode="clipping" id="QtJ-O8-Lza">
+                                                        <font key="font" metaFont="system"/>
+                                                        <string key="title">Asks the user to connect their device in
+normal mode first. Disabling this enforcement
+could result in restore failures.</string>
+                                                        <color key="textColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hnd-lq-Gpf">
+                                                    <rect key="frame" x="335" y="196" width="218" height="18"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <buttonCell key="cell" type="check" title="Downgrade baseband (A6 only)" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="E0b-rV-0Up">
+                                                        <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                    <connections>
+                                                        <action selector="downgradeBBAct:" target="EDS-DF-x6C" id="wLL-2j-AaI"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                        </view>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="cYW-eT-nYl" secondAttribute="bottom" constant="35" id="4Qa-hH-iTU"/>
+                                        <constraint firstItem="cYW-eT-nYl" firstAttribute="centerX" secondItem="KJ6-nZ-lAc" secondAttribute="centerX" id="NgI-5s-XA6"/>
+                                        <constraint firstItem="jop-Us-BAX" firstAttribute="top" secondItem="KJ6-nZ-lAc" secondAttribute="top" constant="20" symbolic="YES" id="Yfl-lF-y9V"/>
+                                        <constraint firstItem="jop-Us-BAX" firstAttribute="centerX" secondItem="KJ6-nZ-lAc" secondAttribute="centerX" id="llJ-0U-oda"/>
+                                    </constraints>
+                                </view>
+                                <color key="borderColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="fillColor" white="0.14842078944186229" alpha="1" colorSpace="calibratedWhite"/>
+                            </box>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="jop-Us-BAX" firstAttribute="centerX" secondItem="FSa-T8-FkR" secondAttribute="centerX" id="9uI-uU-Bsn"/>
-                            <constraint firstAttribute="bottom" secondItem="cYW-eT-nYl" secondAttribute="bottom" constant="28" id="YzN-4h-5hf"/>
-                            <constraint firstItem="cYW-eT-nYl" firstAttribute="centerX" secondItem="FSa-T8-FkR" secondAttribute="centerX" id="hIC-Y5-2ry"/>
-                            <constraint firstItem="jop-Us-BAX" firstAttribute="top" secondItem="FSa-T8-FkR" secondAttribute="top" constant="28" id="md2-WY-c7e"/>
+                            <constraint firstItem="b8D-WF-Uv8" firstAttribute="leading" secondItem="FSa-T8-FkR" secondAttribute="leading" id="5Ga-7q-vse"/>
+                            <constraint firstItem="b8D-WF-Uv8" firstAttribute="top" secondItem="FSa-T8-FkR" secondAttribute="top" id="8Mb-qA-LuI"/>
+                            <constraint firstAttribute="trailing" secondItem="b8D-WF-Uv8" secondAttribute="trailing" id="Bcp-u9-LBB"/>
+                            <constraint firstAttribute="bottom" secondItem="b8D-WF-Uv8" secondAttribute="bottom" id="IgO-xw-WFi"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="debugEnabledToggle" destination="VfC-MQ-7ck" id="2cM-08-pLV"/>
                         <outlet property="downgradeBBoutlet" destination="hnd-lq-Gpf" id="0Xy-x5-To9"/>
+                        <outlet property="exploitSelectionBox" destination="McT-Gj-Luf" id="ZQP-S1-hct"/>
                         <outlet property="reestRequestToggle" destination="2T3-Cp-5YM" id="Rqe-Qi-6in"/>
                         <outlet property="skipipswCheckToggle" destination="8vS-tw-a4p" id="3vo-DW-aqb"/>
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="-334" y="738.5"/>
+            <point key="canvasLocation" x="1064.5" y="747"/>
         </scene>
     </scenes>
     <resources>
+        <image name="command.circle.fill" catalog="system" width="15" height="15"/>
+        <image name="gearshape.fill" catalog="system" width="16" height="16"/>
         <image name="homebuttonimage" width="50" height="50"/>
         <image name="iphoneDFU" width="830" height="1640"/>
         <image name="lockbutton" width="50" height="5"/>
-        <image name="settingsIcon-128" width="128" height="128"/>
     </resources>
 </document>

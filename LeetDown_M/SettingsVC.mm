@@ -9,15 +9,13 @@
 
 @implementation SettingsVC
 
-PlistUtils plistObject;
-
 - (IBAction)debuggingToggle:(id)sender {
     
-    plistObject.modifyPref(@"DebugEnabled", [NSString stringWithFormat:@"%ld", (long)_debugEnabledToggle.state]);
+    modifyPref(@"DebugEnabled", [NSString stringWithFormat:@"%ld", (long)_debugEnabledToggle.state]);
 
     if (_debugEnabledToggle.state) {
 
-        plistObject.modifyPref(@"DebugEnabled", @"1");
+        modifyPref(@"DebugEnabled", @"1");
         NSTask *restart = [[NSTask alloc] init];
         NSString *LDPath = [[NSBundle mainBundle] resourcePath];
         LDPath = [[LDPath substringToIndex:[LDPath length] -9] stringByAppendingString:@"MacOS/LeetDown"];
@@ -29,20 +27,25 @@ PlistUtils plistObject;
 }
 
 - (IBAction)md5Action:(id)sender {
-    plistObject.modifyPref(@"skipMD5", [NSString stringWithFormat:@"%ld", (long)_skipipswCheckToggle.state]);
+    modifyPref(@"skipMD5", [NSString stringWithFormat:@"%ld", (long)_skipipswCheckToggle.state]);
 }
 
 - (IBAction)resetReqAct:(id)sender {
-    plistObject.modifyPref(@"resetreq", [NSString stringWithFormat:@"%ld", (long)_reestRequestToggle.state]);
+    modifyPref(@"resetreq", [NSString stringWithFormat:@"%ld", (long)_reestRequestToggle.state]);
 }
 - (IBAction)downgradeBBAct:(id)sender {
-    plistObject.modifyPref(@"downgradeBB", [NSString stringWithFormat:@"%ld", (long)_downgradeBBoutlet.state]);
+    modifyPref(@"downgradeBB", [NSString stringWithFormat:@"%ld", (long)_downgradeBBoutlet.state]);
 }
 
+- (IBAction)modifyExploitPref:(id)sender {
+    NSPopUpButton *popUpButton = (NSPopUpButton *)sender;
+    NSInteger selectedIndex = [popUpButton indexOfSelectedItem];
+    modifyPref(@"exploit_index", [NSString stringWithFormat:@"%li", (long)selectedIndex]);
+}
 
 
 - (IBAction)closeVC:(id)sender {
-    
+
     [self.view.window.contentViewController dismissViewController:self];
 
 }
@@ -58,14 +61,18 @@ PlistUtils plistObject;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSString *resetreq = plistObject.getPref(@"resetreq");
-    NSString *debugStr = plistObject.getPref(@"DebugEnabled");
-    NSString *md5Str = plistObject.getPref(@"skipMD5");
-    NSString *downgradeBBstr = plistObject.getPref(@"downgradeBB");
-    _debugEnabledToggle.state = ([debugStr isEqualToString:@"1"]) ? YES : NO;
-    _skipipswCheckToggle.state = ([md5Str isEqualToString:@"1"]) ? YES : NO;
-    _reestRequestToggle.state = ([resetreq isEqualToString:@"1"]) ? YES : NO;
-    _downgradeBBoutlet.state = ([downgradeBBstr isEqualToString:@"1"]) ? YES : NO;
+    NSString *resetreq       = getPref(@"resetreq");
+    NSString *debugStr       = getPref(@"DebugEnabled");
+    NSString *md5Str         = getPref(@"skipMD5");
+    NSString *downgradeBBstr = getPref(@"downgradeBB");
+    NSString *exploit_index  = getPref(@"exploit_index");
+    
+    _debugEnabledToggle.state  = ([debugStr isEqualToString:@"1"])       ? YES : NO;
+    _skipipswCheckToggle.state = ([md5Str isEqualToString:@"1"])         ? YES : NO;
+    _reestRequestToggle.state  = ([resetreq isEqualToString:@"1"])       ? YES : NO;
+    _downgradeBBoutlet.state   = ([downgradeBBstr isEqualToString:@"1"]) ? YES : NO;
+    
+    [[self exploitSelectionBox] selectItemAtIndex:[exploit_index integerValue]];
     [self setPreferredContentSize: self.view.frame.size];
 }
 @end

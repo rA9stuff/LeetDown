@@ -8,7 +8,7 @@
 #include "PlistUtils.h"
 
 
-void PlistUtils::modifyPref(NSString* key, NSString* val) {
+void modifyPref(NSString* key, NSString* val) {
     
     NSString* preferencePlist = [[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/com.rA9.LeetDownPreferences.plist"];
     NSDictionary* dict=[[NSDictionary alloc] initWithContentsOfFile:preferencePlist];
@@ -17,7 +17,7 @@ void PlistUtils::modifyPref(NSString* key, NSString* val) {
     
 }
 
-NSString* PlistUtils::getPref(NSString* key) {
+NSString* getPref(NSString* key) {
     
     NSString *preferencePlist = [[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/com.rA9.LeetDownPreferences.plist"];
     NSDictionary *dict=[[NSDictionary alloc] initWithContentsOfFile:preferencePlist];

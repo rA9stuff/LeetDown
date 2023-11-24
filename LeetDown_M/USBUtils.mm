@@ -1,5 +1,5 @@
 //
-//  USBUtils.c
+//  USBUtils.mm
 //  LeetDown
 //
 //  Created by rA9stuff on 10.02.2023.
@@ -11,6 +11,8 @@
 #include "LeetDownMain.h"
 
 extern bool restoreStarted;
+extern bool discoverStateEnded;
+bool trapDevice = false;
 
 @implementation USBUtils : NSObject
 
@@ -43,6 +45,7 @@ extern bool restoreStarted;
 - (void) USBDeviceDetectedCallback:(void *)refcon iterator: (io_iterator_t) iterator {
     io_object_t usbDevice;
     while ((usbDevice = IOIteratorNext(iterator))) {
+        
         printf("New USB device detected\n");
         NSString* name = [self getNameOfUSBDevice:usbDevice];
         if ([name isEqualToString:@"USB2.1 Hub"]) {
@@ -53,27 +56,80 @@ extern bool restoreStarted;
                 [alert runModal];
             });
         }
-        else if ([name isEqualToString:@"Apple Mobile Device (DFU Mode)"]) {
+        else if (([name isEqualToString:@"iPhone"] || [name isEqualToString:@"iPad"]) && !trapDevice) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.vc discoverDevices];
-                //[[NSNotificationCenter defaultCenter] postNotificationName:@"ViewControllerReloadData" object:nil];
+                [self.vc updateStatus:[NSString stringWithFormat:@"Found an %@, attempting to connect...", name] color:[NSColor whiteColor]];
             });
+            [self.vc discoverNormalDevices];
+            trapDevice = true;
+            sleep(1);
         }
-        else if ([name isEqualToString:@"Apple Mobile Device (Recovery Mode)"]) {
+        else if (!discoverStateEnded && ([name isEqualToString:@"Apple Mobile Device (Recovery Mode)"] || [name isEqualToString:@"Apple Mobile Device (DFU Mode)"])) {
+            [self stopMonitoringUSBDevices];
+            [self.vc discoverRestoreDevices:0];
+            [self.vc exploitDevice];
             dispatch_async(dispatch_get_main_queue(), ^{
-                if (!restoreStarted)
-                    [self.vc updateStatus:@"Device is connected in recovery mode, place it in DFU mode to proceed" color:[NSColor redColor]];
+                
+                if (!restoreStarted) {
+                    NSString* formattedName = [name substringFromIndex:21];
+                    formattedName = [formattedName substringToIndex:[formattedName length] - 1];
+                    [self.vc updateStatus:[NSString stringWithFormat:@"Device is connected in %@, place it in normal mode to proceed", formattedName] color:[NSColor redColor]];
+                }
             });
         }
         IOObjectRelease(usbDevice);
     }
 }
 
-static void DeviceAdded(void *refCon, io_iterator_t iterator)
-{
+static void DeviceAdded(void *refCon, io_iterator_t iterator) {
     USBUtils *obj = (USBUtils *)refCon;
     [obj USBDeviceDetectedCallback:NULL iterator:iterator];
 }
+
+static void DeviceRemoved(void *refCon, io_iterator_t iterator) {
+    USBUtils *obj = (USBUtils *)refCon;
+    [obj USBDeviceRemovedCallback:NULL iterator:iterator];
+}
+
+- (void) USBDeviceRemovedCallback:(void *)refcon iterator: (io_iterator_t) iterator {
+    
+    io_object_t usbDevice;
+    while ((usbDevice = IOIteratorNext(iterator))) {
+        
+        if ([self detectTrapRemoval])
+            continue;
+        
+        NSString* name = [self getNameOfUSBDevice:usbDevice];
+        printf("Lost USB device: %s\n", name.UTF8String);
+        
+        if ([name isEqualToString:@"Apple Mobile Device (DFU Mode)"] || [name isEqualToString:@"Apple Mobile Device (Recovery Mode)"] || [name isEqualToString:@"iPhone"] || [name isEqualToString:@"iPad"] || [name isEqualToString:@"iPod"]) {
+            trapDevice = false;
+        }
+        IOObjectRelease(usbDevice);
+    }
+}
+
+- (BOOL) detectTrapRemoval {
+    @autoreleasepool {
+        CFMutableDictionaryRef matchingDict = IOServiceMatching(kIOUSBDeviceClassName);
+        io_iterator_t iter;
+        IOServiceGetMatchingServices(kIOMasterPortDefault, matchingDict, &iter);
+        io_service_t usbDevice;
+        while ((usbDevice = IOIteratorNext(iter))) {
+            // Get device name
+            NSString* devname = [self getNameOfUSBDevice:usbDevice];
+            if ([devname isEqualToString:@"iPhone"] || [devname isEqualToString:@"iPad"] || [devname isEqualToString:@"iPod"]) {
+                printf("%s Device switched state!\n", __func__);
+                return true;
+            }
+            IOObjectRelease(usbDevice);
+        }
+        IOObjectRelease(iter);
+    }
+    return false;
+}
+
+io_iterator_t detectionIterator, removalIterator;
 
 - (void) registerForUSBDeviceNotifications {
     CFMutableDictionaryRef matchingDict = IOServiceMatching(kIOUSBDeviceClassName);
@@ -81,18 +137,31 @@ static void DeviceAdded(void *refCon, io_iterator_t iterator)
         printf("Unable to create matching dictionary for USB device detection\n");
         return;
     }
-    io_iterator_t iterator;
+
     IONotificationPortRef notificationPort = IONotificationPortCreate(kIOMasterPortDefault);
     CFRunLoopSourceRef runLoopSource = IONotificationPortGetRunLoopSource(notificationPort);
     CFRunLoopAddSource(CFRunLoopGetCurrent(), runLoopSource, kCFRunLoopDefaultMode);
-    kern_return_t kernResult = IOServiceAddMatchingNotification(notificationPort, kIOPublishNotification,
-                                                                matchingDict, DeviceAdded, (__bridge void*)self, &iterator);
+    kern_return_t kernResult = IOServiceAddMatchingNotification(notificationPort, kIOPublishNotification, matchingDict, DeviceAdded, (__bridge void*)self, &detectionIterator);
 
     if (kernResult != kIOReturnSuccess) {
         printf("Unable to register for USB device detection notifications\n");
         return;
     }
-    [self USBDeviceDetectedCallback:NULL iterator: iterator];
+    [self USBDeviceDetectedCallback:NULL iterator: detectionIterator];
+    
+    CFMutableDictionaryRef removalMatchingDict = IOServiceMatching(kIOUSBDeviceClassName);
+    if (!removalMatchingDict) {
+        NSLog(@"Unable to create matching dictionary for USB device detection");
+        return;
+    }
+    CFRunLoopAddSource(CFRunLoopGetCurrent(), runLoopSource, kCFRunLoopDefaultMode);
+    kernResult = IOServiceAddMatchingNotification(notificationPort, kIOTerminatedNotification, removalMatchingDict, DeviceRemoved, (__bridge void*)self, &removalIterator);
+
+    if (kernResult != kIOReturnSuccess) {
+        NSLog(@"Unable to register for USB device detection notifications");
+        return;
+    }
+    [self USBDeviceRemovedCallback:NULL iterator:removalIterator];
 }
 
 - (void) startMonitoringUSBDevices:(ViewController *)viewController {
@@ -101,6 +170,11 @@ static void DeviceAdded(void *refCon, io_iterator_t iterator)
         [self registerForUSBDeviceNotifications];
         [[NSRunLoop currentRunLoop] run];
     });
+}
+
+- (void) stopMonitoringUSBDevices {
+    IOObjectRelease(detectionIterator);
+    IOObjectRelease(removalIterator);
 }
 
 @end

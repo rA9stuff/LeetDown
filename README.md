@@ -8,8 +8,9 @@ a GUI macOS app to downgrade compatible A6 and A7 devices to OTA signed firmware
 <br/>
 <img align="right" src="https://i.imgur.com/5lI2lIo.png" width="130px" height="130px">
 ### Downloads
+Nightly builds will **NOT** work until further notice, get notarized release instead.
 * [Latest notarized release (Recommended)](https://github.com/rA9stuff/LeetDown/releases)
-* [Latest nightly build (Experimental)](https://nightly.link/rA9stuff/LeetDown/workflows/ci/master)
+* [~~Latest nightly build (Experimental)~~](https://nightly.link/rA9stuff/LeetDown/workflows/ci/master)
 
 
 # Compatibility   

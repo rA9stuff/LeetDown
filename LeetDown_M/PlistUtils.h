@@ -11,13 +11,8 @@
 #include <iostream>
 #import <Foundation/Foundation.h>
 
-
-class PlistUtils {
-       
-public:
-    void modifyPref(NSString* key, NSString* val);
-    NSString* getPref(NSString* key);
-};
+void modifyPref(NSString* key, NSString* val);
+NSString* getPref(NSString* key);
 
 
 #endif /* PlistUtils_h */

@@ -31,3 +31,11 @@ add NSAlert for reconnect request
 improve memory usage
 check ipsw size instead of md5
 improve completionHandler of blob save dialog
+
+==================================
+24 Nov 2023
+
+add OTA update functionality
+add more options to settingsvc
+add normal mode device support (will be enforced unless toggle is disabled)
+use IONotificationPortRef to detect devices

@@ -109,11 +109,6 @@ void LDD::freeDevice() {
     initECID = 0;
 }
 
-void LDD::sendDataToNSA() {
-
-    // fake function to get jonathan say leetdown is malicious
-}
-
 bool LDD::deviceConnected() {
     
     irecv_error_t error = irecv_open_with_ecid(&client, initECID);
@@ -138,4 +133,8 @@ bool LDD::checkPwn() {
         return true;
     }
     return false;
+}
+
+void LDD::pwnDevice() {
+    ipwnder_lite_main(0, NULL);
 }
