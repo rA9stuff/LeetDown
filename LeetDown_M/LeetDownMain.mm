@@ -4,7 +4,6 @@
 #include "USBUtils.h"
 #include "NormalModeOperations.h"
 #include "UpdateController.h"
-#import <Sparkle/SUUpdater.h>
 #define USB_TIMEOUT 10000
 
 extern BOOL LD_signalReceived;
@@ -1219,7 +1218,7 @@ idevice_t devptr = NULL;
             NSLog(@"Latest notarized LeetDown version: %@", response[@"tag_name"]);
             
             // check if current version number is less than the latest version number
-            if ([[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"] compare:response[@"tag_name"] options:NSNumericSearch] == NSOrderedDescending) {
+            if ([[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"] compare:response[@"tag_name"] options:NSNumericSearch] == NSOrderedAscending) {
                 // nsalert with update button
                 dispatch_async(dispatch_get_main_queue(), ^(){
                     NSAlert *alert = [[NSAlert alloc] init];
