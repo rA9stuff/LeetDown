@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import <Cocoa/Cocoa.h>
-#import <AFNetworking.h>
+#import <AFNetworking/AFNetworking.h>
 #import "UpdateController.h"
 #import "PlistUtils.h"
 

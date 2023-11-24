@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		602B49762A77A4DB00F7973E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 602B49752A77A4DB00F7973E /* AVFoundation.framework */; };
 		604CB52B2A4B044300B9CF6A /* NormalModeOperations.mm in Sources */ = {isa = PBXBuildFile; fileRef = 604CB5292A4B044300B9CF6A /* NormalModeOperations.mm */; };
+		604FA1E42B1133A700130206 /* LDUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = 608232BD2B109E83004035CD /* LDUpdater.m */; };
 		6065568D2A54411000354FAA /* libimobiledevice-glue-1.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 606556852A54411000354FAA /* libimobiledevice-glue-1.0.0.dylib */; };
 		6065568E2A54411000354FAA /* libimobiledevice-glue-1.0.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 606556852A54411000354FAA /* libimobiledevice-glue-1.0.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		6065568F2A54411000354FAA /* libcrypto.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 606556862A54411000354FAA /* libcrypto.3.dylib */; };
@@ -25,7 +26,6 @@
 		6065569A2A54411000354FAA /* libirecovery-1.0.3.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 6065568B2A54411000354FAA /* libirecovery-1.0.3.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		6065569B2A54411000354FAA /* libusb-1.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6065568C2A54411000354FAA /* libusb-1.0.0.dylib */; };
 		6065569C2A54411000354FAA /* libusb-1.0.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 6065568C2A54411000354FAA /* libusb-1.0.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		608232BE2B109E83004035CD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 608232BD2B109E83004035CD /* main.m */; };
 		608AB0782A72B44200AB12B1 /* checkm8.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 608AB0722A72B44200AB12B1 /* checkm8.a */; };
 		608AB0792A72B44200AB12B1 /* ircv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 608AB0732A72B44200AB12B1 /* ircv.a */; };
 		608AB07A2A72B44200AB12B1 /* partial.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 608AB0742A72B44200AB12B1 /* partial.a */; };
@@ -133,7 +133,7 @@
 		6065568B2A54411000354FAA /* libirecovery-1.0.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libirecovery-1.0.3.dylib"; path = "Frameworks/libirecovery-1.0.3.dylib"; sourceTree = "<group>"; };
 		6065568C2A54411000354FAA /* libusb-1.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libusb-1.0.0.dylib"; path = "Frameworks/libusb-1.0.0.dylib"; sourceTree = "<group>"; };
 		608232BB2B109E83004035CD /* LDUpdater */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = LDUpdater; sourceTree = BUILT_PRODUCTS_DIR; };
-		608232BD2B109E83004035CD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		608232BD2B109E83004035CD /* LDUpdater.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LDUpdater.m; sourceTree = "<group>"; };
 		608AB0722A72B44200AB12B1 /* checkm8.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = checkm8.a; path = Frameworks/iPwnder32/checkm8.a; sourceTree = "<group>"; };
 		608AB0732A72B44200AB12B1 /* ircv.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = ircv.a; path = Frameworks/iPwnder32/ircv.a; sourceTree = "<group>"; };
 		608AB0742A72B44200AB12B1 /* partial.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = partial.a; path = Frameworks/iPwnder32/partial.a; sourceTree = "<group>"; };
@@ -260,14 +260,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		608232BC2B109E83004035CD /* LDUpdater */ = {
-			isa = PBXGroup;
-			children = (
-				608232BD2B109E83004035CD /* main.m */,
-			);
-			path = LDUpdater;
-			sourceTree = "<group>";
-		};
 		692DCBEC269E3CE6004DC22C /* SSZipArchive */ = {
 			isa = PBXGroup;
 			children = (
@@ -365,7 +357,6 @@
 			children = (
 				69D5D65926AE39EA0079CF85 /* LDResources */,
 				69AFA6EB269CE0DC0020D40D /* LeetDown_M */,
-				608232BC2B109E83004035CD /* LDUpdater */,
 				69AFA6EA269CE0DC0020D40D /* Products */,
 				693782CD269CE5090082F92D /* Frameworks */,
 				9948104B923EBA54CFAB95A4 /* Pods */,
@@ -411,6 +402,7 @@
 				69AFA6FA269CE0DD0020D40D /* LeetDown_M.entitlements */,
 				693782CB269CE44B0082F92D /* libirecovery.h */,
 				6938CBD526DBF4B300094628 /* com.rA9.LeetDownPreferences.plist */,
+				608232BD2B109E83004035CD /* LDUpdater.m */,
 			);
 			path = LeetDown_M;
 			sourceTree = "<group>";
@@ -583,7 +575,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				608232BE2B109E83004035CD /* main.m in Sources */,
+				604FA1E42B1133A700130206 /* LDUpdater.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
