@@ -77,6 +77,7 @@ run `xcodebuild -workspace LeetDown.xcworkspace -scheme LeetDown_M`
 # Supporters  
 * Will Kellner
 * qqjqqj
+* Jean-Sébastien Ross
 
 # Credits:
 
@@ -90,7 +91,8 @@ run `xcodebuild -workspace LeetDown.xcworkspace -scheme LeetDown_M`
 * [@ConsoleLogLuke](https://twitter.com/ConsoleLogLuke) for helping with the dependencies and scripts for versions < 2.0
 * [ZipArchive](https://github.com/ZipArchive/ZipArchive) for SSZipArchive. 
 * [AFNetworking](https://github.com/AFNetworking/AFNetworking) for AFNetworking.
-* [@alitek123](https://twitter.com/alitek123) for OTA BuildManifests. 
+* [@alitek123](https://twitter.com/alitek123) for OTA BuildManifests.
+* [erentomurcuk](https://github.com/erentomurcuk) for LeetDown OTA updates.   
 * [@exploit3dguy](https://twitter.com/exploit3dguy) for private testing.
 * [@m3t0ski](https://twitter.com/m3t0ski) for private testing.
 * [@AyyItzRob123](https://twitter.com/AyyItzRob123) for private testing.
