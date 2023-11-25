@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>autoUpdate</key>
-	<string>0</string>
+	<string>1</string>
 	<key>normalModeFirst</key>
 	<string>1</string>
 	<key>track_index</key>
