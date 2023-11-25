@@ -194,7 +194,6 @@
 		692DCC0F269E3CE7004DC22C /* SSZipCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSZipCommon.h; sourceTree = "<group>"; };
 		692DCC10269E3CE7004DC22C /* SSZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSZipArchive.m; sourceTree = "<group>"; };
 		692DCC11269E3CE7004DC22C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		693782CB269CE44B0082F92D /* libirecovery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libirecovery.h; sourceTree = "<group>"; };
 		69387BF326B6C7FF00A5EAF6 /* DFUHelperViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = DFUHelperViewController.mm; sourceTree = "<group>"; };
 		69387BF526B6C81600A5EAF6 /* DFUHelperViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DFUHelperViewController.h; sourceTree = "<group>"; };
 		6938CBD526DBF4B300094628 /* com.rA9.LeetDownPreferences.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = com.rA9.LeetDownPreferences.plist; sourceTree = "<group>"; };
@@ -400,7 +399,6 @@
 				69AFA6F7269CE0DD0020D40D /* Info.plist */,
 				69AFA6F8269CE0DD0020D40D /* main.m */,
 				69AFA6FA269CE0DD0020D40D /* LeetDown_M.entitlements */,
-				693782CB269CE44B0082F92D /* libirecovery.h */,
 				6938CBD526DBF4B300094628 /* com.rA9.LeetDownPreferences.plist */,
 				608232BD2B109E83004035CD /* LDUpdater.m */,
 			);
@@ -835,6 +833,7 @@
 					"${PROJECT_DIR}/headers/libplist/include",
 					"${PROJECT_DIR}/headers/libimobiledevice-glue/include",
 					"${PROJECT_DIR}/headers/libimobiledevice-glue/src",
+					"${PROJECT_DIR}/headers/libirecovery/include",
 				);
 				USER_HEADER_SEARCH_PATHS = "${PROJECT_DIR}/headers";
 			};
@@ -901,6 +900,7 @@
 					"${PROJECT_DIR}/headers/libplist/include",
 					"${PROJECT_DIR}/headers/libimobiledevice-glue/include",
 					"${PROJECT_DIR}/headers/libimobiledevice-glue/src",
+					"${PROJECT_DIR}/headers/libirecovery/include",
 				);
 				USER_HEADER_SEARCH_PATHS = "${PROJECT_DIR}/headers";
 			};
