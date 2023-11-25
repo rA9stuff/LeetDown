@@ -1266,27 +1266,27 @@ idevice_t devptr = NULL;
     [super viewDidLoad];
     
     dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
-        [self checkLDUpdates:([getPref(@"nightlyHash") isEqual: @""] ? false : true)];
+        
+        cleanUp();
+        
+        if ([getPref(@"autoUpdate") isEqualToString:@"1"]) {
+            [self checkLDUpdates:([getPref(@"nightlyHash") isEqual: @""] ? false : true)];
+        }
     });
 
     LD_conditionVariable = [[NSCondition alloc] init];
     LD_signalReceived = NO;
     
-    NSString *res = getPref(@"DebugEnabled");
-    
-    if ([res isEqualToString:@"1"])
+    if ([getPref(@"DebugEnabled") isEqualToString:@"1"])
         [self startMonitoringStdout];
     
     // search for USB devices
     [USB_VC startMonitoringUSBDevices:self];
     
     // check if this is a nightly build
-    res = getPref(@"nightlyHash");
-    if (strcmp(res.UTF8String, "") != 0)
-        _versionLabel.stringValue = [@"Nightly " stringByAppendingString:res];
+    if (![getPref(@"nightlyHash") isEqualToString:@""])
+        _versionLabel.stringValue = [@"Nightly " stringByAppendingString:getPref(@"nightlyHash")];
 
-    cleanUp();
-    
     _versionLabel.enabled = true;
     _versionLabel.alphaValue = 1.0;
     [_uselessIndicator setHidden:NO];

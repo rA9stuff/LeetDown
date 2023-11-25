@@ -1,5 +1,5 @@
 //
-//  main.m
+//  LDUpdater.m
 //  LDUpdater
 //
 //  Created by rA9stuff on 24.11.2023.

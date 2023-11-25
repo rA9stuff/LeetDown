@@ -19,5 +19,6 @@ void modifyPreference(NSNumber *val, NSString *preference);
 @property (assign) IBOutlet NSButton *downgradeBBoutlet;
 @property (assign) IBOutlet NSButton *skipipswCheckToggle;
 @property (assign) IBOutlet NSPopUpButtonCell *exploitSelectionBox;
+@property (assign) IBOutlet NSButton *autoUpdate;
 
 @end

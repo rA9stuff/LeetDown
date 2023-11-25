@@ -608,6 +608,17 @@ could result in restore failures.</string>
                                                         <action selector="downgradeBBAct:" target="EDS-DF-x6C" id="wLL-2j-AaI"/>
                                                     </connections>
                                                 </button>
+                                                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Ez-4x-Qdk">
+                                                    <rect key="frame" x="333" y="38" width="221" height="18"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <buttonCell key="cell" type="check" title="Automatically check for updates" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="E04-ni-yTB">
+                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                    <connections>
+                                                        <action selector="autoUpdateAct:" target="EDS-DF-x6C" id="GP8-Cj-gU5"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                         </view>
                                     </subviews>
@@ -630,6 +641,7 @@ could result in restore failures.</string>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="autoUpdate" destination="1Ez-4x-Qdk" id="wiH-ob-MD2"/>
                         <outlet property="debugEnabledToggle" destination="VfC-MQ-7ck" id="2cM-08-pLV"/>
                         <outlet property="downgradeBBoutlet" destination="hnd-lq-Gpf" id="0Xy-x5-To9"/>
                         <outlet property="exploitSelectionBox" destination="McT-Gj-Luf" id="ZQP-S1-hct"/>

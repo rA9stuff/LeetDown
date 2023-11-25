@@ -43,6 +43,10 @@
     modifyPref(@"exploit_index", [NSString stringWithFormat:@"%li", (long)selectedIndex]);
 }
 
+- (IBAction)autoUpdateAct:(id)sender {
+    modifyPref(@"autoUpdate", [NSString stringWithFormat:@"%ld", (long)_autoUpdate.state]);
+}
+
 
 - (IBAction)closeVC:(id)sender {
 
@@ -66,11 +70,13 @@
     NSString *md5Str         = getPref(@"skipMD5");
     NSString *downgradeBBstr = getPref(@"downgradeBB");
     NSString *exploit_index  = getPref(@"exploit_index");
+    NSString *autoUpdate  = getPref(@"autoUpdate");
     
     _debugEnabledToggle.state  = ([debugStr isEqualToString:@"1"])       ? YES : NO;
     _skipipswCheckToggle.state = ([md5Str isEqualToString:@"1"])         ? YES : NO;
     _reestRequestToggle.state  = ([resetreq isEqualToString:@"1"])       ? YES : NO;
     _downgradeBBoutlet.state   = ([downgradeBBstr isEqualToString:@"1"]) ? YES : NO;
+    _autoUpdate.state   = ([autoUpdate isEqualToString:@"1"]) ? YES : NO;
     
     [[self exploitSelectionBox] selectItemAtIndex:[exploit_index integerValue]];
     [self setPreferredContentSize: self.view.frame.size];

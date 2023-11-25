@@ -39,3 +39,4 @@ add OTA update functionality
 add more options to settingsvc
 add normal mode device support (will be enforced unless toggle is disabled)
 use IONotificationPortRef to detect devices
+add toggle to enable/disable automatic OTA updates
