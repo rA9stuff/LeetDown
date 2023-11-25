@@ -10,6 +10,8 @@
 #import <AFNetworking/AFNetworking.h>
 #import "UpdateController.h"
 #import "PlistUtils.h"
+#import "SSZipArchive/SSZipArchive.h"
+#import <math.h>
 
 @implementation UpdateController
 
@@ -63,11 +65,25 @@
             NSLog(@"Error: %@", error.localizedDescription);
         }
         else {
-            NSString* downloadURL = response[@"assets"][0][@"browser_download_url"];
-            NSString* assetName = response[@"assets"][0][@"name"];
+            bool nightly = ![getPref(@"nightlyHash")  isEqual: @""] ? true : false;
+            NSString* downloadURL = @"";
+            NSString* assetName = @"";
+            
+            if (nightly) {
+                downloadURL = @"https://nightly.link/rA9stuff/LeetDown/workflows/ci/master/LeetDown-Nightly.zip";
+                assetName = @"LeetDown_Nightly.zip";
+            }
+            else {
+                downloadURL = response[@"assets"][0][@"browser_download_url"];
+                assetName = response[@"assets"][0][@"name"];
+            }
             dispatch_async(dispatch_get_main_queue(),^{
                 [[self statusStr] setStringValue:@"Downloading..."];
             });
+            
+            // use nsfilemanager to move the updater to the temp directory
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+            [fileManager createDirectoryAtPath:[NSTemporaryDirectory() stringByAppendingString:@"LD"] withIntermediateDirectories:NO attributes:nil error:nil];
             
             printf("Downloading %s from %s\n", assetName.UTF8String, downloadURL.UTF8String);
             
@@ -75,9 +91,12 @@
             AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
             NSURL *formattedURL = [NSURL URLWithString:downloadURL];
             NSURLRequest *request = [NSURLRequest requestWithURL:formattedURL];
-            NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
-            NSURL *fullURL = [documentsDirectoryURL URLByAppendingPathComponent:assetName];
+            NSURL *tempURL = [NSURL URLWithString: NSTemporaryDirectory()];
+            NSURL *fullURL = [[tempURL URLByAppendingPathComponent:@"LD"] URLByAppendingPathComponent:assetName];
             
+            // extremely hacky but will do for now...
+            NSString *fileURL = [@"file://" stringByAppendingString:[NSString stringWithFormat:@"%@", fullURL]];
+
             [manager setDownloadTaskDidWriteDataBlock:^(NSURLSession *session, NSURLSessionDownloadTask *downloadTask, int64_t bytesWritten, int64_t totalBytesWritten, int64_t totalBytesExpectedToWrite) {
                 
                 CGFloat written = totalBytesWritten;
@@ -89,6 +108,10 @@
                 writtenSTR = [writtenSTR substringToIndex:[writtenSTR length] -4];
                 totalSTR = [totalSTR substringToIndex:[totalSTR length] -4];
                 CGFloat percentageCompleted = written/total;
+                if (nightly) {
+                    percentageCompleted /= -10000000;
+                }
+                NSLog(@"%f\n", percentageCompleted);
                 NSString *percentageSTR = [NSString stringWithFormat:@"%f", percentageCompleted];
                 percentageSTR = [percentageSTR substringToIndex:[percentageSTR length] -4];
                 if ([percentageSTR doubleValue] >= 0.10) {
@@ -105,7 +128,7 @@
             }];
             
             NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
-                return fullURL;
+                return [NSURL URLWithString: fileURL];
             }
             completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
                 
@@ -114,29 +137,40 @@
                 NSString *updaterPath = [[NSBundle mainBundle] resourcePath];
                 updaterPath = [[updaterPath substringToIndex:[updaterPath length] -9] stringByAppendingString:@"MacOS/LDUpdater"];
                 
-                // use nsfilemanager to move the updater to the temp directory
-                NSFileManager *fileManager = [NSFileManager defaultManager];
-                [fileManager createDirectoryAtPath:[tempPath stringByAppendingString:@"LD"] withIntermediateDirectories:NO attributes:nil error:nil];
                 [fileManager copyItemAtPath:updaterPath toPath:[tempPath stringByAppendingString:@"LD/LDUpdater"] error:&error];
                 if (error) {
                     printf("Error moving updater to temp directory: %s\n", error.localizedDescription.UTF8String);
                 }
+                
+                if (nightly) {
+                    // unzip the downloaded file with ssziparchive
+                    NSString *zipPath = [tempPath stringByAppendingString:@"LD/LeetDown_Nightly.zip"];
+                    NSString *destinationPath = [tempPath stringByAppendingString:@"LD/"];
+                    [SSZipArchive unzipFileAtPath:zipPath toDestination:destinationPath];
+                }
+                
                 dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [_updateProgress setDoubleValue:1.0];
                         [[self statusStr] setStringValue:@"Installing..."];
                     });
-                    
+                    // find the file with .dmg extension
+                    NSString *dmgFilePath = @"";
+                    NSArray *dirContents = [fileManager contentsOfDirectoryAtPath:[tempPath stringByAppendingString:@"LD"] error:nil];
+                    for (NSString *file in dirContents) {
+                        if ([file containsString:@".dmg"]) {
+                            dmgFilePath = [tempPath stringByAppendingString:[NSString stringWithFormat:@"LD/%@", file]];
+                        }
+                    }
                     sleep(1);
                     NSTask *LDUpdater = [[NSTask alloc] init];
                     [LDUpdater setLaunchPath:[NSTemporaryDirectory() stringByAppendingString:@"LD/LDUpdater"]];
-                    [LDUpdater setArguments:@[[NSString stringWithFormat:@"%@", fullURL]]];
+                    [LDUpdater setArguments:@[[NSString stringWithFormat:@"%@", (nightly ? dmgFilePath : fullURL)]]];
                     [LDUpdater launch];
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [self.view.window.contentViewController dismissViewController:self];
                         [[NSApplication sharedApplication] terminate:nil];
                     });
-                    
                 });
             }];
             [downloadTask resume];

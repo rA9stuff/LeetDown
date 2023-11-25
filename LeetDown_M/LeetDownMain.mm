@@ -1208,22 +1208,35 @@ idevice_t devptr = NULL;
     return 0;
 }
 
-- (void) checkNotarizedUpdates {
-    NSString *urlString = @"https://api.github.com/repos/rA9stuff/LeetDown/releases/latest";
+- (void) checkLDUpdates:(bool)nightly {
+    
+    NSString *urlString = @"";
+    if (nightly) {
+        urlString = @"https://api.github.com/repos/rA9stuff/LeetDown/actions/artifacts";
+    }
+    else {
+        urlString = @"https://api.github.com/repos/rA9stuff/LeetDown/releases/latest";
+    }
     [UpdateController sendGETRequestWithURL:urlString completion:^(NSDictionary *response, NSError *error) {
         if (error) {
-            NSLog(@"LeetDown could not check for notarized updates: %@", error.localizedDescription);
+            NSLog(@"LeetDown could not check for updates: %@", error.localizedDescription);
         } 
         else {
-            NSLog(@"Latest notarized LeetDown version: %@", response[@"tag_name"]);
+            if (nightly) {
+                NSString* hash = [response[@"artifacts"][0][@"workflow_run"][@"head_sha"] substringToIndex:7];
+                NSLog(@"Latest nightly LeetDown hash: %@", hash);
+            }
+            else {
+                NSLog(@"Latest notarized LeetDown version: %@", response[@"tag_name"]);
+            }
             
             // check if current version number is less than the latest version number
-            if ([[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"] compare:response[@"tag_name"] options:NSNumericSearch] == NSOrderedAscending) {
-                // nsalert with update button
+            if ((!nightly && [[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"] compare:response[@"tag_name"] options:NSNumericSearch] == NSOrderedAscending) || (nightly && [response[@"artifacts"][0][@"workflow_run"][@"head_sha"] substringToIndex:7] != getPref(@"nightlyHash"))) {
+                
                 dispatch_async(dispatch_get_main_queue(), ^(){
                     NSAlert *alert = [[NSAlert alloc] init];
                     [alert setMessageText:@"Update available"];
-                    [alert setInformativeText:[NSString stringWithFormat: @"A new version of LeetDown (%@) is available. Would you like to download it?", response[@"tag_name"]]];
+                    [alert setInformativeText:[NSString stringWithFormat: @"A new version of LeetDown (%@) is available. Would you like to download it?", nightly ? [response[@"artifacts"][0][@"workflow_run"][@"head_sha"] substringToIndex:7] : response[@"tag_name"]]];
                     [alert addButtonWithTitle:@"Update"];
                     [alert addButtonWithTitle:@"Cancel"];
                     [alert setAlertStyle:NSAlertStyleWarning];
@@ -1238,24 +1251,12 @@ idevice_t devptr = NULL;
     }];
 }
 
-- (void) checkNightlyUpdates {
-    NSString *urlString = @"https://api.github.com/repos/rA9stuff/LeetDown/actions/artifacts";
-    [UpdateController sendGETRequestWithURL:urlString completion:^(NSDictionary *response, NSError *error) {
-        if (error) {
-            NSLog(@"LeetDown could not check for nightly updates: %@", error.localizedDescription);
-        } else {
-            NSString* hash = [response[@"artifacts"][0][@"workflow_run"][@"head_sha"] substringToIndex:7];
-            NSLog(@"Latest nightly LeetDown hash: %@", hash);
-        }
-    }];
-}
-
 - (void) createUpdateView {
     
     NSStoryboard *storyboard = [NSStoryboard storyboardWithName:@"Main" bundle:nil];
-    NSViewController *yourViewController = [storyboard instantiateControllerWithIdentifier:@"UpdateController"];
+    NSViewController *updateVC = [storyboard instantiateControllerWithIdentifier:@"UpdateController"];
     dispatch_async(dispatch_get_main_queue(), ^(){
-        [self.view.window.contentViewController presentViewControllerAsSheet:yourViewController];
+        [self.view.window.contentViewController presentViewControllerAsSheet:updateVC];
     });
 }
 
@@ -1265,7 +1266,7 @@ idevice_t devptr = NULL;
     [super viewDidLoad];
     
     dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
-        [self checkNotarizedUpdates];
+        [self checkLDUpdates:([getPref(@"nightlyHash") isEqual: @""] ? false : true)];
     });
 
     LD_conditionVariable = [[NSCondition alloc] init];
