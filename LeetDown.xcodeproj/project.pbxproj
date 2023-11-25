@@ -794,10 +794,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_TESTING_SEARCH_PATHS = YES;
 				EXCLUDED_ARCHS = arm64;
-				FRAMEWORK_SEARCH_PATHS = (
-					"@executable_path/../Frameworks",
-					"$(inherited)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					HAVE_INTTYPES_H,
 					HAVE_PKCRYPT,
@@ -809,13 +806,8 @@
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
+					"${PROJECT_DIR}/headers",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/AFNetworking/AFNetworking.framework/Headers\"",
-					"$(HOME)/limd-build",
-					"$(HOME)/limd-build/libimobiledevice/include",
-					"$(HOME)/limd-build/libplist/include",
-					"$(HOME)/limd-build/libimobiledevice-glue/include",
-					"$(HOME)/limd-build/libimobiledevice-glue/src",
-					"$(HOME)/limd-build/libideviceactivation/include",
 				);
 				INFOPLIST_FILE = LeetDown_M/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -826,7 +818,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
-					/opt/homebrew/Cellar/libusb/1.0.26/lib,
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Frameworks/ipwnder_lite",
 					"$(PROJECT_DIR)/Frameworks/iPwnder32",
@@ -838,6 +829,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = rA9.LeetDown;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SYSTEM_HEADER_SEARCH_PATHS = (
+					"${PROJECT_DIR}/headers",
+					"${PROJECT_DIR}/headers/libimobiledevice/include",
+					"${PROJECT_DIR}/headers/libplist/include",
+					"${PROJECT_DIR}/headers/libimobiledevice-glue/include",
+					"${PROJECT_DIR}/headers/libimobiledevice-glue/src",
+				);
+				USER_HEADER_SEARCH_PATHS = "${PROJECT_DIR}/headers";
 			};
 			name = Debug;
 		};
@@ -861,10 +860,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_TESTING_SEARCH_PATHS = YES;
 				EXCLUDED_ARCHS = arm64;
-				FRAMEWORK_SEARCH_PATHS = (
-					"@executable_path/../Frameworks",
-					"$(inherited)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					HAVE_INTTYPES_H,
 					HAVE_PKCRYPT,
@@ -876,12 +872,8 @@
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
+					"${PROJECT_DIR}/headers",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/AFNetworking/AFNetworking.framework/Headers\"",
-					"$(HOME)/limd-build",
-					"$(HOME)/limd-build/libimobiledevice/include",
-					"$(HOME)/limd-build/libplist/include",
-					"$(HOME)/limd-build/libimobiledevice-glue/include",
-					"$(HOME)/limd-build/libimobiledevice-glue/src",
 				);
 				INFOPLIST_FILE = LeetDown_M/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -892,7 +884,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
-					/opt/homebrew/Cellar/libusb/1.0.26/lib,
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Frameworks/ipwnder_lite",
 					"$(PROJECT_DIR)/Frameworks/iPwnder32",
@@ -904,6 +895,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = rA9.LeetDown;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SYSTEM_HEADER_SEARCH_PATHS = (
+					"${PROJECT_DIR}/headers",
+					"${PROJECT_DIR}/headers/libimobiledevice/include",
+					"${PROJECT_DIR}/headers/libplist/include",
+					"${PROJECT_DIR}/headers/libimobiledevice-glue/include",
+					"${PROJECT_DIR}/headers/libimobiledevice-glue/src",
+				);
+				USER_HEADER_SEARCH_PATHS = "${PROJECT_DIR}/headers";
 			};
 			name = Release;
 		};

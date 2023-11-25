@@ -24,6 +24,8 @@ jobs:
       run: rm -rf __MACOSX/ build
     - name: pod install
       run: pod install
+    - name: download headers
+      run: chmod +x download_headers.sh && ./download_headers.sh
     - name: build
       run: xcodebuild -workspace LeetDown.xcworkspace -scheme LeetDown_M CONFIGURATION_BUILD_DIR=/Users/runner/work/LeetDown/LeetDown
     - name: envdetails2
