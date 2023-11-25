@@ -39,3 +39,9 @@ add OTA update functionality
 add more options to settingsvc
 add normal mode device support (will be enforced unless toggle is disabled)
 use IONotificationPortRef to detect devices
+
+==================================
+25 Nov 2023
+
+add nightly OTA updates
+use NSTempDirectory to store temporary OTA update files instead of ~/Documents
